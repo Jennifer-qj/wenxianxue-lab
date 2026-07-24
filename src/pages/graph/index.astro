@@ -1,0 +1,30 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import KnowledgeGraph from "../../components/KnowledgeGraph";
+---
+
+<BaseLayout title="知识图谱" active="graph">
+  <header class="page-hero container">
+    <div>
+      <p class="eyebrow">Knowledge graph · Beta</p>
+      <h1 class="display-title">追踪概念之间的<em>牵引力</em></h1>
+    </div>
+    <p>筛选节点类型，点击节点查看解释。当前为第一批演示节点；后续会从全书抽取人物、典籍、方法、时代、事件与收藏机构。</p>
+  </header>
+  <section class="container graph-area">
+    <KnowledgeGraph client:load />
+  </section>
+  <section class="graph-method container">
+    <p class="eyebrow">Reading the graph</p>
+    <div>
+      <h2>图谱不是漂亮的装饰，而是另一种阅读方式</h2>
+      <p>每条关系必须能回到原书或补充文献的具体依据。存在争议的关系会显示置信度和复核状态，不把推测伪装成事实。</p>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-hero{padding:7rem 0 3rem;display:grid;grid-template-columns:1.35fr .65fr;gap:4rem;align-items:end}.page-hero>p{color:var(--muted)}
+  .graph-area{padding-bottom:5rem}.graph-method{padding:3rem 0 6rem;display:grid;grid-template-columns:.6fr 1.4fr;border-top:1px solid var(--line)}.graph-method h2{margin:0;font-family:var(--serif);font-size:1.7rem}.graph-method div p{color:var(--muted)}
+  @media(max-width:760px){.page-hero,.graph-method{grid-template-columns:1fr;gap:1rem}}
+</style>

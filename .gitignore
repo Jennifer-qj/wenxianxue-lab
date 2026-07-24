@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.astro/
+.DS_Store
+*.log
+visual-*.png
+
+# 版权隔离：原书 OCR、扫描件和研究底稿不得提交公开仓库
+private-sources/
+source-materials/
+*OCR*.md
+*.pdf

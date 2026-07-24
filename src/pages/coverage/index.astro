@@ -1,0 +1,26 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { chapterCoverage } from "../../data/site";
+---
+
+<BaseLayout title="原书覆盖矩阵">
+  <header class="page-hero container">
+    <p class="eyebrow">Coverage matrix</p>
+    <h1 class="display-title">十四章，<em>一章不漏</em></h1>
+    <p>这张矩阵用于审计网站内容是否完整。随着概念、题目和互动加入，每章还会显示对应内容数量与复核状态。</p>
+  </header>
+  <section class="coverage container">
+    <div class="table-head"><span>原书章节</span><span>主题</span><span>网站学习路径</span><span>状态</span></div>
+    {chapterCoverage.map(([chapter, title, path]) => (
+      <article>
+        <strong>{chapter}</strong><span>{title}</span><span>{path}</span><small>已纳入</small>
+      </article>
+    ))}
+  </section>
+</BaseLayout>
+<style>
+  .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
+  .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1fr 1.7fr 1.5fr .6fr;gap:1rem;padding:1rem;border-bottom:1px solid var(--line)}
+  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article strong{font-family:var(--serif)}article small{color:#496b56}
+  @media(max-width:660px){.table-head{display:none}article{grid-template-columns:1fr auto}article span{grid-column:1/-1}}
+</style>
