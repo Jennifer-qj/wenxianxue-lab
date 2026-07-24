@@ -12,7 +12,7 @@ const {
   description = "一个面向初学者的文献学互动学习与数字人文项目",
   active = "home",
 } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const nav = [
   ["home", "首页", base],
   ["paths", "学习路径", `${base}paths/`],

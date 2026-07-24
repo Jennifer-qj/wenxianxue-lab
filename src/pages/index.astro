@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import RepoPulse from "../components/RepoPulse";
 import { games, graphStats, learningPaths } from "../data/site";
 
-const base = import.meta.env.BASE_URL;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 ---
 
 <BaseLayout active="home">
