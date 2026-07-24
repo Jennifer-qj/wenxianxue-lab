@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import VersionDetective from "../../components/VersionDetective";
+import FourFoldChallenge from "../../components/FourFoldChallenge";
 import { games } from "../../data/site";
 ---
 
@@ -24,6 +25,18 @@ import { games } from "../../data/site";
         </dl>
       </div>
       <VersionDetective client:load />
+    </div>
+  </section>
+
+  <section id="four-fold" class="fourfold-section">
+    <div class="container fourfold-grid">
+      <div class="fourfold-copy">
+        <span class="chapter-tag">第七章 · 文献目录</span>
+        <h2>四部分类挑战</h2>
+        <p>读一张模拟目录卡，判断典籍应归入经、史、子、集哪一部。答题之后不只显示对错，还会解释分类依据与容易混淆的边界。</p>
+        <div class="learning-loop"><span>观察体例</span><i>→</i><span>作出分类</span><i>→</i><span>阅读解释</span></div>
+      </div>
+      <FourFoldChallenge client:load />
     </div>
   </section>
 
@@ -54,8 +67,15 @@ import { games } from "../../data/site";
   .featured-game{padding:5rem 0;background:#2b2c29;color:#f9f2e6}.featured-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:4rem;align-items:center}
   .game-intro h2{margin:1rem 0;font-family:var(--serif);font-size:2.4rem}.game-intro>p{color:#bbb6ad}.chapter-tag{color:#d89882;font-size:.72rem;letter-spacing:.12em}.game-intro dl{margin-top:2rem;border-top:1px solid rgba(255,255,255,.13)}.game-intro dl div{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.13)}dt{color:#99958d}dd{margin:0}
   .all-games{padding-block:7rem}.game-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
+  .fourfold-section{padding:6rem 0;background:#e7dcc9}.fourfold-grid{display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;align-items:center}.fourfold-copy h2{margin:.5rem 0;font-family:var(--serif);font-size:2.4rem}.fourfold-copy>p{color:var(--muted)}.learning-loop{display:flex;align-items:center;gap:.6rem;margin-top:2rem;flex-wrap:wrap}.learning-loop span{padding:.4rem .7rem;border:1px solid var(--line);background:rgba(255,255,255,.35);font-size:.78rem}.learning-loop i{color:var(--cinnabar);font-style:normal}
+  :global(.fourfold-game),:global(.fourfold-result){min-height:480px;padding:2rem;border-radius:7px;background:#fffaf0;box-shadow:var(--shadow)}
+  :global(.shelf-progress){display:grid;grid-template-columns:repeat(6,1fr);gap:.35rem;margin-bottom:2rem}:global(.shelf-progress i){height:5px;background:#ddd2bf}:global(.shelf-progress i.filled){background:var(--cinnabar)}
+  :global(.catalog-card){padding:2rem;text-align:center;border:1px solid #cbbba2;border-radius:4px;background:linear-gradient(135deg,#f4ead8,#fffaf0)}:global(.catalog-card small){color:var(--muted);letter-spacing:.1em}:global(.catalog-card h3){margin:.6rem 0;font-family:var(--serif);font-size:2.2rem}:global(.catalog-card p){margin:0;color:var(--muted)}
+  :global(.fourfold-game .prompt){font-weight:600}:global(.fourfold-options){display:grid;grid-template-columns:repeat(4,1fr);gap:.6rem}:global(.fourfold-options button){padding:.8rem;border:1px solid var(--line);border-radius:4px;background:#f1e8d8;color:var(--ink);cursor:pointer}:global(.fourfold-options button strong){display:block;font-family:var(--serif);font-size:1.4rem}:global(.fourfold-options button.correct){border-color:#5c8066;background:#e3eee3}:global(.fourfold-options button.incorrect){border-color:#9f584c;background:#f2dfda}
+  :global(.catalog-feedback){margin-top:1rem;padding:1rem;border-left:3px solid #9f584c;background:#f4e5df}:global(.catalog-feedback.is-correct){border-color:#5c8066;background:#e4eee3}:global(.catalog-feedback p){margin:.25rem 0 .8rem;color:var(--muted);font-size:.86rem}:global(.catalog-feedback button),:global(.fourfold-result button){padding:.55rem .9rem;border:0;border-radius:3px;background:var(--cinnabar);color:white;font:inherit;cursor:pointer}
+  :global(.fourfold-result){display:grid;place-content:center;text-align:center}:global(.fourfold-result>span){color:var(--cinnabar);font-size:.75rem;letter-spacing:.12em}:global(.fourfold-result>strong){font-family:var(--serif);font-size:5rem;line-height:1.2}:global(.fourfold-result>strong small){font-size:1.2rem;color:var(--muted)}:global(.fourfold-result p){max-width:26rem;color:var(--muted)}
   .game-grid article{min-height:280px;padding:1.4rem;display:flex;flex-direction:column;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,253,247,.25)}.game-grid article.ready{background:#fffaf0}
   .game-top{display:flex;justify-content:space-between;align-items:center}.game-top>span{display:grid;place-items:center;width:50px;aspect-ratio:1;border-radius:50%;color:var(--cinnabar);background:#eaded0;font-family:var(--serif);font-size:1.2rem}.game-top small,.game-grid article>small{color:var(--muted)}.game-grid article>small{margin-top:auto}.game-grid h3{margin:.4rem 0;font-family:var(--serif);font-size:1.18rem}.game-grid p{margin:0;color:var(--muted);font-size:.86rem}.game-grid b{width:max-content;margin-top:1rem;padding:.15rem .5rem;border-radius:999px;color:var(--muted);background:#e2dbcf;font-size:.68rem}.game-grid b.live{color:#47644e;background:#dce8dc}.game-grid b.building{color:#7a5b2d;background:#eee1c5}
-  @media(max-width:860px){.featured-grid{grid-template-columns:1fr}.game-grid{grid-template-columns:repeat(2,1fr)}}
+  @media(max-width:860px){.featured-grid,.fourfold-grid{grid-template-columns:1fr}.game-grid{grid-template-columns:repeat(2,1fr)}}
   @media(max-width:560px){.game-grid{grid-template-columns:1fr}}
 </style>

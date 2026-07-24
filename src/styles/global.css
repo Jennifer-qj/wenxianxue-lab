@@ -284,10 +284,18 @@ main {
 
 .graph-toolbar {
   display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: 0.5rem;
   padding: 1rem;
   overflow-x: auto;
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.graph-toolbar > div {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
 
 .graph-toolbar button {
@@ -307,6 +315,19 @@ main {
   background: rgba(143, 53, 43, 0.28);
 }
 
+.graph-controls span {
+  margin-right: 0.35rem;
+  color: #8f8a82;
+  font-size: 0.68rem;
+}
+
+.graph-controls b {
+  min-width: 42px;
+  color: #d6cfc3;
+  font-size: 0.7rem;
+  text-align: center;
+}
+
 .graph-stage {
   position: relative;
   min-height: 610px;
@@ -316,6 +337,8 @@ main {
   width: 100%;
   height: 610px;
   padding-right: 260px;
+  touch-action: none;
+  user-select: none;
 }
 
 .graph-stage line {
@@ -332,8 +355,12 @@ main {
 
 .graph-node {
   outline: none;
-  cursor: pointer;
+  cursor: grab;
   transition: opacity 0.2s ease;
+}
+
+.graph-node.dragging {
+  cursor: grabbing;
 }
 
 .graph-node:hover circle,
@@ -672,6 +699,20 @@ main {
 
   .graph-stage {
     min-height: 700px;
+  }
+
+  .graph-toolbar {
+    align-items: start;
+    flex-direction: column;
+  }
+
+  .graph-toolbar > div {
+    width: 100%;
+    overflow-x: auto;
+  }
+
+  .graph-controls span {
+    display: none;
   }
 
   .graph-stage svg {

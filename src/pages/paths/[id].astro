@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getChapters, learningPaths } from "../../data/site";
+
+export function getStaticPaths() {
+  return learningPaths.map((path) => ({ params: { id: path.id }, props: { path } }));
+}
+
+const { path } = Astro.props;
+const pathChapters = getChapters(path.chapterIds);
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<BaseLayout title={path.title} active="paths">
+  <header class="path-hero" style={`--accent:${path.color}`}>
+    <div class="container hero-grid">
+      <div>
+        <a class="back" href={`${base}paths/`}>← 返回七条路径</a>
+        <p class="eyebrow">Learning path {path.number}</p>
+        <h1>{path.title}</h1>
+        <p class="lead">{path.subtitle}</p>
+      </div>
+      <aside>
+        <small>覆盖章节</small>
+        <strong>{path.chapters}</strong>
+        <small>当前整理进度</small>
+        <div class="meter"><span style={`width:${path.progress}%`}></span></div>
+        <b>{path.progress}%</b>
+      </aside>
+    </div>
+  </header>
+
+  <section class="container outcomes">
+    <div>
+      <p class="eyebrow">完成这条路径后</p>
+      <h2>你应该能够</h2>
+    </div>
+    <ol>
+      {path.outcomes.map((outcome) => <li>{outcome}</li>)}
+    </ol>
+  </section>
+
+  <section class="container units">
+    <div class="section-heading">
+      <div>
+        <p class="eyebrow">Study units</p>
+        <h2 class="section-title">章节不是终点，而是证据入口</h2>
+      </div>
+      <p>以下内容为基于 OCR 目录的原创结构化摘要，不展示原书全文；“待复核”项目会随着个人精读逐步校正。</p>
+    </div>
+    {pathChapters.map((chapter, index) => (
+      <article id={chapter.id}>
+        <div class="unit-no">{String(index + 1).padStart(2, "0")}</div>
+        <div class="unit-main">
+          <div class="unit-title">
+            <div><small>{chapter.number}</small><h3>{chapter.title}</h3></div>
+            <span class:list={{ reviewed: chapter.review === "已复核" }}>{chapter.review}</span>
+          </div>
+          <p>{chapter.focus}</p>
+          <div class="section-list">
+            {chapter.sections.map((section) => <span>{section}</span>)}
+          </div>
+          <div class="keywords">
+            {chapter.keywords.map((keyword) => <small>#{keyword}</small>)}
+          </div>
+        </div>
+        <aside>
+          <small>来源定位</small>
+          <strong>{chapter.source.volume}</strong>
+          <span>{chapter.source.pageRange}</span>
+          <a href={`${base}coverage/#${chapter.id}`}>查看覆盖记录 →</a>
+        </aside>
+      </article>
+    ))}
+  </section>
+
+  <section class="container next-step">
+    <p class="eyebrow">Practice</p>
+    <h2>把阅读转化成一次判断</h2>
+    <p>完成路径阅读后，到实验室用具体案例检验概念。活动结果只保存在你的浏览器中。</p>
+    <a class="button" href={`${base}lab/`}>进入互动实验室 →</a>
+  </section>
+</BaseLayout>
+
+<style>
+  .path-hero{padding:6rem 0 4rem;border-bottom:1px solid var(--line);background:linear-gradient(110deg,color-mix(in srgb,var(--accent) 12%,transparent),transparent 55%)}
+  .hero-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:5rem;align-items:end}.back{display:inline-block;margin-bottom:2rem;color:var(--muted);text-decoration:none}.path-hero h1{margin:.2rem 0;font-family:var(--serif);font-size:clamp(3rem,7vw,6rem);color:var(--accent)}.lead{max-width:45rem;color:var(--muted);font-family:var(--serif);font-size:1.15rem}
+  .path-hero aside{padding:1.5rem;border:1px solid var(--line);background:rgba(255,253,247,.55)}.path-hero aside small,.path-hero aside strong{display:block}.path-hero aside small{color:var(--muted)}.path-hero aside strong{margin:.2rem 0 1rem;font-family:var(--serif);font-size:1.25rem}.meter{height:5px;margin-top:.4rem;background:var(--line)}.meter span{display:block;height:100%;background:var(--accent)}.path-hero aside b{display:block;margin-top:.4rem;text-align:right;color:var(--accent)}
+  .outcomes{padding:4rem 0;display:grid;grid-template-columns:.7fr 1.3fr;gap:4rem;border-bottom:1px solid var(--line)}.outcomes h2{margin:0;font-family:var(--serif);font-size:2rem}.outcomes ol{margin:0;display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;counter-reset:goal;list-style:none}.outcomes li{padding:1.2rem;border-left:2px solid var(--accent);background:rgba(255,255,255,.3)}.outcomes li::before{counter-increment:goal;content:"0" counter(goal);display:block;color:var(--accent);font-family:var(--serif);font-size:1.4rem}
+  .units{padding:6rem 0}.units>article{display:grid;grid-template-columns:70px 1fr 170px;gap:2rem;padding:2rem 0;border-top:1px solid var(--line)}.unit-no{color:var(--accent);font-family:var(--serif);font-size:1.8rem}.unit-title{display:flex;justify-content:space-between;gap:1rem}.unit-title small{color:var(--muted)}.unit-title h3{margin:.1rem 0;font-family:var(--serif);font-size:1.6rem}.unit-title>span{height:max-content;padding:.15rem .55rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.68rem}.unit-main>p{max-width:50rem;color:var(--muted)}
+  .section-list{display:flex;flex-wrap:wrap;gap:.45rem}.section-list span{padding:.35rem .65rem;border:1px solid var(--line);border-radius:3px;background:rgba(255,255,255,.3);font-size:.8rem}.keywords{display:flex;flex-wrap:wrap;gap:.6rem;margin-top:1rem;color:var(--accent)}
+  .units article>aside{display:flex;flex-direction:column;align-items:start;padding-left:1rem;border-left:1px solid var(--line)}.units article>aside small,.units article>aside span{color:var(--muted);font-size:.72rem}.units article>aside strong{font-family:var(--serif)}.units article>aside a{margin-top:auto;color:var(--accent);font-size:.78rem;text-decoration:none}
+  .next-step{margin-bottom:6rem;padding:3rem;border:1px solid var(--line);background:#e9dfcf}.next-step h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.next-step p:not(.eyebrow){max-width:44rem;color:var(--muted)}.next-step .button{margin-top:1rem}
+  @media(max-width:760px){.hero-grid,.outcomes{grid-template-columns:1fr;gap:2rem}.outcomes ol{grid-template-columns:1fr}.units>article{grid-template-columns:42px 1fr}.units article>aside{grid-column:2;min-height:100px}.unit-title{flex-direction:column}}
+</style>

@@ -1,26 +1,34 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
-import { chapterCoverage } from "../../data/site";
+import { chapters, learningPaths } from "../../data/site";
 ---
 
 <BaseLayout title="原书覆盖矩阵">
   <header class="page-hero container">
     <p class="eyebrow">Coverage matrix</p>
     <h1 class="display-title">十四章，<em>一章不漏</em></h1>
-    <p>这张矩阵用于审计网站内容是否完整。随着概念、题目和互动加入，每章还会显示对应内容数量与复核状态。</p>
+    <p>这张矩阵不是“已经做完”的装饰性声明，而是内容审计台账：每章都有学习路径、分节数量、关键词、OCR 来源卷段和人工复核状态。</p>
   </header>
+  <section class="schema container">
+    <p class="eyebrow">Content model</p>
+    <div><span>章 Chapter</span><i>→</i><span>路径 Path</span><i>→</i><span>知识点 Concept</span><i>→</i><span>活动 Activity</span><i>→</i><span>来源 Source</span><i>→</i><span>复核 Review</span></div>
+  </section>
   <section class="coverage container">
-    <div class="table-head"><span>原书章节</span><span>主题</span><span>网站学习路径</span><span>状态</span></div>
-    {chapterCoverage.map(([chapter, title, path]) => (
-      <article>
-        <strong>{chapter}</strong><span>{title}</span><span>{path}</span><small>已纳入</small>
+    <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>来源 / 复核</span></div>
+    {chapters.map((chapter) => (
+      <article id={chapter.id}>
+        <div><strong>{chapter.number}</strong><span>{chapter.title}</span></div>
+        <div><b>{chapter.sections.length} 个分节</b><p>{chapter.keywords.map((word) => `#${word}`).join("　")}</p></div>
+        <span>{learningPaths.find((path) => chapter.pathIds.includes(path.id))?.title}</span>
+        <div><small>{chapter.source.volume}</small><em>{chapter.review}</em></div>
       </article>
     ))}
   </section>
 </BaseLayout>
 <style>
   .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
-  .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1fr 1.7fr 1.5fr .6fr;gap:1rem;padding:1rem;border-bottom:1px solid var(--line)}
-  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article strong{font-family:var(--serif)}article small{color:#496b56}
+  .schema{padding:1.2rem 0 2rem}.schema>div{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}.schema span{padding:.4rem .65rem;border:1px solid var(--line);background:rgba(255,255,255,.35);font-size:.75rem}.schema i{color:var(--cinnabar);font-style:normal}
+  .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1.1fr 1.8fr 1.1fr .8fr;gap:1rem;padding:1.1rem;border-bottom:1px solid var(--line);align-items:center}
+  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article>div:first-child strong,article>div:first-child span{display:block}article strong{font-family:var(--serif)}article b{font-size:.78rem}article p{margin:.2rem 0;color:var(--muted);font-size:.72rem}article small,article em{display:block;font-style:normal}article small{color:var(--muted)}article em{width:max-content;margin-top:.25rem;padding:.1rem .4rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.65rem}
   @media(max-width:660px){.table-head{display:none}article{grid-template-columns:1fr auto}article span{grid-column:1/-1}}
 </style>

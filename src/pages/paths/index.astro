@@ -22,7 +22,7 @@ import { learningPaths } from "../../data/site";
           <span><i style={`width:${path.progress}%`}></i></span>
           <small>整理进度 {path.progress}%</small>
         </div>
-        <button disabled title="内容整理完成后开放">进入路径 →</button>
+        <a class="enter" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/paths/${path.id}/`}>进入路径 →</a>
       </article>
     ))}
   </section>
@@ -34,6 +34,6 @@ import { learningPaths } from "../../data/site";
   article{min-height:155px;display:grid;grid-template-columns:90px 1.4fr 1fr auto;align-items:center;gap:2rem;border-bottom:1px solid var(--line)}
   .number{color:var(--accent);font-family:var(--serif);font-size:2rem;font-weight:700}article small{color:var(--muted)}h2{margin:.2rem 0;font-family:var(--serif);font-size:1.45rem}article p{margin:0;color:var(--muted)}
   .status>span{display:block;width:100%;height:3px;background:var(--line)}.status i{display:block;height:100%;background:var(--accent)}.status small{font-size:.7rem}
-  button{padding:.65rem 1rem;border:1px solid var(--line);background:transparent;color:var(--muted);font:inherit}
-  @media(max-width:760px){article{grid-template-columns:50px 1fr;padding:1.5rem 0}.status,button{grid-column:2}}
+  .enter{padding:.65rem 1rem;border:1px solid var(--ink);border-radius:3px;color:var(--ink);text-decoration:none;font-weight:600;transition:.2s ease}.enter:hover{color:var(--white);background:var(--ink)}
+  @media(max-width:760px){article{grid-template-columns:50px 1fr;padding:1.5rem 0}.status,.enter{grid-column:2}}
 </style>

@@ -48,7 +48,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
     <div class="path-grid">
       {learningPaths.map((path) => (
-        <a class="path-card" href={`${base}paths/#${path.id}`} style={`--accent:${path.color}`}>
+        <a class="path-card" href={`${base}paths/${path.id}/`} style={`--accent:${path.color}`}>
           <div class="path-meta"><span>{path.number}</span><small>{path.chapters}</small></div>
           <h3>{path.title}</h3>
           <p>{path.subtitle}</p>
