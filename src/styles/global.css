@@ -407,7 +407,16 @@ main {
 }
 
 .graph-detail small {
+  display: block;
+  margin-top: 0.8rem;
   color: #817d76;
+}
+
+.graph-chapter-link {
+  display: inline-block;
+  color: #d99781;
+  font-size: 0.78rem;
+  text-decoration: none;
 }
 
 /* Version detective */

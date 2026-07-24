@@ -17,7 +17,7 @@ import { chapters, learningPaths } from "../../data/site";
     <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>来源 / 复核</span></div>
     {chapters.map((chapter) => (
       <article id={chapter.id}>
-        <div><strong>{chapter.number}</strong><span>{chapter.title}</span></div>
+        <div><strong>{chapter.number}</strong><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${chapter.id}/`}>{chapter.title}</a></div>
         <div><b>{chapter.sections.length} 个分节</b><p>{chapter.keywords.map((word) => `#${word}`).join("　")}</p></div>
         <span>{learningPaths.find((path) => chapter.pathIds.includes(path.id))?.title}</span>
         <div><small>{chapter.source.volume}</small><em>{chapter.review}</em></div>
@@ -29,6 +29,6 @@ import { chapters, learningPaths } from "../../data/site";
   .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
   .schema{padding:1.2rem 0 2rem}.schema>div{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}.schema span{padding:.4rem .65rem;border:1px solid var(--line);background:rgba(255,255,255,.35);font-size:.75rem}.schema i{color:var(--cinnabar);font-style:normal}
   .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1.1fr 1.8fr 1.1fr .8fr;gap:1rem;padding:1.1rem;border-bottom:1px solid var(--line);align-items:center}
-  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article>div:first-child strong,article>div:first-child span{display:block}article strong{font-family:var(--serif)}article b{font-size:.78rem}article p{margin:.2rem 0;color:var(--muted);font-size:.72rem}article small,article em{display:block;font-style:normal}article small{color:var(--muted)}article em{width:max-content;margin-top:.25rem;padding:.1rem .4rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.65rem}
+  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article>div:first-child strong,article>div:first-child a{display:block}article>div:first-child a{text-decoration:none}article>div:first-child a:hover{color:var(--cinnabar)}article strong{font-family:var(--serif)}article b{font-size:.78rem}article p{margin:.2rem 0;color:var(--muted);font-size:.72rem}article small,article em{display:block;font-style:normal}article small{color:var(--muted)}article em{width:max-content;margin-top:.25rem;padding:.1rem .4rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.65rem}
   @media(max-width:660px){.table-head{display:none}article{grid-template-columns:1fr auto}article span{grid-column:1/-1}}
 </style>

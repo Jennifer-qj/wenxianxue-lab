@@ -5,24 +5,25 @@ type Node = {
   label: string;
   type: "概念" | "物质" | "方法" | "工具" | "过程" | "文献类型";
   chapter: string;
+  chapterId: string;
   x: number;
   y: number;
   detail: string;
 };
 
 const initialNodes: Node[] = [
-  { id: "wenxian", label: "文献", type: "概念", chapter: "第一章", x: 50, y: 47, detail: "承载知识与信息的记录，是全书各类问题共同指向的中心对象。" },
-  { id: "carrier", label: "载体", type: "物质", chapter: "第二章", x: 19, y: 23, detail: "甲骨、金石、竹木、帛、纸等材料，直接影响制作、保存和解读。" },
-  { id: "version", label: "版本", type: "概念", chapter: "第五章", x: 76, y: 23, detail: "同一文献在抄写、刊刻与流传过程中形成的不同文本和物质形态。" },
-  { id: "collation", label: "校勘", type: "方法", chapter: "第六章", x: 82, y: 58, detail: "比较异同、考订讹误，并说明判断依据与保留意见的方法。" },
-  { id: "catalog", label: "目录", type: "工具", chapter: "第七章", x: 55, y: 80, detail: "通过分类、著录和提要组织文献，建立知识秩序与检索入口。" },
-  { id: "circulation", label: "流布", type: "过程", chapter: "第三章", x: 18, y: 69, detail: "文献经讲唱、抄写、镌刻、印刷、摄影等方式抵达不同读者。" },
-  { id: "paper", label: "纸", type: "物质", chapter: "第二章", x: 7, y: 40, detail: "纸张特征与装潢形制可成为版本鉴定、修复和保存的重要证据。" },
-  { id: "forgery", label: "辨伪", type: "方法", chapter: "第八章", x: 92, y: 39, detail: "综合源流、语言、制度、地理和思想等线索判断文献真伪问题。" },
-  { id: "leishu", label: "类书", type: "工具", chapter: "第九章", x: 36, y: 91, detail: "分类汇集旧文献材料，可用于检索史料、校勘和辑佚。" },
-  { id: "excavated", label: "出土文献", type: "文献类型", chapter: "第十二、十三章", x: 29, y: 8, detail: "经考古或其他途径重新发现，并保留物质现场信息的文献。" },
-  { id: "gazetteer", label: "地方志", type: "文献类型", chapter: "第十章", x: 67, y: 93, detail: "系统记录特定地域沿革、人物、物产与制度的重要专门文献。" },
-  { id: "dunhuang", label: "敦煌文献", type: "文献类型", chapter: "第十四章", x: 10, y: 88, detail: "以藏经洞遗书为核心，涉及发现、流散、目录、整理和多语种内容。" },
+  { id: "wenxian", label: "文献", type: "概念", chapter: "第一章", chapterId: "ch01", x: 50, y: 47, detail: "承载知识与信息的记录，是全书各类问题共同指向的中心对象。" },
+  { id: "carrier", label: "载体", type: "物质", chapter: "第二章", chapterId: "ch02", x: 19, y: 23, detail: "甲骨、金石、竹木、帛、纸等材料，直接影响制作、保存和解读。" },
+  { id: "version", label: "版本", type: "概念", chapter: "第五章", chapterId: "ch05", x: 76, y: 23, detail: "同一文献在抄写、刊刻与流传过程中形成的不同文本和物质形态。" },
+  { id: "collation", label: "校勘", type: "方法", chapter: "第六章", chapterId: "ch06", x: 82, y: 58, detail: "比较异同、考订讹误，并说明判断依据与保留意见的方法。" },
+  { id: "catalog", label: "目录", type: "工具", chapter: "第七章", chapterId: "ch07", x: 55, y: 80, detail: "通过分类、著录和提要组织文献，建立知识秩序与检索入口。" },
+  { id: "circulation", label: "流布", type: "过程", chapter: "第三章", chapterId: "ch03", x: 18, y: 69, detail: "文献经讲唱、抄写、镌刻、印刷、摄影等方式抵达不同读者。" },
+  { id: "paper", label: "纸", type: "物质", chapter: "第二章", chapterId: "ch02", x: 7, y: 40, detail: "纸张特征与装潢形制可成为版本鉴定、修复和保存的重要证据。" },
+  { id: "forgery", label: "辨伪", type: "方法", chapter: "第八章", chapterId: "ch08", x: 92, y: 39, detail: "综合源流、语言、制度、地理和思想等线索判断文献真伪问题。" },
+  { id: "leishu", label: "类书", type: "工具", chapter: "第九章", chapterId: "ch09", x: 36, y: 91, detail: "分类汇集旧文献材料，可用于检索史料、校勘和辑佚。" },
+  { id: "excavated", label: "出土文献", type: "文献类型", chapter: "第十二、十三章", chapterId: "ch12", x: 29, y: 8, detail: "经考古或其他途径重新发现，并保留物质现场信息的文献。" },
+  { id: "gazetteer", label: "地方志", type: "文献类型", chapter: "第十章", chapterId: "ch10", x: 67, y: 93, detail: "系统记录特定地域沿革、人物、物产与制度的重要专门文献。" },
+  { id: "dunhuang", label: "敦煌文献", type: "文献类型", chapter: "第十四章", chapterId: "ch14", x: 10, y: 88, detail: "以藏经洞遗书为核心，涉及发现、流散、目录、整理和多语种内容。" },
 ];
 
 const edges = [
@@ -140,6 +141,7 @@ export default function KnowledgeGraph() {
           <span style={{ color: colors[selected.type] }}>{selected.type} · {selected.chapter}</span>
           <h2>{selected.label}</h2>
           <p>{selected.detail}</p>
+          <a className="graph-chapter-link" href={`${import.meta.env.BASE_URL}chapters/${selected.chapterId}/`}>阅读对应章节 →</a>
           <small>关系为学习型概念映射，后续将补充出处与复核状态。</small>
         </aside>
       </div>

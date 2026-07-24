@@ -1,0 +1,118 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ChapterCheck from "../../components/ChapterCheck";
+import { chapters, learningPaths } from "../../data/site";
+import { getLesson, lessons } from "../../data/lessons";
+
+export function getStaticPaths() {
+  return lessons.map((lesson) => ({ params: { id: lesson.chapterId } }));
+}
+
+const chapterId = Astro.params.id!;
+const chapter = chapters.find((item) => item.id === chapterId)!;
+const lesson = getLesson(chapterId)!;
+const chapterIndex = chapters.findIndex((item) => item.id === chapterId);
+const previous = chapters[chapterIndex - 1];
+const next = chapters[chapterIndex + 1];
+const path = learningPaths.find((item) => chapter.pathIds.includes(item.id));
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<BaseLayout title={`${chapter.number} ${chapter.title}`} active="paths">
+  <header class="chapter-hero">
+    <div class="container">
+      <div class="crumbs"><a href={`${base}paths/`}>学习路径</a><span>／</span><a href={`${base}paths/${path?.id}/`}>{path?.title}</a><span>／</span><b>{chapter.number}</b></div>
+      <div class="hero-grid">
+        <div>
+          <p class="eyebrow">{chapter.number} · Chapter {String(chapterIndex + 1).padStart(2, "0")}</p>
+          <h1>{chapter.title}</h1>
+          <p class="guiding">{lesson.guidingQuestion}</p>
+        </div>
+        <aside>
+          <span>{chapter.review}</span>
+          <dl>
+            <div><dt>分节</dt><dd>{chapter.sections.length}</dd></div>
+            <div><dt>核心概念</dt><dd>{lesson.concepts.length}</dd></div>
+            <div><dt>检测题</dt><dd>{lesson.quiz.length}</dd></div>
+          </dl>
+        </aside>
+      </div>
+    </div>
+  </header>
+
+  <div class="chapter-layout container">
+    <aside class="toc">
+      <small>本章导航</small>
+      <a href="#overview">导读</a>
+      {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
+      <a href="#workflow">方法步骤</a>
+      <a href="#check">本章检测</a>
+      <a href="#source">来源说明</a>
+    </aside>
+
+    <article class="lesson">
+      <section id="overview" class="overview">
+        <p class="eyebrow">本章导读</p>
+        <p>{lesson.introduction}</p>
+        <div class="section-map">
+          {chapter.sections.map((section, index) => <span><b>{index + 1}</b>{section}</span>)}
+        </div>
+      </section>
+
+      {lesson.concepts.map((concept, index) => (
+        <section id={`concept-${index + 1}`} class="concept">
+          <div class="concept-heading"><span>{String(index + 1).padStart(2, "0")}</span><h2>{concept.title}</h2></div>
+          <p>{concept.explanation}</p>
+          <div class="evidence-pair">
+            <div><small>例子</small><p>{concept.example}</p></div>
+            <div><small>判断边界</small><p>{concept.caution}</p></div>
+          </div>
+        </section>
+      ))}
+
+      <section id="workflow" class="workflow">
+        <p class="eyebrow">把知识变成方法</p>
+        <h2>处理这类材料时，可以怎样做？</h2>
+        <ol>
+          {lesson.workflow.map((step) => <li>{step}</li>)}
+        </ol>
+      </section>
+
+      <section id="check" class="check">
+        <p class="eyebrow">Quick check</p>
+        <h2>本章检测</h2>
+        <p>不是背定义，而是判断证据该如何使用。完成后会自动记入本机学习进度。</p>
+        <ChapterCheck chapterId={chapter.id} title={chapter.title} quiz={lesson.quiz} client:load />
+      </section>
+
+      <section class="questions">
+        <p class="eyebrow">带着问题继续读</p>
+        {lesson.furtherQuestions.map((question) => <blockquote>{question}</blockquote>)}
+      </section>
+
+      <section id="source" class="source-note">
+        <div>
+          <p class="eyebrow">来源与版权</p>
+          <h2>{chapter.source.volume} · {chapter.source.pageRange}</h2>
+        </div>
+        <p>本页依据杜泽逊《文献学概要（修订本）》相应章节目录和个人学习需求重新组织，为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”，具体表述仍需结合纸本逐条核对。</p>
+      </section>
+    </article>
+  </div>
+
+  <nav class="chapter-pagination container" aria-label="章节前后导航">
+    {previous ? <a href={`${base}chapters/${previous.id}/`}><small>上一章</small><strong>{previous.title}</strong></a> : <span></span>}
+    {next ? <a class="next" href={`${base}chapters/${next.id}/`}><small>下一章</small><strong>{next.title}</strong></a> : <a class="next" href={`${base}lab/`}><small>完成全书导读</small><strong>进入互动实验室</strong></a>}
+  </nav>
+</BaseLayout>
+
+<style>
+  .chapter-hero{padding:4rem 0 3rem;border-bottom:1px solid var(--line);background:linear-gradient(120deg,rgba(143,53,43,.09),transparent 55%)}.crumbs{display:flex;gap:.5rem;align-items:center;margin-bottom:3rem;color:var(--muted);font-size:.75rem}.crumbs a{text-decoration:none}.hero-grid{display:grid;grid-template-columns:1.4fr .6fr;gap:5rem;align-items:end}.chapter-hero h1{margin:.2rem 0;font-family:var(--serif);font-size:clamp(3rem,7vw,6rem)}.guiding{max-width:50rem;color:var(--cinnabar);font-family:var(--serif);font-size:1.2rem}.chapter-hero aside{padding:1.2rem;border:1px solid var(--line);background:rgba(255,253,247,.55)}.chapter-hero aside>span{padding:.15rem .5rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.68rem}.chapter-hero dl{display:grid;grid-template-columns:repeat(3,1fr);margin:1rem 0 0}.chapter-hero dl div{border-right:1px solid var(--line)}.chapter-hero dl div:last-child{border:0}.chapter-hero dt{color:var(--muted);font-size:.7rem}.chapter-hero dd{margin:0;font-family:var(--serif);font-size:1.4rem}
+  .chapter-layout{display:grid;grid-template-columns:210px 1fr;gap:5rem;padding-top:4rem}.toc{position:sticky;top:100px;height:max-content;display:flex;flex-direction:column;border-top:1px solid var(--line)}.toc small{padding:.8rem 0;color:var(--muted)}.toc a{padding:.5rem 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:.78rem;text-decoration:none}.toc a:hover{color:var(--cinnabar)}
+  .lesson>section{scroll-margin-top:110px;padding:3rem 0;border-bottom:1px solid var(--line)}.overview>p:not(.eyebrow){font-family:var(--serif);font-size:1.15rem;line-height:2}.section-map{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:2rem}.section-map span{display:flex;align-items:center;gap:.7rem;padding:.7rem;border:1px solid var(--line);font-size:.8rem}.section-map b{color:var(--cinnabar);font-family:var(--serif)}
+  .concept-heading{display:flex;align-items:center;gap:1rem}.concept-heading>span{color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.concept h2,.workflow h2,.check h2,.source-note h2{margin:0;font-family:var(--serif);font-size:2rem}.concept>p{font-family:var(--serif);font-size:1.08rem;line-height:2}.evidence-pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.evidence-pair>div{padding:1rem;border-left:3px solid #a57435;background:rgba(255,255,255,.35)}.evidence-pair>div:last-child{border-color:var(--cinnabar)}.evidence-pair small{color:var(--muted);letter-spacing:.1em}.evidence-pair p{margin:.25rem 0;color:var(--muted);font-size:.86rem}
+  .workflow ol{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;counter-reset:method;padding:0;list-style:none}.workflow li{min-height:100px;padding:1rem;border:1px solid var(--line);background:rgba(255,255,255,.3)}.workflow li::before{counter-increment:method;content:counter(method);display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.5rem}.check>p:not(.eyebrow){color:var(--muted)}
+  :global(.check-question){display:grid;grid-template-columns:45px 1fr;gap:1rem;padding:1.5rem 0;border-top:1px solid var(--line)}:global(.check-number){color:var(--cinnabar);font-family:var(--serif);font-size:1.4rem}:global(.check-question h3){margin:0 0 .8rem;font-family:var(--serif)}:global(.check-options){display:grid;grid-template-columns:1fr 1fr;gap:.5rem}:global(.check-options button){display:flex;gap:.5rem;padding:.65rem;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.35);font:inherit;cursor:pointer}:global(.check-options button span){color:var(--cinnabar);font-weight:700}:global(.check-options button.correct){border-color:#5c8066;background:#e3eee3}:global(.check-options button.incorrect){border-color:#9f584c;background:#f2dfda}:global(.check-feedback){padding:.8rem;border-left:3px solid var(--cinnabar);color:var(--muted);background:rgba(255,255,255,.35);font-size:.85rem}:global(.check-feedback strong){margin-right:.5rem;color:var(--ink)}:global(.check-result){display:flex;align-items:center;justify-content:space-between;padding:1rem;color:white;background:#2b2c29}:global(.check-result strong){font-family:var(--serif);font-size:1.5rem}:global(.check-result button){padding:.45rem .7rem;border:1px solid rgba(255,255,255,.3);color:white;background:transparent;cursor:pointer}
+  .questions blockquote{margin:1rem 0;padding:1rem 1.2rem;border-left:3px solid var(--cinnabar);background:#e9dfcf;font-family:var(--serif);font-size:1.1rem}.source-note{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem}.source-note>p{color:var(--muted)}.chapter-pagination{display:flex;justify-content:space-between;gap:2rem;padding:3rem 0 6rem}.chapter-pagination a{display:flex;flex-direction:column;width:48%;padding:1rem;border-top:1px solid var(--line);text-decoration:none}.chapter-pagination .next{text-align:right}.chapter-pagination small{color:var(--muted)}.chapter-pagination strong{font-family:var(--serif);font-size:1.15rem}
+  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,:global(.check-options),.source-note{grid-template-columns:1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
+</style>
