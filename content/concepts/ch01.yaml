@@ -1,0 +1,104 @@
+items:
+  - id: c_wenxian
+    label: 文献
+    type: concept
+    definition: 能够作为认识、研究与验证过去之依据的记录、遗存及相关知识载体；在现代使用中常偏重书面记录。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: c_wen
+    label: 文
+    type: concept
+    definition: 在第一章词义辨析中，主要指可供征验的典籍、记载与制度文本。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: c_xian
+    label: 献
+    type: concept
+    definition: 在早期“文献”语境中，指熟悉典章旧事、能够提供记忆与验证的贤才。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: c_wenxianxue
+    label: 文献学
+    type: concept
+    definition: 以文献自身为主要研究对象，考察其形态、形成、流传、鉴别、整理、分类、收藏和检索等问题的学问。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: c_recording
+    label: 记录转化
+    type: concept
+    definition: 人的言行与知识经记录后成为后人可利用材料的过程，提示“文”与“献”会随时间相互转化。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_historical_evidence
+    label: 历史认识依据
+    type: concept
+    definition: 用于认识和检验历史判断的材料基础，其价值取决于来源、形成过程与具体语境。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_textual_lifecycle
+    label: 文献生命史
+    type: concept
+    definition: 文献从形成、记录、复制、流传、收藏到现代整理和利用所经历的连续过程。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_document_groups
+    label: 文献组群
+    type: concept
+    definition: 按时代、学科、地域、发现环境或材料属性形成的文献集合，不同组群之间可以交叉。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_research_boundary
+    label: 研究边界
+    type: concept
+    definition: 对研究对象、方法适用范围和结论强度作出的明确限制，用来避免把局部材料过度外推。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_evidence_chain
+    label: 证据链
+    type: concept
+    definition: 把来源清楚、相互关系可解释的多项材料组织起来，使观察能够支持有限度结论的结构。
+    chapter_ids: [ch01]
+    status: drafting
+  - id: c_quality_awareness
+    label: 精品意识
+    type: concept
+    definition: 把底本、校勘、标点、注释、校对和检索工具等内容质量置于外观之前的整理原则。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: c_material_anachronism
+    label: 载体时代错置
+    type: concept
+    definition: 在历史叙述或视觉再现中使用与目标时代不相容的文献材料或装帧形态。
+    chapter_ids: [ch01, ch02]
+    status: pending_review
+  - id: me_catalog_search
+    label: 目录调查
+    type: method
+    definition: 利用公私藏目录、联合目录和馆藏记录追踪文献传本与收藏情况的方法。
+    chapter_ids: [ch01, ch07]
+    status: pending_review
+  - id: me_version_selection
+    label: 底本选择
+    type: method
+    definition: 根据完整性、可靠性、文本关系和整理目的选择主要工作文本的方法。
+    chapter_ids: [ch01, ch05]
+    status: pending_review
+  - id: me_textual_organization
+    label: 文献整理
+    type: method
+    definition: 对原始材料进行校勘、标点、注释、编目和索引等加工，使成果可以复查和利用。
+    chapter_ids: [ch01, ch06, ch07]
+    status: pending_review
+  - id: p_confucius
+    label: 孔子
+    type: person
+    definition: 第一章借其关于夏、殷、周礼能否征验的讨论，说明记载与通晓旧制者共同参与历史认识。
+    chapter_ids: [ch01]
+    status: pending_review
+  - id: w_lunyu
+    label: 《论语》
+    type: work
+    definition: 第一章讨论“文献”早期用例及其解释的重要典籍。
+    chapter_ids: [ch01]
+    status: pending_review
+

@@ -1,0 +1,16 @@
+items:
+  - id: lab-15-case-001
+    title: 研究问题装配台·第一章案例
+    engine: reasoning
+    concept_ids: [c_wenxianxue, c_textual_lifecycle, c_research_boundary, c_evidence_chain]
+    config:
+      stages:
+        - id: select_lenses
+          task: 从内容、载体、形成、流传、整理中组合研究镜头
+        - id: calibrate_claim
+          task: 使用强度滑杆控制结论措辞
+        - id: generate_question
+          task: 生成并保存带有证据边界的研究问题
+      scoring:
+        minimum_lenses: 3
+        cautious_claim: 1

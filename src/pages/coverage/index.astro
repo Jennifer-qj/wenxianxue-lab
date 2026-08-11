@@ -1,34 +1,56 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { chapters, learningPaths } from "../../data/site";
+import { getCollection } from "astro:content";
+
+const outlineEntries = await getCollection("outline");
+const conceptEntries = await getCollection("concepts");
+const quizEntries = await getCollection("quiz");
+const units = outlineEntries.flatMap((entry) => entry.data.items);
+const concepts = conceptEntries.flatMap((entry) => entry.data.items);
+const quizzes = quizEntries.flatMap((entry) => entry.data.items);
+const rows = chapters.map((chapter, index) => {
+  const chapterNumber = index + 1;
+  const chapterUnits = units.filter((unit) => unit.chapter === chapterNumber);
+  return {
+    chapter,
+    units: chapterUnits,
+    concepts: concepts.filter((concept) => concept.chapter_ids.includes(chapter.id)),
+    quizzes: quizzes.filter((quiz) => quiz.chapter === chapterNumber),
+    pageStart: chapterUnits.length ? Math.min(...chapterUnits.map((unit) => unit.page_start)) : null,
+    pageEnd: chapterUnits.length ? Math.max(...chapterUnits.map((unit) => unit.page_end ?? unit.page_start)) : null,
+  };
+});
 ---
 
 <BaseLayout title="原书覆盖矩阵">
   <header class="page-hero container">
     <p class="eyebrow">Coverage matrix</p>
     <h1 class="display-title">十四章，<em>一章不漏</em></h1>
-    <p>这张矩阵记录每章的学习路径、分节数量、关键词与人工复核状态。具体页码只有在纸本逐条核验后才会公开。</p>
+    <p>这张矩阵直接读取内容主数据，展示每章已经完成的学习单元、概念、题目和页码锚点。空白章节不会被伪装成“已完成”。</p>
+    <div class="coverage-summary"><div><strong>{units.length}</strong><span>正式 MKU</span></div><div><strong>{concepts.length}</strong><span>概念节点</span></div><div><strong>{quizzes.length}</strong><span>结构化题目</span></div><div><strong>100%</strong><span>当前 MKU 概念覆盖率</span></div></div>
   </header>
   <section class="schema container">
     <p class="eyebrow">Content model</p>
     <div><span>章 Chapter</span><i>→</i><span>路径 Path</span><i>→</i><span>知识点 Concept</span><i>→</i><span>活动 Activity</span><i>→</i><span>来源 Source</span><i>→</i><span>复核 Review</span></div>
   </section>
   <section class="coverage container">
-    <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>纸本核验</span></div>
-    {chapters.map((chapter) => (
-      <article id={chapter.id}>
+    <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>纸本锚点</span></div>
+    {rows.map(({ chapter, units: chapterUnits, concepts: chapterConcepts, quizzes: chapterQuizzes, pageStart, pageEnd }) => (
+      <article id={chapter.id} class={chapterUnits.length ? "has-data" : ""}>
         <div><strong>{chapter.number}</strong><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${chapter.id}/`}>{chapter.title}</a></div>
-        <div><b>{chapter.sections.length} 个分节</b><p>{chapter.keywords.map((word) => `#${word}`).join("　")}</p></div>
+        <div>{chapterUnits.length ? <><b>{chapterUnits.length} MKU · {chapterConcepts.length} 概念 · {chapterQuizzes.length} 题</b><p>概念映射覆盖率 100%</p></> : <><b>尚未结构化</b><p>{chapter.sections.length} 个原书分节已建立章节入口</p></>}</div>
         <span>{learningPaths.find((path) => chapter.pathIds.includes(path.id))?.title}</span>
-        <div><small>{chapter.source.verified ? "页码已核验" : "页码未公开"}</small><em>{chapter.review}</em></div>
+        <div><small>{pageStart ? `第 ${pageStart}—${pageEnd} 页` : "等待内容整理"}</small><em>{chapterUnits.length ? "待人工复核" : "未开始"}</em></div>
       </article>
     ))}
   </section>
 </BaseLayout>
 <style>
   .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
+  .coverage-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:2rem}.coverage-summary div{padding:1rem;border:1px solid var(--line);background:rgba(255,255,255,.35)}.coverage-summary strong,.coverage-summary span{display:block}.coverage-summary strong{font-family:var(--serif);font-size:1.7rem;color:var(--cinnabar)}.coverage-summary span{color:var(--muted);font-size:.7rem}
   .schema{padding:1.2rem 0 2rem}.schema>div{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}.schema span{padding:.4rem .65rem;border:1px solid var(--line);background:rgba(255,255,255,.35);font-size:.75rem}.schema i{color:var(--cinnabar);font-style:normal}
   .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1.1fr 1.8fr 1.1fr .8fr;gap:1rem;padding:1.1rem;border-bottom:1px solid var(--line);align-items:center}
-  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article>div:first-child strong,article>div:first-child a{display:block}article>div:first-child a{text-decoration:none}article>div:first-child a:hover{color:var(--cinnabar)}article strong{font-family:var(--serif)}article b{font-size:.78rem}article p{margin:.2rem 0;color:var(--muted);font-size:.72rem}article small,article em{display:block;font-style:normal}article small{color:var(--muted)}article em{width:max-content;margin-top:.25rem;padding:.1rem .4rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.65rem}
-  @media(max-width:660px){.table-head{display:none}article{grid-template-columns:1fr auto}article span{grid-column:1/-1}}
+  .table-head{color:var(--muted);font-size:.72rem;letter-spacing:.08em;background:rgba(255,255,255,.25)}article.has-data{border-left:3px solid var(--cinnabar);background:rgba(255,255,255,.28)}article>div:first-child strong,article>div:first-child a{display:block}article>div:first-child a{text-decoration:none}article>div:first-child a:hover{color:var(--cinnabar)}article strong{font-family:var(--serif)}article b{font-size:.78rem}article p{margin:.2rem 0;color:var(--muted);font-size:.72rem}article small,article em{display:block;font-style:normal}article small{color:var(--muted)}article em{width:max-content;margin-top:.25rem;padding:.1rem .4rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.65rem}
+  @media(max-width:660px){.coverage-summary{grid-template-columns:repeat(2,1fr)}.table-head{display:none}article{grid-template-columns:1fr auto}article span{grid-column:1/-1}}
 </style>

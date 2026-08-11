@@ -1,0 +1,101 @@
+items:
+  - id: q-ch01-001
+    chapter: 1
+    type: single_choice
+    concept_ids: [c_wenxianxue, c_research_boundary]
+    prompt: 下列哪项最能体现文献学以文献自身为研究本体？
+    options: [只评价作品思想是否深刻, 考察文本形态、版本、整理和流传过程, 只统计作者生平事件, 用一种方法代替所有文史研究]
+    answer: 1
+    explanation: 文献学关心文献自身的形成、形态、鉴别、整理、分类、收藏与利用。它能服务文学和历史研究，却不以替代这些学科为目标；“以文献为本体”说的是问题中心，不是封闭学科边界。
+  - id: q-ch01-002
+    chapter: 1
+    type: multiple_choice
+    concept_ids: [c_wenxianxue, me_catalog_search, me_version_selection, me_textual_organization]
+    prompt: 面对一部准备整理出版的旧书，哪些工作属于第一章所强调的文献学准备？
+    options: [调查传本和馆藏, 比较不同版本, 选择并说明底本, 只设计漂亮封面, 记录校勘和整理依据]
+    answers: [0, 1, 2, 4]
+    explanation: 目录调查、版本比较、底本选择和可复查的整理记录共同决定内容是否可靠。视觉设计可以改善阅读体验，却不能代替文本与来源工作；本题并非否定设计，而是区分内容质量和外观质量的层次。
+  - id: q-ch01-003
+    chapter: 1
+    type: true_false
+    concept_ids: [c_wen, c_xian, c_recording]
+    prompt: “文”与“献”是两个永远互不转化的材料类别。
+    answer: false
+    explanation: 第一章指出，能够记忆和讲述旧制的人可被理解为“献”，其言行一旦记录下来，又会成为后人据以研究的“文”。这种转化不保证记录天然可靠，仍需考察记录者、语境和传播过程。
+  - id: q-ch01-004
+    chapter: 1
+    type: fill_blank
+    concept_ids: [c_historical_evidence, c_evidence_chain]
+    prompt: 文献不是历史本身，而是认识、研究和____历史的重要依据。
+    answers: [验证, 征验]
+    explanation: 填“验证”或“征验”均可。关键不是机械记词，而是理解文献材料需要参与检验：研究者必须说明材料怎样支持判断，以及还有哪些解释尚未被排除。
+  - id: q-ch01-005
+    chapter: 1
+    type: matching
+    concept_ids: [c_wen, c_xian, c_quality_awareness]
+    prompt: 把概念与最合适的学习解释配对。
+    pairs:
+      - { left: 文, right: 可供征验的典籍与记载 }
+      - { left: 献, right: 能够讲述和验证旧事的贤才 }
+      - { left: 精品意识, right: 优先保证底本与整理内容可靠 }
+    explanation: 三组配对分别对应第一节的词义辨析和第三节的学习目标。需要注意，“文”“献”是历史语境中的解释，而“精品意识”还包括校勘、标点、注释、校对和检索工具等多个环节。
+  - id: q-ch01-006
+    chapter: 1
+    type: ordering
+    concept_ids: [me_catalog_search, me_version_selection, me_textual_organization, c_evidence_chain]
+    prompt: 将旧书整理的基本步骤排成较合理的顺序。
+    items: [调查传本, 比较版本, 选择并说明底本, 校勘与整理, 记录依据并供复查]
+    answer: [0, 1, 2, 3, 4]
+    explanation: 先调查和比较，才有条件选择底本；底本确定后进入校勘整理，并持续记录依据。真实项目中步骤可能往返，例如校勘时发现新版本会迫使研究者重新调查，因此这里是工作骨架而非不可逆流程。
+  - id: q-ch01-007
+    chapter: 1
+    type: classification
+    concept_ids: [c_document_groups, c_research_boundary]
+    prompt: 按主要分类维度归置这些标签。
+    zones: [时代, 学科, 特定文献组群]
+    items:
+      - { label: 近代文献, zone: 时代 }
+      - { label: 医学文献, zone: 学科 }
+      - { label: 敦煌文献, zone: 特定文献组群 }
+      - { label: 地方文献, zone: 特定文献组群 }
+      - { label: 法律文献, zone: 学科 }
+    explanation: 分类是建立检索和研究入口的工具，不意味着材料彼此排斥。例如一件近代地方医学档案可同时落入三个维度。本题训练的是识别主要分类依据，而不是把文献永久固定在单一盒子里。
+  - id: q-ch01-008
+    chapter: 1
+    type: evidence
+    concept_ids: [c_evidence_chain, me_catalog_search, me_version_selection]
+    prompt: 有人仅因在海外首次见到某书，便称其为“不传秘本”。哪些证据最能检验这一结论？
+    evidence_ids: [本人首次见到, 全国古籍目录著录, 多家馆藏记录, 该书封面精美, 不同版本实物或书影]
+    answer_ids: [全国古籍目录著录, 多家馆藏记录, 不同版本实物或书影]
+    explanation: 个人首次见到只能说明个人经验，封面外观与传本数量无直接关系。目录、馆藏和版本实物能从不同层面检验“是否稀见”；即便三项齐备，也应说明调查范围，避免把“目前未查到”写成绝对不存在。
+  - id: q-ch01-009
+    chapter: 1
+    type: short_answer
+    concept_ids: [c_evidence_chain, c_research_boundary, me_catalog_search]
+    prompt: 请把“这一定是孤本”改写成一条更审慎、可复查的学术表述。
+    rubric: [说明已调查的目录或馆藏范围, 使用“目前所见”“尚待核查”等有限度措辞, 提出下一步核验路径]
+    explanation: 合格答案应把绝对断言改为范围明确的暂时判断，例如“在目前核查的若干联合目录中尚未见其他著录，暂可视为稀见传本，仍需核对地方馆藏和实物”。重点是让读者知道结论建立在什么范围内。
+  - id: q-ch01-010
+    chapter: 1
+    type: short_answer
+    concept_ids: [c_material_anachronism, c_quality_awareness]
+    prompt: 一幅秦代故事画把所授兵书画成带函套的线装书。请指出问题，并给出更合适的处理方案。
+    rubric: [识别线装形制与秦代不相容, 提出使用简册等更合适的载体表达, 说明视觉再现也需要文献载体知识]
+    explanation: 回答不需要复原所有细节，但应指出载体时代错置会向读者传播错误知识。更合适的方案是依据目标时代和故事来源，选择与之相容的简册等形态，并在无法确定时避免过度具体化。
+  - id: q-ch01-011
+    chapter: 1
+    type: single_choice
+    concept_ids: [c_quality_awareness, me_version_selection]
+    prompt: 重印一部已有增订本的旧工具书时，最先应追问什么？
+    options: [哪一版封面最醒目, 哪一版内容更完整可靠且适合本次目的, 哪一版纸张最厚, 哪一版价格最高]
+    answer: 1
+    explanation: 底本选择首先服务内容可靠性和出版目的。增订本通常值得优先检查，但“后出”并非自动等于“更好”；仍需比较修改内容、错误情况、版本关系和读者需求，再公开说明采用某本的理由。
+  - id: q-ch01-012
+    chapter: 1
+    type: evidence
+    concept_ids: [c_quality_awareness, me_textual_organization, c_evidence_chain]
+    prompt: 判断一个古籍整理本是否具有内容上的“精品意识”，请选择最关键的检查项。
+    evidence_ids: [底本说明, 校勘依据, 标点注释质量, 校对差错率, 必要索引, 烫金书名]
+    answer_ids: [底本说明, 校勘依据, 标点注释质量, 校对差错率, 必要索引]
+    explanation: 内容质量建立在材料选择、文字处理、解释与复查工具之上。装帧美感可以加分，却无法弥补底本和校勘缺陷；反过来，简朴版本也可能拥有可靠的整理内容。评价应先分清内容层与呈现层。
+

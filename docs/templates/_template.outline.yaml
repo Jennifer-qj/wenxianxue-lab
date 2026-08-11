@@ -7,6 +7,9 @@ items:
     module: M5
     page_start: 0 # 必须由本人按 2008 年修订本核验后替换；0 无法通过门禁
     status: not_started
+    key_question: 这一单元要解决什么问题？
+    summary: 请用自己的话概括核心内容
+    boundary: 请说明该结论不能被怎样过度使用
     concept_ids: []
     quiz_ids: []
     lab_ids: []

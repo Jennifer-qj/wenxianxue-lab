@@ -7,6 +7,7 @@ export const mkuSchema = z.object({
   id: z.string().regex(/^mku-\d{2}-\d{2}-\d{2}$/), chapter: z.number().int().min(1).max(14),
   chapter_title: z.string().min(1), section: z.string().min(1), subsection: z.string().optional(), module: moduleIdSchema,
   page_start: z.number().int().positive(), page_end: z.number().int().positive().optional(), status: reviewStatusSchema,
+  key_question: z.string().min(1), summary: z.string().min(1), boundary: z.string().min(1),
   concept_ids: z.array(z.string()), quiz_ids: z.array(z.string()), lab_ids: z.array(z.string()),
 });
 

@@ -2,10 +2,11 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChapterCheck from "../../components/ChapterCheck";
 import ResearchQuestionWorkbench from "../../components/ResearchQuestionWorkbench";
+import StructuredPractice from "../../components/StructuredPractice";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
-import { chapter01DraftUnits } from "../../data/chapter01";
 import { EDITION } from "../../consts";
+import { getCollection } from "astro:content";
 
 export function getStaticPaths() {
   return lessons.map((lesson) => ({ params: { id: lesson.chapterId } }));
@@ -19,6 +20,13 @@ const previous = chapters[chapterIndex - 1];
 const next = chapters[chapterIndex + 1];
 const path = learningPaths.find((item) => chapter.pathIds.includes(item.id));
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const outlineEntries = await getCollection("outline");
+const conceptEntries = await getCollection("concepts");
+const quizEntries = await getCollection("quiz");
+const chapterUnits = outlineEntries.flatMap((entry) => entry.data.items).filter((unit) => unit.chapter === chapterIndex + 1);
+const structuredConcepts = conceptEntries.flatMap((entry) => entry.data.items).filter((concept) => concept.chapter_ids.includes(chapterId));
+const structuredQuizzes = quizEntries.flatMap((entry) => entry.data.items).filter((quiz) => quiz.chapter === chapterIndex + 1);
+const statusLabels = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
 ---
 
 <BaseLayout title={`${chapter.number} ${chapter.title}`} active="paths">
@@ -34,9 +42,9 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <aside>
           <span>{chapter.review}</span>
           <dl>
-            <div><dt>分节</dt><dd>{chapter.sections.length}</dd></div>
-            <div><dt>核心概念</dt><dd>{lesson.concepts.length}</dd></div>
-            <div><dt>检测题</dt><dd>{lesson.quiz.length}</dd></div>
+            <div><dt>学习单元</dt><dd>{chapterUnits.length || chapter.sections.length}</dd></div>
+            <div><dt>核心概念</dt><dd>{structuredConcepts.length || lesson.concepts.length}</dd></div>
+            <div><dt>结构化题目</dt><dd>{structuredQuizzes.length || lesson.quiz.length}</dd></div>
           </dl>
         </aside>
       </div>
@@ -69,22 +77,22 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
           <div class="unit-intro">
             <div>
               <p class="eyebrow">第一章结构化样板</p>
-              <h2>5 个预备学习单元</h2>
+              <h2>{chapterUnits.length} 个正式学习单元</h2>
             </div>
-            <p>这些单元已经完成原创讲解与概念映射。由于纸本页码尚未逐条核验，暂不计入正式 MKU 覆盖率；补齐页码并经你复核后，才会升级为正式内容。</p>
+            <p>依据中华书局 2008 年修订本目录锚点拆分，已经关联概念、题目与实验。页码目前精确到原书各节范围，内容状态仍为“待复核”。</p>
           </div>
           <div class="unit-list">
-            {chapter01DraftUnits.map((unit, index) => (
+            {chapterUnits.map((unit, index) => (
               <article>
-                <div class="unit-meta"><span>{String(index + 1).padStart(2, "0")}</span><small>待页码复核</small></div>
+                <div class="unit-meta"><span>{String(index + 1).padStart(2, "0")}</span><small>{statusLabels[unit.status]}</small><b>第 {unit.page_start}{unit.page_end && unit.page_end !== unit.page_start ? `—${unit.page_end}` : ""} 页</b></div>
                 <div>
-                  <h3>{unit.title}</h3>
-                  <p class="unit-question">{unit.question}</p>
+                  <h3>{unit.subsection ?? unit.section}</h3>
+                  <p class="unit-question">{unit.key_question}</p>
                   <dl>
-                    <div><dt>学习结论</dt><dd>{unit.takeaway}</dd></div>
+                    <div><dt>学习结论</dt><dd>{unit.summary}</dd></div>
                     <div><dt>判断边界</dt><dd>{unit.boundary}</dd></div>
                   </dl>
-                  <div class="unit-tags">{unit.concepts.map((concept) => <span>{concept}</span>)}</div>
+                  <div class="unit-tags"><span>{unit.concept_ids.length} 个概念</span><span>{unit.quiz_ids.length} 道题</span><span>{unit.lab_ids.length} 个实验</span></div>
                 </div>
               </article>
             ))}
@@ -124,7 +132,9 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <p class="eyebrow">Quick check</p>
         <h2>本章检测</h2>
         <p>不是背定义，而是判断证据该如何使用。完成后会自动记入本机学习进度。</p>
-        <ChapterCheck chapterId={chapter.id} title={chapter.title} quiz={lesson.quiz} client:load />
+        {chapterId === "ch01"
+          ? <StructuredPractice quizzes={structuredQuizzes} client:load />
+          : <ChapterCheck chapterId={chapter.id} title={chapter.title} quiz={lesson.quiz} client:load />}
       </section>
 
       <section class="questions">
@@ -157,5 +167,6 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   :global(.check-question){display:grid;grid-template-columns:45px 1fr;gap:1rem;padding:1.5rem 0;border-top:1px solid var(--line)}:global(.check-number){color:var(--cinnabar);font-family:var(--serif);font-size:1.4rem}:global(.check-question h3){margin:0 0 .8rem;font-family:var(--serif)}:global(.check-options){display:grid;grid-template-columns:1fr 1fr;gap:.5rem}:global(.check-options button){display:flex;gap:.5rem;padding:.65rem;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.35);font:inherit;cursor:pointer}:global(.check-options button span){color:var(--cinnabar);font-weight:700}:global(.check-options button.correct){border-color:#5c8066;background:#e3eee3}:global(.check-options button.incorrect){border-color:#9f584c;background:#f2dfda}:global(.check-feedback){padding:.8rem;border-left:3px solid var(--cinnabar);color:var(--muted);background:rgba(255,255,255,.35);font-size:.85rem}:global(.check-feedback strong){margin-right:.5rem;color:var(--ink)}:global(.check-result){display:flex;align-items:center;justify-content:space-between;padding:1rem;color:white;background:#2b2c29}:global(.check-result strong){font-family:var(--serif);font-size:1.5rem}:global(.check-result button){padding:.45rem .7rem;border:1px solid rgba(255,255,255,.3);color:white;background:transparent;cursor:pointer}
   .questions blockquote{margin:1rem 0;padding:1rem 1.2rem;border-left:3px solid var(--cinnabar);background:#e9dfcf;font-family:var(--serif);font-size:1.1rem}.source-note{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem}.source-note>p{color:var(--muted)}.chapter-pagination{display:flex;justify-content:space-between;gap:2rem;padding:3rem 0 6rem}.chapter-pagination a{display:flex;flex-direction:column;width:48%;padding:1rem;border-top:1px solid var(--line);text-decoration:none}.chapter-pagination .next{text-align:right}.chapter-pagination small{color:var(--muted)}.chapter-pagination strong{font-family:var(--serif);font-size:1.15rem}
   .unit-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:2rem;margin-bottom:1.5rem}.unit-intro h2,.workbench-section>h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.unit-intro>p,.workbench-lead{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}.unit-list{border-top:1px solid var(--line)}.unit-list article{display:grid;grid-template-columns:90px 1fr;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}.unit-meta span{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.unit-meta small{display:inline-block;margin-top:.35rem;padding:.16rem .42rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.62rem}.unit-list h3{margin:0;font-family:var(--serif);font-size:1.25rem}.unit-question{margin:.3rem 0 1rem;color:var(--cinnabar);font-family:var(--serif)}.unit-list dl{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:0}.unit-list dl div{padding:.7rem;border-left:2px solid #a77734;background:rgba(255,255,255,.35)}.unit-list dl div:last-child{border-color:var(--cinnabar)}.unit-list dt{color:var(--muted);font-size:.68rem}.unit-list dd{margin:.25rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.65}.unit-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}.unit-tags span{padding:.15rem .45rem;border:1px solid var(--line);color:var(--muted);font-size:.68rem}.workbench-lead{margin-bottom:1.2rem}
+  .unit-meta b{display:block;margin-top:.45rem;color:var(--muted);font-size:.67rem;font-weight:400}
   @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,:global(.check-options),.source-note,.unit-intro,.unit-list dl{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
 </style>

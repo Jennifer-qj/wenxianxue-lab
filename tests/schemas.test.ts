@@ -3,9 +3,10 @@ import { graphEdgeSchema, labSchema, mkuSchema, quizSchema } from "../src/lib/sc
 
 describe("内容 Schema", () => {
   it("合法 MKU 通过，缺真实页码失败", () => {
-    const valid = { id:"mku-05-04-04",chapter:5,chapter_title:"文献的版本",section:"版本鉴定",module:"M5",page_start:167,status:"reviewed",concept_ids:["c_taboo_char"],quiz_ids:[],lab_ids:[] };
+    const valid = { id:"mku-05-04-04",chapter:5,chapter_title:"文献的版本",section:"版本鉴定",module:"M5",page_start:167,status:"reviewed",key_question:"怎样鉴定版本？",summary:"综合多项证据形成有限度判断。",boundary:"单一线索不能自动证明刊刻年代。",concept_ids:["c_taboo_char"],quiz_ids:[],lab_ids:[] };
     expect(mkuSchema.safeParse(valid).success).toBe(true);
     expect(mkuSchema.safeParse({ ...valid, page_start: 0 }).success).toBe(false);
+    expect(mkuSchema.safeParse({ ...valid, boundary: "" }).success).toBe(false);
   });
   it("关系必须有证据与置信度", () => {
     const valid = { id:"e-0001",source:"c_a",target:"c_b",type:"relatedTo",evidence:"教学关系",confidence:"pedagogical" };

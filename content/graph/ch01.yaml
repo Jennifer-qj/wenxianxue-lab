@@ -1,0 +1,20 @@
+items:
+  - { id: e-0001, source: c_wen, target: c_wenxian, type: isA, evidence: "《文献学概要》修订本，第1—4页：以典籍记载说明“文”的层面。", confidence: confirmed }
+  - { id: e-0002, source: c_xian, target: c_wenxian, type: isA, evidence: "《文献学概要》修订本，第1—4页：以通晓旧制的贤才说明“献”的层面。", confidence: confirmed }
+  - { id: e-0003, source: p_confucius, target: c_xian, type: isA, evidence: "《文献学概要》修订本，第1—4页把孔子作为能够识记、讲述旧制者的例证。", confidence: pedagogical }
+  - { id: e-0004, source: w_lunyu, target: c_wen, type: isA, evidence: "《文献学概要》修订本，第1—4页以《论语》的记载说明后世可据以研究的“文”。", confidence: pedagogical }
+  - { id: e-0005, source: c_xian, target: c_recording, type: evolvesTo, evidence: "《文献学概要》修订本，第1—4页指出人的言行被记录后可成为后世的书面材料。", confidence: confirmed }
+  - { id: e-0006, source: c_recording, target: c_wen, type: produces, evidence: "《文献学概要》修订本，第1—4页对“今日之献成为将来之文”的概括。", confidence: confirmed }
+  - { id: e-0007, source: c_wenxian, target: c_historical_evidence, type: evidenceFor, evidence: "《文献学概要》修订本，第1—4页将文献概括为认识、研究和验证历史的依据。", confidence: confirmed }
+  - { id: e-0008, source: c_wenxianxue, target: c_textual_lifecycle, type: usesMethod, evidence: "《文献学概要》修订本，第4—5页列举形态、形成发展、整理、收藏与检索等范围。", confidence: pedagogical }
+  - { id: e-0009, source: c_wenxianxue, target: c_research_boundary, type: evidenceFor, evidence: "《文献学概要》修订本，第4—5页强调文献学不能代替文学、史学等学科。", confidence: confirmed }
+  - { id: e-0010, source: c_document_groups, target: c_wenxian, type: isA, evidence: "《文献学概要》修订本，第4页按时代、学科和文献组群列举研究材料。", confidence: confirmed }
+  - { id: e-0011, source: c_wenxianxue, target: me_catalog_search, type: usesMethod, evidence: "《文献学概要》修订本，第4—5页将分类编目和检索列入主要范围。", confidence: confirmed }
+  - { id: e-0012, source: c_wenxianxue, target: me_version_selection, type: usesMethod, evidence: "《文献学概要》修订本，第4—5页强调鉴别并选择较可靠版本。", confidence: confirmed }
+  - { id: e-0013, source: c_wenxianxue, target: me_textual_organization, type: usesMethod, evidence: "《文献学概要》修订本，第4—5页把整理加工列为学习目标。", confidence: confirmed }
+  - { id: e-0014, source: me_catalog_search, target: c_evidence_chain, type: evidenceFor, evidence: "《文献学概要》修订本，第5—10页以传本调查案例说明目录证据对稀见判断的作用。", confidence: confirmed }
+  - { id: e-0015, source: me_version_selection, target: c_quality_awareness, type: evidenceFor, evidence: "《文献学概要》修订本，第5—10页以旧书重印案例说明底本选择影响内容质量。", confidence: confirmed }
+  - { id: e-0016, source: c_material_anachronism, target: c_quality_awareness, type: evidenceFor, evidence: "《文献学概要》修订本，第5—10页以历史图像中的装帧错置说明载体常识的重要性。", confidence: confirmed }
+  - { id: e-0017, source: me_textual_organization, target: c_quality_awareness, type: produces, evidence: "《文献学概要》修订本，第5—10页把校勘、标点、注释、校对与索引视为内容质量环节。", confidence: confirmed }
+  - { id: e-0018, source: c_evidence_chain, target: c_research_boundary, type: evidenceFor, evidence: "第一章案例共同提示：材料需互证，结论须说明能够覆盖的范围。", confidence: pedagogical }
+
