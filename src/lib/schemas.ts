@@ -48,8 +48,25 @@ export const labSchema = z.discriminatedUnion("engine", [
   labBase.extend({ engine: z.literal("assemble"), config: z.object({ pieces: z.array(z.unknown()).min(2), solution: z.array(z.string()).min(2) }) }),
 ]);
 
+export const deepDiveSchema = z.object({
+  id: z.string().regex(/^deep-ch\d{2}-\d{3}$/),
+  chapter: z.number().int().min(1).max(14),
+  title: z.string().min(1),
+  scenario: z.string().min(1),
+  question: z.string().min(1),
+  concept_ids: z.array(z.string()).min(2),
+  evidence: z.array(z.object({
+    id: z.string().min(1), label: z.string().min(1), role: z.string().min(1), limitation: z.string().min(1),
+  })).min(3),
+  workflow: z.array(z.string().min(1)).min(3),
+  deliverable: z.string().min(1),
+  rubric: z.array(z.string().min(1)).min(3),
+  status: reviewStatusSchema,
+});
+
 export const outlineFileSchema = z.object({ items: z.array(mkuSchema) });
 export const conceptFileSchema = z.object({ items: z.array(conceptSchema) });
 export const graphFileSchema = z.object({ items: z.array(graphEdgeSchema) });
 export const quizFileSchema = z.object({ items: z.array(quizSchema) });
 export const labFileSchema = z.object({ items: z.array(labSchema) });
+export const deepDiveFileSchema = z.object({ items: z.array(deepDiveSchema) });

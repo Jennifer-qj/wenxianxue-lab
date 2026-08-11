@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChapterCheck from "../../components/ChapterCheck";
 import ResearchQuestionWorkbench from "../../components/ResearchQuestionWorkbench";
 import StructuredPractice from "../../components/StructuredPractice";
+import DeepDiveStudio from "../../components/DeepDiveStudio";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
 import { EDITION } from "../../consts";
@@ -23,9 +24,11 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const outlineEntries = await getCollection("outline");
 const conceptEntries = await getCollection("concepts");
 const quizEntries = await getCollection("quiz");
+const deepDiveEntries = await getCollection("deepdives");
 const chapterUnits = outlineEntries.flatMap((entry) => entry.data.items).filter((unit) => unit.chapter === chapterIndex + 1);
 const structuredConcepts = conceptEntries.flatMap((entry) => entry.data.items).filter((concept) => concept.chapter_ids.includes(chapterId));
 const structuredQuizzes = quizEntries.flatMap((entry) => entry.data.items).filter((quiz) => quiz.chapter === chapterIndex + 1);
+const deepDive = deepDiveEntries.flatMap((entry) => entry.data.items).find((study) => study.chapter === chapterIndex + 1);
 const statusLabels = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
 ---
 
@@ -56,6 +59,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
       <small>本章导航</small>
       <a href="#overview">导读</a>
       {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
+      {deepDive && <a href="#deep-dive">案例研读工作台</a>}
       {chapterId === "ch01" && <a href="#workbench">研究问题装配台</a>}
       {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
       <a href="#workflow">方法步骤</a>
@@ -106,6 +110,17 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
           <h2>先学会提出文献学问题</h2>
           <p class="workbench-lead">同一部材料可以被多个研究镜头观察。组合镜头、控制表述强度，比猜中一个标准答案更接近真实研究。</p>
           <ResearchQuestionWorkbench client:load />
+        </section>
+      )}
+
+      {deepDive && (
+        <section id="deep-dive" class="deep-dive-section">
+          <div class="deep-dive-heading">
+            <p class="eyebrow">第二层：证据型研读</p>
+            <h2>把本章知识用于一个真实问题</h2>
+            <p>选择材料、完成分析步骤，并形成一项可放入个人作品集的小成果。进度只保存在当前浏览器。</p>
+          </div>
+          <DeepDiveStudio study={deepDive} client:load />
         </section>
       )}
 
@@ -168,5 +183,6 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   .questions blockquote{margin:1rem 0;padding:1rem 1.2rem;border-left:3px solid var(--cinnabar);background:#e9dfcf;font-family:var(--serif);font-size:1.1rem}.source-note{display:grid;grid-template-columns:.8fr 1.2fr;gap:3rem}.source-note>p{color:var(--muted)}.chapter-pagination{display:flex;justify-content:space-between;gap:2rem;padding:3rem 0 6rem}.chapter-pagination a{display:flex;flex-direction:column;width:48%;padding:1rem;border-top:1px solid var(--line);text-decoration:none}.chapter-pagination .next{text-align:right}.chapter-pagination small{color:var(--muted)}.chapter-pagination strong{font-family:var(--serif);font-size:1.15rem}
   .unit-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:2rem;margin-bottom:1.5rem}.unit-intro h2,.workbench-section>h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.unit-intro>p,.workbench-lead{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}.unit-list{border-top:1px solid var(--line)}.unit-list article{display:grid;grid-template-columns:90px 1fr;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}.unit-meta span{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.unit-meta small{display:inline-block;margin-top:.35rem;padding:.16rem .42rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.62rem}.unit-list h3{margin:0;font-family:var(--serif);font-size:1.25rem}.unit-question{margin:.3rem 0 1rem;color:var(--cinnabar);font-family:var(--serif)}.unit-list dl{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:0}.unit-list dl div{padding:.7rem;border-left:2px solid #a77734;background:rgba(255,255,255,.35)}.unit-list dl div:last-child{border-color:var(--cinnabar)}.unit-list dt{color:var(--muted);font-size:.68rem}.unit-list dd{margin:.25rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.65}.unit-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}.unit-tags span{padding:.15rem .45rem;border:1px solid var(--line);color:var(--muted);font-size:.68rem}.workbench-lead{margin-bottom:1.2rem}
   .unit-meta b{display:block;margin-top:.45rem;color:var(--muted);font-size:.67rem;font-weight:400}
-  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,:global(.check-options),.source-note,.unit-intro,.unit-list dl{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
+  .deep-dive-heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:.4rem 2rem;margin-bottom:1.5rem}.deep-dive-heading .eyebrow{grid-column:1/-1}.deep-dive-heading h2{margin:0;font-family:var(--serif);font-size:2rem}.deep-dive-heading>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}
+  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
 </style>
