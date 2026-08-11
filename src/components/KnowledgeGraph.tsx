@@ -1,150 +1,152 @@
-import { useMemo, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
-type Node = {
-  id: string;
-  label: string;
-  type: "概念" | "物质" | "方法" | "工具" | "过程" | "文献类型";
-  chapter: string;
-  chapterId: string;
-  x: number;
-  y: number;
-  detail: string;
-};
+type ConceptType = "concept" | "material" | "work" | "person" | "event" | "method";
+type Concept = { id: string; label: string; type: ConceptType; definition: string; chapter_ids: string[]; status: string };
+type Edge = { id: string; source: string; target: string; type: string; evidence: string; confidence: "confirmed" | "pedagogical" | "doubtful" };
+type PositionedNode = Concept & { x: number; y: number; degree: number };
 
-const initialNodes: Node[] = [
-  { id: "wenxian", label: "文献", type: "概念", chapter: "第一章", chapterId: "ch01", x: 50, y: 47, detail: "承载知识与信息的记录，是全书各类问题共同指向的中心对象。" },
-  { id: "carrier", label: "载体", type: "物质", chapter: "第二章", chapterId: "ch02", x: 19, y: 23, detail: "甲骨、金石、竹木、帛、纸等材料，直接影响制作、保存和解读。" },
-  { id: "version", label: "版本", type: "概念", chapter: "第五章", chapterId: "ch05", x: 76, y: 23, detail: "同一文献在抄写、刊刻与流传过程中形成的不同文本和物质形态。" },
-  { id: "collation", label: "校勘", type: "方法", chapter: "第六章", chapterId: "ch06", x: 82, y: 58, detail: "比较异同、考订讹误，并说明判断依据与保留意见的方法。" },
-  { id: "catalog", label: "目录", type: "工具", chapter: "第七章", chapterId: "ch07", x: 55, y: 80, detail: "通过分类、著录和提要组织文献，建立知识秩序与检索入口。" },
-  { id: "circulation", label: "流布", type: "过程", chapter: "第三章", chapterId: "ch03", x: 18, y: 69, detail: "文献经讲唱、抄写、镌刻、印刷、摄影等方式抵达不同读者。" },
-  { id: "paper", label: "纸", type: "物质", chapter: "第二章", chapterId: "ch02", x: 7, y: 40, detail: "纸张特征与装潢形制可成为版本鉴定、修复和保存的重要证据。" },
-  { id: "forgery", label: "辨伪", type: "方法", chapter: "第八章", chapterId: "ch08", x: 92, y: 39, detail: "综合源流、语言、制度、地理和思想等线索判断文献真伪问题。" },
-  { id: "leishu", label: "类书", type: "工具", chapter: "第九章", chapterId: "ch09", x: 36, y: 91, detail: "分类汇集旧文献材料，可用于检索史料、校勘和辑佚。" },
-  { id: "excavated", label: "出土文献", type: "文献类型", chapter: "第十二、十三章", chapterId: "ch12", x: 29, y: 8, detail: "经考古或其他途径重新发现，并保留物质现场信息的文献。" },
-  { id: "gazetteer", label: "地方志", type: "文献类型", chapter: "第十章", chapterId: "ch10", x: 67, y: 93, detail: "系统记录特定地域沿革、人物、物产与制度的重要专门文献。" },
-  { id: "dunhuang", label: "敦煌文献", type: "文献类型", chapter: "第十四章", chapterId: "ch14", x: 10, y: 88, detail: "以藏经洞遗书为核心，涉及发现、流散、目录、整理和多语种内容。" },
-];
+const WIDTH = 1100;
+const HEIGHT = 720;
+const typeLabels: Record<ConceptType, string> = { concept: "概念", material: "载体", work: "典籍", person: "人物", event: "事件", method: "方法" };
+const typeColors: Record<ConceptType, string> = { concept: "#a84537", material: "#b08038", work: "#687b9b", person: "#9a6377", event: "#816a9a", method: "#4f7865" };
+const relationLabels: Record<string, string> = { isA: "属于", isPartOf: "组成", usesMethod: "使用方法", produces: "产生", evidenceFor: "支持", affectedBy: "受影响", relatedTo: "相关" };
+const confidenceLabels = { confirmed: "原书确认", pedagogical: "教学归纳", doubtful: "待考关系" } as const;
+const statusLabels: Record<string, string> = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" };
 
-const edges = [
-  ["wenxian", "carrier", "依托"], ["wenxian", "version", "形成"], ["version", "collation", "需要"],
-  ["collation", "forgery", "互证"], ["wenxian", "catalog", "被组织"], ["wenxian", "circulation", "经历"],
-  ["carrier", "paper", "包括"], ["catalog", "leishu", "检索"], ["carrier", "excavated", "保存现场"],
-  ["excavated", "version", "提供早期形态"], ["circulation", "version", "造成差异"],
-  ["catalog", "gazetteer", "著录"], ["excavated", "dunhuang", "相关"], ["dunhuang", "catalog", "需要编目"],
-] as const;
+function chapterNumber(node: Concept) {
+  const match = node.chapter_ids[0]?.match(/\d+/);
+  return match ? Number(match[0]) : 1;
+}
 
-const colors: Record<Node["type"], string> = {
-  概念: "#a84537", 物质: "#a77734", 方法: "#4f7865", 工具: "#687b9b", 过程: "#9a6377", 文献类型: "#63747c",
-};
+function createLayout(concepts: Concept[], edges: Edge[]): PositionedNode[] {
+  const degree = new Map<string, number>();
+  edges.forEach((edge) => {
+    degree.set(edge.source, (degree.get(edge.source) ?? 0) + 1);
+    degree.set(edge.target, (degree.get(edge.target) ?? 0) + 1);
+  });
+  const groups = new Map<number, Concept[]>();
+  concepts.forEach((node) => {
+    const chapter = chapterNumber(node);
+    groups.set(chapter, [...(groups.get(chapter) ?? []), node]);
+  });
+  return concepts.map((node) => {
+    const chapter = chapterNumber(node);
+    const group = groups.get(chapter) ?? [node];
+    const index = group.findIndex((item) => item.id === node.id);
+    const column = (chapter - 1) % 7;
+    const row = Math.floor((chapter - 1) / 7);
+    const centerX = 85 + column * 155;
+    const centerY = 185 + row * 350;
+    const angle = (index / group.length) * Math.PI * 2 - Math.PI / 2;
+    const ring = 25 + (index % 3) * 16;
+    return { ...node, degree: degree.get(node.id) ?? 0, x: centerX + Math.cos(angle) * ring, y: centerY + Math.sin(angle) * ring };
+  });
+}
 
-export default function KnowledgeGraph() {
+export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts: Concept[]; edges: Edge[]; baseUrl: string }) {
+  const initialNodes = useMemo(() => createLayout(concepts, edges), [concepts, edges]);
   const [nodes, setNodes] = useState(initialNodes);
-  const [activeType, setActiveType] = useState("全部");
-  const [selectedId, setSelectedId] = useState("wenxian");
+  const [activeType, setActiveType] = useState<"all" | ConceptType>("all");
+  const [chapter, setChapter] = useState("all");
+  const [query, setQuery] = useState("");
+  const [selectedId, setSelectedId] = useState(concepts[0]?.id ?? "");
   const [dragging, setDragging] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
   const svgRef = useRef<SVGSVGElement>(null);
-  const selected = nodes.find((node) => node.id === selectedId) ?? nodes[0];
-  const types = ["全部", ...Array.from(new Set(nodes.map((node) => node.type)))];
-  const visible = useMemo(
-    () => new Set(nodes.filter((node) => activeType === "全部" || node.type === activeType).map((node) => node.id)),
-    [activeType, nodes],
-  );
+
+  useEffect(() => setNodes(initialNodes), [initialNodes]);
+
+  const nodeMap = useMemo(() => new Map(nodes.map((node) => [node.id, node])), [nodes]);
+  const adjacent = useMemo(() => {
+    const map = new Map<string, Set<string>>();
+    edges.forEach((edge) => {
+      map.set(edge.source, new Set([...(map.get(edge.source) ?? []), edge.target]));
+      map.set(edge.target, new Set([...(map.get(edge.target) ?? []), edge.source]));
+    });
+    return map;
+  }, [edges]);
+  const visible = useMemo(() => {
+    const normalized = query.trim().toLocaleLowerCase("zh-CN");
+    const matches = new Set(nodes.filter((node) => !normalized || `${node.label} ${node.definition}`.toLocaleLowerCase("zh-CN").includes(normalized)).map((node) => node.id));
+    if (normalized) for (const id of [...matches]) for (const neighbor of adjacent.get(id) ?? []) matches.add(neighbor);
+    return new Set(nodes.filter((node) =>
+      (activeType === "all" || node.type === activeType) &&
+      (chapter === "all" || node.chapter_ids.includes(chapter)) && matches.has(node.id),
+    ).map((node) => node.id));
+  }, [activeType, adjacent, chapter, nodes, query]);
+
+  useEffect(() => {
+    if (!visible.has(selectedId)) setSelectedId([...visible][0] ?? "");
+  }, [selectedId, visible]);
+
+  const selected = nodeMap.get(selectedId);
+  const selectedEdges = selected ? edges.filter((edge) => edge.source === selected.id || edge.target === selected.id) : [];
+  const connected = new Set(selectedEdges.flatMap((edge) => [edge.source, edge.target]));
+  const viewWidth = WIDTH / zoom;
+  const viewHeight = HEIGHT / zoom;
+  const viewX = (WIDTH - viewWidth) / 2;
+  const viewY = (HEIGHT - viewHeight) / 2;
 
   function point(event: React.PointerEvent<SVGSVGElement>) {
     const rect = svgRef.current!.getBoundingClientRect();
-    const width = 100 / zoom;
-    const height = 100 / zoom;
-    const offset = (100 - width) / 2;
-    return {
-      x: offset + ((event.clientX - rect.left) / rect.width) * width,
-      y: offset + ((event.clientY - rect.top) / rect.height) * height,
-    };
+    return { x: viewX + ((event.clientX - rect.left) / rect.width) * viewWidth, y: viewY + ((event.clientY - rect.top) / rect.height) * viewHeight };
   }
-
   function move(event: React.PointerEvent<SVGSVGElement>) {
     if (!dragging) return;
     const next = point(event);
-    setNodes((items) => items.map((node) => node.id === dragging
-      ? { ...node, x: Math.max(5, Math.min(95, next.x)), y: Math.max(6, Math.min(94, next.y)) }
-      : node));
+    setNodes((items) => items.map((node) => node.id === dragging ? { ...node, x: Math.max(20, Math.min(WIDTH - 20, next.x)), y: Math.max(25, Math.min(HEIGHT - 25, next.y)) } : node));
+  }
+  function reset() {
+    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setZoom(1); setSelectedId(concepts[0]?.id ?? "");
   }
 
-  const viewSize = 100 / zoom;
-  const viewOffset = (100 - viewSize) / 2;
-
-  return (
-    <div className="graph-shell">
-      <div className="graph-toolbar">
-        <div aria-label="筛选知识图谱">
-          {types.map((type) => (
-            <button className={activeType === type ? "active" : ""} onClick={() => setActiveType(type)} key={type}>{type}</button>
-          ))}
-        </div>
-        <div className="graph-controls">
-          <span>拖动节点 · 滚轮或按钮缩放</span>
-          <button aria-label="缩小" onClick={() => setZoom((value) => Math.max(1, value - 0.2))}>−</button>
-          <b>{Math.round(zoom * 100)}%</b>
-          <button aria-label="放大" onClick={() => setZoom((value) => Math.min(2, value + 0.2))}>＋</button>
-          <button onClick={() => { setNodes(initialNodes); setZoom(1); }}>复位</button>
-        </div>
-      </div>
-      <div className="graph-stage">
-        <svg
-          ref={svgRef}
-          viewBox={`${viewOffset} ${viewOffset} ${viewSize} ${viewSize}`}
-          role="img"
-          aria-label="可拖动的文献学概念关系图"
-          onPointerMove={move}
-          onPointerUp={() => setDragging(null)}
-          onPointerLeave={() => setDragging(null)}
-          onWheel={(event) => {
-            event.preventDefault();
-            setZoom((value) => Math.max(1, Math.min(2, value + (event.deltaY < 0 ? 0.1 : -0.1))));
-          }}
-        >
-          {edges.map(([from, to, label]) => {
-            const a = nodes.find((node) => node.id === from)!;
-            const b = nodes.find((node) => node.id === to)!;
-            const show = visible.has(from) && visible.has(to);
-            return (
-              <g key={`${from}-${to}`} opacity={show ? 0.58 : 0.05}>
-                <line x1={a.x} y1={a.y} x2={b.x} y2={b.y} />
-                <text x={(a.x + b.x) / 2} y={(a.y + b.y) / 2 - 1}>{label}</text>
-              </g>
-            );
-          })}
-          {nodes.map((node) => (
-            <g
-              className={`graph-node ${dragging === node.id ? "dragging" : ""}`}
-              opacity={visible.has(node.id) ? 1 : 0.1}
-              transform={`translate(${node.x} ${node.y})`}
-              onPointerDown={(event) => {
-                if (!visible.has(node.id)) return;
-                event.currentTarget.setPointerCapture(event.pointerId);
-                setDragging(node.id);
-                setSelectedId(node.id);
-              }}
-              onClick={() => visible.has(node.id) && setSelectedId(node.id)}
-              role="button"
-              tabIndex={visible.has(node.id) ? 0 : -1}
-              onKeyDown={(event) => event.key === "Enter" && setSelectedId(node.id)}
-              key={node.id}
-            >
-              <circle r={node.id === "wenxian" ? 7 : 5.6} fill={colors[node.type]} />
-              <text className="node-label" y="0.7">{node.label}</text>
-            </g>
-          ))}
-        </svg>
-        <aside className="graph-detail">
-          <span style={{ color: colors[selected.type] }}>{selected.type} · {selected.chapter}</span>
-          <h2>{selected.label}</h2>
-          <p>{selected.detail}</p>
-          <a className="graph-chapter-link" href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}chapters/${selected.chapterId}/`}>阅读对应章节 →</a>
-          <small>关系为学习型概念映射，后续将补充出处与复核状态。</small>
-        </aside>
-      </div>
+  return <div className="graph-shell graph-shell--full">
+    <div className="graph-searchbar">
+      <label><span>搜索概念</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：版本、辑佚、敦煌……" /></label>
+      <label><span>章节</span><select value={chapter} onChange={(event) => setChapter(event.target.value)}><option value="all">全部十四章</option>{Array.from({ length: 14 }, (_, index) => <option key={index + 1} value={`ch${String(index + 1).padStart(2, "0")}`}>第 {index + 1} 章</option>)}</select></label>
+      <div className="graph-count"><strong>{visible.size}</strong><span>个可见节点</span><b>{edges.filter((edge) => visible.has(edge.source) && visible.has(edge.target)).length} 条关系</b></div>
     </div>
-  );
+    <div className="graph-toolbar">
+      <div aria-label="按类型筛选">{(["all", "concept", "material", "work", "person", "event", "method"] as const).map((type) => <button key={type} className={activeType === type ? "active" : ""} onClick={() => setActiveType(type)}>{type === "all" ? "全部类型" : typeLabels[type]}</button>)}</div>
+      <div className="graph-controls"><span>拖动节点 · 滚轮缩放</span><button onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b>{Math.round(zoom * 100)}%</b><button onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
+    </div>
+    <div className="graph-stage graph-stage--full">
+      <svg ref={svgRef} viewBox={`${viewX} ${viewY} ${viewWidth} ${viewHeight}`} role="img" aria-label="全书可拖动知识图谱" onPointerMove={move} onPointerUp={() => setDragging(null)} onPointerLeave={() => setDragging(null)} onWheel={(event) => { event.preventDefault(); setZoom((value) => Math.max(1, Math.min(2.4, value + (event.deltaY < 0 ? .1 : -.1)))); }}>
+        {Array.from({ length: 14 }, (_, index) => {
+          const col = index % 7, row = Math.floor(index / 7);
+          return <text key={index} className="chapter-cluster-label" x={85 + col * 155} y={90 + row * 350}>第 {index + 1} 章</text>;
+        })}
+        {edges.map((edge) => {
+          const source = nodeMap.get(edge.source), target = nodeMap.get(edge.target);
+          if (!source || !target) return null;
+          const show = visible.has(edge.source) && visible.has(edge.target);
+          const emphasis = selected ? edge.source === selected.id || edge.target === selected.id : false;
+          return <g key={edge.id} opacity={show ? (emphasis ? .95 : .25) : .025} className={emphasis ? "edge-active" : ""}>
+            <line x1={source.x} y1={source.y} x2={target.x} y2={target.y} />
+            {(emphasis || zoom > 1.65) && <text x={(source.x + target.x) / 2} y={(source.y + target.y) / 2 - 4}>{relationLabels[edge.type] ?? edge.type}</text>}
+          </g>;
+        })}
+        {nodes.map((node) => {
+          const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id);
+          const radius = Math.min(10, 4.2 + node.degree * .8);
+          return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""}`} opacity={show ? (selected && !related && !selectedNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" tabIndex={show ? 0 : -1} onKeyDown={(event) => event.key === "Enter" && setSelectedId(node.id)}>
+            <circle r={radius} fill={typeColors[node.type]} />
+            {(selectedNode || related || zoom > 1.25 || (query && show)) && <text className="node-label" y={-radius - 4}>{node.label}</text>}
+          </g>;
+        })}
+      </svg>
+      <aside className="graph-detail graph-detail--full">
+        {selected ? <>
+          <span style={{ color: typeColors[selected.type] }}>{typeLabels[selected.type]} · {selected.chapter_ids.map((id) => `第 ${Number(id.slice(2))} 章`).join("、")}</span>
+          <h2>{selected.label}</h2><p>{selected.definition}</p>
+          <div className="graph-status">{statusLabels[selected.status] ?? selected.status} · {selected.degree} 条直接关系</div>
+          <div className="graph-relations">{selectedEdges.length ? selectedEdges.map((edge) => {
+            const otherId = edge.source === selected.id ? edge.target : edge.source; const other = nodeMap.get(otherId);
+            return <button key={edge.id} onClick={() => setSelectedId(otherId)}><small>{relationLabels[edge.type] ?? edge.type} · {confidenceLabels[edge.confidence]}</small><strong>{other?.label ?? otherId}</strong><span>{edge.evidence}</span></button>;
+          }) : <p>这个概念已录入全书词表，跨概念关系仍待补充。</p>}</div>
+          <div className="graph-chapter-links">{selected.chapter_ids.map((id) => <a key={id} href={`${baseUrl}chapters/${id}/`}>阅读第 {Number(id.slice(2))} 章 →</a>)}</div>
+        </> : <p>当前筛选条件没有可见节点，请调整章节、类型或搜索词。</p>}
+      </aside>
+    </div>
+  </div>;
 }
