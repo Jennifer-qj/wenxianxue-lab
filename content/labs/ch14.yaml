@@ -1,0 +1,12 @@
+items:
+  - id: lab-14-case-001
+    title: 敦煌残卷虚拟重聚台
+    engine: assemble
+    concept_ids: [c_dunhuang_dispersal, c_dunhuang_catalog, c_fragment_reunification, me_dunhuang_id_resolution, c_digital_reunification]
+    config:
+      pieces:
+        - {id: p1, label: 甲馆残卷·右侧断口, clue: 纸纹与行款}
+        - {id: p2, label: 乙馆残卷·左侧断口, clue: 断口与文意承接}
+        - {id: p3, label: 两馆旧号对照, clue: 收藏史}
+        - {id: p4, label: 联合目录记录, clue: 统一标识}
+      solution: [p3, p1, p2, p4]

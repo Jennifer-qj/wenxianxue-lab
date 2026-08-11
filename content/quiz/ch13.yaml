@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch13-001, chapter: 13, type: true_false, concept_ids: [c_excavated_variant], prompt: 出土写本时代早于今本，就必然等同于该书唯一原本。, answer: false, explanation: 出土本是较早且珍贵的文本见证，仍可能只是特定地域和阶段的传本。}
+  - {id: q-ch13-002, chapter: 13, type: classification, concept_ids: [c_bamboo_silk_text, c_stone_inscription, c_seal_text, c_brick_tile_text], prompt: 将材料按载体归类。, zones: [简帛, 石刻, 玺印砖瓦], items: [{label: 竹简律令, zone: 简帛}, {label: 墓志铭, zone: 石刻}, {label: 官印文字, zone: 玺印砖瓦}, {label: 瓦当铭文, zone: 玺印砖瓦}], explanation: 载体分类帮助选择相应的保存、释读和断代方法。}
+  - {id: q-ch13-003, chapter: 13, type: evidence, concept_ids: [c_archaeological_context, c_stone_inscription_value], prompt: 使用墓志重建人物履历应核查哪些材料？, evidence_ids: [墓志纪年, 史书传记, 同墓出土物, 官职制度沿革, 书法是否好看], answer_ids: [墓志纪年, 史书传记, 同墓出土物, 官职制度沿革], explanation: 文本、考古和制度材料互证可发现颂扬或纪年问题。}
+  - {id: q-ch13-004, chapter: 13, type: multiple_choice, concept_ids: [me_excavated_transmitted_comparison], prompt: 对读出土本与传世本应控制哪些变量？, options: [年代, 地域, 篇章结构, 文字载体, 收藏价格], answers: [0,1,2,3], explanation: 比较必须放回具体文本系统，不能只列差字。}
+  - {id: q-ch13-005, chapter: 13, type: matching, concept_ids: [c_book_history_artifact, c_stone_inscription_value], prompt: 将实物特征与研究问题配对。, pairs: [{left: 简册编绳痕迹, right: 书籍制度}, {left: 石刻字体, right: 文字与书法}, {left: 帛书分栏, right: 版面与阅读顺序}], explanation: 出土文献的物质形态本身就是研究对象。}
+  - {id: q-ch13-006, chapter: 13, type: ordering, concept_ids: [c_archaeological_context, me_excavated_transmitted_comparison], prompt: 排列研究新出简帛材料的基础步骤。, items: [记录出土单位, 保存整理实物, 编号摄影释文, 与同批材料组合, 再与传世本比较], answer: [0,1,2,3,4], explanation: 先保护原始语境，再进入文本比较。}
+  - {id: q-ch13-007, chapter: 13, type: short_answer, concept_ids: [c_book_history_artifact], prompt: 简牍散乱后为什么可能有多种编联方案？, rubric: [说明简序可能扰动, 利用编绳痕和尺寸, 结合文意与编号位置, 保留竞争方案], explanation: 编联是物质证据和文本证据共同约束的复原问题。}
+  - {id: q-ch13-008, chapter: 13, type: fill_blank, concept_ids: [c_archaeological_context], prompt: 地层、出土位置和共存物共同构成文献的出土____。, answers: [语境, 情境], explanation: 语境把孤立文字连接到年代、功能和历史活动。}

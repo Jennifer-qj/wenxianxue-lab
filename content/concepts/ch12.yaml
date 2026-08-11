@@ -1,0 +1,11 @@
+items:
+  - {id: c_oracle_bone_text, label: 甲骨文文献, type: concept, definition: 以龟甲兽骨为载体的殷商占卜及相关刻辞材料。, chapter_ids: [ch12], status: pending_review}
+  - {id: ev_oracle_discovery, label: 甲骨文发现, type: event, definition: 晚清以来甲骨被识别、收藏并进入学术研究的过程。, chapter_ids: [ch12], status: pending_review}
+  - {id: me_scientific_excavation, label: 科学发掘, type: method, definition: 记录地层、位置、组合关系和遗迹背景的考古发掘方法。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_oracle_collection, label: 甲骨材料结集, type: concept, definition: 对分散甲骨进行著录、拓印、缀合、分类和释读的整理成果。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_oracle_value, label: 甲骨文学术价值, type: concept, definition: 甲骨文在古文字、语言和殷商历史研究中的价值。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_bronze_inscription, label: 金文文献, type: concept, definition: 铸刻在青铜器上的铭文及其相关器物和出土信息。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_bronze_corpus, label: 金文汇集考释, type: concept, definition: 对青铜器铭文进行著录、摹拓、释文、断代和分类的研究过程。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_bronze_value, label: 金文学术价值, type: concept, definition: 金文在文字、传世文献考订和古史研究中的价值。, chapter_ids: [ch12], status: pending_review}
+  - {id: c_archaeological_context, label: 出土语境, type: concept, definition: 文物的地层、地点、共存物、组合关系及发掘记录。, chapter_ids: [ch12, ch13], status: pending_review}
+  - {id: me_epigraphic_rubbing, label: 铭刻拓本, type: method, definition: 将甲骨或金石表面文字复制为纸本图像以便保存与研究的方法。, chapter_ids: [ch12, ch13], status: pending_review}

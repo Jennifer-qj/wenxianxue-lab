@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch11-001, chapter: 11, type: classification, concept_ids: [c_zongji, c_bieji], prompt: 将结构归入总集或别集。, zones: [总集, 别集], items: [{label: 汇录多位作者诗文, zone: 总集}, {label: 以一位作者作品为主, zone: 别集}, {label: 跨作者按文体选录, zone: 总集}, {label: 附某作者年谱补遗, zone: 别集}], explanation: 作者范围是基本区别，但两类都可能经历多层编纂。}
+  - {id: q-ch11-002, chapter: 11, type: evidence, concept_ids: [c_collection_editorial_selection, me_collection_source_analysis], prompt: 判断选集编选标准应查看哪些材料？, evidence_ids: [序言凡例, 目录分类, 实际收录作品, 删选评语, 封面颜色], answer_ids: [序言凡例, 目录分类, 实际收录作品, 删选评语], explanation: 明示宗旨与实际选录要相互核验。}
+  - {id: q-ch11-003, chapter: 11, type: true_false, concept_ids: [c_quanji_collection], prompt: 名称带“全集”的总集必然保存了范围内所有作品。, answer: false, explanation: 全集仍受材料存佚、编者见闻和收录边界限制。}
+  - {id: q-ch11-004, chapter: 11, type: matching, concept_ids: [c_author_collection_layers], prompt: 将别集部分与形成者配对。, pairs: [{left: 作者自定篇目, right: 自编层}, {left: 门人搜集遗文, right: 后编层}, {left: 后世新增年谱, right: 附录层}], explanation: 分层能避免把所有内容都归给题名作者。}
+  - {id: q-ch11-005, chapter: 11, type: multiple_choice, concept_ids: [c_collection_documentary_value], prompt: 总集别集可用于哪些研究？, options: [校勘辑佚, 文学史, 人物交游, 制度社会, 自动证明所有自述], answers: [0,1,2,3], explanation: 集部材料用途广，但自述与应酬仍需互证。}
+  - {id: q-ch11-006, chapter: 11, type: ordering, concept_ids: [me_collection_source_analysis], prompt: 排列比较总集与别集异文的步骤。, items: [核定两本版本年代, 记录篇题编次, 对读文字差异, 查编纂来源, 形成有限结论], answer: [0,1,2,3,4], explanation: 先控制版本和来源，异文判断才有基础。}
+  - {id: q-ch11-007, chapter: 11, type: short_answer, concept_ids: [c_collection_documentary_value, c_local_source_bias], prompt: 为什么不能把别集书信中的自述直接当作客观事实？, rubric: [说明写作对象与目的, 考虑修辞和自我塑造, 寻找日记档案或他人记录互证], explanation: 书信是重要一手表达，也是特定交往情境中的文本。}
+  - {id: q-ch11-008, chapter: 11, type: fill_blank, concept_ids: [c_author_collection_layers], prompt: 作者自编、后人续编和附录共同构成别集的成书____。, answers: [层次, 过程], explanation: 识别层次有助于准确确定各部分责任者和年代。}
