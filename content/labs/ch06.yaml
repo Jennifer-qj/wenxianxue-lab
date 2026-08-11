@@ -1,0 +1,11 @@
+items:
+  - id: lab-06-case-001
+    title: 校勘工作台·异文标注
+    engine: annotate
+    concept_ids: [c_textual_error, c_variant, me_duijiao, me_tajiao, me_benjiao, c_collation_note]
+    config:
+      passage: "底本：学而时习之不亦说乎；乙本：学而时习之不亦悦乎；类书引文作悦。请标注异文、证据来源与结论强度。"
+      hotspots:
+        - {text: 说, role: 底本文字, task: 记录而不先删除}
+        - {text: 悦, role: 异本文字, task: 比较字义与传本}
+        - {text: 类书引文, role: 他校证据, task: 评估年代与节引风险}

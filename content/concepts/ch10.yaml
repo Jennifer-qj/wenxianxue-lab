@@ -1,0 +1,11 @@
+items:
+  - {id: c_local_gazetteer, label: 地方志, type: concept, definition: 系统记载一定地域自然、建置、人物、经济、文化等内容的综合性地方文献。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_gazetteer_type, label: 方志类型, type: concept, definition: 总志、省府州厅县志、乡镇都邑志及卫所边关土司盐井专志等层级与专题类型。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_administrative_geography, label: 地理沿革, type: concept, definition: 地名、疆域与行政建置随时代发生的变化。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_gazetteer_value, label: 地方志价值, type: concept, definition: 地方志在治理、地理沿革、文学和区域历史研究中的资料价值。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_genealogy, label: 家谱, type: concept, definition: 以宗族世系为核心并保存家族人物、规范、文献与迁徙记录的文献。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_genealogical_lineage, label: 世系, type: concept, definition: 以图表或叙录呈现家族成员世代关系的谱牒核心结构。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_genealogy_structure, label: 家谱内容结构, type: concept, definition: 谱序、谱例、世系、传志、家训、文献、图像和修谱记录等组成部分。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_genealogy_value, label: 家谱价值, type: concept, definition: 家谱可提供人物、诗文、人口、移民和宗族制度等研究资料。, chapter_ids: [ch10], status: pending_review}
+  - {id: c_local_source_bias, label: 地方文献立场, type: concept, definition: 方志与家谱因编纂主体、表彰目的和资料来源而形成的选择性叙述。, chapter_ids: [ch10], status: pending_review}
+  - {id: me_local_source_crosscheck, label: 地方文献互证, type: method, definition: 将不同时期方志、家谱、档案、碑刻和人口资料交叉核验的方法。, chapter_ids: [ch10], status: pending_review}

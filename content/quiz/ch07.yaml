@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch07-001, chapter: 7, type: single_choice, concept_ids: [c_bibliography, c_bibliographic_abstract], prompt: 能最充分体现传统目录学术功能的是哪一项？, options: [只列价格, 既著录书目又撰提要和类序, 只按颜色排书, 只统计页数], answer: 1, explanation: 提要和类序使目录能够揭示一书内容及学术源流。}
+  - {id: q-ch07-002, chapter: 7, type: matching, concept_ids: [c_public_catalog, c_private_catalog, c_dynastic_bibliography], prompt: 将目录类型与主要主体配对。, pairs: [{left: 公藏目录, right: 国家或公共机构收藏}, {left: 私藏目录, right: 私人藏书}, {left: 史志目录, right: 正史中的艺文或经籍著录}], explanation: 主体和编制目的决定收录范围与信息结构。}
+  - {id: q-ch07-003, chapter: 7, type: classification, concept_ids: [c_subject_catalog, c_special_catalog], prompt: 将目录归类。, zones: [专科目录, 特种目录], items: [{label: 经学目录, zone: 专科目录}, {label: 集部目录, zone: 专科目录}, {label: 禁毁目录, zone: 特种目录}, {label: 版本图录, zone: 特种目录}], explanation: 专科按知识领域组织，特种目录围绕特定研究或管理任务。}
+  - {id: q-ch07-004, chapter: 7, type: multiple_choice, concept_ids: [c_bibliographic_entry], prompt: 一条较完整的传统目录著录可包含哪些项目？, options: [书名篇卷, 撰人朝代, 版本, 提要, 天气], answers: [0,1,2,3], explanation: 这些项目共同识别文献并提供内容与版本线索。}
+  - {id: q-ch07-005, chapter: 7, type: true_false, concept_ids: [c_bibliographic_classification], prompt: 同一部书在所有时代和所有目录中必定归入同一类别。, answer: false, explanation: 分类取决于知识体系、编目目的和对书籍性质的判断。}
+  - {id: q-ch07-006, chapter: 7, type: ordering, concept_ids: [c_bibliographic_entry, c_bibliographic_abstract], prompt: 排列制作基础书目记录的工作顺序。, items: [核定书名与篇卷, 核查责任者和朝代, 描述版本, 撰写提要, 归入类目], answer: [0,1,2,3,4], explanation: 先识别对象和所据本，再概括内容并安置于知识体系。}
+  - {id: q-ch07-007, chapter: 7, type: evidence, concept_ids: [c_same_book_names, c_special_catalog], prompt: 解决“同书异名”应优先比较哪些信息？, evidence_ids: [篇卷结构, 内容起讫, 撰人题署, 提要与序跋, 封面颜色], answer_ids: [篇卷结构, 内容起讫, 撰人题署, 提要与序跋], explanation: 作品身份需要内容和传承证据，不应由外观单项决定。}
+  - {id: q-ch07-008, chapter: 7, type: short_answer, concept_ids: [c_bibliography, c_bibliographic_abstract], prompt: 为什么说目录可以成为学术史材料？, rubric: [提到分类体系, 提到提要或序, 说明收录与不收录的时代判断, 指出目录自身边界], explanation: 目录通过类目、提要和取舍呈现编者对知识结构及学术源流的理解。}

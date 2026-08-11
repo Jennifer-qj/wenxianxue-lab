@@ -1,0 +1,13 @@
+items:
+  - id: lab-08-case-001
+    title: 佚文拼合与辨伪证据板
+    engine: assemble
+    concept_ids: [c_reconstruction, me_reconstruction_workflow, c_forged_work, me_provenance_authentication, me_linguistic_authentication, me_historical_authentication]
+    config:
+      pieces:
+        - {id: catalog, label: 早期目录著录, reliability: high}
+        - {id: quotation, label: 同时代他书引文, reliability: high}
+        - {id: late_word, label: 疑似晚出语词, reliability: medium}
+        - {id: provenance, label: 最初传出记录, reliability: high}
+        - {id: web_claim, label: 无出处网络说法, reliability: low}
+      solution: [catalog, quotation, provenance, late_word]

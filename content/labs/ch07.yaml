@@ -1,0 +1,11 @@
+items:
+  - id: lab-07-case-001
+    title: 目录编目室·从书到类
+    engine: classify
+    concept_ids: [c_bibliographic_classification, c_bibliographic_entry, c_public_catalog, c_private_catalog, c_dynastic_bibliography, c_special_catalog]
+    config:
+      zones: [著录信息, 分类判断, 目录类型]
+      items:
+        - {label: 书名、卷数、撰人、版本, zone: 著录信息}
+        - {label: 经史子集归属, zone: 分类判断}
+        - {label: 公藏、私藏、史志、专科、特种, zone: 目录类型}

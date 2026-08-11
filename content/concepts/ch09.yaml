@@ -1,0 +1,11 @@
+items:
+  - {id: c_leishu, label: 类书, type: concept, definition: 摘录群书材料并按类目、事类或韵目编排以供检索的工具书。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_leishu_function, label: 类书功用, type: concept, definition: 利用类书查找史料辞藻、校勘考订古书和搜集佚文。, chapter_ids: [ch09], status: pending_review}
+  - {id: me_leishu_retrieval, label: 类书检索, type: method, definition: 根据类目、事类、韵目和引书标记定位材料并回查原书的方法。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_leishu_citation_risk, label: 类书征引风险, type: concept, definition: 类书摘录可能节略、改字、错标出处或受自身版本影响。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_congshu, label: 丛书, type: concept, definition: 汇刻或汇印多种相对独立著作而成的文献集合。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_congshu_function, label: 丛书功用, type: concept, definition: 丛书通过集中刊印保存、传播稀见著作并形成专题或综合性文献集合。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_congshu_edition, label: 丛书本, type: concept, definition: 某书收入特定丛书后形成的具体版本及其文本形态。, chapter_ids: [ch09], status: pending_review}
+  - {id: c_collection_series_boundary, label: 类书与丛书边界, type: concept, definition: 类书拆取材料重新分类，丛书通常保留各书相对独立形态。, chapter_ids: [ch09], status: pending_review}
+  - {id: w_yongle_dadian, label: 永乐大典, type: work, definition: 明代大型类书，以韵统字、以字系事，保存大量后世亡佚材料。, chapter_ids: [ch09], status: pending_review}
+  - {id: w_siku_quanshu, label: 四库全书, type: work, definition: 清代大型丛书工程，按经史子集收录并整理大量著作。, chapter_ids: [ch09], status: pending_review}

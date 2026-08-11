@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch09-001, chapter: 9, type: classification, concept_ids: [c_leishu, c_congshu, c_collection_series_boundary], prompt: 将结构特征归类。, zones: [类书, 丛书], items: [{label: 摘取群书材料按事类重排, zone: 类书}, {label: 多种书保持相对独立, zone: 丛书}, {label: 条目需回查原始出处, zone: 类书}, {label: 单书形成特定汇刻版本, zone: 丛书}], explanation: 判断重点是材料是否被拆散重组，而不是规模大小。}
+  - {id: q-ch09-002, chapter: 9, type: multiple_choice, concept_ids: [c_leishu_function, c_congshu_function], prompt: 类书和丛书可能共同提供哪些帮助？, options: [保存文献, 扩大传播, 提供研究线索, 自动保证文字无误, 降低查找成本], answers: [0,1,2,4], explanation: 两者均能保存和组织材料，但不能消除版本与编纂误差。}
+  - {id: q-ch09-003, chapter: 9, type: evidence, concept_ids: [c_leishu_citation_risk, c_congshu_edition], prompt: 使用类书引文或丛书本时应核查哪些项目？, evidence_ids: [编纂刊刻年代, 所据底本, 引文上下文, 凡例, 装饰颜色], answer_ids: [编纂刊刻年代, 所据底本, 引文上下文, 凡例], explanation: 编纂与版本信息决定材料可支持的结论范围。}
+  - {id: q-ch09-004, chapter: 9, type: matching, concept_ids: [c_leishu, w_yongle_dadian, w_siku_quanshu], prompt: 将文献与性质配对。, pairs: [{left: 永乐大典, right: 大型类书}, {left: 四库全书, right: 大型丛书工程}, {left: 艺文类聚, right: 唐代类书}], explanation: 名称与卷帙庞大都不是分类依据，须看内部组织方式。}
+  - {id: q-ch09-005, chapter: 9, type: true_false, concept_ids: [c_leishu_citation_risk], prompt: 类书时代较早，所以其中所有引文都可不经核查直接替换今本。, answer: false, explanation: 类书也可能节略、改字或传抄出错，早出只增强其证据价值而非绝对可靠。}
+  - {id: q-ch09-006, chapter: 9, type: ordering, concept_ids: [me_leishu_retrieval], prompt: 排列使用类书寻找史料的步骤。, items: [分析问题关键词与事类, 查类目或索引, 定位条目, 记录引书出处, 回查原书或可靠版本], answer: [0,1,2,3,4], explanation: 检索终点应回到出处核验，而不是停在类书摘文。}
+  - {id: q-ch09-007, chapter: 9, type: short_answer, concept_ids: [c_congshu_edition], prompt: 为什么引用一部收入丛书的书时要注明丛书名？, rubric: [说明丛书本是具体版本, 提到底本或删改差异, 便于复核定位], explanation: 同一著作在不同丛书中的文字和编排可能不同。}
+  - {id: q-ch09-008, chapter: 9, type: fill_blank, concept_ids: [c_leishu_function, c_reconstruction], prompt: 从类书中搜集亡书引文并重新编排的工作叫作____。, answers: [辑佚], explanation: 类书是辑佚的重要资料源，但辑者必须标明出处并处理重复异文。}

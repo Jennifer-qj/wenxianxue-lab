@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch06-001, chapter: 6, type: matching, concept_ids: [c_textual_error], prompt: 将现象与讹误类型配对。, pairs: [{left: 原有一字变成形近字, right: 讹}, {left: 少去一句, right: 脱}, {left: 重复抄入一行, right: 衍}, {left: 两段前后颠倒, right: 倒}], explanation: 分类有助于描述症状，但最终处理仍需异本和语境证据。}
+  - {id: q-ch06-002, chapter: 6, type: true_false, concept_ids: [c_collation, c_suspensive_judgment], prompt: 校勘的目标是无论证据是否充分都必须给出唯一改文。, answer: false, explanation: 证据不足时应存疑；可靠校勘重视可复核的证据和有限结论。}
+  - {id: q-ch06-003, chapter: 6, type: classification, concept_ids: [me_duijiao, me_tajiao, me_benjiao], prompt: 将材料归入主要校法。, zones: [对校, 他校, 本校], items: [{label: 甲乙两刻本异文, zone: 对校}, {label: 类书所引本句, zone: 他校}, {label: 本书另一章的复文, zone: 本校}], explanation: 不同材料入口可以互相支持，实际判断常需综合使用。}
+  - {id: q-ch06-004, chapter: 6, type: multiple_choice, concept_ids: [c_variant, me_tajiao], prompt: 评估他书引文时应检查哪些事项？, options: [引文年代, 引用目的, 是否节略, 传本可靠性, 页面颜色], answers: [0,1,2,3], explanation: 引文不是自动正确的原文，需要考察形成和流传背景。}
+  - {id: q-ch06-005, chapter: 6, type: ordering, concept_ids: [c_collation_note], prompt: 排列撰写校勘记的基本步骤。, items: [记录底文, 列出异文及来源, 陈述证据, 说明取舍或存疑], answer: [0,1,2,3], explanation: 先公开材料，再呈现判断，读者才能复核。}
+  - {id: q-ch06-006, chapter: 6, type: evidence, concept_ids: [me_synthesis_collation, c_evidence_chain], prompt: 判断疑似倒文时哪些证据有效？, evidence_ids: [异本次序, 上下文结构, 本书体例, 同时代引文, 收藏价格], answer_ids: [异本次序, 上下文结构, 本书体例, 同时代引文], explanation: 结构、异本与旁证共同组成判断链，市场信息与文本次序无关。}
+  - {id: q-ch06-007, chapter: 6, type: short_answer, concept_ids: [c_collation_note, c_collation], prompt: 为什么校勘记不能只写“今据某本改”？, rubric: [交代底文和异文, 说明某本为何可靠, 呈现其他证据, 标明结论限度], explanation: 简单宣布改字遮蔽了证据选择，无法让读者判断改动是否成立。}
+  - {id: q-ch06-008, chapter: 6, type: fill_blank, concept_ids: [c_suspensive_judgment], prompt: 证据不足而保留疑问的校勘原则可概括为“多闻____”。, answers: [阙疑], explanation: 阙疑要求把未知保留下来，避免凭主观顺文臆改。}

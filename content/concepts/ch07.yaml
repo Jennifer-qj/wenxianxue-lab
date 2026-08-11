@@ -1,0 +1,11 @@
+items:
+  - {id: c_bibliography, label: 目录, type: concept, definition: 按一定分类与著录规则组织文献并揭示其内容、版本和学术关系的工具。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_bibliographic_classification, label: 古籍分类, type: concept, definition: 依据知识结构和文献性质把古籍分入经史子集等类别的组织方法。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_bibliographic_entry, label: 目录著录项, type: concept, definition: 书名、篇卷、撰人朝代、版本、提要和序等构成的目录信息单元。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_bibliographic_abstract, label: 提要, type: concept, definition: 概述一书内容、作者、版本、价值及源流的目录说明。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_public_catalog, label: 公藏目录, type: concept, definition: 记录国家或公共收藏机构藏书的目录。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_private_catalog, label: 私藏目录, type: concept, definition: 私人藏书家为其收藏编制的目录。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_dynastic_bibliography, label: 史志目录, type: concept, definition: 正史艺文志或经籍志等记录一代文献与分类的目录。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_subject_catalog, label: 专科目录, type: concept, definition: 围绕经学、小学、史部、子部或集部等专门领域编制的目录。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_special_catalog, label: 特种目录, type: concept, definition: 按举要、知见、经眼、禁毁、版本图录、辨伪等特殊目的编制的目录。, chapter_ids: [ch07], status: pending_review}
+  - {id: c_same_book_names, label: 同书异名与异书同名, type: concept, definition: 一书多名或不同书共名造成的检索与识别问题。, chapter_ids: [ch07], status: pending_review}
