@@ -1,0 +1,220 @@
+items:
+  - id: deep-ch01-001
+    chapter: 1
+    title: 同一材料，为什么会产生不同的文献学问题？
+    scenario: 一份旧抄讲义同时保存文字内容、装订痕迹、收藏题记和删改笔迹。研究者需要决定先问“写了什么”，还是先问“这件材料怎样形成和流传”。
+    question: 怎样把一个宽泛的“研究这份讲义”改造成边界清楚、证据可得的问题？
+    concept_ids: [c_wenxian, c_wenxianxue, c_research_boundary, c_evidence_chain]
+    evidence:
+      - {id: object, label: 讲义实物及全册影像, role: 观察文字、纸张、装订和修改层次, limitation: 单一现存本不能直接代表最初形态}
+      - {id: catalog, label: 馆藏目录与入藏记录, role: 追踪名称、年代判断和收藏来源, limitation: 著录可能沿袭旧说或信息简略}
+      - {id: parallel, label: 同课程其他讲义, role: 比较内容结构和书写者差异, limitation: 同课材料也可能来自不同学期和整理阶段}
+    workflow: [列出材料实际提供的信息, 选择文字或物质等一个主问题, 为每项判断匹配证据, 写出暂不处理的范围, 形成可检验的问题句]
+    deliverable: 一张“研究问题—证据—边界”三列表，不超过 500 字。
+    rubric: [问题对象具体, 证据与问题对应, 主动声明材料边界, 不以结论代替问题]
+    status: pending_review
+
+  - id: deep-ch02-001
+    chapter: 2
+    title: 只看数字图像，能判断一件古书的装帧吗？
+    scenario: 数据库提供一册古书的封面和十张内页图，书签称其为“明代线装本”，但没有书脊、书口和拆装信息。
+    question: 现有影像最多能支持哪些装帧判断，还需要补拍什么？
+    concept_ids: [c_thread_binding, c_butterfly_binding, c_carrier_constraint, me_material_reading]
+    evidence:
+      - {id: opening, label: 展开内页影像, role: 观察版心方向、折叶和接缝, limitation: 看不到书脊连接和隐藏结构}
+      - {id: cover, label: 封面与题签, role: 记录现存外观和后期题名, limitation: 封面可能后配，不能单独断代}
+      - {id: catalog, label: 馆藏装帧著录, role: 提供专业人员的初步识别, limitation: 仍需核对著录年代与是否经过改装}
+      - {id: side, label: 待补书脊书口影像, role: 检查穿线、包背和折口方向, limitation: 图像仍不能提供纸张触感和内部缝线全貌}
+    workflow: [区分可见特征与不可见结构, 记录每张图的观察角度, 提出至少两种候选装帧, 列出区分候选所需补拍位置, 给出暂定而非绝对结论]
+    deliverable: 一份装帧鉴定请求单，包含候选类型、现有依据和四个补拍机位。
+    rubric: [识别后配可能, 使用形制特征而非年代印象, 补拍要求可执行, 结论强度适当]
+    status: pending_review
+
+  - id: deep-ch03-001
+    chapter: 3
+    title: 一部译著究竟有几位“作者”？
+    scenario: 某早期译著题署一位译者，序言却记录口译、笔受、校订和润文多人参与，后出的印本又改动若干术语。
+    question: 如何重建从源文到现存印本的参与者链条？
+    concept_ids: [c_translation, c_textual_agent, c_compilation, c_transmission_error]
+    evidence:
+      - {id: title, label: 题署与版权页, role: 确认公开标示的责任者, limitation: 不能覆盖未题名的协作角色}
+      - {id: preface, label: 译序和凡例, role: 识别口译、笔受、校订与润色流程, limitation: 可能省略低地位参与者或带有自我表述目的}
+      - {id: editions, label: 不同版本术语对照, role: 发现后期编辑和印刷阶段的修改, limitation: 差异来源仍需版本谱系支持}
+    workflow: [提取所有人名和动作, 区分翻译与后期传播阶段, 对照版本建立差异表, 将改动归入可证或待证角色, 画出参与者时间线]
+    deliverable: 一幅文本生产流程图，并为每条角色关系附证据来源。
+    rubric: [角色不只限于题名作者, 区分形成与流传, 异文不轻率归因, 图示可追溯]
+    status: pending_review
+
+  - id: deep-ch04-001
+    chapter: 4
+    title: 从三枚藏印重建一部书的递藏史
+    scenario: 一册书上有三枚藏印、一条购书题记和一次机构入藏记录，其中两位藏书家的活动年代重叠。
+    question: 怎样排列递藏次序，并明确哪些环节仍然缺证？
+    concept_ids: [c_private_collection, c_collection_provenance, me_provenance_research, c_collection_catalog]
+    evidence:
+      - {id: seals, label: 藏印位置与叠压关系, role: 推测盖印先后和阅读使用位置, limitation: 印章可能后钤、伪刻或重复使用}
+      - {id: note, label: 纪年购书题记, role: 提供一次明确交易时间和地点, limitation: 题记者身份与纪年真伪仍需核查}
+      - {id: catalogs, label: 私藏目录和拍卖著录, role: 确认某阶段是否著录该书, limitation: 未著录不能证明未收藏}
+      - {id: accession, label: 机构入藏档案, role: 确定现代收藏链末端, limitation: 可能只记录直接捐赠者而非完整前史}
+    workflow: [逐项编号物证, 查人物生卒和收藏活动, 比较印章叠压与题记年代, 区分确定节点和推测连线, 标出来源中断]
+    deliverable: 一条带“确定／推测／空白”标识的递藏时间轴。
+    rubric: [不把藏印自动等同所有权, 时间次序自洽, 空白明确可见, 引用目录与档案]
+    status: pending_review
+
+  - id: deep-ch05-001
+    chapter: 5
+    title: 牌记、避讳与纸张发生冲突时相信谁？
+    scenario: 一部刻本牌记称刊于明末，正文有清代避讳形式，纸张和装订则显示可能经过后期配补。
+    question: 这是伪牌记、后印本、补版还是后配书叶？
+    concept_ids: [c_version, me_colophon_mark, me_taboo_character, me_paper_binding_analysis, c_version_evidence]
+    evidence:
+      - {id: colophon, label: 刊刻牌记, role: 提供声称的刊刻者、地点和年代, limitation: 可被翻刻、挖改或后配}
+      - {id: taboo, label: 避讳字形分布, role: 提示某些版片或书叶的时间下限, limitation: 缺笔可能偶然，翻刻也会继承旧形}
+      - {id: paper, label: 纸张与接缝差异, role: 区分原印、补印和后配部分, limitation: 旧纸后用和保存环境会干扰观察}
+      - {id: images, label: 同版书影与著录, role: 比较版面和版片修补状态, limitation: 低清书影不能判断纸张与内部装订}
+    workflow: [按书叶分区记录差异, 将每项证据限定到作用范围, 寻找同版对照本, 提出多个竞争解释, 按解释力和假设数量排序]
+    deliverable: 一份版本鉴定意见，至少保留两个候选结论并说明淘汰条件。
+    rubric: [多证据互证, 处理冲突而非择一, 区分全书与局部书叶, 结论可被新证据修正]
+    status: pending_review
+
+  - id: deep-ch06-001
+    chapter: 6
+    title: 两个异文都通顺，校勘还能做什么？
+    scenario: 某句甲本作“治”，乙本作“理”，两字都能讲通；同书复文作“治”，较早类书引文却作“理”。
+    question: 应改字、保留底文，还是列异文存疑？
+    concept_ids: [c_variant, me_duijiao, me_tajiao, me_benjiao, c_collation_note, c_suspensive_judgment]
+    evidence:
+      - {id: witnesses, label: 甲乙两本及年代, role: 建立传本差异和相对早晚, limitation: 早本不必然保存较早文字}
+      - {id: parallel, label: 本书复文, role: 提供作者或书内用语习惯, limitation: 复文也可能在传抄中趋同}
+      - {id: quotation, label: 早期类书引文, role: 提供传本之外的旁证, limitation: 类书可能节改或自身有讹}
+    workflow: [完整记录底文和异文, 评估各证据独立性, 比较文义与用语习惯, 判断能否排除一个读法, 撰写改字或存疑校记]
+    deliverable: 一条规范校勘记，包含材料、推理和结论强度。
+    rubric: [不以通顺作为唯一标准, 评估传本关系, 旁证有来源批判, 校记可复核]
+    status: pending_review
+
+  - id: deep-ch07-001
+    chapter: 7
+    title: 同名三书，目录系统怎样避免合并错误？
+    scenario: 三部不同时代的书同名，其中一部又有两个异名；旧目录只列卷数，新目录增加作者、版本和提要。
+    question: 如何建立既能聚合同书异名、又能分开异书同名的书目记录？
+    concept_ids: [c_bibliographic_entry, c_same_book_names, c_bibliographic_abstract, c_bibliographic_classification]
+    evidence:
+      - {id: titles, label: 各目录书名与卷数, role: 汇集名称变体和篇卷线索, limitation: 卷数可能因分合而变化}
+      - {id: incipit, label: 内容起讫与目录提要, role: 比较作品内容和结构身份, limitation: 提要可能转抄旧说或据残本}
+      - {id: agents, label: 撰人、时代与版本项, role: 区分同名作品并定位具体传本, limitation: 作者题署可能存在误托或沿袭}
+    workflow: [为每条著录建立独立记录, 标准化而不删除原始题名, 比较内容起讫和篇卷, 建立同一作品关系或明确分离, 记录判断来源]
+    deliverable: 三条规范书目记录和一张名称关系表。
+    rubric: [作品与版本分层, 原始著录可追溯, 同名不误合, 异名有证据关联]
+    status: pending_review
+
+  - id: deep-ch08-001
+    chapter: 8
+    title: 一部“伪书”是否值得进入研究数据库？
+    scenario: 某书托名汉人，语言和制度显示成书不早于宋代，但它保存了宋代社会观念和大量文学叙事。
+    question: 怎样既否定其伪托身份，又保存其真实时代的研究价值？
+    concept_ids: [c_forged_work, me_linguistic_authentication, me_historical_authentication, c_forged_work_value, c_authentication_conclusion]
+    evidence:
+      - {id: language, label: 后起语词和文体, role: 建立成书时代下限, limitation: 局部晚出也可能来自后人窜改}
+      - {id: institution, label: 宋代才出现的制度称谓, role: 检验所托汉代身份, limitation: 需要排除传抄替换或注释混入}
+      - {id: transmission, label: 最早著录与传出记录, role: 确定该书何时进入文献世界, limitation: 早期目录散佚可能造成记录空白}
+      - {id: reception, label: 宋以后引用和改编, role: 研究实际流传影响与文学价值, limitation: 不能反向证明汉代成书}
+    workflow: [拆分作者时代来源三种身份主张, 限定每条反证的作用范围, 给出整体或局部作伪结论, 重新标注实际时代, 设计价值保留字段]
+    deliverable: 一张“身份判定＋价值重标注”数据库卡片。
+    rubric: [伪托与无价值分开, 年代结论有证据, 局部整体不混淆, 使用场景重新限定]
+    status: pending_review
+
+  - id: deep-ch09-001
+    chapter: 9
+    title: 类书引文能否补回一部亡书？
+    scenario: 一部亡书在三种类书中留下五条引文，文字有差异，其中两条可能互相转引；另有一部清代丛书辑本收录这些材料。
+    question: 怎样识别独立来源，避免把重复转引误当作多重证据？
+    concept_ids: [c_leishu, me_leishu_retrieval, c_leishu_citation_risk, c_congshu_edition, c_reconstruction]
+    evidence:
+      - {id: leishu_a, label: 早出类书甲, role: 提供年代较早的引文见证, limitation: 条目可能节略原文}
+      - {id: leishu_bc, label: 类书乙丙的相同误字, role: 提示二者可能存在转引关系, limitation: 相同误字也可能来自共同上游来源}
+      - {id: congshu, label: 清代丛书辑本, role: 展示前人搜集和编排结果, limitation: 不是亡书原本，可能未说明取舍}
+      - {id: catalog, label: 亡书早期目录著录, role: 核定书名、卷数和类别, limitation: 不直接提供具体佚文文字}
+    workflow: [逐条记录引文出处和版本, 对齐异文发现共享错误, 绘制可能的转引关系, 去除重复证据后编排, 对无法定位次序的佚文存疑]
+    deliverable: 一张引文谱系图和一份带出处等级的辑佚清单。
+    rubric: [识别证据非独立性, 类书版本明确, 不把辑本当原书, 不强造篇次]
+    status: pending_review
+
+  - id: deep-ch10-001
+    chapter: 10
+    title: 家谱与地方志记载的迁徙年代不一致怎么办？
+    scenario: 家谱称祖先明初迁入，清代县志称该族明中叶始见，墓碑纪年又介于二者之间；三个材料使用的地名边界不同。
+    question: 如何重建一条允许冲突存在的迁徙时间线？
+    concept_ids: [c_genealogy, c_local_gazetteer, c_administrative_geography, c_local_source_bias, me_local_source_crosscheck]
+    evidence:
+      - {id: genealogy, label: 家谱谱序与世系, role: 提供家族内部迁徙叙事和代际关系, limitation: 远祖可能追补，修谱时间晚于事件}
+      - {id: gazetteer, label: 清代县志人物与户口记载, role: 提供地方公共著录的最晚可见时间, limitation: 未见于早期县志不等于尚未迁入}
+      - {id: epitaph, label: 有纪年的墓碑, role: 确认某位成员在当地活动的时间下限, limitation: 不能自动代表全族迁入时间}
+      - {id: maps, label: 历代行政区划资料, role: 统一旧今地名和辖域, limitation: 行政归属与实际聚落范围并非完全相同}
+    workflow: [统一地名和时间口径, 区分个人到达与宗族形成, 将三种材料放入时间线, 解释冲突的编纂机制, 给出时间区间而非单年]
+    deliverable: 一条多来源迁徙时间线和 600 字证据说明。
+    rubric: [地理沿革处理正确, 区分个人与群体, 冲突不被抹平, 结论以区间表达]
+    status: pending_review
+
+  - id: deep-ch11-001
+    chapter: 11
+    title: 同一首诗在总集和别集中为何不同？
+    scenario: 诗作在早期选集、作者别集和后世全集中篇题、作者题署与一处文字不同，全集编者称据“旧本”却未说明出处。
+    question: 哪个文本更接近早期形态，作者归属是否可靠？
+    concept_ids: [c_zongji, c_bieji, c_author_collection_layers, me_collection_source_analysis, c_variant]
+    evidence:
+      - {id: anthology, label: 早期选集, role: 提供较早的篇题、文字与作者归属, limitation: 选家可能改题、节选或误署}
+      - {id: collection, label: 作者别集, role: 提供作品在个人文集系统中的位置, limitation: 别集可能为后人编定并收入误作}
+      - {id: complete, label: 后世全集及编者按, role: 保存补辑来源和后期校订结果, limitation: 模糊的“旧本”不能直接验证}
+      - {id: quotations, label: 同时代他人称引, role: 旁证诗句和作者关系, limitation: 引文可能凭记忆或节略}
+    workflow: [核定各本编纂年代, 区分作品文本与作者归属问题, 对齐篇题和异文, 追查所谓旧本, 分别给出文字和归属结论]
+    deliverable: 一份总集—别集对校表及作者归属说明。
+    rubric: [两个问题分开判断, 成书层次清楚, 异文来源可追, 不以早出自动定优]
+    status: pending_review
+
+  - id: deep-ch12-001
+    chapter: 12
+    title: 来源不明的甲骨片还能怎样研究？
+    scenario: 一片早年购藏甲骨有旧拓本和清晰文字，但无出土地点；其内容可与科学发掘甲骨缀合，市场上又出现相似伪刻。
+    question: 如何分别评估真实性、文字价值和历史情境价值？
+    concept_ids: [c_oracle_bone_text, c_archaeological_context, c_oracle_collection, me_scientific_excavation, me_epigraphic_rubbing]
+    evidence:
+      - {id: object, label: 实物材质、刻痕与旧拓, role: 检验制作痕迹和早期存在时间, limitation: 需要专业检测，旧拓也可能误配}
+      - {id: join, label: 与发掘品的物理缀合, role: 若断口吻合可恢复来源组合, limitation: 仅内容相连不能代替物理吻合}
+      - {id: script, label: 字形和卜辞格式, role: 比较书写系统与内容结构, limitation: 熟练伪作者也可能模仿常见格式}
+      - {id: excavation, label: 科学发掘甲骨档案, role: 提供可比较的坑位、层位和同组材料, limitation: 不能自动为来源不明片补全全部经历}
+    workflow: [把真实性与语境完整性分开, 优先记录实物和旧拓, 检验物理缀合, 比较字形格式与同组材料, 分层写出可用和不可用结论]
+    deliverable: 一份三层评估表：真伪、文本、历史语境。
+    rubric: [问题分层, 物理证据优先, 不因无来源直接判伪, 不虚构缺失语境]
+    status: pending_review
+
+  - id: deep-ch13-001
+    chapter: 13
+    title: 散乱竹简怎样恢复阅读顺序？
+    scenario: 一批竹简出土时位置已扰动，仍保留编号、简长、编绳痕、篇题和部分连续文意；学界提出两套编联方案。
+    question: 如何比较两套方案，而不是只选“读起来更顺”的一种？
+    concept_ids: [c_bamboo_silk_text, c_book_history_artifact, c_archaeological_context, me_excavated_transmitted_comparison]
+    evidence:
+      - {id: position, label: 发掘编号与位置记录, role: 保存原始空间邻近关系, limitation: 出土前已可能发生扰动}
+      - {id: physical, label: 简长、编绳痕和断口, role: 重建物质分组与相邻关系, limitation: 同批空白简或标准尺寸可能相似}
+      - {id: text, label: 文意、篇题和重复符号, role: 判断段落衔接和篇章边界, limitation: 纯凭文意容易受今人预期影响}
+      - {id: parallel, label: 传世本或同类出土本, role: 提供可能的篇章结构参照, limitation: 不同文本系统不能机械套合}
+    workflow: [冻结原始编号不改写, 分别建立物理与文本约束, 逐项测试两套方案, 标记只能由主观文意支持的连接, 保留竞争方案和关键验证点]
+    deliverable: 一张双方案编联图，并标出强连接、弱连接和待证连接。
+    rubric: [原始记录保留, 物质文本证据分开, 不机械套传世本, 竞争方案可比较]
+    status: pending_review
+
+  - id: deep-ch14-001
+    chapter: 14
+    title: 分藏三国的敦煌残卷如何虚拟重聚？
+    scenario: 三馆藏卷的旧号不同，纸张、书手和内容显示可能原属同一写卷；其中一馆只有黑白旧照片，另一馆目录题名有误。
+    question: 怎样建立跨馆统一身份，并让缀合判断可复核？
+    concept_ids: [c_dunhuang_dispersal, c_dunhuang_catalog, c_fragment_reunification, me_dunhuang_id_resolution, c_digital_reunification]
+    evidence:
+      - {id: identifiers, label: 三馆新旧编号与入藏档案, role: 建立稳定对象身份和收藏路径, limitation: 旧号可能重复、误抄或在编目中变化}
+      - {id: material, label: 纸张尺寸、纸纹与断口, role: 检验残片物理连续性, limitation: 黑白旧照片可能不足以观察纤维和色差}
+      - {id: hand, label: 书手、行款和界栏, role: 比较书写与版面是否连续, limitation: 同一书手可抄多卷，相似不等于同卷}
+      - {id: text, label: 前后文意和卷端题记, role: 判断内容次序与作品身份, limitation: 同经异卷或抄本重复段落可能造成假衔接}
+    workflow: [建立跨馆编号对照表, 分离物质与文本证据, 请求缺失的高质量影像, 测试多种拼接次序, 发布带版本号的虚拟缀合记录]
+    deliverable: 一份 IIIF 式虚拟重聚方案说明，包括统一标识、图像需求和缀合置信度。
+    rubric: [编号关系清楚, 多证据缀合, 图像缺口明确, 方案可更新和撤销]
+    status: pending_review

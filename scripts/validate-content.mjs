@@ -17,6 +17,7 @@ const concepts = loadGroup("concepts", ["concepts"]);
 const edges = loadGroup("graph", ["edges"]);
 const quizzes = loadGroup("quiz", ["quiz", "questions"]);
 const labs = loadGroup("labs", ["labs", "cases"]);
+const deepdives = loadGroup("deepdives", ["deepdives", "cases"]);
 const conceptIds = new Set(concepts.map(({ item }) => item.id));
 const quizIds = new Set(quizzes.map(({ item }) => item.id));
 
@@ -55,6 +56,14 @@ for (const record of labs) {
   else for (const field of needs) if (record.item.config?.[field] == null) errors.push(`${location(record)} 的 ${record.item.engine} 配置缺少 ${field}，请按模板补充`);
 }
 
+for (const record of deepdives) {
+  for (const id of record.item.concept_ids ?? []) if (!conceptIds.has(id)) errors.push(`${location(record)} 引用了不存在的 concept_id：${id}`);
+  if ((record.item.evidence?.length ?? 0) < 3) errors.push(`${location(record)} 至少需要 3 条作用与限制均明确的证据材料`);
+}
+for (let chapter = 1; chapter <= 14; chapter += 1) {
+  if (!deepdives.some(({ item }) => item.chapter === chapter)) errors.push(`第 ${chapter} 章缺少深度研读案例`);
+}
+
 const productionFiles = walkFiles(path.resolve("src"), [".astro", ".tsx", ".ts", ".md"]);
 const forbiddenPlaceholders = ["待开发", "敬请期待", "TODO", "制作中"];
 for (const file of productionFiles) {
@@ -65,7 +74,7 @@ for (const file of productionFiles) {
 }
 
 const coverage = mkus.length ? Math.round((mkus.filter(({ item }) => (item.concept_ids?.length ?? 0) > 0).length / mkus.length) * 100) : 0;
-console.log(`内容统计：MKU ${mkus.length}，概念 ${concepts.length}，关系 ${edges.length}，题目 ${quizzes.length}，实验案例 ${labs.length}，MKU 概念覆盖率 ${coverage}%`);
+console.log(`内容统计：MKU ${mkus.length}，概念 ${concepts.length}，关系 ${edges.length}，题目 ${quizzes.length}，实验案例 ${labs.length}，深度研读 ${deepdives.length}，MKU 概念覆盖率 ${coverage}%`);
 if (mkus.length === 0) warnings.push("尚未录入正式 MKU；请在确认纸本版次后由本人填写 content/outline/");
 for (const warning of warnings) console.warn(`⚠️ ${warning}`);
 if (errors.length) { printFailure("内容门禁未通过", errors); process.exit(1); }
