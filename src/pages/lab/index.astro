@@ -55,9 +55,9 @@ import { games } from "../../data/site";
     <div class="section-heading">
       <div>
         <p class="eyebrow">The full collection</p>
-        <h2 class="section-title">十二项实验路线图</h2>
+        <h2 class="section-title">六项已完成实验</h2>
       </div>
-      <p>“制作中”表示已进入第一批开发；其余实验将在相应章节内容完成后开放，确保玩法建立在可靠内容上。</p>
+      <p>这里只展示已经可以完整操作并获得反馈的实验，不以路线图或占位卡代替交付。</p>
     </div>
     <div class="game-grid">
       {games.map((game, index) => (
@@ -66,7 +66,7 @@ import { games } from "../../data/site";
           <small>{game.chapters}</small>
           <h3>{game.title}</h3>
           <p>{game.description}</p>
-          <b class:list={{ live: game.status === "可体验", building: game.status === "制作中" }}>{game.status}</b>
+          <b class="live">{game.status}</b>
         </article>
       ))}
     </div>

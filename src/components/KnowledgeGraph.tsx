@@ -141,7 +141,7 @@ export default function KnowledgeGraph() {
           <span style={{ color: colors[selected.type] }}>{selected.type} · {selected.chapter}</span>
           <h2>{selected.label}</h2>
           <p>{selected.detail}</p>
-          <a className="graph-chapter-link" href={`${import.meta.env.BASE_URL}chapters/${selected.chapterId}/`}>阅读对应章节 →</a>
+          <a className="graph-chapter-link" href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}chapters/${selected.chapterId}/`}>阅读对应章节 →</a>
           <small>关系为学习型概念映射，后续将补充出处与复核状态。</small>
         </aside>
       </div>

@@ -1,0 +1,12 @@
+items:
+  - id: mku-05-04-04
+    chapter: 5
+    chapter_title: 文献的版本
+    section: 四、版本鉴定
+    subsection: （四）查避讳
+    module: M5
+    page_start: 0 # 必须由本人按 2008 年修订本核验后替换；0 无法通过门禁
+    status: not_started
+    concept_ids: []
+    quiz_ids: []
+    lab_ids: []

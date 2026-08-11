@@ -31,8 +31,14 @@ jobs:
           cache: pnpm
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
+      - name: Validate content and repository
+        run: pnpm validate
       - name: Build
         run: pnpm build
+      - name: Check generated links
+        run: pnpm check:links
+      - name: Run tests
+        run: pnpm test
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:

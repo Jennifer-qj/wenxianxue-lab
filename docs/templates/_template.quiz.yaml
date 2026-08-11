@@ -1,0 +1,9 @@
+items:
+  - id: q-ch01-001
+    chapter: 1
+    type: single_choice
+    concept_ids: [c_example]
+    prompt: 请填写问题
+    options: [选项一, 选项二]
+    answer: 0
+    explanation: 请解释为什么，并说明判断边界

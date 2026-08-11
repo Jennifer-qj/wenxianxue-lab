@@ -1,0 +1,7 @@
+items:
+  - id: e-0001
+    source: c_example
+    target: me_example
+    type: relatedTo
+    evidence: 请填写可核验的关系依据
+    confidence: pedagogical

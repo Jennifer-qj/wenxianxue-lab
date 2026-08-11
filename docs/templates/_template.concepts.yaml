@@ -1,0 +1,7 @@
+items:
+  - id: c_example
+    label: 示例概念
+    type: concept
+    definition: 请用自己的话填写定义
+    chapter_ids: [ch01]
+    status: not_started

@@ -7,20 +7,20 @@ import { chapters, learningPaths } from "../../data/site";
   <header class="page-hero container">
     <p class="eyebrow">Coverage matrix</p>
     <h1 class="display-title">十四章，<em>一章不漏</em></h1>
-    <p>这张矩阵不是“已经做完”的装饰性声明，而是内容审计台账：每章都有学习路径、分节数量、关键词、OCR 来源卷段和人工复核状态。</p>
+    <p>这张矩阵记录每章的学习路径、分节数量、关键词与人工复核状态。具体页码只有在纸本逐条核验后才会公开。</p>
   </header>
   <section class="schema container">
     <p class="eyebrow">Content model</p>
     <div><span>章 Chapter</span><i>→</i><span>路径 Path</span><i>→</i><span>知识点 Concept</span><i>→</i><span>活动 Activity</span><i>→</i><span>来源 Source</span><i>→</i><span>复核 Review</span></div>
   </section>
   <section class="coverage container">
-    <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>来源 / 复核</span></div>
+    <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>纸本核验</span></div>
     {chapters.map((chapter) => (
       <article id={chapter.id}>
         <div><strong>{chapter.number}</strong><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${chapter.id}/`}>{chapter.title}</a></div>
         <div><b>{chapter.sections.length} 个分节</b><p>{chapter.keywords.map((word) => `#${word}`).join("　")}</p></div>
         <span>{learningPaths.find((path) => chapter.pathIds.includes(path.id))?.title}</span>
-        <div><small>{chapter.source.volume}</small><em>{chapter.review}</em></div>
+        <div><small>{chapter.source.verified ? "页码已核验" : "页码未公开"}</small><em>{chapter.review}</em></div>
       </article>
     ))}
   </section>

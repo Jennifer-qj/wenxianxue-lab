@@ -46,7 +46,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <p class="eyebrow">Study units</p>
         <h2 class="section-title">章节不是终点，而是证据入口</h2>
       </div>
-      <p>以下内容为基于 OCR 目录的原创结构化摘要，不展示原书全文；“待复核”项目会随着个人精读逐步校正。</p>
+      <p>以下内容为原创结构化导读，不展示原书全文；知识表述与页码会随着纸本精读逐步核验。</p>
     </div>
     {pathChapters.map((chapter, index) => (
       <article id={chapter.id}>
@@ -66,9 +66,9 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
           <a class="start-chapter" href={`${base}chapters/${chapter.id}/`}>阅读本章导读与练习 →</a>
         </div>
         <aside>
-          <small>来源定位</small>
-          <strong>{chapter.source.volume}</strong>
-          <span>{chapter.source.pageRange}</span>
+          <small>纸本核验</small>
+          <strong>{chapter.source.verified ? "已核验" : "尚未发布页码"}</strong>
+          <span>中华书局 2008 年修订本</span>
           <a href={`${base}coverage/#${chapter.id}`}>查看覆盖记录 →</a>
         </aside>
       </article>

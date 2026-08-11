@@ -1,0 +1,9 @@
+[data-theme="dark"] {
+  --paper: #1a1815;
+  --ink: #eee8de;
+  --ink-strong: #fffaf1;
+  --muted: #aaa39a;
+  --line: rgba(255,255,255,.14);
+  --white: #23211e;
+  color-scheme: dark;
+}

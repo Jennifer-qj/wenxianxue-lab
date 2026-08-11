@@ -1,17 +1,19 @@
-@import url("https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700;900&family=Source+Sans+3:wght@400;500;600&display=swap");
+@import "./tokens.css";
+@import "./typography.css";
+@import "./theme.css";
 
 :root {
-  --paper: #f4efe4;
+  --paper: #faf7f2;
   --paper-deep: #e9dfcf;
-  --ink: #272622;
+  --ink: #2b2b2b;
   --muted: #706b61;
-  --cinnabar: #8f352b;
+  --cinnabar: #a93226;
   --cinnabar-dark: #68271f;
   --line: rgba(52, 45, 35, 0.15);
   --white: #fffdf7;
   --shadow: 0 16px 44px rgba(55, 43, 29, 0.09);
-  --serif: "Noto Serif SC", "Songti SC", "STSong", serif;
-  --sans: "Source Sans 3", "PingFang SC", "Microsoft YaHei", sans-serif;
+  --serif: "Songti SC", "STSong", "SimSun", serif;
+  --sans: "PingFang SC", "Microsoft YaHei", system-ui, sans-serif;
 }
 
 * {

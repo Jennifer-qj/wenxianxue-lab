@@ -3,6 +3,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import ChapterCheck from "../../components/ChapterCheck";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
+import { EDITION } from "../../consts";
 
 export function getStaticPaths() {
   return lessons.map((lesson) => ({ params: { id: lesson.chapterId } }));
@@ -93,9 +94,9 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
       <section id="source" class="source-note">
         <div>
           <p class="eyebrow">来源与版权</p>
-          <h2>{chapter.source.volume} · {chapter.source.pageRange}</h2>
+          <h2>{EDITION.publisher} {EDITION.year} 年修订本</h2>
         </div>
-        <p>本页依据杜泽逊《文献学概要（修订本）》相应章节目录和个人学习需求重新组织，为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”，具体表述仍需结合纸本逐条核对。</p>
+        <p>本页为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”；未经纸本逐条核验的具体页码不会公开，避免把技术处理区间冒充为学术出处。</p>
       </section>
     </article>
   </div>

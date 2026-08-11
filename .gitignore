@@ -7,6 +7,13 @@ visual-*.png
 
 # 版权隔离：原书 OCR、扫描件和研究底稿不得提交公开仓库
 private-sources/
+private/
 source-materials/
 *OCR*.md
+*ocr*.md
+*.epub
+*.mobi
+*.azw*
+*.djvu
+*.txt.bak
 *.pdf

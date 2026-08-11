@@ -1,0 +1,11 @@
+items:
+  - id: lab-01-case-001
+    title: 示例推理案例
+    engine: reasoning
+    concept_ids: [c_example]
+    config:
+      stages: [采证, 归因, 结论]
+      scoring:
+        coverage: 0.4
+        misuse: 0.3
+        fit: 0.3
