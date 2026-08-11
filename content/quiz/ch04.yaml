@@ -1,0 +1,13 @@
+items:
+  - {id: q-ch04-001, chapter: 4, type: single_choice, concept_ids: [c_official_collection], prompt: 官藏最突出的制度优势是什么？, options: [永不散佚, 能集中征集校理编目, 所藏皆善本, 不受战争影响], answer: 1, explanation: 制度资源支持集中整理，但集中也可能形成灾变中的单点风险。}
+  - {id: q-ch04-002, chapter: 4, type: multiple_choice, concept_ids: [c_document_loss, c_disaster_risk], prompt: 哪些因素会造成文献散佚？, options: [战争, 火灾, 禁毁, 管理中断, 编目完善], answers: [0,1,2,3], explanation: 散佚既包括实体毁损，也包括长期退出收藏和知识系统。}
+  - {id: q-ch04-003, chapter: 4, type: true_false, concept_ids: [c_private_collection], prompt: 名家旧藏可以自动证明文献为真本善本。, answer: false, explanation: 名家旧藏提供递藏线索，但藏印、题跋和鉴定意见仍须复核。}
+  - {id: q-ch04-004, chapter: 4, type: evidence, concept_ids: [me_provenance_research], prompt: 重建递藏链应优先使用哪些证据？, evidence_ids: [藏印, 题跋, 藏书目录, 购书档案, 书名颜色], answer_ids: [藏印, 题跋, 藏书目录, 购书档案], explanation: 多类来源互证能降低伪印、误记和链条空缺造成的风险。}
+  - {id: q-ch04-005, chapter: 4, type: matching, concept_ids: [c_official_collection, c_private_collection, c_document_loss], prompt: 配对概念与核心特征。, pairs: [{left: 官藏, right: 制度化征集编目}, {left: 私藏, right: 个人家族访求传递}, {left: 散佚, right: 实体或知识系统中的失传}], explanation: 三者共同构成收藏史的基本分析框架。}
+  - {id: q-ch04-006, chapter: 4, type: fill_blank, concept_ids: [c_collection_catalog], prompt: 记录某一收藏系统文献构成的工具称为藏书____。, answers: [目录], explanation: 目录既帮助管理，也为后人追踪传本提供历史证据。}
+  - {id: q-ch04-007, chapter: 4, type: classification, concept_ids: [c_official_collection, c_private_collection, c_preservation_strategy], prompt: 将行动归入主要主体。, zones: [官府, 私家, 二者皆可], items: [{label: 国家征书, zone: 官府}, {label: 家族传藏, zone: 私家}, {label: 编制目录, zone: 二者皆可}, {label: 抄副保存, zone: 二者皆可}], explanation: 保存方法可跨越官私边界，主体不同但技术可能共享。}
+  - {id: q-ch04-008, chapter: 4, type: ordering, concept_ids: [c_document_loss, c_preservation_strategy], prompt: 排列灾后文献处置流程。, items: [调查损失, 抢救修复, 重建目录, 寻访副本], answer: [0,1,2,3], explanation: 实际步骤可并行，但先掌握损失和现状有助于安排抢救与补配。}
+  - {id: q-ch04-009, chapter: 4, type: short_answer, concept_ids: [c_collection_provenance], prompt: 如何表达一段中间缺失的递藏链？, rubric: [列出已证实节点, 明确空缺时段, 使用待考措辞, 提出下一步资料], explanation: 不用推测填空，是递藏研究可信度的基础。}
+  - {id: q-ch04-010, chapter: 4, type: evidence, concept_ids: [c_private_collection, me_provenance_research], prompt: 藏印与目录冲突时应怎样处理？, evidence_ids: [检查印泥纸墨, 核对目录版本, 查题跋档案, 直接信名家印], answer_ids: [检查印泥纸墨, 核对目录版本, 查题跋档案], explanation: 冲突应转化为复核任务，不应依名望直接裁决。}
+  - {id: q-ch04-011, chapter: 4, type: single_choice, concept_ids: [c_preservation_strategy], prompt: 哪种做法最能降低集中收藏的单点风险？, options: [只存一处, 分藏并制作可核验副本, 不编目录, 禁止利用], answer: 1, explanation: 分布保存与可靠副本能降低单一灾害造成的全部损失。}
+  - {id: q-ch04-012, chapter: 4, type: short_answer, concept_ids: [c_official_collection, c_private_collection, c_collection_provenance], prompt: 说明私藏转入公藏时为什么要保留旧藏信息。, rubric: [说明来源可追溯, 保留版本鉴定线索, 支持收藏史研究], explanation: 所有权变化不应抹去文献此前的历史层次。}

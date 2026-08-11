@@ -1,0 +1,16 @@
+items:
+  - {id: c_authorship_zhu, label: 著, type: concept, definition: 作者以自身学识与创造形成相对独立著作的方式。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_authorship_shu, label: 述, type: concept, definition: 对既有学说、事实或言论进行传述和记录的形成方式。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_compilation, label: 编, type: concept, definition: 选择、组织并重构既有材料以形成新文献的方式。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_translation, label: 译, type: concept, definition: 在语言和知识体系之间转化文本的再形成过程。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_buddhist_translation, label: 佛典翻译, type: concept, definition: 佛教经典经多人协作、术语选择和校订进入汉语文献系统的过程。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_scholarly_translation, label: 学术翻译, type: concept, definition: 科学与学术知识在不同语言体系间转换和重组的过程。, chapter_ids: [ch03], status: pending_review}
+  - {id: c_literary_translation, label: 文学翻译, type: concept, definition: 兼顾意义、语言风格与目标读者的文学再表达。, chapter_ids: [ch03], status: pending_review}
+  - {id: me_oral_transmission, label: 讲唱, type: method, definition: 通过口头讲述或演唱传播内容并可能形成不同文本的方式。, chapter_ids: [ch03], status: pending_review}
+  - {id: me_inscription, label: 镌刻, type: method, definition: 将文字刻写于耐久材料以展示或传递的方式。, chapter_ids: [ch03], status: pending_review}
+  - {id: me_hand_copying, label: 抄写, type: method, definition: 以手工复制文本的传播方式，可能产生讹脱衍倒等变化。, chapter_ids: [ch03, ch06], status: pending_review}
+  - {id: me_printing, label: 印刷, type: method, definition: 以版片或活字等方式扩大文本复制规模的传播技术。, chapter_ids: [ch03, ch05], status: pending_review}
+  - {id: me_photographic_reproduction, label: 摄影复制, type: method, definition: 通过摄影保存和传播文献外观的复制方式。, chapter_ids: [ch03, ch05], status: pending_review}
+  - {id: c_transmission_error, label: 传播误差, type: concept, definition: 文献在口传、抄写、刊刻与翻译中发生的非原始差异。, chapter_ids: [ch03, ch06], status: drafting}
+  - {id: c_textual_agent, label: 文献参与者, type: concept, definition: 作者、记录者、编者、译者、抄手、刻工等参与文本形成与传播的人。, chapter_ids: [ch03], status: drafting}
+

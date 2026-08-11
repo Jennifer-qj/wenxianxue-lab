@@ -1,0 +1,14 @@
+items:
+  - {id: q-ch05-001, chapter: 5, type: single_choice, concept_ids: [c_version, c_rare_book], prompt: 对“善本”最稳妥的理解是？, options: [越旧越善, 越贵越善, 应说明时代稀见或校勘学术价值等具体标准, 所有写本都是善本], answer: 2, explanation: 善本含义有层次，评价必须公开标准；旧、稀、贵或保存好都不能单独代替学术判断。}
+  - {id: q-ch05-002, chapter: 5, type: matching, concept_ids: [c_manuscript, c_lithograph, c_collotype], prompt: 配对版本类型与形成技术。, pairs: [{left: 写本, right: 手工书写}, {left: 石印本, right: 石版平版印刷}, {left: 珂罗版, right: 照相制版复制}], explanation: 技术类型是识别入口，仍需结合具体制作痕迹和著录。}
+  - {id: q-ch05-003, chapter: 5, type: true_false, concept_ids: [c_blockprint, c_rare_book], prompt: 同一版片印出的所有本子在文字和保存状态上必然完全相同。, answer: false, explanation: 修补版片、刷印先后、纸墨装订和后期损伤都会造成差异。}
+  - {id: q-ch05-004, chapter: 5, type: evidence, concept_ids: [c_color_print, me_taboo_character], prompt: 发现一处避讳缺笔后还应核查哪些证据？, evidence_ids: [同书其他同字, 版片挖改痕迹, 序跋牌记, 刻工年代, 读者星座], answer_ids: [同书其他同字, 版片挖改痕迹, 序跋牌记, 刻工年代], explanation: 避讳需要排除偶然缺笔、翻刻与挖改，并与其他年代线索互证。}
+  - {id: q-ch05-005, chapter: 5, type: classification, concept_ids: [c_embossed_print, c_annotated_copy, me_engraver], prompt: 将线索归入主要证据层。, zones: [印刷技术, 读者活动, 刊刻参与者], items: [{label: 拱花压印, zone: 印刷技术}, {label: 朱笔校语, zone: 读者活动}, {label: 刻工姓名, zone: 刊刻参与者}], explanation: 分清证据对象有助于避免把收藏或阅读信息误当初刻年代。}
+  - {id: q-ch05-006, chapter: 5, type: multiple_choice, concept_ids: [c_movable_type, me_preface_colophon, me_layout_analysis], prompt: 哪些现象可作为活字本线索？, options: [同字字形重复, 字面高低不齐, 行列偶有偏斜, 所有字绝不重复, 墨色局部差异], answers: [0,1,2,4], explanation: 活字排印可能留下字模重复和排版差异，但这些都应组合判断，不能单项定案。}
+  - {id: q-ch05-007, chapter: 5, type: ordering, concept_ids: [c_version_evidence], prompt: 排列版本鉴定的基本工作顺序。, items: [明确问题与成书年代, 查序跋牌记人物, 看字体版式纸张装潢, 查藏印著录书影, 综合形成有限结论], answer: [0,1,2,3,4], explanation: 顺序是工作骨架，实际鉴定会因新证据反复往返。}
+  - {id: q-ch05-008, chapter: 5, type: short_answer, concept_ids: [c_rare_book, me_paper_binding_analysis], prompt: 解释“旧本不必然是善本”。, rubric: [区分年代与文字质量, 举出后出精校本可能更可靠, 说明评价标准和用途], explanation: 年代、稀见、保存与校勘价值是不同维度，不能压缩成单一排行榜。}
+  - {id: q-ch05-009, chapter: 5, type: evidence, concept_ids: [me_colophon_mark, c_annotated_copy], prompt: 牌记书叶与正文纸色不同，首先应怎样处理？, evidence_ids: [检查装订接缝, 比较纸张版式, 查其他著录书影, 直接按牌记断代], answer_ids: [检查装订接缝, 比较纸张版式, 查其他著录书影], explanation: 先判断牌记是否后配或来自另一制作阶段，再评估其年代信息。}
+  - {id: q-ch05-010, chapter: 5, type: fill_blank, concept_ids: [me_taboo_character], prompt: 单一避讳通常更适合提示刊刻时间的____，而非精确年份。, answers: [下限], explanation: 避讳说明某字形变化不会早于相关时期，但翻刻挖改等情况仍需排除。}
+  - {id: q-ch05-011, chapter: 5, type: short_answer, concept_ids: [me_engraver, c_version_evidence], prompt: 刻工姓名为什么不能单独锁定刊年？, rubric: [考虑同名异人, 考虑版片沿用, 考虑补版书叶, 寻找其他证据], explanation: 人物年代是有力旁证，但需确认身份、参与范围和版片历史。}
+  - {id: q-ch05-012, chapter: 5, type: evidence, concept_ids: [me_layout_analysis, me_catalog_comparison], prompt: 远程书影最适合支持哪些判断？, evidence_ids: [比较版面行款, 比较字形版片, 初筛同版关系, 判断纸张触感, 检查装订内部], answer_ids: [比较版面行款, 比较字形版片, 初筛同版关系], explanation: 书影适合可见特征比较，材质触感和内部结构仍需实物或专门影像。}
+

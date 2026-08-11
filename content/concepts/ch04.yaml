@@ -1,0 +1,12 @@
+items:
+  - {id: c_official_collection, label: 官府藏书, type: concept, definition: 由国家机构征集、校理、编目和保存的文献系统。, chapter_ids: [ch04], status: pending_review}
+  - {id: c_private_collection, label: 私家藏书, type: concept, definition: 由个人或家族访求、收藏、校抄并传递的文献系统。, chapter_ids: [ch04], status: pending_review}
+  - {id: c_document_loss, label: 文献散佚, type: concept, definition: 文献因毁损、流散或退出著录与阅读系统而失传的过程。, chapter_ids: [ch04], status: pending_review}
+  - {id: c_collection_provenance, label: 收藏源流, type: concept, definition: 文献在不同收藏者和机构之间转移的历史链条。, chapter_ids: [ch04], status: drafting}
+  - {id: me_provenance_research, label: 递藏考证, type: method, definition: 利用藏印、题跋、目录和档案重建文献收藏经历的方法。, chapter_ids: [ch04, ch05], status: pending_review}
+  - {id: c_collection_catalog, label: 藏书目录, type: concept, definition: 记录某一收藏系统文献构成与著录信息的目录。, chapter_ids: [ch04, ch07], status: pending_review}
+  - {id: c_disaster_risk, label: 灾变风险, type: concept, definition: 战争、火灾、水害、禁毁和制度中断对文献存续造成的风险。, chapter_ids: [ch04], status: drafting}
+  - {id: c_preservation_strategy, label: 保存策略, type: concept, definition: 通过分藏、抄副、编目、修复和数字复制等方式降低散佚风险。, chapter_ids: [ch04], status: drafting}
+  - {id: ev_qianlong_destruction, label: 乾隆禁毁, type: event, definition: 清代纂修与禁毁并行、影响大量文献存续的重要事件。, chapter_ids: [ch04], status: pending_review}
+  - {id: ev_war_loss, label: 战乱散佚, type: event, definition: 政权更替与战争造成官私收藏毁损和流散的反复现象。, chapter_ids: [ch04], status: pending_review}
+

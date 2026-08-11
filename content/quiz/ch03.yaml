@@ -1,0 +1,14 @@
+items:
+  - {id: q-ch03-001, chapter: 3, type: single_choice, concept_ids: [c_authorship_zhu, c_textual_agent], prompt: 题名作者最稳妥地说明什么？, options: [现存每字必由其亲写, 文献与该作者存在署名或传统关联且仍需考察形成过程, 后人从未改动, 版本必然最早], answer: 1, explanation: 署名是形成史线索，不是对现存全部文字的自动担保；编定、传抄和后改都需进一步调查。}
+  - {id: q-ch03-002, chapter: 3, type: true_false, concept_ids: [c_authorship_shu, me_oral_transmission], prompt: 传述和讲唱都是完全透明、不产生选择的复制。, answer: false, explanation: 记录者和表演者会因对象、语境、记忆和表达方式作出选择，差异既可能是误差，也可能是传统变化。}
+  - {id: q-ch03-003, chapter: 3, type: multiple_choice, concept_ids: [c_compilation, me_inscription], prompt: 研究编纂文献应追问哪些问题？, options: [材料来源, 编选原则, 排列结构, 删节情况, 封面颜色], answers: [0,1,2,3], explanation: 编纂的学术意义来自材料如何被选取和重组；外观颜色通常不能回答形成问题。}
+  - {id: q-ch03-004, chapter: 3, type: matching, concept_ids: [c_buddhist_translation, me_hand_copying], prompt: 将参与方式与作用配对。, pairs: [{left: 译经协作, right: 多角色共同形成汉译文本}, {left: 抄写, right: 手工复制并可能产生异文}], explanation: 两种过程都有人的参与，题名或成品不能遮蔽中间环节。}
+  - {id: q-ch03-005, chapter: 3, type: evidence, concept_ids: [c_scholarly_translation, me_printing], prompt: 比较两个学术译本时哪些材料最有用？, evidence_ids: [原文术语, 译者说明, 同时代词汇用例, 目标读者, 纸张香味], answer_ids: [原文术语, 译者说明, 同时代词汇用例, 目标读者], explanation: 翻译判断要联系源语、译者策略和目标语知识环境，感官偏好不构成术语解释证据。}
+  - {id: q-ch03-006, chapter: 3, type: short_answer, concept_ids: [c_literary_translation, me_photographic_reproduction], prompt: 说明“复制得像”为什么不等于“信息完全相同”。, rubric: [区分可见外观与物质属性, 指出翻译或摄影中的选择, 说明使用边界], explanation: 不同复制技术保留的信息不同，研究者应明确媒介转换带来的增益与损失。}
+  - {id: q-ch03-007, chapter: 3, type: classification, concept_ids: [c_authorship_zhu, c_authorship_shu, c_compilation, c_translation], prompt: 将形成方式归类。, zones: [著, 述, 编, 译], items: [{label: 独立撰成新论著, zone: 著}, {label: 记录师说, zone: 述}, {label: 选取旧材料重排, zone: 编}, {label: 跨语言转化, zone: 译}], explanation: 四类是分析框架，真实文献可能兼有多种形成方式。}
+  - {id: q-ch03-008, chapter: 3, type: ordering, concept_ids: [c_textual_lifecycle, c_transmission_error], prompt: 排列一条可能的传播链。, items: [口头讲述, 记录成写本, 据写本刊刻, 摄影复制], answer: [0,1,2,3], explanation: 每次转换都可能保留、改变或丢失信息，因此应记录各节点及所据底本。}
+  - {id: q-ch03-009, chapter: 3, type: fill_blank, concept_ids: [c_textual_agent], prompt: 作者、编者、译者、抄手和刻工都可视为文献形成与传播的____。, answers: [参与者, 行动者], explanation: 强调参与者能帮助我们看见成品背后的多阶段劳动和选择。}
+  - {id: q-ch03-010, chapter: 3, type: evidence, concept_ids: [c_buddhist_translation, me_hand_copying], prompt: 判断写本异文来源需要哪些证据？, evidence_ids: [不同写本, 抄手习惯, 行款位置, 相关引文, 收藏者生肖], answer_ids: [不同写本, 抄手习惯, 行款位置, 相关引文], explanation: 异本、书写习惯、版面和旁证能组成解释链；无关个人信息不能支持文本判断。}
+  - {id: q-ch03-011, chapter: 3, type: single_choice, concept_ids: [me_printing, c_transmission_error], prompt: 印刷对文本误差的影响应怎样表述？, options: [完全消除误差, 可能固定底本错误并产生修版差异, 所有印本相同, 印本必优于写本], answer: 1, explanation: 印刷改变误差机制和复制规模，却不会自动保证底本与刊刻过程可靠。}
+  - {id: q-ch03-012, chapter: 3, type: short_answer, concept_ids: [me_photographic_reproduction, c_research_boundary], prompt: 使用数字书影研究装订时应声明哪些限制？, rubric: [说明图像裁切与分辨率, 指出缺少触感尺寸或内部结构, 提出实物或多角度影像核验], explanation: 数字图像是重要入口，但结论强度必须与影像实际提供的信息相匹配。}
+

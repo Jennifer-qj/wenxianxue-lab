@@ -1,0 +1,12 @@
+items:
+  - id: lab-09-case-001
+    title: 文献流布模拟器·基础策略
+    engine: simulate
+    concept_ids: [me_oral_transmission, me_hand_copying, me_printing, me_photographic_reproduction, c_transmission_error]
+    config:
+      params: [复制速度, 单次成本, 覆盖范围, 误差风险]
+      model_table:
+        讲唱: {speed: 2, cost: 1, reach: 2, error: 4}
+        抄写: {speed: 1, cost: 3, reach: 1, error: 3}
+        印刷: {speed: 4, cost: 4, reach: 4, error: 2}
+        摄影: {speed: 5, cost: 2, reach: 5, error: 1}

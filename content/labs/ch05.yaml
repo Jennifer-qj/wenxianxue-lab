@@ -1,0 +1,8 @@
+items:
+  - id: lab-01-case-001
+    title: 版本鉴定侦探·多证据案卷
+    engine: reasoning
+    concept_ids: [c_version, c_rare_book, me_preface_colophon, me_colophon_mark, me_taboo_character, me_engraver, me_layout_analysis, me_paper_binding_analysis, me_catalog_comparison]
+    config:
+      stages: [观察版本形态, 检查内部证据, 查询外部旁证, 调整结论强度]
+      scoring: {evidence_coverage: 4, contradiction_handling: 3, cautious_claim: 3}

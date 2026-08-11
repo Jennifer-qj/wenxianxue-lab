@@ -1,0 +1,20 @@
+items:
+  - {id: c_version, label: 版本, type: concept, definition: 同一文献在形成、复制和流传中产生的不同文本与物质形态。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_manuscript, label: 写本, type: concept, definition: 以手工书写方式形成的文献版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_blockprint, label: 刻本, type: concept, definition: 由雕版印刷形成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_color_print, label: 套印本, type: concept, definition: 使用多块版分色套印形成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_embossed_print, label: 饾版拱花, type: concept, definition: 通过分版水印与无墨压印表现色彩层次和凹凸纹理的印刷技术。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_movable_type, label: 活字本, type: concept, definition: 以可重复排列的单字字模印成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_lithograph, label: 石印本, type: concept, definition: 利用石版平版印刷技术形成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_collotype, label: 珂罗版印本, type: concept, definition: 以照相制版方式高精度复制书画外观的印本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_annotated_copy, label: 批校题跋本, type: concept, definition: 保存读者批语、校记或题跋的具体传本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_rare_book, label: 善本, type: concept, definition: 依据时代、稀见性、保存或校勘学术价值等标准认定的重要版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_preface_colophon, label: 序跋考察, type: method, definition: 利用序跋的作者、年代和叙述核查成书与刊刻信息。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_colophon_mark, label: 牌记核验, type: method, definition: 检查刊刻牌记内容及其与全书物质状态是否一致。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_taboo_character, label: 避讳断代, type: method, definition: 利用避讳字形推测刊刻时间下限并与其他证据互证。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_engraver, label: 刻工考证, type: method, definition: 通过刻工姓名及活动年代辅助判断刊刻时地。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_layout_analysis, label: 字体版式分析, type: method, definition: 观察字体、行款、版心、鱼尾和边栏等版面特征。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_paper_binding_analysis, label: 纸张装潢分析, type: method, definition: 结合纸张特征和装订形制判断制作与后改信息。, chapter_ids: [ch05], status: pending_review}
+  - {id: me_catalog_comparison, label: 著录书影旁证, type: method, definition: 以目录著录、相关材料和可靠书影比较待鉴版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_version_evidence, label: 版本证据链, type: concept, definition: 将年代、序跋、牌记、避讳、刻工、版式、纸张和著录等线索组合的鉴定结构。, chapter_ids: [ch05], status: drafting}
+

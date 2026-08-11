@@ -1,0 +1,19 @@
+items:
+  - {id: e-0201, source: c_authorship_zhu, target: c_textual_lifecycle, type: produces, evidence: "修订本第30—32页：著作进入文献形成过程。", confidence: confirmed}
+  - {id: e-0202, source: c_compilation, target: c_evidence_chain, type: usesMethod, evidence: "修订本第33—34页：编纂需追踪材料来源与编选。", confidence: pedagogical}
+  - {id: e-0203, source: c_translation, target: c_buddhist_translation, type: isA, evidence: "修订本第34—41页：佛典翻译为翻译类型之一。", confidence: confirmed}
+  - {id: e-0204, source: c_translation, target: c_scholarly_translation, type: isA, evidence: "修订本第41—46页：学术翻译为翻译类型之一。", confidence: confirmed}
+  - {id: e-0205, source: me_hand_copying, target: c_transmission_error, type: produces, evidence: "修订本第52—53页：抄写可能产生文字差异。", confidence: confirmed}
+  - {id: e-0206, source: me_printing, target: c_transmission_error, type: produces, evidence: "修订本第53—55页：印刷仍可能固定或产生错误。", confidence: confirmed}
+  - {id: e-0301, source: c_official_collection, target: c_collection_catalog, type: usesMethod, evidence: "修订本第56—64页：官藏通过编目管理收藏。", confidence: confirmed}
+  - {id: e-0302, source: ev_war_loss, target: c_document_loss, type: produces, evidence: "修订本第64—68页列举多次战乱散佚。", confidence: confirmed}
+  - {id: e-0303, source: ev_qianlong_destruction, target: c_document_loss, type: produces, evidence: "修订本第66页著录乾隆禁毁。", confidence: confirmed}
+  - {id: e-0304, source: c_private_collection, target: c_collection_provenance, type: produces, evidence: "修订本第69—103页呈现私藏传递网络。", confidence: pedagogical}
+  - {id: e-0305, source: me_provenance_research, target: c_collection_provenance, type: evidenceFor, evidence: "修订本第73—103页的藏家、目录和递藏材料。", confidence: pedagogical}
+  - {id: e-0306, source: c_preservation_strategy, target: c_document_loss, type: affectedBy, evidence: "依据第四章收藏与散佚对照形成的教学性归纳。", confidence: pedagogical}
+  - {id: e-0401, source: c_manuscript, target: c_version, type: isA, evidence: "修订本第105—107页：写本属于版本类型。", confidence: confirmed}
+  - {id: e-0402, source: c_blockprint, target: c_version, type: isA, evidence: "修订本第107页：刻本属于版本类型。", confidence: confirmed}
+  - {id: e-0403, source: c_movable_type, target: c_version, type: isA, evidence: "修订本第108—109页：活字本属于版本类型。", confidence: confirmed}
+  - {id: e-0404, source: me_taboo_character, target: c_version_evidence, type: evidenceFor, evidence: "修订本第118—119页：避讳为版本鉴定证据之一。", confidence: confirmed}
+  - {id: e-0405, source: me_layout_analysis, target: c_version_evidence, type: evidenceFor, evidence: "修订本第126—128页：字体版式进入综合鉴定。", confidence: confirmed}
+  - {id: e-0406, source: me_catalog_comparison, target: c_version_evidence, type: evidenceFor, evidence: "修订本第129—134页：著录、旁证和书影支持版本判断。", confidence: confirmed}
