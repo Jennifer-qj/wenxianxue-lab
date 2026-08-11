@@ -1,0 +1,11 @@
+items:
+  - id: lab-11-case-001
+    title: 总集别集异文对读台
+    engine: annotate
+    concept_ids: [c_zongji, c_bieji, c_collection_editorial_selection, c_author_collection_layers, me_collection_source_analysis]
+    config:
+      passage: "某诗在早出选集、作者别集和后世全集中篇题与一字不同。请标注编纂年代、来源层次、异文及可支持的结论。"
+      hotspots:
+        - {text: 早出选集, role: 早期旁证, task: 核查是否节选或改题}
+        - {text: 作者别集, role: 归属证据, task: 判断是否作者自编}
+        - {text: 后世全集, role: 晚期汇辑, task: 查明底本与补辑来源}

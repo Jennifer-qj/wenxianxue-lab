@@ -1,0 +1,8 @@
+items:
+  - id: lab-10-case-001
+    title: 地方史证据拼图·迁徙追踪
+    engine: reasoning
+    concept_ids: [c_local_gazetteer, c_administrative_geography, c_genealogy, c_genealogical_lineage, c_local_source_bias, me_local_source_crosscheck]
+    config:
+      stages: [核定时间与行政区划, 阅读谱序谱例与世系, 对照两地方志, 加入碑刻档案旁证, 标注冲突和缺失]
+      scoring: {source_diversity: 3, chronology: 3, boundary_awareness: 2, cautious_claim: 2}

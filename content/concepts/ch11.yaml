@@ -1,0 +1,10 @@
+items:
+  - {id: c_zongji, label: 总集, type: concept, definition: 汇编多位作者作品而成的文学文献集合。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_xuanji, label: 选集, type: concept, definition: 按一定标准选录多位作者部分作品的总集类型。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_quanji_collection, label: 全集型总集, type: concept, definition: 力求汇集某一时代、地域或文类多位作者全部相关作品的总集。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_bieji, label: 别集, type: concept, definition: 汇集一位作者作品为主的文集。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_collection_compilation, label: 集部编纂, type: concept, definition: 搜集、选择、分类、编次和校订文学作品的过程。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_collection_editorial_selection, label: 选录标准, type: concept, definition: 编者据文体、时代、地域、评价或宗旨决定作品去取的规则。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_author_collection_layers, label: 别集成书层次, type: concept, definition: 作者自编、后人续编、补遗、年谱和附录等不同形成阶段。, chapter_ids: [ch11], status: pending_review}
+  - {id: c_collection_documentary_value, label: 集部文献价值, type: concept, definition: 总集别集在保存作品、校勘辑佚、人物研究和文学史研究中的价值。, chapter_ids: [ch11], status: pending_review}
+  - {id: me_collection_source_analysis, label: 集部来源分析, type: method, definition: 比较总集别集所据材料、编次、异文和删改以追踪作品来源的方法。, chapter_ids: [ch11], status: pending_review}

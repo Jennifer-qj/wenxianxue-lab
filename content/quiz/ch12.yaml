@@ -1,0 +1,9 @@
+items:
+  - {id: q-ch12-001, chapter: 12, type: classification, concept_ids: [c_oracle_bone_text, c_bronze_inscription], prompt: 将材料归类。, zones: [甲骨文, 金文], items: [{label: 龟甲兽骨刻辞, zone: 甲骨文}, {label: 青铜器铭文, zone: 金文}, {label: 占卜记录, zone: 甲骨文}, {label: 册命与作器铭记, zone: 金文}], explanation: 载体和使用场景不同，研究问题与证据边界也不同。}
+  - {id: q-ch12-002, chapter: 12, type: true_false, concept_ids: [c_archaeological_context], prompt: 文字内容相同的两片甲骨，只要释文一致，是否有出土记录就不影响研究价值。, answer: false, explanation: 地层、坑位与共存关系会影响年代、组合和历史解释。}
+  - {id: q-ch12-003, chapter: 12, type: multiple_choice, concept_ids: [me_scientific_excavation, c_archaeological_context], prompt: 科学发掘应记录哪些信息？, options: [地层位置, 遗迹单位, 共存物, 编号与方向, 市场价格], answers: [0,1,2,3], explanation: 可追溯空间记录使文献与考古情境结合。}
+  - {id: q-ch12-004, chapter: 12, type: ordering, concept_ids: [c_oracle_collection, c_bronze_corpus], prompt: 排列出土铭刻整理的基础流程。, items: [编号记录来源, 摄影或拓印, 缀合与分类, 释读考证, 发表可复核著录], answer: [0,1,2,3,4], explanation: 来源和原始图像应先于释文结论保存。}
+  - {id: q-ch12-005, chapter: 12, type: matching, concept_ids: [c_oracle_value, c_bronze_value], prompt: 将材料与突出价值配对。, pairs: [{left: 甲骨卜辞, right: 殷商占卜与王室活动}, {left: 青铜铭文, right: 册命宗族与作器事件}, {left: 二者文字形体, right: 古文字与语言研究}], explanation: 两类材料可互补，但文体和使用场景不同。}
+  - {id: q-ch12-006, chapter: 12, type: evidence, concept_ids: [ev_oracle_discovery, c_bronze_inscription], prompt: 核查一件来源不明铭刻应优先收集哪些证据？, evidence_ids: [最早著录, 收藏递藏, 清晰图像拓本, 材质与器形检测, 卖家故事], answer_ids: [最早著录, 收藏递藏, 清晰图像拓本, 材质与器形检测], explanation: 来源史、物质检测和可见文字需要互相支持。}
+  - {id: q-ch12-007, chapter: 12, type: short_answer, concept_ids: [c_archaeological_context, c_research_boundary], prompt: 乱掘出土的真甲骨为什么仍比科学发掘材料少一层证据？, rubric: [缺少地层位置, 缺少组合关系, 影响断代和事件重建, 区分真实性与语境完整性], explanation: 实物可以为真，但历史信息因来源链断裂而不可恢复。}
+  - {id: q-ch12-008, chapter: 12, type: fill_blank, concept_ids: [c_evidence_chain], prompt: 将文字、载体、地层和共存物联系起来形成的是出土文献的证据____。, answers: [链], explanation: 多层证据共同限定年代、来源和解释范围。}

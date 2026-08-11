@@ -1,0 +1,13 @@
+items:
+  - {id: c_bamboo_silk_text, label: 简帛文献, type: concept, definition: 书写于竹木简牍或缣帛上的出土文献。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_bamboo_silk_discoveries, label: 近世简帛发现, type: concept, definition: 近现代在多地墓葬、遗址和边塞发现的战国至汉晋简帛材料群。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_excavated_lost_text, label: 佚籍复出, type: concept, definition: 已失传或仅残存于传世材料的古书以出土写本重新出现。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_excavated_variant, label: 出土异本, type: concept, definition: 出土文本与传世本在篇章、文字和思想表述上存在的版本差异。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_book_history_artifact, label: 书籍制度实物, type: concept, definition: 简册编联、帛书卷写、题记和收纳形态等早期书籍制度证据。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_stone_inscription, label: 石刻文献, type: concept, definition: 刻写于碑碣、摩崖、墓志和经幢等石质载体的文献。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_stone_inscription_value, label: 石刻文献价值, type: concept, definition: 石刻在史料、文学、文字书法、经学和宗教研究中的价值。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_covenant_text, label: 盟书, type: concept, definition: 记录盟誓活动并书写于玉石等载体的出土文献。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_seal_text, label: 玺印文字, type: concept, definition: 官私印章上的文字及其制度、身份和古文字信息。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_brick_tile_text, label: 砖瓦文字, type: concept, definition: 砖瓦上的刻划、模印或书写文字及其考古历史信息。, chapter_ids: [ch13], status: pending_review}
+  - {id: c_excavated_paper, label: 纸质出土文献, type: concept, definition: 从遗址墓葬等出土并保留明确考古来源的纸本文献。, chapter_ids: [ch13], status: pending_review}
+  - {id: me_excavated_transmitted_comparison, label: 出土本与传世本对读, type: method, definition: 在控制年代、地域、载体和文本系统后比较出土本与传世本的方法。, chapter_ids: [ch13], status: pending_review}

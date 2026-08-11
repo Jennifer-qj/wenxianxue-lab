@@ -1,0 +1,8 @@
+items:
+  - id: lab-12-case-001
+    title: 考古记录修复台·语境能说明什么
+    engine: reasoning
+    concept_ids: [c_oracle_bone_text, c_bronze_inscription, c_archaeological_context, me_scientific_excavation, me_epigraphic_rubbing]
+    config:
+      stages: [区分科学发掘与来源不明材料, 记录载体和文字, 加入地层共存信息, 比较拓本与实物, 限定历史结论]
+      scoring: {provenance: 3, context: 3, textual_reading: 2, cautious_claim: 2}

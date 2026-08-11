@@ -1,0 +1,13 @@
+items:
+  - {id: c_lost_work, label: 亡佚文献, type: concept, definition: 原曾存在而今已全部或部分失传的文献。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_reconstruction, label: 辑佚, type: concept, definition: 从他书征引、类书、注疏等材料中搜集佚文并校订重建亡书的工作。, chapter_ids: [ch08], status: pending_review}
+  - {id: me_reconstruction_workflow, label: 辑佚流程, type: method, definition: 查明书名卷数、广搜引文、辨别真伪、校订编排并注明出处的工作链。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_forged_work, label: 伪书, type: concept, definition: 在作者、时代、来源或文本身份上存在有意假托的文献。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_forgery_motive, label: 作伪动机, type: concept, definition: 传道、射利、炫名、争胜、逃禁或避嫌等促成假托的目的。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_forgery_technique, label: 作伪手段, type: concept, definition: 假托作者、改题、伪序、袭名、节采、缀合、窜入等制造虚假身份的方式。, chapter_ids: [ch08], status: pending_review}
+  - {id: me_provenance_authentication, label: 授受源流辨伪, type: method, definition: 考察一书传承链和最初出现记录以检验其来历。, chapter_ids: [ch08], status: pending_review}
+  - {id: me_linguistic_authentication, label: 语言文体辨伪, type: method, definition: 从文体、风格、特殊语词和声韵系统与时代的关系检验文本。, chapter_ids: [ch08], status: pending_review}
+  - {id: me_historical_authentication, label: 史实制度辨伪, type: method, definition: 从史实、称谓、制度和地理沿革的时代边界检验文本。, chapter_ids: [ch08], status: pending_review}
+  - {id: me_intellectual_authentication, label: 思想学术辨伪, type: method, definition: 比较作者行事、思想、学术水平和学术发展次序与文本是否相容。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_forged_work_value, label: 伪书的文献价值, type: concept, definition: 伪书虽不能按所托时代使用，仍可能保存作伪时代的史料、文学、语言和思想信息。, chapter_ids: [ch08], status: pending_review}
+  - {id: c_authentication_conclusion, label: 辨伪结论层级, type: concept, definition: 将确定伪、疑伪、部分窜改或尚待考等不同强度结论分开表达。, chapter_ids: [ch08], status: drafting}

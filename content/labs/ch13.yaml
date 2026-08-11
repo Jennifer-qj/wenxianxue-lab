@@ -1,0 +1,12 @@
+items:
+  - id: lab-13-case-001
+    title: 简册复原台·编联方案
+    engine: assemble
+    concept_ids: [c_bamboo_silk_text, c_book_history_artifact, c_archaeological_context, me_excavated_transmitted_comparison]
+    config:
+      pieces:
+        - {id: j1, label: 简1·篇题与起句, clue: 起始标记}
+        - {id: j2, label: 简2·承接上句, clue: 文意衔接}
+        - {id: j3, label: 简3·编绳痕同组, clue: 物质关系}
+        - {id: j4, label: 简4·篇末题记, clue: 结束标记}
+      solution: [j1, j2, j3, j4]

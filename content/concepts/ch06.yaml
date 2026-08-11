@@ -1,0 +1,10 @@
+items:
+  - {id: c_textual_error, label: 文献讹误, type: concept, definition: 文献在形成与流传中出现的讹、脱、衍、倒及错乱等文字异常。, chapter_ids: [ch06], status: pending_review}
+  - {id: c_collation, label: 校勘, type: concept, definition: 比较异文并结合内外证据判断文本差异、说明取舍的研究过程。, chapter_ids: [ch06], status: pending_review}
+  - {id: c_variant, label: 异文, type: concept, definition: 同一文本在不同传本或引文中出现的文字差异。, chapter_ids: [ch06], status: pending_review}
+  - {id: me_duijiao, label: 对校法, type: method, definition: 以同书不同版本逐字逐句比较来发现异同的校勘方法。, chapter_ids: [ch06], status: pending_review}
+  - {id: me_tajiao, label: 他校法, type: method, definition: 用他书引文、类书征引或相关文献校核本书文字的方法。, chapter_ids: [ch06], status: pending_review}
+  - {id: me_benjiao, label: 本校法, type: method, definition: 利用本书上下文、体例和重复语句相互校核的方法。, chapter_ids: [ch06], status: pending_review}
+  - {id: me_synthesis_collation, label: 综合考证法, type: method, definition: 综合语言、史实、制度、版本和异文等证据判断文本的方法。, chapter_ids: [ch06], status: pending_review}
+  - {id: c_collation_note, label: 校勘记, type: concept, definition: 记录底本文字、异文、证据、判断和处理方式的规范说明。, chapter_ids: [ch06], status: pending_review}
+  - {id: c_suspensive_judgment, label: 多闻阙疑, type: concept, definition: 证据不足时保留疑问并限制结论强度的校勘态度。, chapter_ids: [ch06], status: pending_review}

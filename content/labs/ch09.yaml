@@ -1,0 +1,13 @@
+items:
+  - id: lab-09-case-002
+    title: 类书检索路线规划器
+    engine: sequence
+    concept_ids: [c_leishu, me_leishu_retrieval, c_leishu_citation_risk, c_congshu_edition]
+    config:
+      items:
+        - {id: define, label: 把研究问题转换为人物、事类或韵目}
+        - {id: index, label: 查询类目与索引}
+        - {id: locate, label: 定位条目并抄录引书信息}
+        - {id: verify, label: 回查原书或可靠版本}
+        - {id: cite, label: 标注类书版本、卷次和核验结果}
+      correct_order: [define, index, locate, verify, cite]

@@ -1,0 +1,14 @@
+items:
+  - {id: c_dunhuang, label: 敦煌, type: concept, definition: 河西走廊重要历史城市及多元文化交流节点。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_mogao_caves, label: 莫高窟, type: concept, definition: 敦煌石窟群中保存壁画、塑像和藏经洞文献的重要遗址。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_library_cave, label: 藏经洞, type: concept, definition: 莫高窟中发现大量中古写本、印本和艺术品的洞窟。, chapter_ids: [ch14], status: pending_review}
+  - {id: ev_library_cave_discovery, label: 藏经洞发现, type: event, definition: 近代藏经洞及其中遗书被重新发现并逐步为外界所知的事件。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_dunhuang_dispersal, label: 敦煌遗书流散, type: concept, definition: 藏经洞文献被分批取得并分藏国内外机构和私人手中的历史过程。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_dunhuang_catalog, label: 敦煌文献目录, type: concept, definition: 按收藏机构、编号、内容和形态著录敦煌文献的检索工具。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_dunhuang_edition, label: 敦煌文献整理刊行, type: concept, definition: 对分散遗书进行摄影、编目、缀合、释录、校订和出版的工作。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_dunhuang_religion, label: 敦煌宗教文献, type: concept, definition: 敦煌遗书中的佛教、道教及其他宗教写本和实践记录。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_dunhuang_secular, label: 敦煌世俗文献, type: concept, definition: 敦煌遗书中的经籍、语言、史地、子书、文学和科技等非宗教材料。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_fragment_reunification, label: 残卷缀合, type: concept, definition: 根据纸张、书写、行款、内容和收藏史识别原属同一写卷的残片。, chapter_ids: [ch14], status: pending_review}
+  - {id: me_dunhuang_id_resolution, label: 敦煌编号解析, type: method, definition: 通过馆藏缩写、卷号和旧新编号对照定位具体遗书的方法。, chapter_ids: [ch14], status: pending_review}
+  - {id: c_digital_reunification, label: 数字化虚拟重聚, type: concept, definition: 以联合目录和数字图像在线关联分藏各处文献的数字人文实践。, chapter_ids: [ch14], status: drafting}
+  - {id: c_revision_history, label: 修订说明, type: concept, definition: 作者记录版本修订范围、增删缘由和研究局限的元文献材料。, chapter_ids: [ch14], status: pending_review}
