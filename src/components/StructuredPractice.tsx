@@ -4,7 +4,7 @@ import "./StructuredPractice.css";
 type Pair = { left: string; right: string };
 type ClassItem = { label: string; zone: string };
 type Quiz = {
-  id: string; type: string; prompt: string; explanation: string;
+  id: string; chapter: number; type: string; prompt: string; explanation: string;
   options?: string[]; answer?: number | boolean | number[]; answers?: Array<number | string>;
   pairs?: Pair[]; items?: Array<string | ClassItem>; zones?: string[];
   evidence_ids?: string[]; answer_ids?: string[]; rubric?: string[];
@@ -19,10 +19,10 @@ function equalSets(a: Array<number | string>, b: Array<number | string>) {
   return a.length === b.length && [...a].sort().every((item, index) => item === [...b].sort()[index]);
 }
 
-function save(score: number, total: number) {
+function save(score: number, total: number, chapter: number) {
   const key = "wxlab-progress";
   const progress = JSON.parse(localStorage.getItem(key) || "{}");
-  progress["ch01-structured-practice"] = { completed: true, score, total, title: "第一章·九题型综合练习", updatedAt: new Date().toISOString() };
+  progress[`ch${String(chapter).padStart(2, "0")}-structured-practice`] = { completed: true, score, total, title: `第${chapter === 1 ? "一" : chapter === 2 ? "二" : chapter}章·九题型综合练习`, updatedAt: new Date().toISOString() };
   localStorage.setItem(key, JSON.stringify(progress));
   window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
 }
@@ -58,7 +58,7 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
     const nextResults = { ...results, [quiz.id]: correct };
     setResults(nextResults);
     setChecked((state) => ({ ...state, [quiz.id]: true }));
-    if (completed + (isChecked ? 0 : 1) === quizzes.length) save(Object.values(nextResults).filter(Boolean).length, quizzes.length);
+    if (completed + (isChecked ? 0 : 1) === quizzes.length) save(Object.values(nextResults).filter(Boolean).length, quizzes.length, quiz.chapter);
   }
 
   function toggleList(value: number | string) {
@@ -77,7 +77,7 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
   return (
     <div className="structured-practice">
       <header>
-        <div><small>第一章综合练习</small><strong>{completed}/{quizzes.length} 已完成 · {score} 得分</strong></div>
+        <div><small>第{quiz.chapter === 1 ? "一" : quiz.chapter === 2 ? "二" : quiz.chapter}章综合练习</small><strong>{completed}/{quizzes.length} 已完成 · {score} 得分</strong></div>
         <div className="practice-progress"><span style={{ width: `${(completed / quizzes.length) * 100}%` }} /></div>
       </header>
       <div className="practice-body">

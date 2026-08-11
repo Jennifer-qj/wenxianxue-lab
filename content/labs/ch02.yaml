@@ -1,0 +1,3 @@
+items:
+  - {id: lab-03-case-001, title: 载体博物馆·基础展柜, engine: classify, concept_ids: [m_oracle_bone, m_bronze, m_stone, m_bamboo_wood, m_silk, m_papyrus, m_parchment, m_palm_leaf, m_paper], config: {zones: [中国早期载体, 域外早期载体, 纸质载体], items: [甲骨, 青铜器, 石刻, 简牍, 帛, 莎草纸, 羊皮纸, 贝叶, 纸]}}
+  - {id: lab-04-case-001, title: 装帧演变拼图·基础序列, engine: sequence, concept_ids: [c_scroll_binding, c_accordion_binding, c_butterfly_binding, c_wrapped_back_binding, c_thread_binding], config: {items: [卷子装, 经折装, 蝴蝶装, 包背装, 线装], correct_order: [卷子装, 经折装, 蝴蝶装, 包背装, 线装]}}

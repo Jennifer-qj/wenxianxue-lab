@@ -55,7 +55,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
     <aside class="toc">
       <small>本章导航</small>
       <a href="#overview">导读</a>
-      {chapterId === "ch01" && <a href="#learning-units">预备学习单元</a>}
+      {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
       {chapterId === "ch01" && <a href="#workbench">研究问题装配台</a>}
       {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
       <a href="#workflow">方法步骤</a>
@@ -72,7 +72,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
         </div>
       </section>
 
-      {chapterId === "ch01" && (
+      {chapterUnits.length > 0 && (
         <section id="learning-units" class="learning-units">
           <div class="unit-intro">
             <div>
@@ -132,7 +132,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
         <p class="eyebrow">Quick check</p>
         <h2>本章检测</h2>
         <p>不是背定义，而是判断证据该如何使用。完成后会自动记入本机学习进度。</p>
-        {chapterId === "ch01"
+        {structuredQuizzes.length > 0
           ? <StructuredPractice quizzes={structuredQuizzes} client:load />
           : <ChapterCheck chapterId={chapter.id} title={chapter.title} quiz={lesson.quiz} client:load />}
       </section>

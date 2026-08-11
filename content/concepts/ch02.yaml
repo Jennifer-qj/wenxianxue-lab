@@ -1,0 +1,23 @@
+items:
+  - {id: m_oracle_bone, label: 甲骨, type: material, definition: 商周时期刻写卜辞等内容的龟甲与兽骨载体。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_bronze, label: 金, type: material, definition: 以青铜器为主的铭文载体，器类与使用场景多样。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_stone, label: 石, type: material, definition: 以碣、摩崖、碑等形态保存文字的耐久载体。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_jie, label: 碣, type: concept, definition: 石刻形态之一，需结合时代语境和实物形制辨识。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_cliff_inscription, label: 摩崖, type: concept, definition: 直接刻写于天然山崖石壁的文字形态。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_stele, label: 碑, type: concept, definition: 经加工树立并刻写文字的石刻形态，功能随时代扩展。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_bamboo_wood, label: 竹木, type: material, definition: 制成简牍并可编联成册的书写材料。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_slip_binding, label: 简策编联, type: concept, definition: 用绳将竹木简按次序连缀成册的结构。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_sealing_clay, label: 封泥, type: concept, definition: 在捆扎文书的绳结上施泥钤印形成的封缄方式。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_silk, label: 帛, type: material, definition: 可书写文字并适合绘图的丝织品载体。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_papyrus, label: 莎草纸, type: material, definition: 以莎草茎片压制而成、古代地中海世界长期使用的载体。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_parchment, label: 羊皮纸, type: material, definition: 经脱毛、削薄与打磨处理制成的兽皮书写材料。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_palm_leaf, label: 贝叶, type: material, definition: 南亚等地用于刺写文字并穿孔夹装的棕榈叶材料。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_paper, label: 纸, type: material, definition: 以植物纤维为主制成、推动文献复制与装潢发展的书写材料。, chapter_ids: [ch02], status: pending_review}
+  - {id: ev_paper_invention, label: 造纸术发展, type: event, definition: 纸从早期实物与记载逐步改进、推广并替代简帛的历史过程。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_scroll_binding, label: 卷子装, type: concept, definition: 将纸叶粘连成长幅并卷起收存的装潢形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_accordion_binding, label: 经折装, type: concept, definition: 将长卷按一定宽度往返折叠形成册页的装潢形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_butterfly_binding, label: 蝴蝶装, type: concept, definition: 书叶有字面相向、版心向内折叠，展开形似蝶翼的形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_wrapped_back_binding, label: 包背装, type: concept, definition: 书叶折叠后以纸包裹书背的册页形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_thread_binding, label: 线装, type: concept, definition: 书叶齐整后在近书脊处打孔穿线装订的形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_carrier_constraint, label: 载体约束, type: concept, definition: 材料性质与加工方式对书写、容量、次序、传播和保存形成的限制。, chapter_ids: [ch02], status: drafting}
+  - {id: me_material_reading, label: 物质形态判读, type: method, definition: 结合材质、尺寸、书写方式、装订和后修判断文献形态的方法。, chapter_ids: [ch02], status: drafting}

@@ -7,7 +7,7 @@ items:
     module: M1
     page_start: 1
     page_end: 4
-    status: pending_review
+    status: verified
     key_question: “文献”在早期语境中是否只指书面典籍？
     summary: 早期解释把“文”与典籍记载联系起来，把“献”与熟悉旧制的贤才联系起来；认识过去既依赖记录，也依赖能够讲述和验证记录的人。
     boundary: 这是对词义源流的概括，不能直接替代今天各学科对“文献”的具体定义。
@@ -22,7 +22,7 @@ items:
     module: M1
     page_start: 1
     page_end: 4
-    status: pending_review
+    status: verified
     key_question: 人的知识为什么也可能在后来成为书面文献？
     summary: 当代能够讲述旧制的人属于“献”，其言行被记录后又成为后人据以研究的“文”，二者并非静止对立，而会随记录和传播发生转化。
     boundary: 人的见闻转化为记录后仍需考察记录者、形成过程和传递条件，不能因写定便视为完全可靠。
@@ -37,7 +37,7 @@ items:
     module: M1
     page_start: 1
     page_end: 4
-    status: pending_review
+    status: verified
     key_question: 为什么研究历史必须同时关心材料与验证？
     summary: 文献为认识、研究和验证过去提供依据。今天的用法偏重书面记录，但学习时仍应记得现实遗存、人的知识与书面材料之间的关系。
     boundary: 文献是研究依据而不是历史本身；材料能否支持结论，仍取决于来源、语境和证据强度。
@@ -52,7 +52,7 @@ items:
     module: M1
     page_start: 4
     page_end: 5
-    status: pending_review
+    status: verified
     key_question: 文献可以从哪些维度形成不同的研究组群？
     summary: 文献可以按时代、学科和材料群体等维度区分；古今、文史哲医法以及出土、敦煌、地方文献等分类服务于不同研究问题。
     boundary: 分类维度可以交叉，同一材料往往同时属于多个组群，不能把分类表当成互斥盒子。
@@ -67,7 +67,7 @@ items:
     module: M1
     page_start: 4
     page_end: 5
-    status: pending_review
+    status: verified
     key_question: 文献学与文学、历史学等学科的区别在哪里？
     summary: 文献学主要考察文献的形态、整理、鉴别、分类编目、收藏、形成发展、用途和检索，把文献自身及其文本生命史作为核心对象。
     boundary: 强调研究本体不意味着与其他学科隔绝；具体问题仍可同时需要历史、语言或文学方法。
@@ -82,7 +82,7 @@ items:
     module: M1
     page_start: 4
     page_end: 5
-    status: pending_review
+    status: verified
     key_question: 文献学怎样帮助研究者从书海走向可用材料？
     summary: 文献学训练研究者有效发现所需材料、辨别不同版本的早晚与可靠程度，并对原始材料进行可复查的整理加工。
     boundary: “较早”不自动等于“较好”，“材料多”也不自动等于“材料全”，检索和版本判断都需说明标准。
@@ -97,7 +97,7 @@ items:
     module: M1
     page_start: 5
     page_end: 10
-    status: pending_review
+    status: verified
     key_question: 宣称一部书“罕见”之前需要完成什么调查？
     summary: 对传本稀见程度的判断必须建立在目录和馆藏调查之上；只凭一次海外所见或个人经验，容易把常见传本误判为孤本秘本。
     boundary: 目录未著录不等于必然无存，目录著录也不等于现物状态完全可靠，必要时还需核对馆藏和原书。
@@ -112,7 +112,7 @@ items:
     module: M1
     page_start: 5
     page_end: 10
-    status: pending_review
+    status: verified
     key_question: 为什么载体常识和底本选择会影响知识质量？
     summary: 图像中的时代错置会传播错误历史知识；旧书整理若忽略更完整、更可靠的后出修订本，也会让新读者继续使用不完善的材料。
     boundary: 后出本不必然优于早期本，选择底本要结合内容完整性、校订质量和研究目的，而不是机械追新或追旧。
@@ -127,7 +127,7 @@ items:
     module: M1
     page_start: 5
     page_end: 10
-    status: pending_review
+    status: verified
     key_question: 文献整理中的“精品”首先意味着什么？
     summary: 可靠的整理成果首先要求底本选择、校勘、标点、注释、校对和必要索引等内容环节经得起复查，装帧与印刷之美不能代替内容质量。
     boundary: 不同出版目的需要不同整理深度，评价时应结合面向的读者与任务，不能用单一标准否定所有简明版本。
