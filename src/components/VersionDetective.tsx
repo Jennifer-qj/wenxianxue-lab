@@ -1,135 +1,108 @@
 import { useEffect, useMemo, useState } from "react";
 
-type Clue = {
-  label: string;
-  evidence: string;
-  question: string;
-  options: { text: string; correct: boolean; feedback: string }[];
-};
+type BinId = "core" | "support" | "caution";
+type Evidence = { id: string; title: string; detail: string; bin: BinId; reason: string };
 
-const clues: Clue[] = [
-  {
-    label: "线索一 · 避讳",
-    evidence: "书中多处将“玄”字改写或缺末笔。",
-    question: "这条线索最稳妥的解释是什么？",
-    options: [
-      { text: "它一定是宋版书", correct: false, feedback: "单一字形不能直接证明是宋版，还要排除后刻本、翻刻本和偶然缺笔。" },
-      { text: "可能与清代避讳有关", correct: true, feedback: "正确。清代避康熙帝名讳时常涉及“玄”字，但仍须结合序跋、牌记等证据。" },
-      { text: "缺笔只是印刷损坏，没有价值", correct: false, feedback: "印刷损坏当然可能发生，但有规律地多次出现，就值得作为版本证据继续观察。" },
-    ],
-  },
-  {
-    label: "线索二 · 牌记",
-    evidence: "卷末牌记提供了刊刻者和刊刻地点，但牌记所在叶与前文纸色略有差异。",
-    question: "下一步最应该做什么？",
-    options: [
-      { text: "直接按牌记确定全书年代", correct: false, feedback: "牌记可能被后人补配、挖改或沿用，不能跳过物质检查。" },
-      { text: "核查该叶是否后配，并与其他著录互证", correct: true, feedback: "正确。牌记很重要，但要确认它与整部书是否属于同一制作阶段。" },
-      { text: "忽略牌记，只看字体", correct: false, feedback: "版本鉴定依靠证据组合。字体也可能被后世仿刻，不能取代其他线索。" },
-    ],
-  },
-  {
-    label: "线索三 · 证据组合",
-    evidence: "避讳现象、序跋年代、刻工活动时间大体相合；纸张和装帧可能经过后世修整。",
-    question: "怎样写结论更符合文献学态度？",
-    options: [
-      { text: "综合证据支持清代早期刻本，但装帧并非原装，仍需对照书影", correct: true, feedback: "很好。结论说明了证据强度、保留条件和下一步验证方式。" },
-      { text: "绝对是真正的清初原装本", correct: false, feedback: "“绝对”“原装”超出了现有证据，忽略了装帧可能后修的情况。" },
-      { text: "所有证据都有局限，所以无法得出任何结论", correct: false, feedback: "多闻阙疑不等于拒绝判断；应当给出有证据支持、同时保留边界的结论。" },
-    ],
-  },
+const evidence: Evidence[] = [
+  { id: "taboo", title: "避讳字", detail: "“玄”字在多处有规律地缺末笔。", bin: "core", reason: "规律性避讳可缩小时代范围，但仍需与其他证据互证。" },
+  { id: "preface", title: "序跋纪年", detail: "序中署“康熙三十二年”，内容与正文同版印刷。", bin: "core", reason: "纪年与正文的制作关系清楚，是本案较强的断代证据。" },
+  { id: "engraver", title: "刻工活动", detail: "两名刻工还见于康熙中期的另一部刻本。", bin: "support", reason: "刻工活动年代可以旁证，但同名、复用旧版等情况仍需排除。" },
+  { id: "catalog", title: "旧藏目录", detail: "乾隆初年藏书目录已著录同名同卷数之书。", bin: "support", reason: "著录可提供年代下限和流传线索，但未必就是眼前这一部。" },
+  { id: "paper", title: "纸色较旧", detail: "纸张泛黄，手感松软，没有水印信息。", bin: "caution", reason: "纸色受保存环境影响，也存在旧纸后印，单独不能可靠断代。" },
+  { id: "binding", title: "线装书衣", detail: "书衣整齐，蓝绢包角，疑为近代重装。", bin: "caution", reason: "装帧可能晚于书芯，不能把重装年代等同于刻印年代。" },
 ];
 
+const bins: { id: BinId; title: string; hint: string }[] = [
+  { id: "core", title: "关键证据", hint: "能直接约束版本判断" },
+  { id: "support", title: "辅助互证", hint: "增强判断但不能单独定案" },
+  { id: "caution", title: "保留事项", hint: "容易误导，必须说明局限" },
+];
+
+const verdicts = [
+  "这是康熙三十二年的原装初印本，已经完全确定。",
+  "综合避讳、序跋和刻工线索，暂定为康熙中期刻本；书衣可能后配，仍应核对牌记、版式与同版书影。",
+  "所有线索都有局限，因此目前不能作出任何版本判断。",
+];
+
+function save(score: number, total: number) {
+  const key = "wxlab-progress";
+  const current = JSON.parse(localStorage.getItem(key) || "{}");
+  current["version-detective"] = { completed: true, score, total, updatedAt: new Date().toISOString() };
+  localStorage.setItem(key, JSON.stringify(current));
+  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+}
+
 export default function VersionDetective() {
-  const [step, setStep] = useState(0);
-  const [choice, setChoice] = useState<number | null>(null);
-  const [score, setScore] = useState(0);
-  const [done, setDone] = useState(false);
-  const clue = clues[step];
-  const percent = useMemo(() => ((step + (done ? 1 : 0)) / clues.length) * 100, [step, done]);
+  const [placed, setPlaced] = useState<Record<string, BinId>>({});
+  const [active, setActive] = useState<string | null>(null);
+  const [checked, setChecked] = useState(false);
+  const [verdict, setVerdict] = useState<number | null>(null);
+  const correctEvidence = useMemo(() => evidence.filter((item) => placed[item.id] === item.bin).length, [placed]);
+  const done = checked && verdict !== null;
+  const score = correctEvidence + (verdict === 1 ? 1 : 0);
 
   useEffect(() => {
-    if (!done) return;
-    const key = "wxlab-progress";
-    const current = JSON.parse(localStorage.getItem(key) || "{}");
-    current["version-detective"] = {
-      completed: true,
-      score,
-      total: clues.length,
-      updatedAt: new Date().toISOString(),
-    };
-    localStorage.setItem(key, JSON.stringify(current));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+    if (done) save(score, evidence.length + 1);
   }, [done, score]);
 
-  function answer(index: number) {
-    if (choice !== null) return;
-    setChoice(index);
-    if (clue.options[index].correct) setScore((value) => value + 1);
+  function move(id: string, bin?: BinId) {
+    if (checked) return;
+    setPlaced((current) => {
+      const next = { ...current };
+      if (bin) next[id] = bin;
+      else delete next[id];
+      return next;
+    });
+    setActive(null);
   }
 
-  function next() {
-    if (step === clues.length - 1) {
-      setDone(true);
-      return;
-    }
-    setStep((value) => value + 1);
-    setChoice(null);
+  function drop(event: React.DragEvent, bin?: BinId) {
+    event.preventDefault();
+    const id = event.dataTransfer.getData("text/plain");
+    if (id) move(id, bin);
   }
 
-  function restart() {
-    setStep(0);
-    setChoice(null);
-    setScore(0);
-    setDone(false);
+  function reset() {
+    setPlaced({}); setActive(null); setChecked(false); setVerdict(null);
   }
 
-  if (done) {
-    return (
-      <section className="detective-result" aria-live="polite">
-        <span className="seal">案</span>
-        <p className="mini-label">鉴定记录已归档</p>
-        <h2>{score === 3 ? "证据意识很敏锐" : "你完成了第一次版本会诊"}</h2>
-        <p>本轮得分 {score} / {clues.length}。版本鉴定的关键不是猜中年代，而是区分“线索”“证据”和“结论”的强度。</p>
-        <button className="game-button" onClick={restart}>重新鉴定</button>
-      </section>
-    );
-  }
+  const card = (item: Evidence) => (
+    <button
+      key={item.id}
+      type="button"
+      draggable={!checked}
+      className={`evidence-card ${active === item.id ? "active" : ""} ${checked ? (placed[item.id] === item.bin ? "correct" : "incorrect") : ""}`}
+      onDragStart={(event) => event.dataTransfer.setData("text/plain", item.id)}
+      onClick={() => !checked && setActive(active === item.id ? null : item.id)}
+    >
+      <strong>{item.title}</strong><span>{item.detail}</span>
+      {checked && <small>{item.reason}</small>}
+    </button>
+  );
 
   return (
-    <section className="detective">
-      <div className="game-progress" aria-label={`第 ${step + 1} 关，共 ${clues.length} 关`}>
-        <span style={{ width: `${percent}%` }} />
+    <section className="detective evidence-desk">
+      <div className="case-top"><div><p className="mini-label">CASE 001 · 证据分级</p><h2>无名刻本鉴定案</h2></div><span className="case-number">{Object.keys(placed).length}/{evidence.length}</span></div>
+      <p className="desk-instruction">拖动证据卡进入三个证据盘。也可以先点卡片，再点目标证据盘。</p>
+      <div className="evidence-pool" onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event)} onClick={() => active && move(active)}>
+        <small>待研判线索</small>
+        <div>{evidence.filter((item) => !placed[item.id]).map(card)}</div>
       </div>
-      <div className="case-top">
-        <div>
-          <p className="mini-label">{clue.label}</p>
-          <h2>无名刻本鉴定案</h2>
-        </div>
-        <span className="case-number">CASE 001</span>
-      </div>
-      <blockquote>{clue.evidence}</blockquote>
-      <p className="question">{clue.question}</p>
-      <div className="options">
-        {clue.options.map((option, index) => (
-          <button
-            key={option.text}
-            className={choice === index ? (option.correct ? "correct" : "incorrect") : ""}
-            onClick={() => answer(index)}
-            disabled={choice !== null}
-          >
-            <span>{String.fromCharCode(65 + index)}</span>
-            {option.text}
-          </button>
+      <div className="evidence-bins">
+        {bins.map((bin) => (
+          <section key={bin.id} className={active ? "accepting" : ""} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event, bin.id)} onClick={() => active && move(active, bin.id)}>
+            <header><strong>{bin.title}</strong><small>{bin.hint}</small></header>
+            <div>{evidence.filter((item) => placed[item.id] === bin.id).map(card)}</div>
+          </section>
         ))}
       </div>
-      {choice !== null && (
-        <div className="feedback" aria-live="polite">
-          <strong>{clue.options[choice].correct ? "判断成立" : "还需再审"}</strong>
-          <p>{clue.options[choice].feedback}</p>
-          <button className="game-button" onClick={next}>
-            {step === clues.length - 1 ? "完成鉴定" : "查看下一条线索"} →
-          </button>
+      {!checked && <button className="game-button desk-submit" disabled={Object.keys(placed).length !== evidence.length} onClick={() => setChecked(true)}>核验我的证据盘</button>}
+      {checked && (
+        <div className="verdict-builder" aria-live="polite">
+          <div className={`evidence-score ${correctEvidence === evidence.length ? "success" : ""}`}><strong>证据分级 {correctEvidence}/{evidence.length}</strong><span>绿色为判断合理；红色卡片请结合说明重新理解。</span></div>
+          <h3>最后一步：选择与证据强度相称的鉴定结论</h3>
+          <div className="verdict-options">{verdicts.map((item, index) => <button key={item} className={verdict === index ? (index === 1 ? "correct" : "incorrect") : ""} disabled={verdict !== null} onClick={() => setVerdict(index)}><span>{index + 1}</span>{item}</button>)}</div>
+          {verdict !== null && <div className={`feedback ${verdict === 1 ? "success" : ""}`}><strong>{verdict === 1 ? "结论强度恰当" : "结论与证据强度不匹配"}</strong><p>版本判断既不能把线索写成绝对事实，也不能因为存在局限就拒绝判断。应同时写明依据、结论强度与待核事项。</p><button className="game-button" onClick={reset}>重新布置证据盘</button></div>}
         </div>
       )}
     </section>
