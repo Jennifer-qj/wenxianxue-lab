@@ -56,6 +56,10 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const [selectedId, setSelectedId] = useState(concepts[0]?.id ?? "");
   const [dragging, setDragging] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
+  const [pathStart, setPathStart] = useState("");
+  const [pathEnd, setPathEnd] = useState("");
+  const [pathIds, setPathIds] = useState<string[]>([]);
+  const [pathNotice, setPathNotice] = useState("");
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => setNodes(initialNodes), [initialNodes]);
@@ -96,6 +100,11 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const selected = nodeMap.get(selectedId);
   const selectedEdges = selected ? filteredEdges.filter((edge) => edge.source === selected.id || edge.target === selected.id) : [];
   const connected = new Set(selectedEdges.flatMap((edge) => [edge.source, edge.target]));
+  const pathNodeSet = new Set(pathIds);
+  const pathEdgeSet = new Set(pathIds.slice(1).map((id, index) => {
+    const previous = pathIds[index];
+    return filteredEdges.find((edge) => (edge.source === previous && edge.target === id) || (edge.target === previous && edge.source === id))?.id;
+  }).filter(Boolean));
   const viewWidth = WIDTH / zoom;
   const viewHeight = HEIGHT / zoom;
   const viewX = (WIDTH - viewWidth) / 2;
@@ -111,7 +120,39 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
     setNodes((items) => items.map((node) => node.id === dragging ? { ...node, x: Math.max(20, Math.min(WIDTH - 20, next.x)), y: Math.max(25, Math.min(HEIGHT - 25, next.y)) } : node));
   }
   function reset() {
-    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? "");
+    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? ""); setPathStart(""); setPathEnd(""); setPathIds([]); setPathNotice("");
+  }
+  function resolveConcept(value: string) {
+    const normalized = value.trim().toLocaleLowerCase("zh-CN");
+    return concepts.find((node) => node.id.toLocaleLowerCase("zh-CN") === normalized || node.label.toLocaleLowerCase("zh-CN") === normalized)?.id ?? "";
+  }
+  function findShortestPath() {
+    const start = resolveConcept(pathStart), end = resolveConcept(pathEnd);
+    if (!start || !end) { setPathIds([]); setPathNotice("请从词表中选择两个准确的概念名称。"); return; }
+    if (start === end) { setPathIds([start]); setPathNotice("起点和终点是同一个概念。"); setSelectedId(start); return; }
+    const queue = [start];
+    const previous = new Map<string, string | null>([[start, null]]);
+    while (queue.length && !previous.has(end)) {
+      const current = queue.shift()!;
+      for (const neighbor of adjacent.get(current) ?? []) if (!previous.has(neighbor)) { previous.set(neighbor, current); queue.push(neighbor); }
+    }
+    if (!previous.has(end)) { setPathIds([]); setPathNotice("按当前关系筛选未找到连通路径，可放宽关系、置信度或跨章条件。"); return; }
+    const result: string[] = [];
+    let cursor: string | null = end;
+    while (cursor) { result.unshift(cursor); cursor = previous.get(cursor) ?? null; }
+    setPathIds(result); setPathNotice(`找到 ${result.length - 1} 步最短路径，已在图中高亮。`); setSelectedId(end);
+  }
+  function exportVisibleGraph() {
+    const visibleEdges = filteredEdges.filter((edge) => visible.has(edge.source) && visible.has(edge.target));
+    const payload = {
+      schema_version: "1.0",
+      exported_at: new Date().toISOString(),
+      filters: { type: activeType, chapter, confidence, relation, cross_chapter_only: crossChapter, query },
+      nodes: concepts.filter((node) => visible.has(node.id)),
+      edges: visibleEdges,
+    };
+    const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
+    const link = document.createElement("a"); link.href = url; link.download = "wenxianxue-visible-subgraph.json"; link.click(); URL.revokeObjectURL(url);
   }
 
   return <div className="graph-shell graph-shell--full">
@@ -125,6 +166,17 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
       <div className="graph-extra-filters"><label>关系<select value={relation} onChange={(event) => setRelation(event.target.value)}><option value="all">全部关系</option>{Object.entries(relationLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label>置信度<select value={confidence} onChange={(event) => setConfidence(event.target.value as (typeof confidenceOptions)[number])}><option value="all">全部置信度</option>{(confidenceOptions.slice(1) as Array<Exclude<(typeof confidenceOptions)[number], "all">>).map((id) => <option key={id} value={id}>{confidenceLabels[id]}</option>)}</select></label><label className="graph-check"><input type="checkbox" checked={crossChapter} onChange={(event) => setCrossChapter(event.target.checked)} />只看跨章关系</label></div>
       <div className="graph-controls"><span>拖动节点 · 滚轮缩放</span><button onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b>{Math.round(zoom * 100)}%</b><button onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
     </div>
+    <section className="graph-pathfinder" aria-labelledby="pathfinder-title">
+      <div><small>PATH EXPLORER</small><h2 id="pathfinder-title">两个概念之间，隔着哪些知识？</h2><p>按当前关系与置信度筛选寻找最短路径；结果会同步高亮在图中。</p></div>
+      <div className="graph-path-inputs">
+        <label><span>起点</span><input list="concept-options" value={pathStart} onChange={(event) => setPathStart(event.target.value)} placeholder="输入或选择概念" /></label>
+        <b aria-hidden="true">→</b>
+        <label><span>终点</span><input list="concept-options" value={pathEnd} onChange={(event) => setPathEnd(event.target.value)} placeholder="输入或选择概念" /></label>
+        <button onClick={findShortestPath}>寻找最短路径</button><button className="secondary" onClick={exportVisibleGraph}>导出当前子图</button>
+        <datalist id="concept-options">{concepts.map((node) => <option key={node.id} value={node.label}>{typeLabels[node.type]} · {node.id}</option>)}</datalist>
+      </div>
+      {(pathNotice || pathIds.length > 0) && <div className="graph-path-result" role="status"><strong>{pathNotice}</strong>{pathIds.length > 0 && <div>{pathIds.map((id, index) => <span key={id}>{index > 0 && <i>→</i>}<button onClick={() => setSelectedId(id)}>{nodeMap.get(id)?.label ?? id}</button></span>)}</div>}</div>}
+    </section>
     <div className="graph-stage graph-stage--full">
       <svg ref={svgRef} viewBox={`${viewX} ${viewY} ${viewWidth} ${viewHeight}`} role="img" aria-label="全书可拖动知识图谱" onPointerMove={move} onPointerUp={() => setDragging(null)} onPointerLeave={() => setDragging(null)} onWheel={(event) => { event.preventDefault(); setZoom((value) => Math.max(1, Math.min(2.4, value + (event.deltaY < 0 ? .1 : -.1)))); }}>
         {Array.from({ length: 14 }, (_, index) => {
@@ -136,16 +188,17 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
           if (!source || !target) return null;
           const edgeFiltered = filteredEdges.some((item) => item.id === edge.id);
           const show = edgeFiltered && visible.has(edge.source) && visible.has(edge.target);
-          const emphasis = selected ? edge.source === selected.id || edge.target === selected.id : false;
-          return <g key={edge.id} opacity={show ? (emphasis ? .95 : .25) : .025} className={emphasis ? "edge-active" : ""}>
+          const pathEdge = pathEdgeSet.has(edge.id);
+          const emphasis = pathEdge || (selected ? edge.source === selected.id || edge.target === selected.id : false);
+          return <g key={edge.id} opacity={show ? (emphasis ? .95 : .25) : .025} className={`${emphasis ? "edge-active" : ""} ${pathEdge ? "edge-path" : ""}`}>
             <line x1={source.x} y1={source.y} x2={target.x} y2={target.y} />
             {(emphasis || zoom > 1.65) && <text x={(source.x + target.x) / 2} y={(source.y + target.y) / 2 - 4}>{relationLabels[edge.type] ?? edge.type}</text>}
           </g>;
         })}
         {nodes.map((node) => {
-          const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id);
+          const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id); const pathNode = pathNodeSet.has(node.id);
           const radius = Math.min(10, 4.2 + node.degree * .8);
-          return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""}`} opacity={show ? (selected && !related && !selectedNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" tabIndex={show ? 0 : -1} onKeyDown={(event) => event.key === "Enter" && setSelectedId(node.id)}>
+          return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""} ${pathNode ? "path-node" : ""}`} opacity={show ? (selected && !related && !selectedNode && !pathNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" tabIndex={show ? 0 : -1} onKeyDown={(event) => event.key === "Enter" && setSelectedId(node.id)}>
             <circle r={radius} fill={typeColors[node.type]} />
             {(selectedNode || related || zoom > 1.25 || (query && show)) && <text className="node-label" y={-radius - 4}>{node.label}</text>}
           </g>;

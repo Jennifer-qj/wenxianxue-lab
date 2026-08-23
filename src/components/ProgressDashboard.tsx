@@ -12,6 +12,7 @@ const names: Record<string, string> = {
 };
 const gameIds = new Set(["version-detective", "four-fold", "collation-clinic", "carrier-museum", "binding-puzzle", "leishu-congshu"]);
 const totalActivities = 51; // 14 章综合练习 + 14 章研读 + 6 项旗舰实验 + 15 个案例 + 1 个研究问题工作台 + 1 个综合案卷
+const chapterTitles = ["文献与文献学", "文献的载体", "文献的形成与流布", "文献的收藏与散佚", "文献的版本", "文献的校勘", "文献目录", "辑佚与辨伪", "类书与丛书", "地方志与家谱", "总集与别集", "出土文献（上）", "出土文献（下）", "敦煌文献"];
 
 function safeRead<T>(key: string, fallback: T): T {
   try { return JSON.parse(localStorage.getItem(key) || "") as T; } catch { return fallback; }
@@ -53,6 +54,24 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   const caseCount = entries.filter(([id]) => id.startsWith("case-")).length;
   const dossierCount = entries.filter(([id]) => id === "rare-book-dossier").length;
   const wrongItems = Object.values(wrongBook).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
+  const dueItems = wrongItems.filter((item) => {
+    const interval = [1, 3, 7][Math.min(Math.max(item.attempts - 1, 0), 2)];
+    return Date.now() - Date.parse(item.updatedAt) >= interval * 86400000;
+  });
+  const activeDays = new Set(entries.map(([, item]) => new Date(item.updatedAt).toLocaleDateString("en-CA")));
+  let streak = 0; const cursor = new Date();
+  while (activeDays.has(cursor.toLocaleDateString("en-CA"))) { streak += 1; cursor.setDate(cursor.getDate() - 1); }
+  const chapterMastery = Array.from({ length: 14 }, (_, index) => {
+    const chapter = index + 1; const token = `ch${String(chapter).padStart(2, "0")}`;
+    const practice = entries.find(([id]) => id === `${token}-structured-practice`)?.[1];
+    const deep = entries.some(([id]) => id.startsWith(`deep-${token}`));
+    const chapterCase = entries.some(([id, item]) => id.startsWith("case-") && item.title?.includes(`第${chapter}章`));
+    const wrong = wrongItems.filter((item) => item.chapter === chapter).length;
+    const practiceScore = practice ? (practice.total ? practice.score / practice.total : 0) * 55 : 0;
+    const mastery = Math.max(0, Math.min(100, Math.round(practiceScore + (deep ? 25 : 0) + (chapterCase ? 20 : 0) - Math.min(15, wrong * 3))));
+    return { chapter, token, mastery, wrong, practice: Boolean(practice), deep, chapterCase };
+  });
+  const recommended = chapterMastery.find((item) => item.mastery < 60) ?? chapterMastery.find((item) => item.mastery < 85) ?? chapterMastery[0];
 
   function exportArchive() {
     const deepdives: Record<string, unknown> = {};
@@ -91,6 +110,12 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
       <p className="mini-label">保存在当前浏览器</p><strong>{completed}</strong><span>项学习活动已完成，共 {totalActivities} 项</span>
       <div className="ring" style={{ "--value": `${percent}%` } as React.CSSProperties}><b>{percent}%</b></div>
       <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/6</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
+      <div className="study-vitals"><span><b>{streak}</b>连续学习天数</span><span><b>{dueItems.length}</b>今日到期错题</span></div>
+    </section>
+    <section className="mastery-panel">
+      <header><div><p className="mini-label">Chapter mastery</p><h2>十四章掌握度</h2></div><aside><span>下一步建议</span><strong>第 {recommended.chapter} 章 · {chapterTitles[recommended.chapter - 1]}</strong><p>{recommended.practice ? recommended.wrong ? `先重做本章 ${recommended.wrong} 道错题，再完成案例。` : "继续完成深度研读或章节案例。" : "先完成本章综合练习，建立第一条掌握度记录。"}</p><a href={`${baseUrl}chapters/${recommended.token}/`}>开始建议任务 →</a></aside></header>
+      <div className="mastery-grid">{chapterMastery.map((item) => <a href={`${baseUrl}chapters/${item.token}/`} key={item.token} style={{ "--mastery": `${item.mastery}%` } as React.CSSProperties}><small>第 {item.chapter} 章</small><strong>{item.mastery}%</strong><span>{chapterTitles[item.chapter - 1]}</span><i><b /></i><em>{item.practice ? "练习✓" : "练习—"} · {item.deep ? "研读✓" : "研读—"} · {item.chapterCase ? "案例✓" : "案例—"}</em></a>)}</div>
+      <p className="mastery-note">掌握度为本地学习指标：综合练习占 55%，深度研读占 25%，章节案例占 20%；未订正错题会适度扣分。它不是学术能力认证。</p>
     </section>
     <section className="progress-list">
       <div className="progress-list-title"><h2>最近记录</h2>{entries[0] && <a href={hrefFor(entries[0][0], baseUrl)}>继续上次学习 →</a>}</div>
@@ -98,7 +123,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     </section>
     <section className="wrongbook-panel">
       <header><div><p className="mini-label">Wrong book</p><h2>错题本</h2></div><strong>{wrongItems.length}</strong></header>
-      {wrongItems.length ? wrongItems.slice(0, 8).map((item) => <article key={item.id}><div><small>第 {item.chapter} 章 · {item.type} · 错误 {item.attempts} 次</small><h3>{item.prompt}</h3><p>{item.explanation}</p></div><a href={`${baseUrl}chapters/ch${String(item.chapter).padStart(2, "0")}/#check`}>返回重做 →</a></article>) : <p className="wrong-empty">暂时没有错题。答错的结构化题目会自动进入这里；重新答对后自动移出。</p>}
+      {wrongItems.length ? wrongItems.slice(0, 8).map((item) => <article key={item.id}><div><small>第 {item.chapter} 章 · {item.type} · 错误 {item.attempts} 次 {dueItems.some((due) => due.id === item.id) ? "· 今日应复习" : "· 等待间隔复习"}</small><h3>{item.prompt}</h3><p>{item.explanation}</p></div><a href={`${baseUrl}chapters/ch${String(item.chapter).padStart(2, "0")}/#check`}>返回重做 →</a></article>) : <p className="wrong-empty">暂时没有错题。答错的结构化题目会自动进入这里；重新答对后自动移出。</p>}
     </section>
     <section className="archive-tools">
       <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>导出文件只包含进度、错题和研读勾选，不包含账号或设备信息。</p></div>
