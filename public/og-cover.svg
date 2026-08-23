@@ -1,0 +1,7 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <rect width="1200" height="630" fill="#292a27"/>
+  <circle cx="1020" cy="95" r="230" fill="#8f352b" opacity=".22"/>
+  <path d="M85 480C210 330 315 405 430 250s220-92 330 40 205 124 355-50" fill="none" stroke="#d99781" stroke-width="4" opacity=".65"/>
+  <g fill="#f6efe3"><text x="85" y="220" font-family="serif" font-size="74" font-weight="700">文献学实验室</text><text x="91" y="285" font-family="sans-serif" font-size="24" letter-spacing="7" fill="#d99781">WENXIANXUE LAB · DIGITAL HUMANITIES</text></g>
+  <g fill="#e9dfcf" font-family="sans-serif" font-size="22"><text x="90" y="540">边读 · 边辨 · 边连接</text><text x="915" y="560">十四章 · 互动学习</text></g>
+</svg>

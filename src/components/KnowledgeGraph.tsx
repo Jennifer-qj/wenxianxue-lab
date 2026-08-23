@@ -12,6 +12,7 @@ const typeColors: Record<ConceptType, string> = { concept: "#a84537", material: 
 const relationLabels: Record<string, string> = { isA: "属于", isPartOf: "组成", usesMethod: "使用方法", produces: "产生", evidenceFor: "支持", affectedBy: "受影响", relatedTo: "相关" };
 const confidenceLabels = { confirmed: "原书确认", pedagogical: "教学归纳", doubtful: "待考关系" } as const;
 const statusLabels: Record<string, string> = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" };
+const confidenceOptions = ["all", "confirmed", "pedagogical", "doubtful"] as const;
 
 function chapterNumber(node: Concept) {
   const match = node.chapter_ids[0]?.match(/\d+/);
@@ -49,22 +50,35 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const [activeType, setActiveType] = useState<"all" | ConceptType>("all");
   const [chapter, setChapter] = useState("all");
   const [query, setQuery] = useState("");
+  const [confidence, setConfidence] = useState<(typeof confidenceOptions)[number]>("all");
+  const [relation, setRelation] = useState("all");
+  const [crossChapter, setCrossChapter] = useState(false);
   const [selectedId, setSelectedId] = useState(concepts[0]?.id ?? "");
   const [dragging, setDragging] = useState<string | null>(null);
   const [zoom, setZoom] = useState(1);
   const svgRef = useRef<SVGSVGElement>(null);
 
   useEffect(() => setNodes(initialNodes), [initialNodes]);
+  useEffect(() => {
+    const initialQuery = new URLSearchParams(window.location.search).get("q");
+    if (initialQuery) setQuery(initialQuery);
+  }, []);
 
   const nodeMap = useMemo(() => new Map(nodes.map((node) => [node.id, node])), [nodes]);
+  const filteredEdges = useMemo(() => edges.filter((edge) => {
+    const source = concepts.find((node) => node.id === edge.source);
+    const target = concepts.find((node) => node.id === edge.target);
+    const cross = Boolean(source && target && source.chapter_ids[0] !== target.chapter_ids[0]);
+    return (confidence === "all" || edge.confidence === confidence) && (relation === "all" || edge.type === relation) && (!crossChapter || cross);
+  }), [confidence, concepts, crossChapter, edges, relation]);
   const adjacent = useMemo(() => {
     const map = new Map<string, Set<string>>();
-    edges.forEach((edge) => {
+    filteredEdges.forEach((edge) => {
       map.set(edge.source, new Set([...(map.get(edge.source) ?? []), edge.target]));
       map.set(edge.target, new Set([...(map.get(edge.target) ?? []), edge.source]));
     });
     return map;
-  }, [edges]);
+  }, [filteredEdges]);
   const visible = useMemo(() => {
     const normalized = query.trim().toLocaleLowerCase("zh-CN");
     const matches = new Set(nodes.filter((node) => !normalized || `${node.label} ${node.definition}`.toLocaleLowerCase("zh-CN").includes(normalized)).map((node) => node.id));
@@ -80,7 +94,7 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   }, [selectedId, visible]);
 
   const selected = nodeMap.get(selectedId);
-  const selectedEdges = selected ? edges.filter((edge) => edge.source === selected.id || edge.target === selected.id) : [];
+  const selectedEdges = selected ? filteredEdges.filter((edge) => edge.source === selected.id || edge.target === selected.id) : [];
   const connected = new Set(selectedEdges.flatMap((edge) => [edge.source, edge.target]));
   const viewWidth = WIDTH / zoom;
   const viewHeight = HEIGHT / zoom;
@@ -97,17 +111,18 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
     setNodes((items) => items.map((node) => node.id === dragging ? { ...node, x: Math.max(20, Math.min(WIDTH - 20, next.x)), y: Math.max(25, Math.min(HEIGHT - 25, next.y)) } : node));
   }
   function reset() {
-    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setZoom(1); setSelectedId(concepts[0]?.id ?? "");
+    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? "");
   }
 
   return <div className="graph-shell graph-shell--full">
     <div className="graph-searchbar">
       <label><span>搜索概念</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：版本、辑佚、敦煌……" /></label>
       <label><span>章节</span><select value={chapter} onChange={(event) => setChapter(event.target.value)}><option value="all">全部十四章</option>{Array.from({ length: 14 }, (_, index) => <option key={index + 1} value={`ch${String(index + 1).padStart(2, "0")}`}>第 {index + 1} 章</option>)}</select></label>
-      <div className="graph-count"><strong>{visible.size}</strong><span>个可见节点</span><b>{edges.filter((edge) => visible.has(edge.source) && visible.has(edge.target)).length} 条关系</b></div>
+      <div className="graph-count"><strong>{visible.size}</strong><span>个可见节点</span><b>{filteredEdges.filter((edge) => visible.has(edge.source) && visible.has(edge.target)).length} 条关系</b></div>
     </div>
     <div className="graph-toolbar">
       <div aria-label="按类型筛选">{(["all", "concept", "material", "work", "person", "event", "method"] as const).map((type) => <button key={type} className={activeType === type ? "active" : ""} onClick={() => setActiveType(type)}>{type === "all" ? "全部类型" : typeLabels[type]}</button>)}</div>
+      <div className="graph-extra-filters"><label>关系<select value={relation} onChange={(event) => setRelation(event.target.value)}><option value="all">全部关系</option>{Object.entries(relationLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label>置信度<select value={confidence} onChange={(event) => setConfidence(event.target.value as (typeof confidenceOptions)[number])}><option value="all">全部置信度</option>{(confidenceOptions.slice(1) as Array<Exclude<(typeof confidenceOptions)[number], "all">>).map((id) => <option key={id} value={id}>{confidenceLabels[id]}</option>)}</select></label><label className="graph-check"><input type="checkbox" checked={crossChapter} onChange={(event) => setCrossChapter(event.target.checked)} />只看跨章关系</label></div>
       <div className="graph-controls"><span>拖动节点 · 滚轮缩放</span><button onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b>{Math.round(zoom * 100)}%</b><button onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
     </div>
     <div className="graph-stage graph-stage--full">
@@ -119,7 +134,8 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
         {edges.map((edge) => {
           const source = nodeMap.get(edge.source), target = nodeMap.get(edge.target);
           if (!source || !target) return null;
-          const show = visible.has(edge.source) && visible.has(edge.target);
+          const edgeFiltered = filteredEdges.some((item) => item.id === edge.id);
+          const show = edgeFiltered && visible.has(edge.source) && visible.has(edge.target);
           const emphasis = selected ? edge.source === selected.id || edge.target === selected.id : false;
           return <g key={edge.id} opacity={show ? (emphasis ? .95 : .25) : .025} className={emphasis ? "edge-active" : ""}>
             <line x1={source.x} y1={source.y} x2={target.x} y2={target.y} />

@@ -80,15 +80,15 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
         <section id="learning-units" class="learning-units">
           <div class="unit-intro">
             <div>
-              <p class="eyebrow">第一章结构化样板</p>
+              <p class="eyebrow">第 {chapterIndex + 1} 章结构化内容</p>
               <h2>{chapterUnits.length} 个正式学习单元</h2>
             </div>
-            <p>依据中华书局 2008 年修订本目录锚点拆分，已经关联概念、题目与实验。页码目前精确到原书各节范围，内容状态仍为“待复核”。</p>
+            <p>依据中华书局 2008 年修订本目录锚点拆分，已经关联概念、题目与实验。只有完成纸本逐条核验的单元才公开页码，其余内容明确标记为待复核。</p>
           </div>
           <div class="unit-list">
             {chapterUnits.map((unit, index) => (
-              <article>
-                <div class="unit-meta"><span>{String(index + 1).padStart(2, "0")}</span><small>{statusLabels[unit.status]}</small><b>第 {unit.page_start}{unit.page_end && unit.page_end !== unit.page_start ? `—${unit.page_end}` : ""} 页</b></div>
+              <article id={unit.id}>
+                <div class="unit-meta"><span>{String(index + 1).padStart(2, "0")}</span><small>{statusLabels[unit.status]}</small><b>{unit.status === "verified" ? `第 ${unit.page_start}${unit.page_end && unit.page_end !== unit.page_start ? `—${unit.page_end}` : ""} 页` : "页码待纸本核验"}</b></div>
                 <div>
                   <h3>{unit.subsection ?? unit.section}</h3>
                   <p class="unit-question">{unit.key_question}</p>
@@ -162,7 +162,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
           <p class="eyebrow">来源与版权</p>
           <h2>{EDITION.publisher} {EDITION.year} 年修订本</h2>
         </div>
-        <p>本页为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”；未经纸本逐条核验的具体页码不会公开，避免把技术处理区间冒充为学术出处。</p>
+        <p>本页为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”；仅“已核验”学习单元公开纸本页码，其他内容不把自动识别或技术处理区间冒充为学术出处。</p>
       </section>
     </article>
   </div>

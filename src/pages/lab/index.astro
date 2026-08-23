@@ -3,7 +3,12 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 import VersionDetective from "../../components/VersionDetective";
 import FourFoldChallenge from "../../components/FourFoldChallenge";
 import SkillArcade from "../../components/SkillArcade";
+import CaseGallery from "../../components/CaseGallery";
+import { getCollection } from "astro:content";
 import { games } from "../../data/site";
+
+const labEntries = await getCollection("labs");
+const labCases = labEntries.flatMap((entry) => entry.data.items.map((lab) => ({ ...lab, chapter: Number(entry.id.slice(2)) })));
 ---
 
 <BaseLayout title="互动实验室" active="lab">
@@ -52,11 +57,21 @@ import { games } from "../../data/site";
     </div>
   </section>
 
+  <section id="case-gallery" class="case-gallery-section">
+    <div class="container">
+      <div class="section-heading case-gallery-heading">
+        <div><p class="eyebrow">Chapter case files</p><h2 class="section-title">每一章都有一个可操作现场</h2></div>
+        <p>把结构化内容转成十五个小型案例：有的要求追踪证据，有的要求重排流程、标注文本或比较传播方案。完成后会写入本地学习档案。</p>
+      </div>
+      <CaseGallery labs={labCases} client:load />
+    </div>
+  </section>
+
   <section class="all-games container">
     <div class="section-heading">
       <div>
         <p class="eyebrow">The full collection</p>
-        <h2 class="section-title">六项已完成实验</h2>
+        <h2 class="section-title">六项旗舰实验</h2>
       </div>
       <p>这里只展示已经可以完整操作并获得反馈的实验，不以路线图或占位卡代替交付。</p>
     </div>
@@ -80,6 +95,7 @@ import { games } from "../../data/site";
   .game-intro h2{margin:1rem 0;font-family:var(--serif);font-size:2.4rem}.game-intro>p{color:#bbb6ad}.chapter-tag{color:#d89882;font-size:.72rem;letter-spacing:.12em}.game-intro dl{margin-top:2rem;border-top:1px solid rgba(255,255,255,.13)}.game-intro dl div{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.13)}dt{color:#99958d}dd{margin:0}
   .all-games{padding-block:7rem}.game-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
   .arcade-section{padding:7rem 0;background:#292a27}.arcade-heading{color:#f9f2e6}.arcade-heading p{color:#aaa59d}
+  .case-gallery-section{padding:7rem 0;background:#e9dfcf}.case-gallery-heading{margin-bottom:2rem}.case-gallery-heading>p{max-width:34rem;color:var(--muted)}
   :global(.skill-arcade){overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#f6f0e4}
   :global(.arcade-tabs){display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#20211f}:global(.arcade-tabs button){padding:1rem;text-align:left;border:0;border-right:1px solid rgba(255,255,255,.1);color:#aaa59d;background:transparent;cursor:pointer}:global(.arcade-tabs button.active){color:#fff7e9;background:#8f352b}:global(.arcade-tabs small),:global(.arcade-tabs strong){display:block}:global(.arcade-tabs small){font-size:.62rem}:global(.arcade-tabs strong){font-family:var(--serif)}
   :global(.arcade-stage){min-height:550px;padding:2rem;color:var(--ink)}:global(.arcade-stage>header){display:flex;justify-content:space-between;gap:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}:global(.arcade-stage>header small){color:var(--cinnabar)}:global(.arcade-stage>header h2){margin:.2rem 0;font-family:var(--serif);font-size:2rem}:global(.arcade-stage>header p){max-width:30rem;color:var(--muted)}

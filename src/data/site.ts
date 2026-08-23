@@ -19,7 +19,6 @@ export type LearningPath = {
   chapterIds: string[];
   outcomes: string[];
   color: string;
-  progress: number;
 };
 
 export type LabGame = {
@@ -133,20 +132,20 @@ export const chapters: Chapter[] = [
 ];
 
 export const learningPaths: LearningPath[] = [
-  { id: "intro", number: "01", title: "走进文献学", subtitle: "先建立对象、方法与问题意识，再进入具体门类。", chapters: "第一章", chapterIds: ["ch01"], outcomes: ["说清“文献”的工作定义", "辨认文献学的研究范围", "建立阅读问题清单"], color: "#9c4738", progress: 65 },
-  { id: "material", number: "02", title: "文献的物质生命", subtitle: "材料、制作和装潢不是外壳，而是判断年代与流传的证据。", chapters: "第二章", chapterIds: ["ch02"], outcomes: ["识别九类主要载体", "梳理五种纸本文献装潢", "理解物质特征的证据价值"], color: "#a57435", progress: 55 },
-  { id: "circulation", number: "03", title: "形成、翻译与流布", subtitle: "追踪一部文献如何产生、变化并抵达读者。", chapters: "第三章", chapterIds: ["ch03"], outcomes: ["区分形成方式", "比较五种流布媒介", "分析传播中的文本变化"], color: "#52705f", progress: 45 },
-  { id: "collection", number: "04", title: "收藏、散佚与再发现", subtitle: "在保存与毁灭之间追踪文献命运。", chapters: "第四章", chapterIds: ["ch04"], outcomes: ["比较公藏与私藏", "分析散佚原因", "绘制藏书史时间线"], color: "#5f6f88", progress: 40 },
-  { id: "criticism", number: "05", title: "判断与整理文本", subtitle: "把版本、校勘、辑佚与辨伪组成证据推理链。", chapters: "第五、六、八章", chapterIds: ["ch05", "ch06", "ch08"], outcomes: ["完成版本证据判断", "选择合适校勘方法", "区分辑佚与辨伪任务"], color: "#843d4c", progress: 58 },
-  { id: "organization", number: "06", title: "组织与检索知识", subtitle: "用目录、类书和丛书理解古代知识秩序。", chapters: "第七、九章", chapterIds: ["ch07", "ch09"], outcomes: ["读懂目录著录字段", "理解古籍分类", "比较类书与丛书"], color: "#76613f", progress: 52 },
-  { id: "special", number: "07", title: "专门文献世界", subtitle: "进入方志、家谱、集部、出土与敦煌文献的专题现场。", chapters: "第十至十四章", chapterIds: ["ch10", "ch11", "ch12", "ch13", "ch14"], outcomes: ["区分主要专门文献类型", "评估不同史料价值", "建立出土文献档案链"], color: "#536b70", progress: 38 },
+  { id: "intro", number: "01", title: "走进文献学", subtitle: "先建立对象、方法与问题意识，再进入具体门类。", chapters: "第一章", chapterIds: ["ch01"], outcomes: ["说清“文献”的工作定义", "辨认文献学的研究范围", "建立阅读问题清单"], color: "#9c4738" },
+  { id: "material", number: "02", title: "文献的物质生命", subtitle: "材料、制作和装潢不是外壳，而是判断年代与流传的证据。", chapters: "第二章", chapterIds: ["ch02"], outcomes: ["识别九类主要载体", "梳理五种纸本文献装潢", "理解物质特征的证据价值"], color: "#a57435" },
+  { id: "circulation", number: "03", title: "形成、翻译与流布", subtitle: "追踪一部文献如何产生、变化并抵达读者。", chapters: "第三章", chapterIds: ["ch03"], outcomes: ["区分形成方式", "比较五种流布媒介", "分析传播中的文本变化"], color: "#52705f" },
+  { id: "collection", number: "04", title: "收藏、散佚与再发现", subtitle: "在保存与毁灭之间追踪文献命运。", chapters: "第四章", chapterIds: ["ch04"], outcomes: ["比较公藏与私藏", "分析散佚原因", "绘制藏书史时间线"], color: "#5f6f88" },
+  { id: "criticism", number: "05", title: "判断与整理文本", subtitle: "把版本、校勘、辑佚与辨伪组成证据推理链。", chapters: "第五、六、八章", chapterIds: ["ch05", "ch06", "ch08"], outcomes: ["完成版本证据判断", "选择合适校勘方法", "区分辑佚与辨伪任务"], color: "#843d4c" },
+  { id: "organization", number: "06", title: "组织与检索知识", subtitle: "用目录、类书和丛书理解古代知识秩序。", chapters: "第七、九章", chapterIds: ["ch07", "ch09"], outcomes: ["读懂目录著录字段", "理解古籍分类", "比较类书与丛书"], color: "#76613f" },
+  { id: "special", number: "07", title: "专门文献世界", subtitle: "进入方志、家谱、集部、出土与敦煌文献的专题现场。", chapters: "第十至十四章", chapterIds: ["ch10", "ch11", "ch12", "ch13", "ch14"], outcomes: ["区分主要专门文献类型", "评估不同史料价值", "建立出土文献档案链"], color: "#536b70" },
 ];
 
 export const games: LabGame[] = [
   { id: "version-detective", title: "版本鉴定侦探", description: "从牌记、避讳、字体、版式和纸张等线索建立证据链。", chapters: "第五章", status: "可体验", icon: "鉴" },
   { id: "four-fold", title: "四部分类挑战", description: "根据典籍内容与传统部类判断经、史、子、集，并阅读边界解释。", chapters: "第七章", status: "可体验", icon: "目" },
-  { id: "collation-clinic", title: "校勘诊所", description: "诊断异文情境，并选择对校、本校或他校等方法。", chapters: "第六章", status: "可体验", icon: "校" },
-  { id: "carrier-museum", title: "载体博物馆", description: "根据物质与形制线索辨认载体和装潢。", chapters: "第二章", status: "可体验", icon: "材" },
+  { id: "collation-clinic", title: "校勘诊所", description: "拖动重排从记录异文、核查版本到形成校记的完整流程。", chapters: "第六章", status: "可体验", icon: "校" },
+  { id: "carrier-museum", title: "载体博物馆", description: "把物质与形制线索送回五类载体标本柜。", chapters: "第二章", status: "可体验", icon: "材" },
   { id: "binding-puzzle", title: "装帧演变拼图", description: "亲手重建卷子装至线装的学习序列。", chapters: "第二章", status: "可体验", icon: "装" },
   { id: "leishu-congshu", title: "类书还是丛书", description: "按组织单位把典籍放入正确的工具书类别。", chapters: "第九章", status: "可体验", icon: "类" },
 ];

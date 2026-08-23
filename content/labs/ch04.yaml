@@ -1,0 +1,13 @@
+items:
+  - id: lab-16-case-001
+    title: 藏书聚散追踪台·一部书的流转档案
+    engine: reasoning
+    concept_ids: [c_official_collection, c_private_collection, c_document_loss, c_collection_provenance, me_provenance_research]
+    config:
+      stages:
+        - 确认原藏书系统与目录著录
+        - 比较藏印、题跋和书目记录
+        - 区分主动转藏、征集与战乱散佚
+        - 追踪公藏与私藏之间的流转
+        - 标注断裂环节与不能证明的部分
+      scoring: {catalog_evidence: 3, provenance: 3, chronology: 2, boundary_awareness: 2}

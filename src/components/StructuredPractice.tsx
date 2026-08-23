@@ -27,6 +27,21 @@ function save(score: number, total: number, chapter: number) {
   window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
 }
 
+function updateWrongBook(quiz: Quiz, correct: boolean) {
+  const key = "wxlab-wrongbook";
+  try {
+    const wrongBook = JSON.parse(localStorage.getItem(key) || "{}");
+    if (correct) delete wrongBook[quiz.id];
+    else wrongBook[quiz.id] = {
+      id: quiz.id, chapter: quiz.chapter, type: quiz.type, prompt: quiz.prompt,
+      explanation: quiz.explanation, attempts: (wrongBook[quiz.id]?.attempts ?? 0) + 1,
+      updatedAt: new Date().toISOString(),
+    };
+    localStorage.setItem(key, JSON.stringify(wrongBook));
+    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  } catch { /* 存储不可用时不阻塞答题 */ }
+}
+
 export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
   const [index, setIndex] = useState(0);
   const [responses, setResponses] = useState<Record<string, unknown>>({});
@@ -56,6 +71,7 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
     if (quiz.type === "evidence") correct = equalSets((forcedResponse as string[] | undefined) ?? [], quiz.answer_ids!);
     if (quiz.type === "short_answer") correct = forcedResponse === "self-pass";
     const nextResults = { ...results, [quiz.id]: correct };
+    updateWrongBook(quiz, correct);
     setResults(nextResults);
     setChecked((state) => ({ ...state, [quiz.id]: true }));
     if (completed + (isChecked ? 0 : 1) === quizzes.length) save(Object.values(nextResults).filter(Boolean).length, quizzes.length, quiz.chapter);
