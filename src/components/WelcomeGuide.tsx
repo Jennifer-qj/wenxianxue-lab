@@ -7,7 +7,8 @@ export default function WelcomeGuide({ baseUrl }: { baseUrl: string }) {
   const closeRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (!window.localStorage.getItem(STORAGE_KEY)) setOpen(true);
+    const replay = new URLSearchParams(window.location.search).get("welcome") === "1";
+    if (replay || !window.localStorage.getItem(STORAGE_KEY)) setOpen(true);
   }, []);
   useEffect(() => {
     if (!open) return;

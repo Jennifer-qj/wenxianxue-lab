@@ -15,7 +15,13 @@
 - 全站搜索、自动错题本、本地学习进度与档案导入导出
 - 可拖动知识图谱、关系与置信度筛选、原创方法图示和研读札记导出
 - 古籍鉴定综合案卷：五室证据研判、综合意见、学习报告与 Markdown 导出
-- 移动端适配、项目方法页与覆盖／核验矩阵
+- 移动端适配、首次访问引导、永久使用指南、项目方法页与覆盖／核验矩阵
+
+## 在线入口
+
+- 网站首页：https://jennifer-qj.github.io/wenxianxue-lab/
+- 使用指南：https://jennifer-qj.github.io/wenxianxue-lab/guide/
+- 更新日志与开放数据：https://jennifer-qj.github.io/wenxianxue-lab/updates/
 
 ## 后续维护
 

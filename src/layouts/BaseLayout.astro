@@ -5,7 +5,7 @@ import WelcomeGuide from "../components/WelcomeGuide";
 interface Props {
   title?: string;
   description?: string;
-  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "about";
+  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "guide" | "about";
 }
 
 const {
@@ -61,6 +61,7 @@ const ogImage = new URL(`${base}og-cover.svg`, Astro.site ?? Astro.url.origin);
         ))}
       </nav>
       <div class="header-tools">
+        <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}>指南</a>
         <a href={`${base}search/`} aria-current={active === "search" ? "page" : undefined}>搜索</a>
         <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}>项目</a>
         <a class="github-link" href="https://github.com/Jennifer-qj/wenxianxue-lab" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
@@ -79,6 +80,7 @@ const ogImage = new URL(`${base}og-cover.svg`, Astro.site ?? Astro.url.origin);
         <span>参考杜泽逊《文献学概要（修订本）》</span>
         <span>不提供原书全文</span>
         <a href={`${base}about/`}>方法、版权与引用说明 →</a>
+        <a href={`${base}guide/`}>网站使用指南 →</a>
         <a href={`${base}updates/`}>更新日志、路线图与开放数据 →</a>
       </div>
     </footer>
