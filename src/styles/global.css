@@ -421,6 +421,25 @@ main {
   text-decoration: none;
 }
 
+.header-tools {
+  justify-self: end;
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+
+.header-tools a {
+  color: var(--muted);
+  font-size: 0.78rem;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.header-tools a:hover,
+.header-tools a[aria-current="page"] {
+  color: var(--cinnabar);
+}
+
 .graph-searchbar {
   display: grid;
   grid-template-columns: minmax(260px, 1fr) 180px 210px;
@@ -454,6 +473,7 @@ main {
 .graph-stage--full g>text:not(.node-label){font-size:9px;paint-order:stroke;stroke:#2b2c29;stroke-width:4px;stroke-linejoin:round}
 .graph-stage--full .node-label{font-size:11px;paint-order:stroke;stroke:#2b2c29;stroke-width:4px;stroke-linejoin:round}
 .graph-stage--full .graph-node.selected circle{stroke:#fff7e9;stroke-width:3px}
+.graph-extra-filters{display:flex;flex-wrap:wrap;gap:.45rem;align-items:center}.graph-extra-filters label{display:flex;align-items:center;gap:.35rem;color:#aaa49b;font-size:.68rem}.graph-extra-filters select{padding:.35rem .45rem;color:#eee6da;border:1px solid rgba(255,255,255,.16);background:#2b2c29;font:inherit}.graph-extra-filters .graph-check{padding:.3rem .45rem;border:1px solid rgba(255,255,255,.1);cursor:pointer}.graph-check input{accent-color:#d99781}
 .graph-stage--full .chapter-cluster-label{fill:rgba(255,255,255,.18)!important;stroke:none!important;font-family:var(--serif)!important;font-size:15px!important;font-weight:700;text-anchor:middle}
 .graph-detail--full{position:static;top:auto;right:auto;width:auto;max-height:720px;padding:1.4rem;overflow:auto;border-width:0 0 0 1px;background:#222320;backdrop-filter:none}
 .graph-status{margin:.8rem 0;padding:.45rem .6rem;color:#aaa49b;border:1px solid rgba(255,255,255,.1);font-size:.7rem}
@@ -720,11 +740,136 @@ main {
   max-width: 28rem;
 }
 
+.progress-dashboard--full {
+  grid-template-columns: 0.7fr 1.3fr;
+}
+
+.progress-breakdown {
+  display: grid;
+  gap: 0.25rem;
+  margin-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.72rem;
+}
+
+.progress-breakdown b {
+  margin-right: 0.35rem;
+  color: var(--ink);
+}
+
+.progress-list-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.progress-list-title a,
+.progress-list article > a,
+.wrongbook-panel a {
+  color: var(--cinnabar);
+  font-size: 0.72rem;
+  text-decoration: none;
+}
+
+.progress-list article > span {
+  margin-left: auto;
+  padding-inline: 1rem;
+}
+
+.wrongbook-panel,
+.archive-tools {
+  grid-column: 1 / -1;
+  padding: 2rem;
+  border-top: 1px solid var(--line);
+}
+
+.wrongbook-panel > header {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 1rem;
+}
+
+.wrongbook-panel h2,
+.archive-tools h2 {
+  margin: 0;
+  font-family: var(--serif);
+}
+
+.wrongbook-panel > header > strong {
+  color: var(--cinnabar);
+  font-family: var(--serif);
+  font-size: 3rem;
+}
+
+.wrongbook-panel article {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem 0;
+  border-top: 1px solid var(--line);
+}
+
+.wrongbook-panel article small,
+.wrongbook-panel article p,
+.wrong-empty,
+.archive-tools p {
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.wrongbook-panel article h3 {
+  margin: 0.2rem 0;
+  font-family: var(--serif);
+  font-size: 1rem;
+}
+
+.wrongbook-panel article p {
+  margin: 0;
+}
+
+.archive-tools {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: center;
+  background: #e9dfcf;
+}
+
+.archive-tools > div:nth-child(2) {
+  display: flex;
+  gap: 0.45rem;
+  flex-wrap: wrap;
+}
+
+.archive-tools button {
+  padding: 0.55rem 0.8rem;
+  border: 1px solid var(--ink);
+  background: transparent;
+  cursor: pointer;
+}
+
+.archive-tools button.danger {
+  border-color: #9f584c;
+  color: #8f352b;
+}
+
+.archive-notice {
+  grid-column: 1 / -1;
+  margin: 0;
+}
+
 @media (max-width: 860px) {
   .site-header {
     position: static;
     grid-template-columns: 1fr auto;
     padding-block: 0.8rem;
+  }
+
+  .header-tools {
+    justify-self: end;
   }
 
   nav {
@@ -781,6 +926,15 @@ main {
   }
 
   .progress-dashboard {
+    grid-template-columns: 1fr;
+  }
+
+  .progress-dashboard--full .wrongbook-panel,
+  .progress-dashboard--full .archive-tools {
+    grid-column: auto;
+  }
+
+  .archive-tools {
     grid-template-columns: 1fr;
   }
 

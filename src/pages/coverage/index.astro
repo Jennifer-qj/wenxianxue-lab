@@ -17,8 +17,7 @@ const rows = chapters.map((chapter, index) => {
     units: chapterUnits,
     concepts: concepts.filter((concept) => concept.chapter_ids.includes(chapter.id)),
     quizzes: quizzes.filter((quiz) => quiz.chapter === chapterNumber),
-    pageStart: chapterUnits.length ? Math.min(...chapterUnits.map((unit) => unit.page_start)) : null,
-    pageEnd: chapterUnits.length ? Math.max(...chapterUnits.map((unit) => unit.page_end ?? unit.page_start)) : null,
+    verifiedUnits: chapterUnits.filter((unit) => unit.status === "verified"),
   };
 });
 ---
@@ -36,12 +35,12 @@ const rows = chapters.map((chapter, index) => {
   </section>
   <section class="coverage container">
     <div class="table-head"><span>原书章节</span><span>结构化内容</span><span>学习路径</span><span>纸本锚点</span></div>
-    {rows.map(({ chapter, units: chapterUnits, concepts: chapterConcepts, quizzes: chapterQuizzes, pageStart, pageEnd }) => (
+    {rows.map(({ chapter, units: chapterUnits, concepts: chapterConcepts, quizzes: chapterQuizzes, verifiedUnits }) => (
       <article id={chapter.id} class={chapterUnits.length ? "has-data" : ""}>
         <div><strong>{chapter.number}</strong><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${chapter.id}/`}>{chapter.title}</a></div>
         <div>{chapterUnits.length ? <><b>{chapterUnits.length} MKU · {chapterConcepts.length} 概念 · {chapterQuizzes.length} 题</b><p>概念映射覆盖率 100%</p></> : <><b>尚未结构化</b><p>{chapter.sections.length} 个原书分节已建立章节入口</p></>}</div>
         <span>{learningPaths.find((path) => chapter.pathIds.includes(path.id))?.title}</span>
-        <div><small>{pageStart ? `第 ${pageStart}—${pageEnd} 页` : "等待内容整理"}</small><em>{chapterUnits.length ? "待人工复核" : "未开始"}</em></div>
+        <div><small>{verifiedUnits.length ? `${verifiedUnits.length}/${chapterUnits.length} 单元已核页码` : "页码待纸本核验"}</small><em>{verifiedUnits.length === chapterUnits.length ? "已核验" : "待人工复核"}</em></div>
       </article>
     ))}
   </section>

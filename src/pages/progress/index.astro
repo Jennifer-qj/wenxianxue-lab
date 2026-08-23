@@ -11,7 +11,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     <p>不需要注册或登录。完成实验、测验与学习单元后，记录只保存在当前浏览器中，不上传个人信息。</p>
   </header>
   <section class="container dashboard-area">
-    <ProgressDashboard client:load />
+    <ProgressDashboard baseUrl={base} client:load />
     <div class="privacy-note">
       <strong>为什么不做账号？</strong>
       <p>这个项目是一座学习型网站，而不是用户平台。取消账号系统可以减少隐私负担、维护成本和安全风险，也更适合 GitHub Pages。</p>
