@@ -1,0 +1,16 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import SearchExplorer from "../../components/SearchExplorer";
+import { getCollection } from "astro:content";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const entries = await getCollection("concepts");
+const concepts = entries.flatMap((entry) => entry.data.items);
+const statusNames = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
+const typeNames = { concept: "概念", material: "载体", work: "典籍", person: "人物", event: "事件", method: "方法" } as const;
+const items = concepts.map((concept) => ({ id: concept.id, type: "concept" as const, title: concept.label, text: concept.definition, href: `${base}concepts/${concept.id}/`, chapter: Number(concept.chapter_ids[0]?.slice(2) ?? 1), status: statusNames[concept.status], meta: typeNames[concept.type] }));
+---
+<BaseLayout title="概念词表" description="文献学实验室全书概念、载体、典籍、人物、事件与方法词表" active="graph">
+  <header class="lexicon-hero container"><p class="eyebrow">Concept lexicon · {concepts.length} entries</p><h1 class="display-title">从一个词条进入<em>整张知识网</em></h1><p>每个词条都连接章节、判断边界、证据关系、题目与实验。词条状态同时显示人工复核进度。</p></header>
+  <main class="lexicon-main container"><SearchExplorer items={items} client:load /></main>
+</BaseLayout>
+<style>.lexicon-hero{padding:7rem 0 3rem}.lexicon-hero>p:last-child{max-width:48rem;color:var(--muted);font-family:var(--serif)}.lexicon-main{padding-bottom:7rem}@media(max-width:560px){.lexicon-hero{padding:4rem 0 2rem}.display-title{font-size:2.5rem}}</style>

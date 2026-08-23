@@ -8,9 +8,10 @@ const names: Record<string, string> = {
   "version-detective": "版本鉴定侦探", "four-fold": "四部分类挑战", "collation-clinic": "校勘诊所",
   "carrier-museum": "载体博物馆", "binding-puzzle": "装帧演变拼图", "leishu-congshu": "类书与丛书分拣",
   "ch01-research-workbench": "第一章·研究问题装配台",
+  "rare-book-dossier": "古籍鉴定综合案卷",
 };
 const gameIds = new Set(["version-detective", "four-fold", "collation-clinic", "carrier-museum", "binding-puzzle", "leishu-congshu"]);
-const totalActivities = 50; // 14 章综合练习 + 14 章研读 + 6 项旗舰实验 + 15 个案例 + 1 个研究问题工作台
+const totalActivities = 51; // 14 章综合练习 + 14 章研读 + 6 项旗舰实验 + 15 个案例 + 1 个研究问题工作台 + 1 个综合案卷
 
 function safeRead<T>(key: string, fallback: T): T {
   try { return JSON.parse(localStorage.getItem(key) || "") as T; } catch { return fallback; }
@@ -20,6 +21,7 @@ function hrefFor(id: string, baseUrl: string) {
   if (/^ch\d{2}-structured-practice$/.test(id)) return `${baseUrl}chapters/${id.slice(0, 4)}/#check`;
   if (/^deep-ch\d{2}/.test(id)) return `${baseUrl}chapters/${id.slice(5, 9)}/#deep-dive`;
   if (id === "ch01-research-workbench") return `${baseUrl}chapters/ch01/#workbench`;
+  if (id === "rare-book-dossier") return `${baseUrl}lab/#rare-book-dossier`;
   if (id.startsWith("case-")) return `${baseUrl}lab/#case-gallery`;
   if (gameIds.has(id)) return `${baseUrl}lab/#${id}`;
   return `${baseUrl}paths/`;
@@ -49,6 +51,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   const deepCount = entries.filter(([id]) => id.startsWith("deep-ch")).length;
   const gameCount = entries.filter(([id]) => gameIds.has(id)).length;
   const caseCount = entries.filter(([id]) => id.startsWith("case-")).length;
+  const dossierCount = entries.filter(([id]) => id === "rare-book-dossier").length;
   const wrongItems = Object.values(wrongBook).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
 
   function exportArchive() {
@@ -87,7 +90,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     <section className="progress-summary">
       <p className="mini-label">保存在当前浏览器</p><strong>{completed}</strong><span>项学习活动已完成，共 {totalActivities} 项</span>
       <div className="ring" style={{ "--value": `${percent}%` } as React.CSSProperties}><b>{percent}%</b></div>
-      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/6</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span></div>
+      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/6</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
     </section>
     <section className="progress-list">
       <div className="progress-list-title"><h2>最近记录</h2>{entries[0] && <a href={hrefFor(entries[0][0], baseUrl)}>继续上次学习 →</a>}</div>

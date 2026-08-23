@@ -37,6 +37,12 @@ const pathReview = new Map(learningPaths.map((path) => {
     </div>
   </section>
 
+  <section class="flagship-entry container">
+    <div class="flagship-mark"><span>综合</span><strong>案卷</strong></div>
+    <div><p class="eyebrow">New flagship case</p><h2>你能否为一部“宋刻”残本写出谨慎的鉴定意见？</h2><p>跨越纸张、装帧、牌记、避讳、刻工、版式、目录和递藏记录。不是猜答案，而是给证据分配角色、限制结论强度并导出报告。</p></div>
+    <a class="button" href={`${base}lab/#rare-book-dossier`}>打开古籍鉴定案卷 <span>→</span></a>
+  </section>
+
   <section class="project-strip">
     <div class="container strip-inner">
       <p><span>当前阶段</span><strong>十四章结构化公测版</strong></p>
@@ -76,7 +82,7 @@ const pathReview = new Map(learningPaths.map((path) => {
         <p class="eyebrow">Knowledge graph</p>
         <h2 class="section-title">知识不是章节的队列，<br />而是彼此牵引的网络</h2>
         <p>点击概念，看它与载体、版本、方法、人物、典籍和时代发生怎样的关系。图谱将随阅读持续扩充。</p>
-        <a class="text-link" href={`${base}graph/`}>探索知识图谱 →</a>
+        <a class="text-link" href={`${base}graph/`}>探索知识图谱 →</a><a class="text-link lexicon-link" href={`${base}concepts/`}>浏览 176 个概念词条 →</a>
       </div>
       <div class="mini-graph" aria-hidden="true">
         <svg viewBox="0 0 520 330">
@@ -111,7 +117,7 @@ const pathReview = new Map(learningPaths.map((path) => {
     <div class="section-heading">
       <div>
         <p class="eyebrow">Interactive laboratory</p>
-        <h2 class="section-title">六项真实可玩的互动实验</h2>
+        <h2 class="section-title">综合案卷、六项旗舰实验与十五个章节案例</h2>
       </div>
       <a class="text-link" href={`${base}lab/`}>查看全部实验 →</a>
     </div>
@@ -161,6 +167,7 @@ const pathReview = new Map(learningPaths.map((path) => {
   .strip-line { height:1px; background:var(--line); }.strip-line span{display:block;width:18%;height:2px;background:var(--cinnabar);}
   .strip-inner a,.text-link { color:var(--cinnabar); font-weight:600; text-decoration:none; }
   .paths-section,.lab-preview { padding-block:7rem; }
+  .flagship-entry{display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;margin-top:5rem;padding:2rem;border:1px solid #5d5143;color:#f4ecdf;background:#292a27}.flagship-mark{display:grid;place-items:center;width:90px;aspect-ratio:1;border:2px solid #d99781;color:#d99781;transform:rotate(-3deg)}.flagship-mark span,.flagship-mark strong{display:block;font-family:var(--serif)}.flagship-mark span{font-size:.7rem;letter-spacing:.18em}.flagship-mark strong{font-size:1.5rem}.flagship-entry h2{margin:.2rem 0;font-family:var(--serif);font-size:1.6rem}.flagship-entry p:not(.eyebrow){margin:.4rem 0;color:#aaa59d;font-size:.82rem}.flagship-entry .button{white-space:nowrap}.lexicon-link{margin-left:1rem}
   .path-grid { display:grid; grid-template-columns:repeat(4,1fr); border-top:1px solid var(--line); border-left:1px solid var(--line); }
   .path-card { min-height:260px; padding:1.5rem; display:flex; flex-direction:column; border-right:1px solid var(--line); border-bottom:1px solid var(--line); text-decoration:none; background:rgba(255,253,247,.26); transition:.25s ease; }
   .path-card:hover { z-index:2; transform:translateY(-5px); background:var(--white); box-shadow:var(--shadow); }
@@ -180,7 +187,7 @@ const pathReview = new Map(learningPaths.map((path) => {
   .game-card:hover{background:var(--white);box-shadow:var(--shadow)}.game-icon{display:grid;place-items:center;width:55px;aspect-ratio:1;border-radius:50%;color:var(--cinnabar);background:#eaded0;font-family:var(--serif);font-size:1.35rem}.game-card small{margin-top:auto;color:var(--muted)}.game-card h3{margin:.5rem 0;font-family:var(--serif)}.game-card p{margin:0;color:var(--muted);font-size:.86rem}
   .method-note { margin-block:1rem 5rem; padding:3rem; display:grid; grid-template-columns:auto 1fr 1fr; align-items:center; gap:2.2rem; border:1px solid var(--line); background:#ebe1d1; }
   .method-number{font-family:var(--serif);font-size:3rem;color:var(--cinnabar)}.method-note h2{margin:0;font-family:var(--serif);font-size:1.5rem}.method-note p{margin:0;color:var(--muted)}
-  @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:4rem}.hero-visual{width:min(400px,85vw)}.strip-inner{grid-template-columns:1fr 1fr}.strip-line{display:none}.path-grid{grid-template-columns:repeat(2,1fr)}.path-card:nth-child(5){grid-column:span 1}.graph-preview-grid{grid-template-columns:1fr}.game-row{grid-template-columns:repeat(2,1fr)}.method-note{grid-template-columns:auto 1fr}.method-note>p{grid-column:1/-1}}
-  @media(max-width:560px){.strip-inner,.path-grid,.game-row,.graph-stats{grid-template-columns:1fr}.strip-inner{padding-block:1.2rem}.path-card:nth-child(5){grid-column:auto}.section-heading{align-items:start}.method-note{padding:1.5rem}}
+  @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:4rem}.hero-visual{width:min(400px,85vw)}.strip-inner{grid-template-columns:1fr 1fr}.strip-line{display:none}.flagship-entry{grid-template-columns:auto 1fr}.flagship-entry>a{grid-column:1/-1}.path-grid{grid-template-columns:repeat(2,1fr)}.path-card:nth-child(5){grid-column:span 1}.graph-preview-grid{grid-template-columns:1fr}.game-row{grid-template-columns:repeat(2,1fr)}.method-note{grid-template-columns:auto 1fr}.method-note>p{grid-column:1/-1}}
+  @media(max-width:560px){.strip-inner,.path-grid,.game-row,.graph-stats,.flagship-entry{grid-template-columns:1fr}.strip-inner{padding-block:1.2rem}.flagship-entry{margin-top:3rem;padding:1.2rem}.flagship-entry>a{grid-column:auto}.path-card:nth-child(5){grid-column:auto}.section-heading{align-items:start}.method-note{padding:1.5rem}.lexicon-link{display:block;margin-left:0}}
   @media(prefers-reduced-motion:reduce){.orbit{animation:none}}
 </style>

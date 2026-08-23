@@ -152,9 +152,9 @@ export const games: LabGame[] = [
 
 export const graphStats = [
   { value: "14", label: "全书章节" },
-  { value: "7", label: "学习路径" },
-  { value: "6", label: "可玩实验" },
-  { value: "6", label: "元数据实体类型" },
+  { value: "176", label: "概念词条" },
+  { value: "98", label: "证据关系" },
+  { value: "15", label: "章节案例" },
 ];
 
 export const chapterCoverage = chapters.map((chapter) => {
