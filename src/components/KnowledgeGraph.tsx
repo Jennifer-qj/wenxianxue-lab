@@ -154,7 +154,7 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
       <aside className="graph-detail graph-detail--full">
         {selected ? <>
           <span style={{ color: typeColors[selected.type] }}>{typeLabels[selected.type]} · {selected.chapter_ids.map((id) => `第 ${Number(id.slice(2))} 章`).join("、")}</span>
-          <h2>{selected.label}</h2><p>{selected.definition}</p>
+          <h2><a href={`${baseUrl}concepts/${selected.id}/`}>{selected.label}</a></h2><p>{selected.definition}</p>
           <div className="graph-status">{statusLabels[selected.status] ?? selected.status} · {selected.degree} 条直接关系</div>
           <div className="graph-relations">{selectedEdges.length ? selectedEdges.map((edge) => {
             const otherId = edge.source === selected.id ? edge.target : edge.source; const other = nodeMap.get(otherId);

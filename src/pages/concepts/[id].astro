@@ -1,0 +1,68 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { chapters } from "../../data/site";
+
+export async function getStaticPaths() {
+  const entries = await getCollection("concepts");
+  return entries.flatMap((entry) => entry.data.items).map((concept) => ({ params: { id: concept.id }, props: { concept } }));
+}
+
+const { concept } = Astro.props;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const [conceptEntries, graphEntries, outlineEntries, quizEntries, labEntries] = await Promise.all([
+  getCollection("concepts"), getCollection("graph"), getCollection("outline"), getCollection("quiz"), getCollection("labs"),
+]);
+const allConcepts = conceptEntries.flatMap((entry) => entry.data.items);
+const allEdges = graphEntries.flatMap((entry) => entry.data.items);
+const units = outlineEntries.flatMap((entry) => entry.data.items).filter((unit) => unit.concept_ids.includes(concept.id));
+const quizzes = quizEntries.flatMap((entry) => entry.data.items).filter((quiz) => quiz.concept_ids.includes(concept.id));
+const labs = labEntries.flatMap((entry) => entry.data.items).filter((lab) => lab.concept_ids.includes(concept.id));
+const relations = allEdges.filter((edge) => edge.source === concept.id || edge.target === concept.id).map((edge) => ({
+  ...edge,
+  other: allConcepts.find((item) => item.id === (edge.source === concept.id ? edge.target : edge.source)),
+}));
+const typeLabels = { concept: "概念", material: "载体", work: "典籍", person: "人物", event: "事件", method: "方法" } as const;
+const statusLabels = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
+const relationLabels: Record<string, string> = { isA: "属于", isPartOf: "组成", usesMethod: "使用方法", produces: "产生", evidenceFor: "支持", affectedBy: "受影响", relatedTo: "相关" };
+const confidenceLabels = { confirmed: "原书确认", pedagogical: "教学归纳", doubtful: "待考关系" } as const;
+const relatedChapters = concept.chapter_ids.map((id) => chapters.find((chapter) => chapter.id === id)).filter(Boolean);
+const verifiedUnits = units.filter((unit) => unit.status === "verified");
+---
+
+<BaseLayout title={`${concept.label}｜概念词条`} description={`${concept.label}：${concept.definition}`} active="graph">
+  <header class="concept-hero">
+    <div class="container concept-hero__grid">
+      <div><p class="eyebrow">Concept dossier · {concept.id}</p><h1>{concept.label}</h1><p>{concept.definition}</p></div>
+      <aside><span>{typeLabels[concept.type]}</span><strong>{statusLabels[concept.status]}</strong><small>{relations.length} 条关系 · {units.length} 个学习单元 · {quizzes.length} 道关联题</small></aside>
+    </div>
+  </header>
+
+  <main class="concept-main container">
+    <nav class="concept-breadcrumb"><a href={`${base}graph/`}>知识图谱</a><span>／</span><a href={`${base}concepts/`}>概念词表</a><span>／</span><b>{concept.label}</b></nav>
+    <div class="concept-layout">
+      <article>
+        <section id="reading"><p class="eyebrow">01 · Reading position</p><h2>它在全书中的位置</h2><div class="chapter-links">{relatedChapters.map((chapter) => chapter && <a href={`${base}chapters/${chapter.id}/`}><small>{chapter.number}</small><strong>{chapter.title}</strong><span>{chapter.focus}</span></a>)}</div></section>
+
+        <section id="boundary"><p class="eyebrow">02 · Judgment boundaries</p><h2>相关判断边界</h2>{units.length ? <div class="boundary-list">{units.map((unit) => <article><small>{unit.section}{unit.subsection ? ` · ${unit.subsection}` : ""}</small><h3>{unit.key_question}</h3><p>{unit.boundary}</p><a href={`${base}chapters/ch${String(unit.chapter).padStart(2, "0")}/#${unit.id}`}>回到学习单元 →</a></article>)}</div> : <p class="empty-copy">词条已经进入概念库，关联学习单元仍在补充。</p>}</section>
+
+        <section id="relations"><p class="eyebrow">03 · Evidence relations</p><h2>它与哪些概念相连</h2>{relations.length ? <div class="relation-list">{relations.map((edge) => <a href={`${base}concepts/${edge.other?.id}/`}><span>{relationLabels[edge.type] ?? edge.type} · {confidenceLabels[edge.confidence]}</span><strong>{edge.other?.label ?? "待补概念"}</strong><p>{edge.evidence}</p></a>)}</div> : <p class="empty-copy">当前没有已建模的直接关系；这不表示该概念在学术上完全孤立。</p>}</section>
+
+        <section id="practice"><p class="eyebrow">04 · Practice</p><h2>用问题检验是否真正理解</h2>{quizzes.length ? <ol class="concept-questions">{quizzes.slice(0, 8).map((quiz) => <li><span>{String(quiz.chapter).padStart(2, "0")}</span><div><h3>{quiz.prompt}</h3><p>{quiz.explanation}</p><a href={`${base}chapters/ch${String(quiz.chapter).padStart(2, "0")}/#check`}>去本章作答 →</a></div></li>)}</ol> : <p class="empty-copy">暂无直接关联题目。</p>}</section>
+      </article>
+
+      <aside class="concept-side">
+        <section><small>复核说明</small><p>词条已经完成结构化整理；状态为“{statusLabels[concept.status]}”。只有纸本核验完成后才显示精确引用页码。</p>{verifiedUnits.length > 0 && <ul>{verifiedUnits.map((unit) => <li>第 {unit.page_start}{unit.page_end ? `–${unit.page_end}` : ""} 页</li>)}</ul>}</section>
+        <section><small>关联实验</small>{labs.length ? labs.map((lab) => <a href={`${base}lab/#case-gallery`}>{lab.title} →</a>) : <p>暂无直接关联实验。</p>}</section>
+        <section><small>继续探索</small><a href={`${base}graph/?q=${encodeURIComponent(concept.label)}`}>在知识图谱中查看 →</a><a href={`${base}search/?q=${encodeURIComponent(concept.label)}`}>搜索全站相关内容 →</a></section>
+      </aside>
+    </div>
+  </main>
+</BaseLayout>
+
+<style>
+  .concept-hero{padding:7rem 0 4rem;color:#f7f0e4;background:#292a27}.concept-hero__grid{display:grid;grid-template-columns:1.3fr .7fr;gap:5rem;align-items:end}.concept-hero h1{margin:.35rem 0;font-family:var(--serif);font-size:clamp(3.2rem,8vw,6.8rem);font-weight:500}.concept-hero__grid>div>p:last-child{max-width:48rem;color:#c4beb5;font-family:var(--serif);font-size:1.1rem;line-height:1.9}.concept-hero aside{display:grid;gap:.5rem;padding:1.2rem;border-top:1px solid rgba(255,255,255,.18);border-bottom:1px solid rgba(255,255,255,.18)}.concept-hero aside span{color:#d99781}.concept-hero aside strong{font-family:var(--serif);font-size:1.6rem}.concept-hero aside small{color:#9d9890}
+  .concept-main{padding-bottom:7rem}.concept-breadcrumb{display:flex;gap:.35rem;padding:1.2rem 0;color:var(--muted);font-size:.72rem}.concept-breadcrumb a{color:var(--cinnabar);text-decoration:none}.concept-layout{display:grid;grid-template-columns:minmax(0,1fr) 270px;gap:5rem}.concept-layout article>section{padding:3rem 0;border-bottom:1px solid var(--line)}.concept-layout h2{margin:.25rem 0 1.2rem;font-family:var(--serif);font-size:2rem}.chapter-links{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}.chapter-links a{display:grid;gap:.25rem;padding:1rem;border:1px solid var(--line);background:rgba(255,255,255,.35);text-decoration:none}.chapter-links small{color:var(--cinnabar)}.chapter-links strong{color:var(--ink);font-family:var(--serif);font-size:1.15rem}.chapter-links span{color:var(--muted);font-size:.75rem;line-height:1.6}.boundary-list,.relation-list{display:grid;gap:.65rem}.boundary-list article,.relation-list a{padding:1rem;border-left:3px solid #a57435;background:#eee3d2}.boundary-list small,.relation-list span{color:var(--cinnabar);font-size:.68rem}.boundary-list h3,.relation-list strong{display:block;margin:.35rem 0;color:var(--ink);font-family:var(--serif);font-size:1.05rem}.boundary-list p,.relation-list p{margin:.3rem 0;color:var(--muted);font-size:.8rem}.boundary-list a,.relation-list a{text-decoration:none}.boundary-list article>a{color:var(--cinnabar);font-size:.72rem}.relation-list a{border-left-color:#536b70}.concept-questions{margin:0;padding:0;list-style:none}.concept-questions li{display:grid;grid-template-columns:42px 1fr;gap:1rem;padding:1rem 0;border-top:1px solid var(--line)}.concept-questions li>span{color:var(--cinnabar);font-family:var(--serif);font-size:1.3rem}.concept-questions h3{margin:0;font-family:var(--serif)}.concept-questions p{color:var(--muted);font-size:.78rem}.concept-questions a{color:var(--cinnabar);font-size:.75rem}.empty-copy{color:var(--muted)}
+  .concept-side{position:sticky;top:90px;height:max-content}.concept-side section{display:grid;gap:.6rem;padding:1rem;border-top:1px solid var(--line)}.concept-side small{color:var(--cinnabar);letter-spacing:.1em}.concept-side p,.concept-side li{color:var(--muted);font-size:.76rem}.concept-side a{color:var(--ink);font-size:.78rem;text-decoration:none}.concept-side a:hover{color:var(--cinnabar)}
+  @media(max-width:800px){.concept-hero__grid,.concept-layout{grid-template-columns:1fr;gap:2rem}.concept-side{position:static}.chapter-links{grid-template-columns:1fr}}@media(max-width:560px){.concept-hero{padding:4rem 0 3rem}.concept-hero h1{font-size:3rem}}
+</style>
