@@ -1,0 +1,49 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const [conceptFiles, graphFiles, outlineFiles] = await Promise.all([getCollection("concepts"), getCollection("graph"), getCollection("outline")]);
+const counts = {
+  concepts: conceptFiles.flatMap((entry) => entry.data.items).length,
+  edges: graphFiles.flatMap((entry) => entry.data.items).length,
+  units: outlineFiles.flatMap((entry) => entry.data.items).length,
+};
+---
+
+<BaseLayout title="更新日志与路线图" description="文献学实验室的版本记录、后续路线与开放元数据下载">
+  <header class="updates-hero"><div class="container"><p class="eyebrow">CHANGELOG · ROADMAP · OPEN DATA</p><h1 class="display-title">项目不是成品箱，<em>而是一份可核验的生长记录</em></h1><p>这里说明网站已经做了什么、还欠什么，以及哪些结构化成果可以下载检查。</p></div></header>
+  <main class="updates-main container">
+    <section class="open-data">
+      <div><p class="eyebrow">Open metadata</p><h2>开放学习元数据</h2><p>可下载全书概念、关系和学习单元索引。数据不含原书全文，也不包含访客数据。</p></div>
+      <div class="data-stats"><span><strong>{counts.concepts}</strong>概念</span><span><strong>{counts.edges}</strong>关系</span><span><strong>{counts.units}</strong>学习单元</span></div>
+      <a href={`${base}data/knowledge.json`} download>下载 knowledge.json ↓</a>
+    </section>
+
+    <div class="updates-grid">
+      <article>
+        <p class="eyebrow">Released</p><h2>更新日志</h2>
+        <ol class="release-list">
+          <li><time>2026-08 · 第三轮</time><h3>从“完成率”走向掌握度</h3><p>加入章节掌握度、连续学习、间隔复习推荐；知识图谱新增最短路径和子图导出；加入首次访问引导与开放元数据。</p></li>
+          <li><time>2026-08 · 第二轮</time><h3>概念档案与综合鉴定案卷</h3><p>建立全书概念详情页，把多章知识放进一份可反复推理的古籍综合案卷，并补充题后诊断反馈。</p></li>
+          <li><time>2026-08 · 第一轮</time><h3>十四章进入结构化系统</h3><p>完成章节学习页、学习路径、知识图谱、搜索、进度档案和多种非选择题互动实验的基础架构。</p></li>
+        </ol>
+      </article>
+      <aside>
+        <p class="eyebrow">Next</p><h2>后续路线图</h2>
+        <ul class="roadmap-list">
+          <li><b>持续进行</b><span>依据纸本逐条复核十四章表述和页码。</span></li>
+          <li><b>下一阶段</b><span>增加真实古籍图像许可来源、图像标注和版本对勘案例。</span></li>
+          <li><b>下一阶段</b><span>扩充开放式任务的示范答案、评分量规和学习反思。</span></li>
+          <li><b>研究输出</b><span>整理内容模型、交互设计和人机协作方法的项目报告。</span></li>
+          <li><b>暂不接入</b><span>登录、用户画像及第三方访客追踪；保持轻量和隐私友好。</span></li>
+        </ul>
+      </aside>
+    </div>
+    <section class="release-standard"><p class="eyebrow">Release standard</p><h2>什么才算“可以发布”？</h2><div><span>内容结构通过模式校验</span><span>站内链接无断链</span><span>核心交互自动测试通过</span><span>公开文件无原书全文</span><span>待复核结论明确标注</span></div><a href={`${base}about/`}>查看完整研究方法与版权边界 →</a></section>
+  </main>
+</BaseLayout>
+
+<style>
+  .updates-hero{padding:7rem 0 4rem;border-bottom:1px solid var(--line);background:linear-gradient(135deg,rgba(83,107,112,.12),transparent 58%)}.updates-hero p:not(.eyebrow){max-width:50rem;color:var(--muted);font-family:var(--serif);font-size:1.05rem;line-height:1.8}.updates-main{padding-block:3rem 7rem}.open-data{display:grid;grid-template-columns:1fr auto auto;gap:2rem;align-items:center;padding:1.5rem;border:1px solid var(--line);background:#fffaf0}.open-data h2,.updates-grid h2,.release-standard h2{margin:.2rem 0 .55rem;font-family:var(--serif);font-size:2rem}.open-data p{margin:0;color:var(--muted)}.data-stats{display:flex;gap:1.5rem}.data-stats span{color:var(--muted);font-size:.7rem}.data-stats strong{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.7rem}.open-data>a{padding:.7rem .9rem;color:#fff7e9;background:var(--cinnabar);text-decoration:none;white-space:nowrap}.updates-grid{display:grid;grid-template-columns:1.4fr .8fr;gap:4rem;margin-top:4rem}.release-list{padding:0;list-style:none}.release-list li{position:relative;padding:0 0 2.5rem 1.5rem;border-left:1px solid var(--line)}.release-list li::before{position:absolute;top:.2rem;left:-5px;width:9px;height:9px;border-radius:50%;background:var(--cinnabar);content:""}.release-list time{color:var(--cinnabar);font-size:.7rem}.release-list h3{margin:.25rem 0;font-family:var(--serif);font-size:1.25rem}.release-list p,.roadmap-list span{color:var(--muted);font-size:.82rem;line-height:1.7}.roadmap-list{display:grid;gap:.65rem;padding:0;list-style:none}.roadmap-list li{padding:.9rem;border:1px solid var(--line);background:rgba(255,255,255,.35)}.roadmap-list b,.roadmap-list span{display:block}.roadmap-list b{margin-bottom:.3rem;color:var(--cinnabar)}.release-standard{margin-top:4rem;padding-top:3rem;border-top:1px solid var(--line)}.release-standard>div{display:flex;flex-wrap:wrap;gap:.5rem;margin:1.2rem 0}.release-standard span{padding:.5rem .7rem;border:1px solid var(--line);background:#fffaf0;font-size:.76rem}.release-standard a{color:var(--cinnabar)}@media(max-width:850px){.open-data{grid-template-columns:1fr}.data-stats{flex-wrap:wrap}.updates-grid{grid-template-columns:1fr;gap:2rem}}
+</style>
