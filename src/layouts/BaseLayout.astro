@@ -23,7 +23,22 @@ const nav = [
 ];
 const fullTitle = title === "文献学实验室" ? title : `${title}｜文献学实验室`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
-const ogImage = new URL(`${base}og-cover.svg`, Astro.site ?? Astro.url.origin);
+const ogImage = new URL(`${base}og-cover.png`, Astro.site ?? Astro.url.origin);
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "LearningResource",
+  name: fullTitle,
+  description,
+  url: canonical,
+  image: ogImage,
+  inLanguage: "zh-CN",
+  isAccessibleForFree: true,
+  educationalLevel: "大学初学者",
+  learningResourceType: ["互动学习网站", "数字人文项目", "知识图谱"],
+  about: ["文献学", "古典文献学", "目录学", "版本学", "校勘学", "数字人文"],
+  author: { "@type": "Person", name: "Jennifer-qj" },
+  citation: "杜泽逊：《文献学概要（修订本）》",
+};
 ---
 
 <!doctype html>
@@ -42,7 +57,11 @@ const ogImage = new URL(`${base}og-cover.svg`, Astro.site ?? Astro.url.origin);
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="文献学实验室：边读、边辨、边连接" />
     <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <title>{fullTitle}</title>
   </head>
   <body>
