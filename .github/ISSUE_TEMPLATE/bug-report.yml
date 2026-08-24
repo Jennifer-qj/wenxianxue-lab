@@ -1,0 +1,36 @@
+name: 网站问题
+description: 报告链接、显示、交互或学习记录问题
+title: "[网站问题] "
+labels: [bug]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 页面地址
+    validations:
+      required: true
+  - type: dropdown
+    id: device
+    attributes:
+      label: 设备类型
+      options: [电脑, 手机, 平板, 其他]
+    validations:
+      required: true
+  - type: input
+    id: browser
+    attributes:
+      label: 浏览器及版本
+      placeholder: 例如 Edge 140
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤
+      description: 请按顺序说明点击了什么、看到了什么。
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: 预期结果
+    validations:
+      required: true

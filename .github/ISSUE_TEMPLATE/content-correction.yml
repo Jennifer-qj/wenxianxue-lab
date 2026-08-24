@@ -1,0 +1,31 @@
+name: 内容纠错
+description: 报告概念、章节、题目、关系或页码问题
+title: "[内容纠错] "
+labels: [content]
+body:
+  - type: input
+    id: page
+    attributes:
+      label: 页面地址
+      placeholder: https://jennifer-qj.github.io/wenxianxue-lab/...
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: 问题说明
+      description: 请指出具体表述及其问题，不要粘贴原书大段文字。
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 核对依据
+      description: 可提供书目信息、纸本页码或可靠研究来源。
+  - type: checkboxes
+    id: copyright
+    attributes:
+      label: 版权确认
+      options:
+        - label: 我没有上传原书扫描件、自动识别全文或大段受版权保护内容。
+          required: true
