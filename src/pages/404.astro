@@ -1,0 +1,18 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<BaseLayout title="页面未找到" description="这个地址没有对应的文献学实验室页面">
+  <main class="not-found container">
+    <div class="error-code" aria-hidden="true"><span>四</span><span>〇</span><span>四</span></div>
+    <p class="eyebrow">404 · LEAF MISSING</p>
+    <h1>这一叶暂时<em>散佚</em>了</h1>
+    <p>你访问的地址可能已经移动、拼写有误，或尚未收入实验室。可以返回首页，也可以直接检索概念和章节。</p>
+    <div><a class="button" href={base}>返回首页 →</a><a class="button secondary" href={`${base}search/`}>搜索全站</a><a href={`${base}coverage/`}>查看十四章覆盖矩阵</a></div>
+  </main>
+</BaseLayout>
+
+<style>
+  .not-found{min-height:72vh;display:grid;place-content:center;justify-items:start;padding-block:6rem}.error-code{display:flex;gap:.5rem;margin-bottom:1rem}.error-code span{display:grid;width:3.6rem;aspect-ratio:1;place-items:center;color:#fff8ea;border-radius:50%;background:var(--ink);font-family:var(--serif);font-size:1.7rem}.error-code span:nth-child(2){background:var(--cinnabar)}.not-found h1{margin:.2rem 0;font-family:var(--serif);font-size:clamp(3rem,8vw,6rem);font-weight:500}.not-found h1 em{color:var(--cinnabar);font-style:normal}.not-found>p:not(.eyebrow){max-width:42rem;color:var(--muted);font-family:var(--serif);font-size:1.05rem}.not-found>div:last-child{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-top:1.5rem}.not-found>div:last-child>a:not(.button){color:var(--cinnabar);font-size:.8rem}
+</style>

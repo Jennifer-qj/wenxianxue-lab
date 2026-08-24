@@ -1,0 +1,14 @@
+{
+  "name": "文献学实验室",
+  "short_name": "文献学实验室",
+  "description": "面向初学者的文献学互动学习与数字人文项目",
+  "lang": "zh-CN",
+  "start_url": "/wenxianxue-lab/",
+  "scope": "/wenxianxue-lab/",
+  "display": "standalone",
+  "background_color": "#faf7f2",
+  "theme_color": "#a93226",
+  "icons": [
+    { "src": "/wenxianxue-lab/favicon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any" }
+  ]
+}

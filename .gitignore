@@ -4,6 +4,8 @@ dist/
 .DS_Store
 *.log
 visual-*.png
+output/
+tmp/
 
 # 版权隔离：原书 OCR、扫描件和研究底稿不得提交公开仓库
 private-sources/

@@ -1,5 +1,8 @@
 # 文献学实验室 · Wenxianxue Lab
 
+[![Deploy to GitHub Pages](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/deploy.yml)
+[![Quality checks](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/ci.yml)
+
 一个面向大学生与文献学初学者的互动学习网站，也是一项持续生长的个人数字人文实践。
 
 ## 项目目标
@@ -28,6 +31,13 @@
 
 - 继续依据纸本逐条核验页码与学术表述
 - 扩充跨章关系、实验反馈层次和高质量案例材料
+
+## 纠错、引用与维护
+
+- 内容或网站问题请使用 [GitHub Issues](https://github.com/Jennifer-qj/wenxianxue-lab/issues/new/choose)。
+- 提交修改前请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)。
+- 项目引用信息见 [CITATION.cff](./CITATION.cff)。
+- Pull Request 会自动执行内容门禁、构建、断链检查和测试；依赖更新由 Dependabot 按月检查。
 
 ## 版权与内容原则
 
