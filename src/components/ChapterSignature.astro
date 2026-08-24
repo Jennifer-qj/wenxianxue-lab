@@ -1,0 +1,47 @@
+---
+interface Props { chapterId: string; baseUrl: string; }
+const { chapterId, baseUrl } = Astro.props;
+---
+
+{chapterId === "ch01" && (
+  <section id="signature" class="signature signature--notebook">
+    <header><p class="eyebrow">本章专属入口 · 阅读草图</p><h2>先不要背定义，试着把“文献”看成一个仍在变化的对象</h2></header>
+    <div class="notebook-sheet">
+      <small>我为第一章留下的三个动作</small>
+      <ol><li><b>看见对象</b><span>文字之外，还有载体、形制和保存状态。</span></li><li><b>追问生命史</b><span>它由谁形成，又经过谁的抄写、刊刻、整理和收藏？</span></li><li><b>限制结论</b><span>眼前材料能回答什么，又暂时不能回答什么？</span></li></ol>
+      <aside>阅读提醒：工具不是本章的起点，问题才是。</aside>
+    </div>
+    <a class="signature-action" href="#workbench"><span>接下来亲手做</span><strong>安装研究镜头，生成一条自己的问题路径 →</strong></a>
+  </section>
+)}
+
+{chapterId === "ch05" && (
+  <section id="signature" class="signature signature--dossier">
+    <header><p class="eyebrow">本章专属入口 · 教学案卷</p><h2>一部标作“宋刻”的残本，为什么不能只看牌记？</h2></header>
+    <div class="dossier-paper">
+      <div class="dossier-stamp">待<br />鉴</div>
+      <div><small>案卷任务</small><h3>把六类线索放回各自的证明范围</h3><p>版本鉴定不是寻找一枚决定胜负的印章，而是判断每条证据作用于全书、局部书叶，还是某一次递藏与改装。</p></div>
+      <dl><div><dt>牌记</dt><dd>可能早刻、后配或挖改</dd></div><div><dt>避讳</dt><dd>需排除偶然缺笔与后修</dd></div><div><dt>纸张</dt><dd>旧纸后用，不能单独定年</dd></div></dl>
+    </div>
+    <div class="signature-actions"><a href={`${baseUrl}lab/#version-detective`}><span>5 分钟练习</span><strong>版本鉴定侦探 →</strong></a><a href={`${baseUrl}lab/#rare-book-dossier`}><span>综合作品</span><strong>完成一份古籍鉴定报告 →</strong></a></div>
+  </section>
+)}
+
+{chapterId === "ch07" && (
+  <section id="signature" class="signature signature--catalog">
+    <header><p class="eyebrow">本章专属入口 · 著录卡</p><h2>同一个书名，为什么可能指向完全不同的对象？</h2></header>
+    <div class="catalog-slip">
+      <div class="slip-number">編目練習<br /><strong>007</strong></div>
+      <dl><div><dt>原始题名</dt><dd>保留目录中的原样记录</dd></div><div><dt>责任者</dt><dd>记录姓名、时代与责任方式</dd></div><div><dt>篇卷</dt><dd>用于识别残缺、合并和异名</dd></div><div><dt>版本</dt><dd>作品与具体版本分层描述</dd></div><div><dt>提要</dt><dd>说明内容、源流与判断依据</dd></div><div><dt>关系</dt><dd>同书异名或异书同名，均需证据</dd></div></dl>
+      <p>编目不是把书塞进格子，而是让每一次合并、分离和分类都能够被后来者复查。</p>
+    </div>
+    <a class="signature-action" href={`${baseUrl}lab/#four-fold`}><span>接下来亲手做</span><strong>把八部典籍归入四部书架，并检查分类边界 →</strong></a>
+  </section>
+)}
+
+<style>
+  .signature{padding:3.5rem 0;border-bottom:1px solid var(--line)}.signature header{display:grid;grid-template-columns:.75fr 1.25fr;gap:2rem;align-items:end;margin-bottom:1.6rem}.signature h2{margin:0;font-family:var(--serif);font-size:2rem;line-height:1.45}.notebook-sheet{position:relative;padding:2rem 2rem 1.4rem 4.2rem;border:1px solid #c9b89d;background:repeating-linear-gradient(#fffaf0 0,#fffaf0 31px,#d9cbb7 32px);box-shadow:8px 10px 0 #e3d7c5;transform:rotate(-.5deg)}.notebook-sheet::before{position:absolute;inset:0 auto 0 2.8rem;width:1px;background:#d59a8d;content:""}.notebook-sheet>small{color:var(--cinnabar);font-family:var(--serif)}.notebook-sheet ol{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;padding:0;list-style:none;counter-reset:note}.notebook-sheet li{counter-increment:note}.notebook-sheet li::before{content:counter(note,decimal-leading-zero);color:var(--cinnabar);font-family:var(--serif)}.notebook-sheet b,.notebook-sheet span{display:block}.notebook-sheet b{margin:.25rem 0;font-family:var(--serif)}.notebook-sheet span{color:var(--muted);font-size:.76rem;line-height:1.7}.notebook-sheet aside{color:#7d4137;font-family:var(--serif);font-size:.8rem;text-align:right;transform:rotate(-1deg)}
+  .signature-action,.signature-actions a{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1rem;padding:1rem 1.2rem;border:1px solid var(--line);color:var(--ink);background:#fffaf0;text-decoration:none}.signature-action span,.signature-actions span{color:var(--cinnabar);font-size:.67rem}.signature-action strong,.signature-actions strong{font-family:var(--serif)}.dossier-paper{position:relative;display:grid;grid-template-columns:auto 1.1fr 1fr;gap:1.5rem;align-items:center;padding:1.5rem;border:1px solid #6d5c48;color:#f4ecdf;background:#292a27}.dossier-stamp{display:grid;place-items:center;width:74px;aspect-ratio:1;border:2px solid #d99781;color:#d99781;font-family:var(--serif);font-size:1.3rem;transform:rotate(-5deg)}.dossier-paper small{color:#d99781}.dossier-paper h3{margin:.3rem 0;font-family:var(--serif);font-size:1.4rem}.dossier-paper p,.dossier-paper dd{color:#bfb9af;font-size:.75rem;line-height:1.65}.dossier-paper dl{margin:0}.dossier-paper dl div{display:grid;grid-template-columns:3.5rem 1fr;padding:.45rem 0;border-bottom:1px solid #55534d}.dossier-paper dt{font-family:var(--serif)}.dossier-paper dd{margin:0}.signature-actions{display:grid;grid-template-columns:1fr 1fr;gap:.7rem}.signature-actions a{margin-top:0}
+  .catalog-slip{display:grid;grid-template-columns:110px 1fr;gap:1.4rem;padding:1.5rem;border:1px solid #a89170;background:#efe3ce;box-shadow:inset 0 0 0 5px #f7eedf}.slip-number{padding-right:1.2rem;border-right:1px solid #baa585;color:#76634c;font-family:var(--serif);font-size:.72rem;letter-spacing:.12em}.slip-number strong{display:block;margin-top:.4rem;color:var(--cinnabar);font-size:2.5rem}.catalog-slip dl{display:grid;grid-template-columns:repeat(3,1fr);gap:0;margin:0;border-top:1px solid #bca98c;border-left:1px solid #bca98c}.catalog-slip dl div{padding:.75rem;border-right:1px solid #bca98c;border-bottom:1px solid #bca98c}.catalog-slip dt{color:var(--cinnabar);font-family:var(--serif)}.catalog-slip dd{margin:.25rem 0 0;color:var(--muted);font-size:.72rem;line-height:1.55}.catalog-slip>p{grid-column:2;margin:0;color:#6b5b49;font-family:var(--serif);font-size:.8rem}
+  @media(max-width:720px){.signature header,.dossier-paper{grid-template-columns:1fr}.notebook-sheet ol,.catalog-slip dl{grid-template-columns:1fr}.signature-actions{grid-template-columns:1fr}.catalog-slip{grid-template-columns:1fr}.slip-number{border-right:0;border-bottom:1px solid #baa585}.catalog-slip>p{grid-column:auto}.notebook-sheet{padding-left:3.5rem}}
+</style>
