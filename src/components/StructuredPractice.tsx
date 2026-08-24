@@ -47,6 +47,8 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
   const [responses, setResponses] = useState<Record<string, unknown>>({});
   const [checked, setChecked] = useState<Record<string, boolean>>({});
   const [results, setResults] = useState<Record<string, boolean>>({});
+  const [selfChecks, setSelfChecks] = useState<Record<string, number[]>>({});
+  const [selfDecisions, setSelfDecisions] = useState<Record<string, "pass" | "retry">>({});
   const quiz = quizzes[index];
   const response = responses[quiz.id];
   const isChecked = checked[quiz.id];
@@ -90,6 +92,26 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
     setResponse(current);
   }
 
+  function toggleRubric(rubricIndex: number) {
+    setSelfChecks((current) => {
+      const selected = current[quiz.id] ?? [];
+      return { ...current, [quiz.id]: selected.includes(rubricIndex) ? selected.filter((item) => item !== rubricIndex) : [...selected, rubricIndex] };
+    });
+  }
+
+  function decideShortAnswer(decision: "pass" | "retry") {
+    setSelfDecisions((current) => ({ ...current, [quiz.id]: decision }));
+    evaluate(decision === "pass" ? "self-pass" : "self-retry");
+  }
+
+  function reviseShortAnswer() {
+    setChecked((current) => { const next = { ...current }; delete next[quiz.id]; return next; });
+    setResults((current) => { const next = { ...current }; delete next[quiz.id]; return next; });
+    setSelfDecisions((current) => { const next = { ...current }; delete next[quiz.id]; return next; });
+    setSelfChecks((current) => ({ ...current, [quiz.id]: [] }));
+    try { const key = "wxlab-progress"; const archive = JSON.parse(localStorage.getItem(key) || "{}"); delete archive[`ch${String(quiz.chapter).padStart(2, "0")}-structured-practice`]; localStorage.setItem(key, JSON.stringify(archive)); window.dispatchEvent(new CustomEvent("wxlab-progress-updated")); } catch { /* ignore */ }
+  }
+
   return (
     <div className="structured-practice">
       <header>
@@ -118,13 +140,13 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
 
           {quiz.type === "evidence" && <div className="evidence-board">{quiz.evidence_ids!.map((evidence) => { const selected = ((response as string[] | undefined) ?? []).includes(evidence); return <button disabled={isChecked} aria-pressed={selected} className={selected ? "selected" : ""} onClick={() => toggleList(evidence)} key={evidence}><span>{selected ? "已收入证据链" : "点击选取"}</span><strong>{evidence}</strong></button>; })}</div>}
 
-          {quiz.type === "short_answer" && <div className="short-answer"><textarea disabled={isChecked} value={typeof response === "string" && response !== "self-pass" && response !== "self-retry" ? response : ""} onChange={(event) => setResponse(event.target.value)} placeholder="先写下你的判断与依据……" />{isChecked && <ul>{quiz.rubric!.map((item) => <li key={item}>{item}</li>)}</ul>}{!isChecked && <p>提交后按评分要点自评；简答题不由机器替你判断学术质量。</p>}</div>}
+          {quiz.type === "short_answer" && <div className="short-answer"><textarea disabled={isChecked} value={String(response ?? "")} onChange={(event) => setResponse(event.target.value)} placeholder="先写下你的判断、依据和结论限度……" />{isChecked && <div className="rubric-check"><p>逐项核对自己的答案。勾选表示“答案中已经明确做到”，不是标准答案判定。</p>{quiz.rubric!.map((item, rubricIndex) => { const selected = (selfChecks[quiz.id] ?? []).includes(rubricIndex); return <button disabled={Boolean(selfDecisions[quiz.id])} aria-pressed={selected} className={selected ? "selected" : ""} key={item} onClick={() => toggleRubric(rubricIndex)}><span>{selected ? "✓" : "□"}</span>{item}</button>; })}<aside><strong>建议写作骨架</strong><span>判断对象 → 使用证据 → 推理过程 → 反证或缺口 → 有限度结论</span></aside></div>}{!isChecked && <p>提交后逐项对照评分量规；简答题不由机器替你判断学术质量。</p>}</div>}
 
           {!isChecked && quiz.type !== "short_answer" && <button className="submit-answer" disabled={response == null || (Array.isArray(response) && response.length === 0)} onClick={evaluate}>提交判断</button>}
           {!isChecked && quiz.type === "short_answer" && <button className="submit-answer" disabled={!String(response ?? "").trim()} onClick={() => setChecked((state) => ({ ...state, [quiz.id]: true }))}>查看评分要点</button>}
-          {isChecked && quiz.type === "short_answer" && response !== "self-pass" && response !== "self-retry" && <div className="self-score"><button onClick={() => { setResponse("self-pass"); evaluate("self-pass"); }}>达到要点</button><button onClick={() => { setResponse("self-retry"); evaluate("self-retry"); }}>需要重写</button></div>}
+          {isChecked && quiz.type === "short_answer" && !selfDecisions[quiz.id] && <div className="self-score"><span>已覆盖 {(selfChecks[quiz.id] ?? []).length}/{quiz.rubric!.length} 项</span><button disabled={(selfChecks[quiz.id] ?? []).length < quiz.rubric!.length} onClick={() => decideShortAnswer("pass")}>全部达到，归档</button><button onClick={() => decideShortAnswer("retry")}>保留答案，继续重写</button></div>}
 
-          {isChecked && (quiz.type !== "short_answer" || response === "self-pass" || response === "self-retry") && <div className={`practice-feedback ${results[quiz.id] ? "success" : ""}`}><strong>{results[quiz.id] ? "判断成立" : "这一步还可以修正"}</strong><p>{quiz.explanation}</p><button onClick={() => setIndex((index + 1) % quizzes.length)}>{index === quizzes.length - 1 ? "回到第一题" : "下一题 →"}</button></div>}
+          {isChecked && (quiz.type !== "short_answer" || selfDecisions[quiz.id]) && <div className={`practice-feedback ${results[quiz.id] ? "success" : ""}`}><strong>{results[quiz.id] ? "判断成立" : "这一步还可以修正"}</strong><p>{quiz.explanation}</p>{quiz.type === "short_answer" && selfDecisions[quiz.id] === "retry" ? <button onClick={reviseShortAnswer}>回到原答案继续修改 →</button> : <button onClick={() => setIndex((index + 1) % quizzes.length)}>{index === quizzes.length - 1 ? "回到第一题" : "下一题 →"}</button>}</div>}
         </article>
       </div>
     </div>
