@@ -3,7 +3,11 @@
 [![Deploy to GitHub Pages](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/deploy.yml/badge.svg)](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/deploy.yml)
 [![Quality checks](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/ci.yml/badge.svg)](https://github.com/Jennifer-qj/wenxianxue-lab/actions/workflows/ci.yml)
 
-一个面向大学生与文献学初学者的互动学习网站，也是一项持续生长的个人数字人文实践。
+一个面向大学生与文献学初学者的互动学习网站，也是一项仍在纸本复核中的个人数字人文读书实验。
+
+> 我没有等到“全部读懂”以后才开始。每遇到一个难以把握的概念，我就追问它能否被画成关系、变成判断，或者设计成一次真正需要动手的练习。
+
+本项目不是《文献学概要》的在线电子版，也不把结构化完成冒充为学术核验完成。十四章已经进入内容系统；当前 9/143 个学习单元完成纸本核验，其余内容公开保留待复核状态。
 
 ## 项目目标
 
@@ -28,6 +32,7 @@
 ## 在线入口
 
 - 网站首页：https://jennifer-qj.github.io/wenxianxue-lab/
+- 作者手记：https://jennifer-qj.github.io/wenxianxue-lab/story/
 - 使用指南：https://jennifer-qj.github.io/wenxianxue-lab/guide/
 - 更新日志与开放数据：https://jennifer-qj.github.io/wenxianxue-lab/updates/
 - 个人学习工作台：https://jennifer-qj.github.io/wenxianxue-lab/notebook/
@@ -43,6 +48,7 @@
 - 内容或网站问题请使用 [GitHub Issues](https://github.com/Jennifer-qj/wenxianxue-lab/issues/new/choose)。
 - 提交修改前请阅读 [CONTRIBUTING.md](./CONTRIBUTING.md)。
 - 项目引用信息见 [CITATION.cff](./CITATION.cff)。
+- 代码、原创内容与第三方材料的使用边界见 [RIGHTS.md](./RIGHTS.md)。
 - Pull Request 会自动执行内容门禁、构建、断链检查和测试；依赖更新由 Dependabot 按月检查。
 
 ## 版权与内容原则
@@ -52,9 +58,9 @@
 - 不在公开仓库保存原书 OCR、扫描件或大段逐字转录。
 - 网站内容以原创概括、评论、互动案例和自制图示为主。
 - 仅经纸本核验的页码作为公开引用锚点；待核验内容会明确标记状态。
-- 当前仓库未授予代码或网站内容的再许可；后续将分别制定许可说明。
+- 当前仓库未声明开放许可。公开访问不等于自动允许复制、改编或再发布；具体边界见 [RIGHTS.md](./RIGHTS.md)。
 
-原书文字、图片及其他第三方材料的权利归各自权利人所有。
+原书文字、图片及其他第三方材料的权利归各自权利人所有。本项目与原书作者、出版社不存在官方隶属或授权关系。
 
 ## 本地开发
 

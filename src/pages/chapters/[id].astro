@@ -71,6 +71,12 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
       <section id="overview" class="overview">
         <p class="eyebrow">本章导读</p>
         <p>{lesson.introduction}</p>
+        <div class="provenance" aria-label="本章内容身份说明">
+          <div><small>知识框架</small><strong>依据原书章节目录定位</strong></div>
+          <div><small>页面文字</small><strong>项目原创转述与教学改编</strong></div>
+          <div><small>制作方式</small><strong>人机协作草拟，人工持续复核</strong></div>
+          <div><small>引用边界</small><strong>不是原书逐字引文</strong></div>
+        </div>
         <div class="section-map">
           {chapter.sections.map((section, index) => <span><b>{index + 1}</b>{section}</span>)}
         </div>
@@ -96,7 +102,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
                     <div><dt>学习结论</dt><dd>{unit.summary}</dd></div>
                     <div><dt>判断边界</dt><dd>{unit.boundary}</dd></div>
                   </dl>
-                  <div class="unit-tags"><span>{unit.concept_ids.length} 个概念</span><span>{unit.quiz_ids.length} 道题</span><span>{unit.lab_ids.length} 个实验</span></div>
+                  <div class="unit-tags"><span>原书目录锚点</span><span>项目原创概括</span><span>{statusLabels[unit.status]}</span><span>{unit.concept_ids.length} 个概念</span><span>{unit.quiz_ids.length} 道题</span><span>{unit.lab_ids.length} 个实验</span></div>
                   <div class="unit-concepts">{unit.concept_ids.map((id) => { const item = structuredConcepts.find((concept) => concept.id === id) ?? conceptEntries.flatMap((entry) => entry.data.items).find((concept) => concept.id === id); return <a href={`${base}concepts/${id}/`}>{item?.label ?? id}</a>; })}</div>
                 </div>
               </article>
@@ -118,8 +124,8 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
         <section id="deep-dive" class="deep-dive-section">
           <div class="deep-dive-heading">
             <p class="eyebrow">第二层：证据型研读</p>
-            <h2>把本章知识用于一个真实问题</h2>
-            <p>选择材料、完成分析步骤，并形成一项可放入个人作品集的小成果。进度只保存在当前浏览器。</p>
+            <h2>把本章知识用于一个具体问题</h2>
+            <p>以下内容属于项目设计的教学情境，不冒充真实馆藏档案。选择材料、完成分析步骤，并形成一项可放入个人作品集的小成果；进度只保存在当前浏览器。</p>
           </div>
           <DeepDiveStudio study={deepDive} client:load />
         </section>
@@ -128,6 +134,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
       {lesson.concepts.map((concept, index) => (
         <section id={`concept-${index + 1}`} class="concept">
           <div class="concept-heading"><span>{String(index + 1).padStart(2, "0")}</span><h2>{concept.title}</h2></div>
+          <div class="content-identity"><span>项目教学释义</span><span>人机协作草拟</span><span>不作为原书引文</span></div>
           <p>{concept.explanation}</p>
           <div class="evidence-pair">
             <div><small>例子</small><p>{concept.example}</p></div>
@@ -163,7 +170,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
           <p class="eyebrow">来源与版权</p>
           <h2>{EDITION.publisher} {EDITION.year} 年修订本</h2>
         </div>
-        <p>本页为原创导读、释义与练习，不提供原书全文。当前状态为“{chapter.review}”；仅“已核验”学习单元公开纸本页码，其他内容不把自动识别或技术处理区间冒充为学术出处。</p>
+        <p>本页为项目原创导读、教学释义与互动练习，不提供原书全文，也不将教学案例冒充真实馆藏材料。内容采用人机协作方式草拟，由项目作者承担纸本复核责任。当前状态为“{chapter.review}”；仅“已核验”学习单元公开纸本页码，正式论文请直接引用原书。</p>
       </section>
     </article>
   </div>
@@ -179,6 +186,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   .chapter-layout{display:grid;grid-template-columns:210px 1fr;gap:5rem;padding-top:4rem}.toc{position:sticky;top:100px;height:max-content;display:flex;flex-direction:column;border-top:1px solid var(--line)}.toc small{padding:.8rem 0;color:var(--muted)}.toc a{padding:.5rem 0;border-bottom:1px solid var(--line);color:var(--muted);font-size:.78rem;text-decoration:none}.toc a:hover{color:var(--cinnabar)}
   .lesson>section{scroll-margin-top:110px;padding:3rem 0;border-bottom:1px solid var(--line)}.overview>p:not(.eyebrow){font-family:var(--serif);font-size:1.15rem;line-height:2}.section-map{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem;margin-top:2rem}.section-map span{display:flex;align-items:center;gap:.7rem;padding:.7rem;border:1px solid var(--line);font-size:.8rem}.section-map b{color:var(--cinnabar);font-family:var(--serif)}
   .concept-heading{display:flex;align-items:center;gap:1rem}.concept-heading>span{color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.concept h2,.workflow h2,.check h2,.source-note h2{margin:0;font-family:var(--serif);font-size:2rem}.concept>p{font-family:var(--serif);font-size:1.08rem;line-height:2}.evidence-pair{display:grid;grid-template-columns:1fr 1fr;gap:1rem}.evidence-pair>div{padding:1rem;border-left:3px solid #a57435;background:rgba(255,255,255,.35)}.evidence-pair>div:last-child{border-color:var(--cinnabar)}.evidence-pair small{color:var(--muted);letter-spacing:.1em}.evidence-pair p{margin:.25rem 0;color:var(--muted);font-size:.86rem}
+  .provenance{display:grid;grid-template-columns:repeat(4,1fr);margin:2rem 0;border-top:1px solid var(--line);border-left:1px solid var(--line)}.provenance>div{padding:.85rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:#fffaf0}.provenance small,.provenance strong{display:block}.provenance small{margin-bottom:.35rem;color:var(--cinnabar);font-size:.65rem}.provenance strong{font-family:var(--serif);font-size:.82rem;line-height:1.55}.content-identity{display:flex;flex-wrap:wrap;gap:.35rem;margin:.7rem 0 1.4rem}.content-identity span{padding:.22rem .45rem;border:1px solid var(--line);color:var(--muted);background:#fffaf0;font-size:.64rem}
   .unit-concepts{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.65rem}.unit-concepts a{padding:.2rem .45rem;border:1px solid var(--line);color:var(--cinnabar);background:#fffaf0;font-size:.68rem;text-decoration:none}.unit-concepts a:hover{color:white;background:var(--cinnabar)}
   .workflow ol{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;counter-reset:method;padding:0;list-style:none}.workflow li{min-height:100px;padding:1rem;border:1px solid var(--line);background:rgba(255,255,255,.3)}.workflow li::before{counter-increment:method;content:counter(method);display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.5rem}.check>p:not(.eyebrow){color:var(--muted)}
   :global(.check-question){display:grid;grid-template-columns:45px 1fr;gap:1rem;padding:1.5rem 0;border-top:1px solid var(--line)}:global(.check-number){color:var(--cinnabar);font-family:var(--serif);font-size:1.4rem}:global(.check-question h3){margin:0 0 .8rem;font-family:var(--serif)}:global(.check-options){display:grid;grid-template-columns:1fr 1fr;gap:.5rem}:global(.check-options button){display:flex;gap:.5rem;padding:.65rem;text-align:left;border:1px solid var(--line);background:rgba(255,255,255,.35);font:inherit;cursor:pointer}:global(.check-options button span){color:var(--cinnabar);font-weight:700}:global(.check-options button.correct){border-color:#5c8066;background:#e3eee3}:global(.check-options button.incorrect){border-color:#9f584c;background:#f2dfda}:global(.check-feedback){padding:.8rem;border-left:3px solid var(--cinnabar);color:var(--muted);background:rgba(255,255,255,.35);font-size:.85rem}:global(.check-feedback strong){margin-right:.5rem;color:var(--ink)}:global(.check-result){display:flex;align-items:center;justify-content:space-between;padding:1rem;color:white;background:#2b2c29}:global(.check-result strong){font-family:var(--serif);font-size:1.5rem}:global(.check-result button){padding:.45rem .7rem;border:1px solid rgba(255,255,255,.3);color:white;background:transparent;cursor:pointer}
@@ -186,5 +194,5 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   .unit-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:2rem;margin-bottom:1.5rem}.unit-intro h2,.workbench-section>h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.unit-intro>p,.workbench-lead{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}.unit-list{border-top:1px solid var(--line)}.unit-list article{display:grid;grid-template-columns:90px 1fr;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}.unit-meta span{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.unit-meta small{display:inline-block;margin-top:.35rem;padding:.16rem .42rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.62rem}.unit-list h3{margin:0;font-family:var(--serif);font-size:1.25rem}.unit-question{margin:.3rem 0 1rem;color:var(--cinnabar);font-family:var(--serif)}.unit-list dl{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:0}.unit-list dl div{padding:.7rem;border-left:2px solid #a77734;background:rgba(255,255,255,.35)}.unit-list dl div:last-child{border-color:var(--cinnabar)}.unit-list dt{color:var(--muted);font-size:.68rem}.unit-list dd{margin:.25rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.65}.unit-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}.unit-tags span{padding:.15rem .45rem;border:1px solid var(--line);color:var(--muted);font-size:.68rem}.workbench-lead{margin-bottom:1.2rem}
   .unit-meta b{display:block;margin-top:.45rem;color:var(--muted);font-size:.67rem;font-weight:400}
   .deep-dive-heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:.4rem 2rem;margin-bottom:1.5rem}.deep-dive-heading .eyebrow{grid-column:1/-1}.deep-dive-heading h2{margin:0;font-family:var(--serif);font-size:2rem}.deep-dive-heading>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}
-  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
+  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol,.provenance{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,.provenance,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
 </style>
