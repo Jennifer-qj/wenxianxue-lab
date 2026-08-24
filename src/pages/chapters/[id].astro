@@ -4,6 +4,7 @@ import ChapterCheck from "../../components/ChapterCheck";
 import ResearchQuestionWorkbench from "../../components/ResearchQuestionWorkbench";
 import StructuredPractice from "../../components/StructuredPractice";
 import DeepDiveStudio from "../../components/DeepDiveStudio";
+import ChapterSignature from "../../components/ChapterSignature.astro";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
 import { EDITION } from "../../consts";
@@ -58,6 +59,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
     <aside class="toc">
       <small>本章导航</small>
       <a href="#overview">导读</a>
+      {["ch01", "ch05", "ch07"].includes(chapterId) && <a href="#signature">本章专属入口</a>}
       {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
       {deepDive && <a href="#deep-dive">案例研读工作台</a>}
       {chapterId === "ch01" && <a href="#workbench">研究问题装配台</a>}
@@ -81,6 +83,8 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
           {chapter.sections.map((section, index) => <span><b>{index + 1}</b>{section}</span>)}
         </div>
       </section>
+
+      {["ch01", "ch05", "ch07"].includes(chapterId) && <ChapterSignature chapterId={chapterId} baseUrl={base} />}
 
       {chapterUnits.length > 0 && (
         <section id="learning-units" class="learning-units">
