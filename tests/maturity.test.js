@@ -72,4 +72,16 @@ describe("公开项目成熟度门禁", () => {
     expect(studio).toContain("missingEvidence");
     expect(studio).toContain("关键缺口");
   });
+
+  it("公开作者性、内容来源边界与代表章节差异化入口", () => {
+    const story = read("src/pages/story/index.astro");
+    const signature = read("src/components/ChapterSignature.astro");
+    expect(existsSync(resolve(root, "RIGHTS.md"))).toBe(true);
+    expect(story).toContain("我与 AI");
+    expect(story).toContain("仍未完成");
+    expect(read("src/pages/sitemap.xml.ts")).toContain('"story/"');
+    expect(signature).toContain('chapterId === "ch01"');
+    expect(signature).toContain('chapterId === "ch05"');
+    expect(signature).toContain('chapterId === "ch07"');
+  });
 });
