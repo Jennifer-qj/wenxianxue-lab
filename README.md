@@ -18,6 +18,8 @@
 - 支持同义入口、近似纠错、相关度排序和复核状态筛选的全站搜索
 - 自动错题本、本地学习进度，以及包含札记与收藏的统一档案导入导出
 - 全站随身札记、页面收藏、最近浏览和独立个人学习工作台
+- 十四章学术结构审计、公开人工纸本复核队列与跨章概念复用检查
+- 深度研读中的竞争性结论、关键证据缺口和自适应追问
 - 可拖动知识图谱、关系与置信度筛选、原创方法图示和研读札记导出
 - 古籍鉴定综合案卷：五室证据研判、综合意见、学习报告与 Markdown 导出
 - 移动端适配、首次访问引导、永久使用指南、项目方法页与覆盖／核验矩阵
@@ -29,6 +31,7 @@
 - 使用指南：https://jennifer-qj.github.io/wenxianxue-lab/guide/
 - 更新日志与开放数据：https://jennifer-qj.github.io/wenxianxue-lab/updates/
 - 个人学习工作台：https://jennifer-qj.github.io/wenxianxue-lab/notebook/
+- 学术内容审计：https://jennifer-qj.github.io/wenxianxue-lab/audit/
 
 ## 后续维护
 

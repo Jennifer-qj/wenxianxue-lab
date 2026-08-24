@@ -62,4 +62,14 @@ describe("公开项目成熟度门禁", () => {
     expect(practice).toContain("回到原答案继续修改");
     expect(practice).not.toContain('setResponse("self-pass")');
   });
+
+  it("公开学术审计并让深度研读支持竞争结论", () => {
+    const studio = read("src/components/DeepDiveStudio.tsx");
+    expect(existsSync(resolve(root, "src/pages/audit/index.astro"))).toBe(true);
+    expect(existsSync(resolve(root, "scripts/audit-academic.mjs"))).toBe(true);
+    expect(read("package.json")).toContain("audit:academic");
+    expect(studio).toContain("竞争性结论");
+    expect(studio).toContain("missingEvidence");
+    expect(studio).toContain("关键缺口");
+  });
 });

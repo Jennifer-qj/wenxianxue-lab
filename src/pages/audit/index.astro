@@ -1,0 +1,62 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+import { chapters } from "../../data/site";
+
+const [outlineFiles, conceptFiles, graphFiles, quizFiles, deepFiles] = await Promise.all([
+  getCollection("outline"), getCollection("concepts"), getCollection("graph"), getCollection("quiz"), getCollection("deepdives"),
+]);
+const units = outlineFiles.flatMap((entry) => entry.data.items);
+const concepts = conceptFiles.flatMap((entry) => entry.data.items);
+const edges = graphFiles.flatMap((entry) => entry.data.items);
+const quizzes = quizFiles.flatMap((entry) => entry.data.items);
+const deepdives = deepFiles.flatMap((entry) => entry.data.items);
+const verifiedUnits = units.filter((item) => item.status === "verified").length;
+const verifiedConcepts = concepts.filter((item) => item.status === "verified").length;
+const confirmedEdges = edges.filter((item) => item.confidence === "confirmed").length;
+const rows = chapters.map((chapter, index) => {
+  const number = index + 1;
+  const chapterUnits = units.filter((item) => item.chapter === number);
+  const chapterConcepts = concepts.filter((item) => item.chapter_ids.includes(chapter.id));
+  const chapterQuizzes = quizzes.filter((item) => item.chapter === number);
+  const chapterEdges = edges.filter((edge) => {
+    const source = concepts.find((item) => item.id === edge.source); const target = concepts.find((item) => item.id === edge.target);
+    return source?.chapter_ids.includes(chapter.id) || target?.chapter_ids.includes(chapter.id);
+  });
+  const study = deepdives.find((item) => item.chapter === number);
+  return { chapter, units: chapterUnits.length, verifiedUnits: chapterUnits.filter((item) => item.status === "verified").length, concepts: chapterConcepts.length, verifiedConcepts: chapterConcepts.filter((item) => item.status === "verified").length, quizzes: chapterQuizzes.length, types: new Set(chapterQuizzes.map((item) => item.type)).size, edges: chapterEdges.length, confirmedEdges: chapterEdges.filter((item) => item.confidence === "confirmed").length, conclusions: study?.conclusions.length ?? 0 };
+});
+---
+
+<BaseLayout title="学术内容审计" description="公开展示文献学实验室的机器结构审计、人工纸本复核队列与章节级质量状态" active="about">
+  <header class="audit-hero">
+    <div class="container"><p class="eyebrow">ACADEMIC CONTENT AUDIT</p><h1 class="display-title">完整覆盖不等于<em>已经核验</em></h1><p>这里把“系统已经收录什么”和“哪些内容已经由纸本人工核验”分开呈现。自动检查能够发现结构错误，但不能替代学术判断。</p></div>
+  </header>
+  <div class="audit-main container">
+    <section class="audit-summary">
+      <article><small>机器结构检查</small><strong>通过</strong><span>引用、答案、关系与案例字段一致</span></article>
+      <article><small>纸本核验学习单元</small><strong>{verifiedUnits}<i>/{units.length}</i></strong><span>{units.length - verifiedUnits} 项仍在人工复核队列</span></article>
+      <article><small>纸本核验概念</small><strong>{verifiedConcepts}<i>/{concepts.length}</i></strong><span>未核验词条不会伪装为定论</span></article>
+      <article><small>原书确认关系</small><strong>{confirmedEdges}<i>/{edges.length}</i></strong><span>其余为教学归纳或待考关系</span></article>
+    </section>
+
+    <section class="audit-explainer"><div><p class="eyebrow">Two review layers</p><h2>两套门禁，各自负责什么？</h2></div><dl><div><dt>自动结构审计</dt><dd>检查题目答案越界、排序答案完整性、关系自环、竞争结论引用、三类自适应追问和全站九题型覆盖；跨章复用概念记录为知识连接。</dd></div><div><dt>人工纸本复核</dt><dd>核对专名、书名、异体字、观点边界、真实页码与复杂案例。只有完成这一层，状态才可改为“已核验”。</dd></div></dl></section>
+
+    <section class="review-table">
+      <header><div><p class="eyebrow">Chapter queue</p><h2>十四章复核队列</h2></div><p>竞争结论是教学情境中的可比较假说，不表示原书直接提出这些具体结论。</p></header>
+      <div class="review-head"><span>章节</span><span>学习单元</span><span>概念</span><span>关系</span><span>练习与研读</span></div>
+      {rows.map((row) => <article>
+        <div><small>{row.chapter.number}</small><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${row.chapter.id}/`}>{row.chapter.title}</a></div>
+        <div><strong>{row.units}</strong><span>已核验 {row.verifiedUnits}</span><i style={`--done:${row.units ? row.verifiedUnits / row.units * 100 : 0}%`}><b /></i></div>
+        <div><strong>{row.concepts}</strong><span>已核验 {row.verifiedConcepts}</span><i style={`--done:${row.concepts ? row.verifiedConcepts / row.concepts * 100 : 0}%`}><b /></i></div>
+        <div><strong>{row.edges}</strong><span>确认关系 {row.confirmedEdges}</span></div>
+        <div><strong>{row.quizzes} 题 · {row.types} 题型</strong><span>{row.conclusions} 条竞争结论</span></div>
+      </article>)}
+    </section>
+    <section class="audit-boundary"><strong>状态边界</strong><p>“机器检查通过”只说明数据结构自洽；“待复核”不代表内容错误，而是尚未完成纸本逐项核对。正式论文仍应直接引用原书。</p><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/coverage/`}>查看全书覆盖矩阵 →</a></section>
+  </div>
+</BaseLayout>
+
+<style>
+  .audit-hero{padding:7rem 0 4rem;color:#f7f0e4;background:#292a27}.audit-hero p:last-child{max-width:52rem;color:#c4beb5;font-family:var(--serif);font-size:1.05rem}.audit-main{padding-block:3rem 7rem}.audit-summary{display:grid;grid-template-columns:repeat(4,1fr);border:1px solid var(--line)}.audit-summary article{display:flex;min-height:170px;flex-direction:column;justify-content:center;padding:1.2rem;border-right:1px solid var(--line);background:#fffaf0}.audit-summary article:last-child{border:0}.audit-summary small{color:var(--cinnabar)}.audit-summary strong{font-family:var(--serif);font-size:2.4rem}.audit-summary strong i{color:var(--muted);font-size:1rem;font-style:normal}.audit-summary span{color:var(--muted);font-size:.72rem}.audit-explainer{display:grid;grid-template-columns:.7fr 1.3fr;gap:3rem;padding:4rem 0;border-bottom:1px solid var(--line)}.audit-explainer h2,.review-table h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.audit-explainer dl{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:0}.audit-explainer dl div{padding:1rem;border-left:3px solid #a57435;background:#eee3d2}.audit-explainer dl div:last-child{border-color:var(--cinnabar)}.audit-explainer dt{font-family:var(--serif);font-weight:700}.audit-explainer dd{margin:.4rem 0 0;color:var(--muted);font-size:.78rem}.review-table{padding-top:4rem}.review-table>header{display:flex;align-items:end;justify-content:space-between;gap:2rem;margin-bottom:1.5rem}.review-table>header>p{max-width:34rem;color:var(--muted);font-size:.78rem}.review-head,.review-table>article{display:grid;grid-template-columns:1.3fr .8fr .8fr .8fr 1.1fr;gap:1rem;align-items:center;padding:1rem;border-bottom:1px solid var(--line)}.review-head{color:var(--muted);background:#e9dfcf;font-size:.7rem}.review-table>article{background:rgba(255,255,255,.3)}.review-table>article>div{display:grid}.review-table article small{color:var(--cinnabar)}.review-table article a{font-family:var(--serif);font-weight:700;text-decoration:none}.review-table article strong{font-family:var(--serif)}.review-table article span{color:var(--muted);font-size:.68rem}.review-table article i{height:3px;margin-top:.35rem;background:#ddd0bd}.review-table article i b{display:block;width:var(--done);height:100%;background:#58745f}.audit-boundary{display:grid;grid-template-columns:auto 1fr auto;gap:1.5rem;align-items:center;margin-top:2rem;padding:1.2rem;border:1px solid var(--line);background:#fffaf0}.audit-boundary strong{font-family:var(--serif)}.audit-boundary p{margin:0;color:var(--muted);font-size:.78rem}.audit-boundary a{color:var(--cinnabar);white-space:nowrap}@media(max-width:850px){.audit-summary{grid-template-columns:repeat(2,1fr)}.audit-summary article:nth-child(2){border-right:0}.audit-explainer{grid-template-columns:1fr}.review-head{display:none}.review-table>article{grid-template-columns:1.2fr repeat(2,1fr)}.review-table>article>div:nth-child(4),.review-table>article>div:nth-child(5){grid-column:auto}.audit-boundary{grid-template-columns:1fr}}@media(max-width:580px){.audit-hero{padding:4rem 0 3rem}.audit-summary,.audit-explainer dl{grid-template-columns:1fr}.audit-summary article{border-right:0;border-bottom:1px solid var(--line)}.review-table>header{align-items:start;flex-direction:column}.review-table>article{grid-template-columns:1fr 1fr}.review-table>article>div:first-child{grid-column:1/-1}}
+</style>

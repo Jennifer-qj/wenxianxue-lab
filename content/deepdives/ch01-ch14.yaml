@@ -12,6 +12,13 @@ items:
     workflow: [列出材料实际提供的信息, 选择文字或物质等一个主问题, 为每项判断匹配证据, 写出暂不处理的范围, 形成可检验的问题句]
     deliverable: 一张“研究问题—证据—边界”三列表，不超过 500 字。
     rubric: [问题对象具体, 证据与问题对应, 主动声明材料边界, 不以结论代替问题]
+    conclusions:
+      - {id: text-first, label: 以文本形成问题为主, claim: 先考察讲义文字内容及删改层次，再把装订与递藏作为辅助条件。, requires: [object, parallel], caution: 不能因此忽略现存形态对文字层次的影响。}
+      - {id: object-first, label: 以物质生命史为主, claim: 先重建讲义的制作、修改与收藏过程，再限定可讨论的文本问题。, requires: [object, catalog], caution: 物质线索不能自动回答内容的思想意义。}
+    followups:
+      - {trigger: insufficient, prompt: 你选择的材料还不足以连接问题与证据；应补哪一种对照材料？}
+      - {trigger: conflict, prompt: 如果文字层次与装订层次不一致，哪一个问题需要先暂停？}
+      - {trigger: supported, prompt: 这条问题路径暂时成立；请再写一句明确排除的研究范围。}
     status: pending_review
 
   - id: deep-ch02-001
@@ -28,6 +35,13 @@ items:
     workflow: [区分可见特征与不可见结构, 记录每张图的观察角度, 提出至少两种候选装帧, 列出区分候选所需补拍位置, 给出暂定而非绝对结论]
     deliverable: 一份装帧鉴定请求单，包含候选类型、现有依据和四个补拍机位。
     rubric: [识别后配可能, 使用形制特征而非年代印象, 补拍要求可执行, 结论强度适当]
+    conclusions:
+      - {id: provisional-thread, label: 暂定线装或后期改装, claim: 现有图像支持记录线装特征，但必须把后期改装保留为竞争解释。, requires: [opening, cover, side], caution: 未见书脊书口前不能确认内部缝线结构。}
+      - {id: evidence-insufficient, label: 暂不判定装帧类型, claim: 影像角度不足，只能列出候选装帧与补拍清单。, requires: [opening, catalog], caution: 馆藏著录只能作为待核对线索。}
+    followups:
+      - {trigger: insufficient, prompt: 哪个补拍机位最能区分线装与包背装？}
+      - {trigger: conflict, prompt: 如果封面与内页结构年代不一致，应如何描述改装层次？}
+      - {trigger: supported, prompt: 把结论改写成包含“现有影像范围内”的有限度表述。}
     status: pending_review
 
   - id: deep-ch03-001
@@ -43,6 +57,13 @@ items:
     workflow: [提取所有人名和动作, 区分翻译与后期传播阶段, 对照版本建立差异表, 将改动归入可证或待证角色, 画出参与者时间线]
     deliverable: 一幅文本生产流程图，并为每条角色关系附证据来源。
     rubric: [角色不只限于题名作者, 区分形成与流传, 异文不轻率归因, 图示可追溯]
+    conclusions:
+      - {id: collaborative-production, label: 协作生产链, claim: 题名译者之外，口译、笔受、校订和润文共同构成文本形成链。, requires: [title, preface], caution: 序言未题名者仍可能被系统性遗漏。}
+      - {id: layered-agency, label: 形成与后期改写分层, claim: 现存印本同时包含早期翻译协作与后期编辑修改。, requires: [preface, editions], caution: 版本差异尚不能直接归到某一位参与者。}
+    followups:
+      - {trigger: insufficient, prompt: 还缺哪类材料才能把术语改动归到具体阶段？}
+      - {trigger: conflict, prompt: 题署与序言责任说明冲突时，数据库应如何分字段记录？}
+      - {trigger: supported, prompt: 为流程图中的每条人物关系补一个可追溯来源。}
     status: pending_review
 
   - id: deep-ch04-001
@@ -59,6 +80,13 @@ items:
     workflow: [逐项编号物证, 查人物生卒和收藏活动, 比较印章叠压与题记年代, 区分确定节点和推测连线, 标出来源中断]
     deliverable: 一条带“确定／推测／空白”标识的递藏时间轴。
     rubric: [不把藏印自动等同所有权, 时间次序自洽, 空白明确可见, 引用目录与档案]
+    conclusions:
+      - {id: minimal-chain, label: 最小确定递藏链, claim: 只连接题记纪年与机构入藏两个确定节点，其余藏印保留为候选环节。, requires: [note, accession], caution: 藏印不能自动等同所有权转移。}
+      - {id: probable-chain, label: 带置信度的推测链, claim: 综合印章叠压、目录和题记提出最可能次序，并显式标出断点。, requires: [seals, note, catalogs, accession], caution: 未著录不能作为否定收藏的证据。}
+    followups:
+      - {trigger: insufficient, prompt: 当前链条缺少哪两个节点之间的直接转移证据？}
+      - {trigger: conflict, prompt: 印章叠压与题记年代相反时，哪种后钤情形需要检验？}
+      - {trigger: supported, prompt: 把确定连线与推测连线分别使用不同视觉编码。}
     status: pending_review
 
   - id: deep-ch05-001
@@ -75,6 +103,13 @@ items:
     workflow: [按书叶分区记录差异, 将每项证据限定到作用范围, 寻找同版对照本, 提出多个竞争解释, 按解释力和假设数量排序]
     deliverable: 一份版本鉴定意见，至少保留两个候选结论并说明淘汰条件。
     rubric: [多证据互证, 处理冲突而非择一, 区分全书与局部书叶, 结论可被新证据修正]
+    conclusions:
+      - {id: later-impression, label: 旧版后印或局部补版, claim: 牌记可能保存早期刊刻信息，而避讳与纸张提示后期印补层次。, requires: [colophon, taboo, paper], caution: 结论必须限定到具体书叶，不能概括全书。}
+      - {id: altered-imprint, label: 牌记挖改或后配, claim: 牌记与正文、纸张冲突可能源于后配或人为改动。, requires: [colophon, paper, images], caution: 未见同版对照本前只能作为候选解释。}
+    followups:
+      - {trigger: insufficient, prompt: 哪一种同版对照最能区分后印与牌记后配？}
+      - {trigger: conflict, prompt: 避讳只集中在少数书叶时，结论对象应如何缩小？}
+      - {trigger: supported, prompt: 为两个候选结论分别写出一条可证伪条件。}
     status: pending_review
 
   - id: deep-ch06-001
@@ -90,6 +125,13 @@ items:
     workflow: [完整记录底文和异文, 评估各证据独立性, 比较文义与用语习惯, 判断能否排除一个读法, 撰写改字或存疑校记]
     deliverable: 一条规范校勘记，包含材料、推理和结论强度。
     rubric: [不以通顺作为唯一标准, 评估传本关系, 旁证有来源批判, 校记可复核]
+    conclusions:
+      - {id: retain-variant, label: 保留底文并列异文, claim: 两个读法均可成立，现有证据不足以排除其一，应出校存疑。, requires: [witnesses, parallel, quotation], caution: 类书引文可能节改，不能简单按时代早晚定胜负。}
+      - {id: cautious-emendation, label: 有条件采用改字, claim: 若复文、传本关系与旁证形成独立合证，可提出改字并保留异文。, requires: [witnesses, parallel, quotation], caution: 必须说明各证据是否真正独立。}
+    followups:
+      - {trigger: insufficient, prompt: 你是否已经说明甲乙本之间可能的传承关系？}
+      - {trigger: conflict, prompt: 早期旁证与本书内部用语冲突时，为什么“多闻阙疑”可能更合理？}
+      - {trigger: supported, prompt: 写一条同时保留材料、推理和结论强度的校勘记。}
     status: pending_review
 
   - id: deep-ch07-001
@@ -105,6 +147,13 @@ items:
     workflow: [为每条著录建立独立记录, 标准化而不删除原始题名, 比较内容起讫和篇卷, 建立同一作品关系或明确分离, 记录判断来源]
     deliverable: 三条规范书目记录和一张名称关系表。
     rubric: [作品与版本分层, 原始著录可追溯, 同名不误合, 异名有证据关联]
+    conclusions:
+      - {id: same-work-alias, label: 同书异名聚合, claim: 内容起讫、撰人和篇卷结构一致时，可在作品层建立异名关系。, requires: [titles, incipit, agents], caution: 标准题名不能覆盖或删除原始著录。}
+      - {id: homonymous-works, label: 异书同名分离, claim: 内容、时代或责任者不同的同名书应建立独立作品记录。, requires: [incipit, agents], caution: 卷数差异本身不足以证明是不同作品。}
+    followups:
+      - {trigger: insufficient, prompt: 还缺哪一个字段才能避免把版本差异误当作品差异？}
+      - {trigger: conflict, prompt: 书名相同但内容起讫不同，应优先保留什么原始信息？}
+      - {trigger: supported, prompt: 为“作品—版本—单件”三层分别指定唯一标识。}
     status: pending_review
 
   - id: deep-ch08-001
@@ -121,6 +170,13 @@ items:
     workflow: [拆分作者时代来源三种身份主张, 限定每条反证的作用范围, 给出整体或局部作伪结论, 重新标注实际时代, 设计价值保留字段]
     deliverable: 一张“身份判定＋价值重标注”数据库卡片。
     rubric: [伪托与无价值分开, 年代结论有证据, 局部整体不混淆, 使用场景重新限定]
+    conclusions:
+      - {id: forged-attribution, label: 否定托名，保留时代价值, claim: 托名汉人不能成立，但材料可作为宋代观念与叙事的研究对象。, requires: [language, institution, transmission, reception], caution: 后出证据应分别排除局部窜改的可能。}
+      - {id: layered-text, label: 分层判断而非整书定伪, claim: 现存文本可能包含早期材料与宋代重编层，应逐层标注来源和年代。, requires: [language, institution, transmission], caution: 分层假说需要版本或引文证据支持。}
+    followups:
+      - {trigger: insufficient, prompt: 哪项材料能够区分整书晚出与局部后人窜改？}
+      - {trigger: conflict, prompt: 语言与制度证据指向不同时代时，应如何缩小结论范围？}
+      - {trigger: supported, prompt: 为数据库分别填写“托名身份”和“实际研究时代”。}
     status: pending_review
 
   - id: deep-ch09-001
@@ -137,6 +193,13 @@ items:
     workflow: [逐条记录引文出处和版本, 对齐异文发现共享错误, 绘制可能的转引关系, 去除重复证据后编排, 对无法定位次序的佚文存疑]
     deliverable: 一张引文谱系图和一份带出处等级的辑佚清单。
     rubric: [识别证据非独立性, 类书版本明确, 不把辑本当原书, 不强造篇次]
+    conclusions:
+      - {id: independent-witnesses, label: 保留独立引文见证, claim: 先识别独立来源，再以出处等级辑录亡书材料。, requires: [leishu_a, leishu_bc, catalog], caution: 相同文字不等于独立支持。}
+      - {id: transmission-cluster, label: 合并转引证据簇, claim: 乙丙共享误字时先视为一个传承簇，清代辑本仅作研究史记录。, requires: [leishu_bc, congshu, catalog], caution: 共同上游来源仍是待检验解释。}
+    followups:
+      - {trigger: insufficient, prompt: 你能指出哪条共享误字最可能揭示转引关系吗？}
+      - {trigger: conflict, prompt: 早出类书节文与晚出类书全文冲突时，应怎样分配权重？}
+      - {trigger: supported, prompt: 在辑佚清单中为每条材料标注独立性等级。}
     status: pending_review
 
   - id: deep-ch10-001
@@ -153,6 +216,13 @@ items:
     workflow: [统一地名和时间口径, 区分个人到达与宗族形成, 将三种材料放入时间线, 解释冲突的编纂机制, 给出时间区间而非单年]
     deliverable: 一条多来源迁徙时间线和 600 字证据说明。
     rubric: [地理沿革处理正确, 区分个人与群体, 冲突不被抹平, 结论以区间表达]
+    conclusions:
+      - {id: early-individual, label: 明初已有个体活动, claim: 家谱与墓碑可支持部分成员较早到达，但不等于宗族已经形成。, requires: [genealogy, epitaph, maps], caution: 家谱远祖叙事可能是后期追补。}
+      - {id: lineage-formation, label: 明中叶形成可见宗族, claim: 县志可见时间更适合描述公共记录中的宗族形成下限。, requires: [gazetteer, epitaph, maps], caution: 未见于早期县志不能证明此前无人居住。}
+    followups:
+      - {trigger: insufficient, prompt: 当前材料能证明个人到达，还是能证明宗族形成？}
+      - {trigger: conflict, prompt: 三种材料使用不同地名边界时，时间线应先做什么转换？}
+      - {trigger: supported, prompt: 用起讫区间分别表达迁入、定居和宗族形成。}
     status: pending_review
 
   - id: deep-ch11-001
@@ -169,6 +239,13 @@ items:
     workflow: [核定各本编纂年代, 区分作品文本与作者归属问题, 对齐篇题和异文, 追查所谓旧本, 分别给出文字和归属结论]
     deliverable: 一份总集—别集对校表及作者归属说明。
     rubric: [两个问题分开判断, 成书层次清楚, 异文来源可追, 不以早出自动定优]
+    conclusions:
+      - {id: early-reading, label: 早期选集保存较早读法, claim: 早期选集可能保存较早文字形态，但仍需解释选家的改动。, requires: [anthology, collection, quotations], caution: 早出不自动等于正确或作者原稿。}
+      - {id: attribution-uncertain, label: 文本可校，归属存疑, claim: 可以对校文字，却暂不确认作者归属。, requires: [anthology, collection, complete, quotations], caution: 全集所谓“旧本”来源不明，不能单独定案。}
+    followups:
+      - {trigger: insufficient, prompt: 文字异同与作者归属是否已经拆成两个问题？}
+      - {trigger: conflict, prompt: 早期选集与同时代称引相冲突时，还需要追查哪类来源？}
+      - {trigger: supported, prompt: 分别写出文字判断和归属判断的置信度。}
     status: pending_review
 
   - id: deep-ch12-001
@@ -185,6 +262,13 @@ items:
     workflow: [把真实性与语境完整性分开, 优先记录实物和旧拓, 检验物理缀合, 比较字形格式与同组材料, 分层写出可用和不可用结论]
     deliverable: 一份三层评估表：真伪、文本、历史语境。
     rubric: [问题分层, 物理证据优先, 不因无来源直接判伪, 不虚构缺失语境]
+    conclusions:
+      - {id: authentic-limited-context, label: 真品可能性高，语境受限, claim: 实物、旧拓与物理缀合可支持真实性，但历史语境价值仍受来源缺失限制。, requires: [object, join, excavation], caution: 内容相连不能替代断口等物理缀合。}
+      - {id: authenticity-unresolved, label: 真伪暂不确定, claim: 字形与格式相似不足以排除伪刻，应暂停整体历史解释。, requires: [object, script, excavation], caution: 无来源不等于必伪，结论须保持可逆。}
+    followups:
+      - {trigger: insufficient, prompt: 哪项专业检测最能提高真实性判断的证据强度？}
+      - {trigger: conflict, prompt: 文字可与发掘品连读但断口不合时，能保留哪一层价值？}
+      - {trigger: supported, prompt: 分别为真伪、文本和历史语境写三条结论。}
     status: pending_review
 
   - id: deep-ch13-001
@@ -201,6 +285,13 @@ items:
     workflow: [冻结原始编号不改写, 分别建立物理与文本约束, 逐项测试两套方案, 标记只能由主观文意支持的连接, 保留竞争方案和关键验证点]
     deliverable: 一张双方案编联图，并标出强连接、弱连接和待证连接。
     rubric: [原始记录保留, 物质文本证据分开, 不机械套传世本, 竞争方案可比较]
+    conclusions:
+      - {id: physical-first, label: 物质约束优先方案, claim: 以位置、简长、编绳痕与断口建立骨架，再用文意检验。, requires: [position, physical, text], caution: 出土前扰动会削弱空间邻近的证明力。}
+      - {id: parallel-assisted, label: 平行文本辅助方案, claim: 在不改写原编号的前提下，用传世本或同类材料提出竞争编联。, requires: [physical, text, parallel], caution: 平行文本不能机械决定出土文本顺序。}
+    followups:
+      - {trigger: insufficient, prompt: 哪一条连接目前只靠“读起来更顺”？}
+      - {trigger: conflict, prompt: 物质约束与传世本顺序冲突时，怎样保留双方案？}
+      - {trigger: supported, prompt: 为每条连接标注强、弱或待证，并写明判断依据。}
     status: pending_review
 
   - id: deep-ch14-001
@@ -217,4 +308,11 @@ items:
     workflow: [建立跨馆编号对照表, 分离物质与文本证据, 请求缺失的高质量影像, 测试多种拼接次序, 发布带版本号的虚拟缀合记录]
     deliverable: 一份 IIIF 式虚拟重聚方案说明，包括统一标识、图像需求和缀合置信度。
     rubric: [编号关系清楚, 多证据缀合, 图像缺口明确, 方案可更新和撤销]
+    conclusions:
+      - {id: provisional-rejoin, label: 暂定同卷虚拟缀合, claim: 编号、物质、书手与文本多项证据共同支持暂定重聚。, requires: [identifiers, material, hand, text], caution: 黑白旧照片造成的物质信息缺口必须保留。}
+      - {id: related-not-joined, label: 相关写卷但暂不缀合, claim: 书手与内容相近可支持相关性，却不足以确认物理连续。, requires: [identifiers, hand, text], caution: 同一书手可抄多卷，重复段落也会造成假衔接。}
+    followups:
+      - {trigger: insufficient, prompt: 哪一种高质量影像最能检验断口与纸纹连续性？}
+      - {trigger: conflict, prompt: 文意连续而物质特征不合时，虚拟平台应怎样展示两个方案？}
+      - {trigger: supported, prompt: 为缀合记录加入版本号、置信度和撤销理由字段。}
     status: pending_review

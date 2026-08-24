@@ -61,6 +61,13 @@ export const deepDiveSchema = z.object({
   workflow: z.array(z.string().min(1)).min(3),
   deliverable: z.string().min(1),
   rubric: z.array(z.string().min(1)).min(3),
+  conclusions: z.array(z.object({
+    id: z.string().min(1), label: z.string().min(1), claim: z.string().min(1),
+    requires: z.array(z.string().min(1)).min(1), caution: z.string().min(1),
+  })).min(2),
+  followups: z.array(z.object({
+    trigger: z.enum(["insufficient", "conflict", "supported"]), prompt: z.string().min(1),
+  })).min(3),
   status: reviewStatusSchema,
 });
 

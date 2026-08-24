@@ -27,6 +27,7 @@ const rows = chapters.map((chapter, index) => {
     <p class="eyebrow">Coverage matrix</p>
     <h1 class="display-title">十四章，<em>一章不漏</em></h1>
     <p>这张矩阵直接读取内容主数据，展示每章已经完成的学习单元、概念、题目和页码锚点。空白章节不会被伪装成“已完成”。</p>
+    <a class="audit-link" href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/audit/`}>查看机器审计与人工复核队列 →</a>
     <div class="coverage-summary"><div><strong>{units.length}</strong><span>正式 MKU</span></div><div><strong>{concepts.length}</strong><span>概念节点</span></div><div><strong>{quizzes.length}</strong><span>结构化题目</span></div><div><strong>100%</strong><span>当前 MKU 概念覆盖率</span></div></div>
   </header>
   <section class="schema container">
@@ -46,7 +47,7 @@ const rows = chapters.map((chapter, index) => {
   </section>
 </BaseLayout>
 <style>
-  .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
+  .page-hero{padding:7rem 0 4rem}.page-hero>p:not(.eyebrow){max-width:44rem;color:var(--muted)}.audit-link{display:inline-block;margin-top:.8rem;color:var(--cinnabar)}
   .coverage-summary{display:grid;grid-template-columns:repeat(4,1fr);gap:.7rem;margin-top:2rem}.coverage-summary div{padding:1rem;border:1px solid var(--line);background:rgba(255,255,255,.35)}.coverage-summary strong,.coverage-summary span{display:block}.coverage-summary strong{font-family:var(--serif);font-size:1.7rem;color:var(--cinnabar)}.coverage-summary span{color:var(--muted);font-size:.7rem}
   .schema{padding:1.2rem 0 2rem}.schema>div{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}.schema span{padding:.4rem .65rem;border:1px solid var(--line);background:rgba(255,255,255,.35);font-size:.75rem}.schema i{color:var(--cinnabar);font-style:normal}
   .coverage{padding-bottom:6rem}.table-head,article{display:grid;grid-template-columns:1.1fr 1.8fr 1.1fr .8fr;gap:1rem;padding:1.1rem;border-bottom:1px solid var(--line);align-items:center}

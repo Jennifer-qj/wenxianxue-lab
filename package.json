@@ -9,7 +9,8 @@
     "postbuild": "node scripts/build-search.mjs",
     "preview": "astro preview",
     "check": "astro check",
-    "validate": "node scripts/validate-content.mjs && node scripts/scan-ocr.mjs && node scripts/audit-repo.mjs",
+    "validate": "node scripts/validate-content.mjs && node scripts/audit-academic.mjs && node scripts/scan-ocr.mjs && node scripts/audit-repo.mjs",
+    "audit:academic": "node scripts/audit-academic.mjs",
     "check:links": "node scripts/check-links.mjs",
     "test": "vitest run",
     "subset-fonts": "node scripts/subset-fonts.mjs"
