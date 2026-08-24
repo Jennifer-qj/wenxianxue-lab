@@ -33,7 +33,7 @@ describe("公开项目成熟度门禁", () => {
   });
 
   it("展示素材完整且不是空白占位图", () => {
-    const images = ["01-home", "02-guide", "03-coverage", "04-graph", "05-lab", "06-chapter"];
+    const images = ["01-home", "02-guide", "03-coverage", "04-graph", "05-lab", "06-chapter", "07-story", "08-version", "09-catalog"];
     images.forEach((name) => expect(statSync(resolve(root, `docs/media/${name}.png`)).size).toBeGreaterThan(20_000));
   });
 
@@ -83,5 +83,6 @@ describe("公开项目成熟度门禁", () => {
     expect(signature).toContain('chapterId === "ch01"');
     expect(signature).toContain('chapterId === "ch05"');
     expect(signature).toContain('chapterId === "ch07"');
+    expect(read("src/components/WelcomeGuide.tsx")).toContain('welcomeMode === "0"');
   });
 });
