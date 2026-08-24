@@ -1,11 +1,13 @@
 ---
 import "../styles/global.css";
 import WelcomeGuide from "../components/WelcomeGuide";
+import LearningDock from "../components/LearningDock";
+import type { LibraryPageType } from "../lib/learningArchive";
 
 interface Props {
   title?: string;
   description?: string;
-  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "guide" | "about";
+  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "guide" | "about" | "notebook";
 }
 
 const {
@@ -23,6 +25,11 @@ const nav = [
 ];
 const fullTitle = title === "文献学实验室" ? title : `${title}｜文献学实验室`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const pageType: LibraryPageType = Astro.url.pathname.includes("/chapters/") ? "chapter"
+  : Astro.url.pathname.includes("/concepts/") ? "concept"
+  : Astro.url.pathname.includes("/lab/") ? "lab"
+  : Astro.url.pathname.includes("/paths/") ? "path"
+  : Astro.url.pathname.includes("/guide/") ? "guide" : "other";
 const ogImage = new URL(`${base}og-cover.png`, Astro.site ?? Astro.url.origin);
 const structuredData = {
   "@context": "https://schema.org",
@@ -81,6 +88,7 @@ const structuredData = {
         ))}
       </nav>
       <div class="header-tools">
+        <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}>札记</a>
         <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}>指南</a>
         <a href={`${base}search/`} aria-current={active === "search" ? "page" : undefined}>搜索</a>
         <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}>项目</a>
@@ -105,5 +113,6 @@ const structuredData = {
       </div>
     </footer>
     <WelcomeGuide baseUrl={base} client:load />
+    {active !== "notebook" && <LearningDock baseUrl={base} title={title} pageType={pageType} client:load />}
   </body>
 </html>

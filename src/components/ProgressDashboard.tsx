@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from "react";
+import { LIBRARY_KEY, emptyLibrary, readLibrary } from "../lib/learningArchive";
 
 type ProgressItem = { completed: boolean; score: number; total: number; updatedAt: string; title?: string };
 type SavedProgress = Record<string, ProgressItem>;
@@ -79,7 +80,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
       const key = localStorage.key(index);
       if (key?.startsWith("wenxianxue-deepdive-")) deepdives[key] = safeRead(key, {});
     }
-    const payload = { version: 1, exportedAt: new Date().toISOString(), progress, wrongBook, deepdives };
+    const payload = { version: 2, exportedAt: new Date().toISOString(), progress, wrongBook, deepdives, library: readLibrary() };
     const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `wenxianxue-learning-${new Date().toISOString().slice(0, 10)}.json`; anchor.click(); URL.revokeObjectURL(url);
     setNotice("学习档案已经导出。文件只包含本地学习记录。 ");
@@ -89,20 +90,22 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     if (!file) return;
     try {
       const payload = JSON.parse(await file.text());
-      if (payload.version !== 1 || typeof payload.progress !== "object" || typeof payload.wrongBook !== "object") throw new Error();
+      if (![1, 2].includes(payload.version) || typeof payload.progress !== "object" || typeof payload.wrongBook !== "object") throw new Error();
       localStorage.setItem("wxlab-progress", JSON.stringify(payload.progress));
       localStorage.setItem("wxlab-wrongbook", JSON.stringify(payload.wrongBook));
       Object.entries(payload.deepdives ?? {}).forEach(([key, value]) => key.startsWith("wenxianxue-deepdive-") && localStorage.setItem(key, JSON.stringify(value)));
+      if (payload.version === 2 && payload.library && typeof payload.library === "object") { localStorage.setItem(LIBRARY_KEY, JSON.stringify({ ...emptyLibrary(), ...payload.library, version: 1 })); window.dispatchEvent(new CustomEvent("wxlab-library-updated")); }
       read(); setNotice("学习档案导入成功。");
     } catch { setNotice("导入失败：请选择由本站导出的 JSON 学习档案。"); }
     if (inputRef.current) inputRef.current.value = "";
   }
 
   function clearArchive() {
-    if (!window.confirm("确定清空当前浏览器中的全部学习进度、错题和研读记录吗？此操作不可撤销。")) return;
+    if (!window.confirm("确定清空当前浏览器中的全部进度、错题、研读记录、札记与收藏吗？此操作不可撤销。")) return;
     localStorage.removeItem("wxlab-progress"); localStorage.removeItem("wxlab-wrongbook");
     const keys = Array.from({ length: localStorage.length }, (_, index) => localStorage.key(index)).filter((key): key is string => Boolean(key?.startsWith("wenxianxue-deepdive-")));
     keys.forEach((key) => localStorage.removeItem(key)); read(); setNotice("本地学习档案已清空。");
+    localStorage.removeItem(LIBRARY_KEY); window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
   }
 
   return <div className="progress-dashboard progress-dashboard--full">
@@ -125,8 +128,8 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
       <header><div><p className="mini-label">Wrong book</p><h2>错题本</h2></div><strong>{wrongItems.length}</strong></header>
       {wrongItems.length ? wrongItems.slice(0, 8).map((item) => <article key={item.id}><div><small>第 {item.chapter} 章 · {item.type} · 错误 {item.attempts} 次 {dueItems.some((due) => due.id === item.id) ? "· 今日应复习" : "· 等待间隔复习"}</small><h3>{item.prompt}</h3><p>{item.explanation}</p></div><a href={`${baseUrl}chapters/ch${String(item.chapter).padStart(2, "0")}/#check`}>返回重做 →</a></article>) : <p className="wrong-empty">暂时没有错题。答错的结构化题目会自动进入这里；重新答对后自动移出。</p>}
     </section>
-    <section className="archive-tools">
-      <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>导出文件只包含进度、错题和研读勾选，不包含账号或设备信息。</p></div>
+    <section className="archive-tools" id="archive">
+      <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>统一备份进度、错题、研读勾选、札记、收藏和最近浏览；不包含账号或设备信息。</p></div>
       <div><button onClick={exportArchive}>导出 JSON</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
       {notice && <p className="archive-notice" role="status">{notice}</p>}
     </section>

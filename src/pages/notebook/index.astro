@@ -1,0 +1,19 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import NotebookDashboard from "../../components/NotebookDashboard";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<BaseLayout title="个人学习工作台" description="集中管理文献学实验室的浏览器本地札记、收藏与最近浏览" active="notebook">
+  <header class="page-hero container">
+    <p class="eyebrow">Personal learning workspace</p>
+    <h1 class="display-title">把零散阅读变成可回看的<em>学习现场</em></h1>
+    <p>在任意章节、概念或实验页面写札记和收藏，再回到这里整理。无需登录，内容不会离开当前浏览器。</p>
+  </header>
+  <main class="container notebook-area"><NotebookDashboard baseUrl={base} client:load /></main>
+</BaseLayout>
+
+<style>
+  .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:48rem;color:var(--muted)}.notebook-area{padding-bottom:7rem}
+  @media(max-width:680px){.page-hero{padding:4rem 0 3rem}}
+</style>

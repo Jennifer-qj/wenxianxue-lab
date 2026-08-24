@@ -36,4 +36,30 @@ describe("公开项目成熟度门禁", () => {
     const images = ["01-home", "02-guide", "03-coverage", "04-graph", "05-lab", "06-chapter"];
     images.forEach((name) => expect(statSync(resolve(root, `docs/media/${name}.png`)).size).toBeGreaterThan(20_000));
   });
+
+  it("提供本地札记、收藏、最近浏览和统一档案备份", () => {
+    const layout = read("src/layouts/BaseLayout.astro");
+    const progress = read("src/components/ProgressDashboard.tsx");
+    expect(layout).toContain("LearningDock");
+    expect(existsSync(resolve(root, "src/pages/notebook/index.astro"))).toBe(true);
+    expect(read("src/lib/learningArchive.ts")).toContain("recent: LibraryEntry[]");
+    expect(progress).toContain("library: readLibrary()");
+    expect(progress).toContain("version: 2");
+  });
+
+  it("搜索支持相关检索词、近似匹配与状态筛选", () => {
+    const search = read("src/components/SearchExplorer.tsx");
+    expect(read("src/data/searchAliases.ts")).toContain("校雠");
+    expect(search).toContain("近似词匹配");
+    expect(search).toContain("复核状态");
+    expect(search).toContain("sort((a, b) => b.score - a.score");
+  });
+
+  it("简答题保留原答并提供逐项量规和重写闭环", () => {
+    const practice = read("src/components/StructuredPractice.tsx");
+    expect(practice).toContain("toggleRubric");
+    expect(practice).toContain("建议写作骨架");
+    expect(practice).toContain("回到原答案继续修改");
+    expect(practice).not.toContain('setResponse("self-pass")');
+  });
 });
