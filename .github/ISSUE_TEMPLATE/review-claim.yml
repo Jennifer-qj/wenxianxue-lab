@@ -1,0 +1,35 @@
+name: 认领共校
+description: 公开记录准备核对的章节、概念或关系
+title: "[共校认领] "
+labels: [content]
+body:
+  - type: input
+    id: scope
+    attributes:
+      label: 认领范围
+      placeholder: 例如：第五章“版本”概念及两个判断边界
+    validations:
+      required: true
+  - type: textarea
+    id: plan
+    attributes:
+      label: 准备如何核对
+      description: 可说明使用的纸本版本、参考书或计划检查的项目。
+    validations:
+      required: true
+  - type: dropdown
+    id: level
+    attributes:
+      label: 计划提交什么
+      options: [核对结果与纸本页码, 问题清单, 补充参考文献, 只认领一项短核对]
+    validations:
+      required: true
+  - type: checkboxes
+    id: rules
+    attributes:
+      label: 参与确认
+      options:
+        - label: 我不会上传原书扫描件、OCR 全文或大段受版权保护内容。
+          required: true
+        - label: 我理解认领不代表独占，项目作者保留最终学术判断与合并决定。
+          required: true

@@ -2,6 +2,7 @@
 import "../styles/global.css";
 import WelcomeGuide from "../components/WelcomeGuide";
 import LearningDock from "../components/LearningDock";
+import FeedbackPanel from "../components/FeedbackPanel";
 import type { LibraryPageType } from "../lib/learningArchive";
 
 interface Props {
@@ -97,13 +98,16 @@ const structuredData = {
               <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}><span>札记</span><small>收藏、批注与最近浏览</small></a>
               <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}><span>使用指南</span><small>第一次来，从这里开始</small></a>
               <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}><span>关于项目</span><small>方法、版权与作者说明</small></a>
+              <a href={`${base}showcase/`}><span>项目展示</span><small>三分钟演示与成果证据</small></a>
+              <a href={`${base}contribute/`}><span>参与共校</span><small>纠错、认领与功能建议</small></a>
+              <a href={`${base}accessibility/`}><span>无障碍说明</span><small>键盘、小屏与阅读辅助</small></a>
               <a class="github-link" href="https://github.com/Jennifer-qj/wenxianxue-lab" target="_blank" rel="noreferrer"><span>GitHub ↗</span><small>查看代码与更新记录</small></a>
             </div>
           </details>
         </div>
       </div>
     </header>
-    <main id="main">
+    <main id="main" tabindex="-1">
       <slot />
     </main>
     <footer class="site-footer container">
@@ -120,6 +124,9 @@ const structuredData = {
         <a href={`${base}guide/`}>使用指南</a>
         <a href={`${base}updates/`}>更新日志</a>
         <a href={`${base}audit/`}>内容审计</a>
+        <a href={`${base}showcase/`}>项目展示</a>
+        <a href={`${base}contribute/`}>参与共校</a>
+        <a href={`${base}accessibility/`}>无障碍说明</a>
       </nav>
       <div class="footer-meta">
         <span>个人学习与数字人文实践</span>
@@ -129,6 +136,7 @@ const structuredData = {
     </footer>
     <WelcomeGuide baseUrl={base} client:load />
     {active !== "notebook" && <LearningDock baseUrl={base} title={title} pageType={pageType} client:load />}
+    <FeedbackPanel baseUrl={base} title={title} client:load />
     <script is:inline>
       const progressBar = document.querySelector('.reading-progress span');
       const updateReadingProgress = () => {

@@ -22,10 +22,26 @@ body:
     attributes:
       label: 核对依据
       description: 可提供书目信息、纸本页码或可靠研究来源。
+    validations:
+      required: true
+  - type: dropdown
+    id: kind
+    attributes:
+      label: 问题类型
+      options: [知识表述, 人名书名年代, 页码与书目信息, 概念关系, 题目答案或解析, 其他]
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: 建议修改方向
+      description: 可以只说明判断方向，不要求提供完整改写。
   - type: checkboxes
     id: copyright
     attributes:
       label: 版权确认
       options:
         - label: 我没有上传原书扫描件、自动识别全文或大段受版权保护内容。
+          required: true
+        - label: 我提交的说明为本人原创或我有权提供，并同意项目在保留贡献记录的前提下整理、修改和采用。
           required: true

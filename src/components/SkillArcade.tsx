@@ -44,7 +44,7 @@ function SequenceBoard({ id, items, shuffled, note }: { id: string; items: Seque
       const item = byId.get(idValue)!; const correct = items[index].id === idValue;
       return <li key={item.id} draggable={!checked} onDragStart={() => setDragging(item.id)} onDragOver={(event) => event.preventDefault()} onDrop={() => dragging && move(dragging, item.id)} className={checked ? (correct ? "correct" : "incorrect") : ""}>
         <b>{index + 1}</b><div><strong>{item.title}</strong><span>{item.detail}</span>{checked && !correct && <small>此位置应为：{items[index].title}</small>}</div>
-        <nav><button aria-label={`上移${item.title}`} disabled={checked || index === 0} onClick={() => shift(index, -1)}>↑</button><button aria-label={`下移${item.title}`} disabled={checked || index === order.length - 1} onClick={() => shift(index, 1)}>↓</button></nav>
+        <nav aria-label={`调整“${item.title}”的位置`}><button aria-label={`上移${item.title}`} disabled={checked || index === 0} onClick={() => shift(index, -1)}>↑</button><button aria-label={`下移${item.title}`} disabled={checked || index === order.length - 1} onClick={() => shift(index, 1)}>↓</button></nav>
       </li>;
     })}</ol>
     {!checked ? <button className="arcade-primary" onClick={check}>核验流程</button> : <div className={`arcade-feedback ${score === items.length ? "success" : ""}`}><strong>正确位置 {score}/{items.length}</strong><p>{note}</p><button onClick={reset}>重新排列</button></div>}
@@ -87,8 +87,9 @@ function BatchSorter({ id, cards, bins, mode, conclusion }: { id: string; cards:
 
   return <div className={`batch-sorter ${mode}`}>
     <p className="mechanic-note">拖动卡片完成整批配对；也可先点卡片，再点目标区域。</p>
-    <section className="sorting-tray" onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event)} onClick={() => active && move(active)}><header><strong>待处理卡片</strong><small>{cards.length - Object.keys(placed).length} 项</small></header><div>{cards.filter((card) => !placed[card.id]).map(cardView)}</div></section>
-    <div className="sorting-bins">{bins.map((bin) => <section key={bin.id} className={active ? "accepting" : ""} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event, bin.id)} onClick={() => active && move(active, bin.id)}><header><strong>{bin.title}</strong><small>{bin.hint}</small></header><div>{cards.filter((card) => placed[card.id] === bin.id).map(cardView)}</div></section>)}</div>
+    <div className={`mobile-selection ${active ? "visible" : ""}`} role="status" aria-live="polite">{active ? <>已选：<strong>{cards.find((card) => card.id === active)?.title}</strong>，现在点一个目标区域。</> : "先点一张卡片，再选择目标区域。"}</div>
+    <section className="sorting-tray" role="button" tabIndex={active ? 0 : -1} aria-label="移回待处理卡片" onKeyDown={(event) => { if (active && (event.key === "Enter" || event.key === " ")) move(active); }} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event)} onClick={() => active && move(active)}><header><strong>待处理卡片</strong><small>{cards.length - Object.keys(placed).length} 项</small></header><div>{cards.filter((card) => !placed[card.id]).map(cardView)}</div></section>
+    <div className="sorting-bins">{bins.map((bin) => <section key={bin.id} role="button" tabIndex={active ? 0 : -1} aria-label={`把已选卡片放入${bin.title}`} className={active ? "accepting" : ""} onKeyDown={(event) => { if (active && (event.key === "Enter" || event.key === " ")) move(active, bin.id); }} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event, bin.id)} onClick={() => active && move(active, bin.id)}><header><strong>{bin.title}</strong><small>{bin.hint}</small></header><div>{cards.filter((card) => placed[card.id] === bin.id).map(cardView)}</div></section>)}</div>
     {!checked ? <button className="arcade-primary" disabled={Object.keys(placed).length !== cards.length} onClick={check}>全部完成，统一核验</button> : <div className={`arcade-feedback ${score === cards.length ? "success" : ""}`}><strong>匹配正确 {score}/{cards.length}</strong><p>{conclusion}</p><button onClick={reset}>重新挑战</button></div>}
   </div>;
 }

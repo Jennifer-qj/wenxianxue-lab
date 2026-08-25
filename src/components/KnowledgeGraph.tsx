@@ -61,6 +61,8 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const [pathIds, setPathIds] = useState<string[]>([]);
   const [pathNotice, setPathNotice] = useState("");
   const svgRef = useRef<SVGSVGElement>(null);
+  const pointersRef = useRef(new Map<number, { x: number; y: number }>());
+  const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
 
   useEffect(() => setNodes(initialNodes), [initialNodes]);
   useEffect(() => {
@@ -115,9 +117,33 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
     return { x: viewX + ((event.clientX - rect.left) / rect.width) * viewWidth, y: viewY + ((event.clientY - rect.top) / rect.height) * viewHeight };
   }
   function move(event: React.PointerEvent<SVGSVGElement>) {
+    if (event.pointerType === "touch") {
+      pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+      const points = [...pointersRef.current.values()];
+      if (points.length >= 2) {
+        const distance = Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y);
+        if (!pinchRef.current) pinchRef.current = { distance, zoom };
+        else if (pinchRef.current.distance > 0) setZoom(Math.max(1, Math.min(2.4, pinchRef.current.zoom * (distance / pinchRef.current.distance))));
+        return;
+      }
+    }
     if (!dragging) return;
     const next = point(event);
     setNodes((items) => items.map((node) => node.id === dragging ? { ...node, x: Math.max(20, Math.min(WIDTH - 20, next.x)), y: Math.max(25, Math.min(HEIGHT - 25, next.y)) } : node));
+  }
+  function pointerDown(event: React.PointerEvent<SVGSVGElement>) {
+    if (event.pointerType !== "touch") return;
+    pointersRef.current.set(event.pointerId, { x: event.clientX, y: event.clientY });
+    if (pointersRef.current.size >= 2) {
+      const points = [...pointersRef.current.values()];
+      pinchRef.current = { distance: Math.hypot(points[0].x - points[1].x, points[0].y - points[1].y), zoom };
+      setDragging(null);
+    }
+  }
+  function pointerEnd(event: React.PointerEvent<SVGSVGElement>) {
+    pointersRef.current.delete(event.pointerId);
+    pinchRef.current = null;
+    setDragging(null);
   }
   function reset() {
     setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? ""); setPathStart(""); setPathEnd(""); setPathIds([]); setPathNotice("");
@@ -164,7 +190,7 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
     <div className="graph-toolbar">
       <div aria-label="按类型筛选">{(["all", "concept", "material", "work", "person", "event", "method"] as const).map((type) => <button key={type} className={activeType === type ? "active" : ""} onClick={() => setActiveType(type)}>{type === "all" ? "全部类型" : typeLabels[type]}</button>)}</div>
       <div className="graph-extra-filters"><label>关系<select value={relation} onChange={(event) => setRelation(event.target.value)}><option value="all">全部关系</option>{Object.entries(relationLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label>置信度<select value={confidence} onChange={(event) => setConfidence(event.target.value as (typeof confidenceOptions)[number])}><option value="all">全部置信度</option>{(confidenceOptions.slice(1) as Array<Exclude<(typeof confidenceOptions)[number], "all">>).map((id) => <option key={id} value={id}>{confidenceLabels[id]}</option>)}</select></label><label className="graph-check"><input type="checkbox" checked={crossChapter} onChange={(event) => setCrossChapter(event.target.checked)} />只看跨章关系</label></div>
-      <div className="graph-controls"><span>拖动节点 · 滚轮缩放</span><button onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b>{Math.round(zoom * 100)}%</b><button onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
+      <div className="graph-controls"><span>拖动节点 · 滚轮或双指缩放</span><button aria-label="缩小图谱" onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b aria-live="polite">{Math.round(zoom * 100)}%</b><button aria-label="放大图谱" onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
     </div>
     <section className="graph-pathfinder" aria-labelledby="pathfinder-title">
       <div><small>PATH EXPLORER</small><h2 id="pathfinder-title">两个概念之间，隔着哪些知识？</h2><p>按当前关系与置信度筛选寻找最短路径；结果会同步高亮在图中。</p></div>
@@ -178,7 +204,8 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
       {(pathNotice || pathIds.length > 0) && <div className="graph-path-result" role="status"><strong>{pathNotice}</strong>{pathIds.length > 0 && <div>{pathIds.map((id, index) => <span key={id}>{index > 0 && <i>→</i>}<button onClick={() => setSelectedId(id)}>{nodeMap.get(id)?.label ?? id}</button></span>)}</div>}</div>}
     </section>
     <div className="graph-stage graph-stage--full">
-      <svg ref={svgRef} viewBox={`${viewX} ${viewY} ${viewWidth} ${viewHeight}`} role="img" aria-label="全书可拖动知识图谱" onPointerMove={move} onPointerUp={() => setDragging(null)} onPointerLeave={() => setDragging(null)} onWheel={(event) => { event.preventDefault(); setZoom((value) => Math.max(1, Math.min(2.4, value + (event.deltaY < 0 ? .1 : -.1)))); }}>
+      <p className="graph-touch-hint" aria-hidden="true">单指点选或拖动 · 双指缩放 · 下方按钮可复位</p>
+      <svg ref={svgRef} viewBox={`${viewX} ${viewY} ${viewWidth} ${viewHeight}`} role="group" aria-label="全书可拖动知识图谱；可用 Tab 键逐个访问当前可见节点" onPointerDown={pointerDown} onPointerMove={move} onPointerUp={pointerEnd} onPointerCancel={pointerEnd} onPointerLeave={(event) => { if (event.pointerType !== "touch") setDragging(null); }} onWheel={(event) => { event.preventDefault(); setZoom((value) => Math.max(1, Math.min(2.4, value + (event.deltaY < 0 ? .1 : -.1)))); }}>
         {Array.from({ length: 14 }, (_, index) => {
           const col = index % 7, row = Math.floor(index / 7);
           return <text key={index} className="chapter-cluster-label" x={85 + col * 155} y={90 + row * 350}>第 {index + 1} 章</text>;
@@ -198,13 +225,13 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
         {nodes.map((node) => {
           const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id); const pathNode = pathNodeSet.has(node.id);
           const radius = Math.min(10, 4.2 + node.degree * .8);
-          return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""} ${pathNode ? "path-node" : ""}`} opacity={show ? (selected && !related && !selectedNode && !pathNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" tabIndex={show ? 0 : -1} onKeyDown={(event) => event.key === "Enter" && setSelectedId(node.id)}>
+          return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""} ${pathNode ? "path-node" : ""}`} opacity={show ? (selected && !related && !selectedNode && !pathNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); if (event.isPrimary) setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" aria-label={`${node.label}，${typeLabels[node.type]}，${node.degree} 条直接关系`} aria-pressed={selectedNode} tabIndex={show ? 0 : -1} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedId(node.id); } }}>
             <circle r={radius} fill={typeColors[node.type]} />
             {(selectedNode || related || zoom > 1.25 || (query && show)) && <text className="node-label" y={-radius - 4}>{node.label}</text>}
           </g>;
         })}
       </svg>
-      <aside className="graph-detail graph-detail--full">
+      <aside className="graph-detail graph-detail--full" aria-live="polite" aria-label="当前概念详情">
         {selected ? <>
           <span style={{ color: typeColors[selected.type] }}>{typeLabels[selected.type]} · {selected.chapter_ids.map((id) => `第 ${Number(id.slice(2))} 章`).join("、")}</span>
           <h2><a href={`${baseUrl}concepts/${selected.id}/`}>{selected.label}</a></h2><p>{selected.definition}</p>

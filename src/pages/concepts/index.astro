@@ -13,4 +13,4 @@ const items = concepts.map((concept) => ({ id: concept.id, type: "concept" as co
   <header class="lexicon-hero container"><p class="eyebrow">Concept lexicon · {concepts.length} entries</p><h1 class="display-title">从一个词条进入<em>整张知识网</em></h1><p>每个词条都连接章节、判断边界、证据关系、题目与实验。词条状态同时显示人工复核进度。</p></header>
   <main class="lexicon-main container"><SearchExplorer items={items} client:load /></main>
 </BaseLayout>
-<style>.lexicon-hero{padding:7rem 0 3rem}.lexicon-hero>p:last-child{max-width:48rem;color:var(--muted);font-family:var(--serif)}.lexicon-main{padding-bottom:7rem}@media(max-width:560px){.lexicon-hero{padding:4rem 0 2rem}.display-title{font-size:2.5rem}}</style>
+<style>.lexicon-hero{padding:5rem 0 3.5rem}.lexicon-hero .display-title{max-width:900px;font-size:clamp(2.7rem,5.2vw,4.8rem)}.lexicon-hero>p:last-child{max-width:48rem;color:var(--muted);font-family:var(--serif)}.lexicon-main{padding-bottom:7rem}@media(max-width:560px){.lexicon-hero{padding:4rem 0 2rem}.display-title{font-size:2.5rem}}</style>

@@ -1,0 +1,74 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { getCollection } from "astro:content";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const [outline, concepts, graph, quizzes, labs, deepdives] = await Promise.all([
+  getCollection("outline"), getCollection("concepts"), getCollection("graph"),
+  getCollection("quiz"), getCollection("labs"), getCollection("deepdives"),
+]);
+const stats = [
+  [14, "原书章节全覆盖"],
+  [outline.flatMap((entry) => entry.data.items).length, "学习单元"],
+  [concepts.flatMap((entry) => entry.data.items).length, "概念节点"],
+  [graph.flatMap((entry) => entry.data.items).length, "关系边"],
+  [quizzes.flatMap((entry) => entry.data.items).length, "结构化练习"],
+  [labs.flatMap((entry) => entry.data.items).length + deepdives.flatMap((entry) => entry.data.items).length, "实验与深度研读"],
+];
+---
+
+<BaseLayout title="项目展示" description="文献学实验室的三分钟项目介绍、数字人文方法、个人贡献与成果证据">
+  <header class="showcase-hero">
+    <div class="container showcase-hero__grid">
+      <div><p class="eyebrow">PORTFOLIO CASE · DIGITAL HUMANITIES</p><h1 class="display-title">我怎样把一本专业教材，<br />转化为一座可操作的学习实验室</h1><p class="showcase-lead">这是一个面向大学生和初学者的独立数字人文项目。它不复制原书，而是把阅读中的概念、证据、判断与练习重新建模，并公开保留人工复核边界。</p><div class="showcase-actions"><a class="button" href="#pitch">开始三分钟演示 ↓</a><button class="button secondary print-project" type="button">打印项目摘要</button></div></div>
+      <aside><small>一句话项目定义</small><blockquote>让读者不是“看完一本书”，而是能沿路径学习、在图谱中连接、在案例中判断，并把疑问送回公开共校流程。</blockquote><dl><div><dt>角色</dt><dd>策划／内容建模／教学交互／前端实现／维护</dd></div><div><dt>对象</dt><dd>杜泽逊《文献学概要（修订本）》</dd></div><div><dt>状态</dt><dd>公开迭代，结构全覆盖，纸本复核进行中</dd></div></dl></aside>
+    </div>
+  </header>
+
+  <section class="showcase-stats" aria-label="项目规模">
+    <div class="container">{stats.map(([value, label]) => <div><strong>{value}</strong><span>{label}</span></div>)}</div>
+  </section>
+
+  <section id="pitch" class="container pitch-section">
+    <header><p class="eyebrow">3-MINUTE PITCH</p><h2>按这条线索讲清楚项目</h2><p>点击每一分钟，切换适合面试或答辩现场的讲述重点。</p></header>
+    <div class="pitch-board">
+      <nav aria-label="三分钟演示段落"><button class="active" data-pitch="0"><b>00′–01′</b><span>问题与选择</span></button><button data-pitch="1"><b>01′–02′</b><span>方法与实现</span></button><button data-pitch="2"><b>02′–03′</b><span>价值与反思</span></button></nav>
+      <div class="pitch-slides">
+        <article class="active" data-slide="0"><small>WHY</small><h3>我不想再做一本只能向下翻的“在线电子书”</h3><p>传统顺序阅读不容易呈现跨章关系，也难以练习版本、目录、校勘中的判断过程。因此我把目标改成：全书覆盖，但不按原书机械复制；让学习者能查概念、走路径、做任务、留札记。</p><a href={`${base}story/`}>查看问题形成过程 →</a></article>
+        <article data-slide="1"><small>HOW</small><h3>先做内容模型，再做界面</h3><p>我把十四章拆成学习单元、概念、关系、题目、实验与复核状态；每条关系保留证据和置信度。前端把这些数据渲染为七条路径、知识图谱、九题型练习、综合案卷和学习档案。</p><a href={`${base}about/`}>查看完整方法 →</a></article>
+        <article data-slide="2"><small>SO WHAT</small><h3>成果不只是一个网站，也是一个可审查的研究过程</h3><p>项目公开版权边界、AI协作方式、纸本核验进度和修订历史，并邀请读者共校。它展示了我如何把阅读问题转化为数据结构、教学设计与可持续维护的公共作品。</p><a href={`${base}audit/`}>查看审计与未完成部分 →</a></article>
+      </div>
+    </div>
+  </section>
+
+  <section class="case-method">
+    <div class="container"><header><p class="eyebrow">FROM READING TO SYSTEM</p><h2>核心转化链</h2></header><ol><li><span>01</span><strong>阅读定位</strong><p>以纸本章节为边界，记录问题和原书位置。</p></li><li><span>02</span><strong>知识拆分</strong><p>生成可独立复习的学习单元和概念词条。</p></li><li><span>03</span><strong>关系建模</strong><p>为跨章关系添加类型、证据与置信度。</p></li><li><span>04</span><strong>互动转译</strong><p>把识记改造成排序、配对、证据判断和开放作答。</p></li><li><span>05</span><strong>人工复核</strong><p>精确页码和关键表述回到纸本核验。</p></li><li><span>06</span><strong>公开迭代</strong><p>用版本历史、审计页和共校处理修订。</p></li></ol></div>
+  </section>
+
+  <section class="container contribution-section">
+    <div><p class="eyebrow">MY CONTRIBUTION</p><h2>我负责的不是“把文字放上网”，而是定义整个学习系统</h2></div>
+    <div class="contribution-grid"><article><b>研究与策划</b><p>确定受众、研究问题、内容边界、版权策略与复核标准。</p></article><article><b>内容工程</b><p>设计学习单元、概念、图谱、题库、实验和状态元数据。</p></article><article><b>学习设计</b><p>将抽象方法转成路径、证据链、分层答案与可重做任务。</p></article><article><b>产品与界面</b><p>设计无登录学习档案、搜索、手机交互、无障碍和公开反馈。</p></article><article><b>质量与发布</b><p>建立内容校验、测试、断链检查、GitHub Actions 和版本日志。</p></article><article><b>学术责任</b><p>AI协助结构化与实现；项目作者决定边界并承担最终纸本复核。</p></article></div>
+  </section>
+
+  <section class="evidence-section">
+    <div class="container"><div><p class="eyebrow">EVIDENCE, NOT SLOGANS</p><h2>可以现场打开的成果证据</h2><p>每一项都对应一个可操作页面，不用只靠口头介绍。</p></div><nav><a href={`${base}graph/`}><span>01</span><b>可拖动知识图谱</b><small>关系筛选、最短路径、子图导出</small></a><a href={`${base}lab/#rare-book-dossier`}><span>02</span><b>古籍鉴定案卷</b><small>证据分层、有限结论、报告导出</small></a><a href={`${base}chapters/ch05/`}><span>03</span><b>章节学习闭环</b><small>导读、概念、练习、深度研读</small></a><a href={`${base}notebook/`}><span>04</span><b>无登录学习档案</b><small>札记、收藏、错题、导入导出</small></a><a href={`${base}audit/`}><span>05</span><b>公开内容审计</b><small>覆盖、核验、问题与版本历史</small></a><a href={`${base}contribute/`}><span>06</span><b>读者共校流程</b><small>反馈、证据、认领与署名</small></a></nav></div>
+  </section>
+
+  <section class="container reflection-section">
+    <article><small>LIMITATION</small><h2>我不会把“结构完成”说成“学术完成”</h2><p>当前全书已经结构化覆盖，但精确页码与部分表述仍在逐条回到纸本核验。公开状态不是项目的缺口遮羞布，而是让读者知道每条内容目前能被信任到什么程度。</p></article>
+    <article lang="en"><small>ENGLISH ABSTRACT</small><h2>Wenxianxue Lab</h2><p>An independent digital humanities project that transforms a Chinese philology textbook into an explorable learning system. It combines structured reading units, a knowledge graph, multi-format exercises, interactive evidence cases, local learning records, and a transparent human-review workflow—without republishing the source book.</p></article>
+  </section>
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('[data-pitch]').forEach((button) => button.addEventListener('click', () => {
+    const index = button.getAttribute('data-pitch');
+    document.querySelectorAll('[data-pitch]').forEach((item) => item.classList.toggle('active', item === button));
+    document.querySelectorAll('[data-slide]').forEach((item) => item.classList.toggle('active', item.getAttribute('data-slide') === index));
+  }));
+  document.querySelector('.print-project')?.addEventListener('click', () => window.print());
+</script>
+
+<style>
+  .showcase-hero{padding:6.5rem 0 5rem;color:#f7f1e7;background:#22312a}.showcase-hero__grid{display:grid;grid-template-columns:1.15fr .7fr;align-items:center;gap:6rem}.showcase-hero h1{max-width:920px;margin:.5rem 0}.showcase-lead{max-width:760px;color:#c5cec8;font-family:var(--serif);font-size:1.03rem;line-height:2}.showcase-actions{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:2rem}.showcase-actions .secondary{color:#f7f1e7;border-color:rgba(255,255,255,.3);background:transparent;cursor:pointer}.showcase-hero aside{padding:2rem;border:1px solid rgba(255,255,255,.16);border-radius:14px;background:rgba(255,255,255,.045)}.showcase-hero aside>small{color:#d5a28f;letter-spacing:.12em}.showcase-hero blockquote{margin:1rem 0 1.5rem;font-family:var(--serif);font-size:1.15rem;line-height:1.8}.showcase-hero dl{margin:0}.showcase-hero dl div{display:grid;grid-template-columns:4rem 1fr;gap:1rem;padding:.55rem 0;border-top:1px solid rgba(255,255,255,.12)}.showcase-hero dt{color:#d5a28f}.showcase-hero dd{margin:0;color:#b9c2bc;font-size:.76rem}.showcase-stats{border-bottom:1px solid var(--line);background:#ede6da}.showcase-stats>div{display:grid;grid-template-columns:repeat(6,1fr)}.showcase-stats div div{padding:1.4rem;border-right:1px solid var(--line)}.showcase-stats strong,.showcase-stats span{display:block}.showcase-stats strong{color:var(--cinnabar);font-family:var(--serif);font-size:1.7rem}.showcase-stats span{color:var(--muted);font-size:.65rem}.pitch-section{padding-block:6rem}.pitch-section>header{display:grid;grid-template-columns:1fr 1fr;align-items:end}.pitch-section h2,.case-method h2,.contribution-section h2,.evidence-section h2,.reflection-section h2{margin:.25rem 0;font-family:var(--serif);font-size:2.2rem}.pitch-section>header>p:last-child{color:var(--muted)}.pitch-board{display:grid;grid-template-columns:260px 1fr;margin-top:2rem;overflow:hidden;border:1px solid var(--line);border-radius:14px;background:var(--white);box-shadow:var(--shadow)}.pitch-board>nav{display:grid;background:#e8e0d3}.pitch-board>nav button{display:grid;align-content:center;gap:.2rem;min-height:110px;padding:1.2rem;text-align:left;border:0;border-bottom:1px solid var(--line);color:var(--muted);background:transparent;cursor:pointer}.pitch-board>nav button.active{color:#fff;background:var(--cinnabar)}.pitch-board>nav b{font-family:var(--serif);font-size:1.1rem}.pitch-board>nav span{font-size:.72rem}.pitch-slides{min-height:390px}.pitch-slides article{display:none;padding:3rem}.pitch-slides article.active{display:block}.pitch-slides small{color:var(--cinnabar);letter-spacing:.16em}.pitch-slides h3{max-width:720px;margin:.6rem 0;font-family:var(--serif);font-size:2rem}.pitch-slides p{max-width:760px;color:var(--muted);line-height:1.9}.pitch-slides a{color:var(--cinnabar)}.case-method{padding-block:5rem;background:#e7dfd2}.case-method header{text-align:center}.case-method ol{display:grid;grid-template-columns:repeat(3,1fr);gap:.7rem;padding:0;list-style:none}.case-method li{min-height:190px;padding:1.4rem;border-radius:10px;background:rgba(252,251,247,.58)}.case-method li span{color:var(--cinnabar);font-family:var(--serif)}.case-method li strong{display:block;margin-top:1.8rem;font-family:var(--serif);font-size:1.2rem}.case-method li p,.contribution-grid p,.evidence-section>div>div>p,.reflection-section p{color:var(--muted);font-size:.8rem}.contribution-section{display:grid;grid-template-columns:.7fr 1.3fr;gap:5rem;padding-block:6rem}.contribution-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:.7rem}.contribution-grid article{padding:1.2rem;border:1px solid var(--line);border-radius:9px;background:var(--white)}.contribution-grid b{font-family:var(--serif)}.contribution-grid p{margin:.4rem 0}.evidence-section{padding-block:5rem;color:#f6f0e5;background:#27352f}.evidence-section>div{display:grid;grid-template-columns:.65fr 1.35fr;gap:5rem}.evidence-section h2{color:#f6f0e5}.evidence-section>div>div>p{color:#bbc5bf}.evidence-section nav{display:grid;grid-template-columns:repeat(2,1fr);gap:.6rem}.evidence-section nav a{display:grid;grid-template-columns:auto 1fr;gap:.1rem .8rem;padding:1rem;border:1px solid rgba(255,255,255,.13);border-radius:8px;text-decoration:none}.evidence-section nav span{grid-row:1/3;color:#d69e89;font-family:var(--serif)}.evidence-section nav b{font-family:var(--serif)}.evidence-section nav small{color:#aeb8b2}.reflection-section{display:grid;grid-template-columns:1fr 1fr;gap:1rem;padding-block:5rem}.reflection-section article{padding:2rem;border-radius:12px;background:#ebe4d8}.reflection-section article:last-child{background:var(--white)}.reflection-section small{color:var(--cinnabar);letter-spacing:.12em}@media(max-width:900px){.showcase-hero__grid,.contribution-section,.evidence-section>div{grid-template-columns:1fr;gap:3rem}.showcase-stats>div{grid-template-columns:repeat(3,1fr)}}@media(max-width:650px){.showcase-hero{padding:4rem 0}.showcase-stats>div,.case-method ol,.contribution-grid,.evidence-section nav,.reflection-section,.pitch-section>header{grid-template-columns:1fr}.pitch-board{grid-template-columns:1fr}.pitch-board>nav{display:flex;overflow-x:auto}.pitch-board>nav button{min-width:130px;min-height:78px}.pitch-slides{min-height:0}.pitch-slides article{padding:1.4rem}.pitch-slides h3{font-size:1.5rem}.case-method ol{grid-template-columns:1fr}.case-method li{min-height:0}.showcase-stats div div{border-bottom:1px solid var(--line)}}
+  @media print{.showcase-actions,.pitch-board>nav{display:none}.showcase-hero{padding:2rem 0;color:#111;background:#fff}.showcase-hero aside{border-color:#999}.showcase-hero blockquote,.showcase-hero dd,.showcase-lead{color:#222}.pitch-board{display:block;box-shadow:none}.pitch-slides article{display:block!important;min-height:0;padding:1.2rem;border-bottom:1px solid #aaa}.case-method,.evidence-section{color:#111;background:#fff}.evidence-section h2,.evidence-section nav small{color:#111}.evidence-section nav a{border-color:#aaa}.showcase-stats>div{grid-template-columns:repeat(3,1fr)}}
+</style>

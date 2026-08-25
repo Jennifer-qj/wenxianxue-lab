@@ -1,0 +1,41 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+
+<BaseLayout title="无障碍与阅读辅助" description="文献学实验室的键盘操作、小屏适配、减弱动态与问题反馈说明">
+  <header class="access-hero">
+    <div class="container access-hero__inner">
+      <div><p class="eyebrow">ACCESSIBILITY · 持续改进</p><h1 class="display-title">让阅读、练习与反馈<br />尽可能不依赖单一操作方式</h1></div>
+      <p>这个项目仍在迭代。我们把无障碍视为内容可靠性的一部分：读者应能找到正文、辨认状态、用键盘完成主要任务，并报告仍然存在的障碍。</p>
+    </div>
+  </header>
+
+  <div class="container access-main">
+    <section class="access-summary" aria-labelledby="support-title">
+      <div><small>CURRENT SUPPORT</small><h2 id="support-title">当前已支持</h2></div>
+      <ul>
+        <li><strong>键盘导航</strong><span>页面提供“跳到正文”，导航、题目、知识图谱节点、反馈面板和游戏主要操作可用 Tab、Enter 或空格完成。</span></li>
+        <li><strong>触控替代</strong><span>小游戏既支持拖拽，也支持“先选卡片、再选区域”；知识图谱支持单指点选、双指缩放和屏幕按钮。</span></li>
+        <li><strong>动态减弱</strong><span>当系统开启“减少动态效果”时，网站会停止非必要动画和顺滑滚动。</span></li>
+        <li><strong>缩放与小屏</strong><span>核心页面采用响应式布局；浏览器文字和页面缩放不会阻断主要阅读流程。</span></li>
+        <li><strong>状态说明</strong><span>审核状态、答题结果和保存反馈不只依赖颜色，同时提供文字标签或状态提示。</span></li>
+        <li><strong>打印阅读</strong><span>章节与概念页面可以直接使用浏览器打印，导航和浮动工具会在打印时隐藏。</span></li>
+      </ul>
+    </section>
+
+    <section class="access-grid">
+      <article><small>01</small><h2>键盘快速路径</h2><dl><div><dt>Tab</dt><dd>依次移动到链接、按钮和表单</dd></div><div><dt>Shift + Tab</dt><dd>反向移动</dd></div><div><dt>Enter / 空格</dt><dd>打开按钮、选择图谱节点</dd></div><div><dt>Esc</dt><dd>关闭首次引导、反馈面板或札记</dd></div><div><dt>↑ / ↓</dt><dd>在排序游戏中移动卡片</dd></div></dl></article>
+      <article><small>02</small><h2>已知限制</h2><p>大型知识图谱包含较多可聚焦节点，使用读屏软件逐一浏览可能仍显冗长；复杂拖拽实验的键盘体验也需要继续测试。部分纸本专业术语尚缺统一的通俗释义。</p><p>我们会把反馈转成公开任务，说明修订过程，而不把“基本可用”写成“已经完美”。</p></article>
+    </section>
+
+    <section class="access-report">
+      <div><p class="eyebrow">REPORT A BARRIER</p><h2>遇到看不清、点不到、读不懂的地方？</h2><p>请写明页面地址、使用设备、操作方式和预期结果。无需提供任何健康或身份信息。</p></div>
+      <div><a class="button" href="https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?template=bug-report.yml&title=%5B%E6%97%A0%E9%9A%9C%E7%A2%8D%5D%20" target="_blank" rel="noreferrer">提交无障碍问题 ↗</a><a href={`${base}contribute/`}>查看反馈与共校规则 →</a></div>
+    </section>
+  </div>
+</BaseLayout>
+
+<style>
+  .access-hero{padding:6rem 0 5rem;color:#f7f2e8;background:#24332c}.access-hero__inner{display:grid;grid-template-columns:1.2fr .7fr;align-items:end;gap:5rem}.access-hero h1{margin:.4rem 0;max-width:850px}.access-hero__inner>p{margin:0;color:#c9d1cc;line-height:1.9}.access-main{padding-block:4.5rem}.access-summary{display:grid;grid-template-columns:.6fr 1.4fr;gap:4rem}.access-summary h2,.access-grid h2,.access-report h2{font-family:var(--serif)}.access-summary h2{margin:.25rem 0;font-size:2.2rem}.access-summary small,.access-grid article>small{color:var(--cinnabar);font-size:.65rem;letter-spacing:.13em}.access-summary ul{display:grid;grid-template-columns:repeat(2,1fr);gap:.8rem;margin:0;padding:0;list-style:none}.access-summary li{display:grid;gap:.35rem;padding:1.2rem;border:1px solid var(--line);border-radius:10px;background:var(--white)}.access-summary li strong{font-family:var(--serif);font-size:1.08rem}.access-summary li span,.access-grid p{color:var(--muted);font-size:.8rem;line-height:1.8}.access-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:4rem}.access-grid article{padding:2rem;border-radius:12px;background:#e9e2d6}.access-grid h2{margin:.25rem 0 1rem}.access-grid dl{display:grid;gap:.45rem}.access-grid dl div{display:grid;grid-template-columns:110px 1fr;padding:.55rem 0;border-bottom:1px solid var(--line)}.access-grid dt{font-weight:700}.access-grid dd{margin:0;color:var(--muted)}.access-report{display:flex;align-items:center;justify-content:space-between;gap:3rem;margin-top:4rem;padding:2.2rem;border-radius:14px;color:#f7f1e7;background:#2c3c34}.access-report h2{margin:.3rem 0;font-size:2rem}.access-report p{max-width:650px;margin:0;color:#c8d0cb}.access-report>div:last-child{display:grid;justify-items:start;gap:.8rem}.access-report a:last-child{color:#e5c1ad;font-size:.75rem}@media(max-width:800px){.access-hero__inner,.access-summary{grid-template-columns:1fr;gap:2rem}.access-summary ul,.access-grid{grid-template-columns:1fr}.access-report{align-items:flex-start;flex-direction:column}}@media(max-width:560px){.access-hero{padding:4rem 0}.access-summary ul{grid-template-columns:1fr}.access-grid dl div{grid-template-columns:88px 1fr}.access-report{padding:1.4rem}}
+</style>

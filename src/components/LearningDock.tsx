@@ -27,7 +27,11 @@ export default function LearningDock({ baseUrl, title, pageType }: Props) {
   }, []);
 
   useEffect(() => {
-    if (open) window.setTimeout(() => textareaRef.current?.focus(), 80);
+    if (!open) return;
+    window.setTimeout(() => textareaRef.current?.focus(), 80);
+    const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
   }, [open]);
 
   function toggleBookmark() {
@@ -53,7 +57,7 @@ export default function LearningDock({ baseUrl, title, pageType }: Props) {
     <button className="learning-dock__trigger" aria-expanded={open} aria-controls="learning-dock-panel" onClick={() => setOpen((value) => !value)}>
       <span aria-hidden="true">笺</span><b>{open ? "收起札记" : "学习札记"}</b>
     </button>
-    {open && <section id="learning-dock-panel" className="learning-dock__panel">
+    {open && <section id="learning-dock-panel" className="learning-dock__panel" aria-label="当前页面学习札记">
       <header><div><small>LOCAL NOTEBOOK</small><strong>{title}</strong></div><button aria-label="关闭札记" onClick={() => setOpen(false)}>×</button></header>
       <button className={`bookmark-toggle ${bookmarked ? "active" : ""}`} onClick={toggleBookmark}><span aria-hidden="true">{bookmarked ? "★" : "☆"}</span>{bookmarked ? "已加入收藏" : "收藏这个页面"}</button>
       <label><span>写下判断、疑问或待核对事项</span><textarea ref={textareaRef} value={note} maxLength={3000} onChange={(event) => setNote(event.target.value)} onBlur={saveNote} placeholder="例如：牌记只能作为证据链的一环；回纸本核对第……页。" /></label>

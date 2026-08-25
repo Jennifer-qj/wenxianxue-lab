@@ -146,9 +146,26 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   :global(.arcade-tabs){background:#1d2823}
   :global(.arcade-tabs button.active){background:#8f3b2e}
   :global(.arcade-stage){background:#faf8f2}
+  :global(.mobile-selection){display:none;margin:.8rem 0;padding:.7rem .9rem;border-radius:8px;background:#e8e0d2;color:var(--muted);font-size:.82rem}
+  :global(.mobile-selection.visible){color:#fff;background:#33483e}
   .game-grid{gap:1rem;border:0}
   .game-grid article{min-height:255px;border:1px solid var(--line);border-radius:10px;background:rgba(252,251,247,.55)}
   .game-grid article.ready{background:var(--white)}
   .game-grid article:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
-  @media(max-width:560px){.page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section{padding-block:4rem}}
+  @media(max-width:560px){
+    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section{padding-block:4rem}
+    :global(.arcade-tabs){display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
+    :global(.arcade-tabs button){min-width:148px;min-height:70px;scroll-snap-align:start}
+    :global(.arcade-stage){min-height:0;padding:1.05rem}
+    :global(.arcade-stage>header){gap:.5rem}
+    :global(.arcade-stage>header h2){font-size:1.65rem}
+    :global(.mechanic-note){padding:.65rem .75rem;border-radius:7px;background:#eee6da}
+    :global(.mobile-selection){display:block;position:sticky;top:78px;z-index:4}
+    :global(.sequence-board nav button){width:44px;height:44px;border-radius:8px;font-size:1.15rem;touch-action:manipulation}
+    :global(.sequence-board li){padding:.7rem .55rem;cursor:default}
+    :global(.batch-card){min-height:70px;touch-action:manipulation}
+    :global(.sorting-tray),:global(.sorting-bins>section){border-radius:9px}
+    :global(.sorting-bins>section.accepting){outline-style:solid}
+    :global(.arcade-primary),:global(.arcade-feedback button){min-height:44px}
+  }
 </style>

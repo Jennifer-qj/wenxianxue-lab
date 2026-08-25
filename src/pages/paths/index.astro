@@ -41,4 +41,11 @@ const units = entries.flatMap((entry) => entry.data.items);
   .status>span{display:block;width:100%;height:3px;background:var(--line)}.status i{display:block;height:100%;background:var(--accent)}.status small{font-size:.7rem}
   .enter{padding:.65rem 1rem;border:1px solid var(--ink);border-radius:3px;color:var(--ink);text-decoration:none;font-weight:600;transition:.2s ease}.enter:hover{color:var(--white);background:var(--ink)}
   @media(max-width:760px){article{grid-template-columns:50px 1fr;padding:1.5rem 0}.status,.enter{grid-column:2}}
+  /* editorial card layout */
+  .page-hero{padding:5rem 0 3.5rem}.page-hero .display-title{max-width:900px;font-size:clamp(2.7rem,5.2vw,4.8rem)}
+  .path-list{display:grid;grid-template-columns:repeat(2,1fr);gap:1rem;padding-bottom:6rem;border:0}
+  .path-list article{min-height:230px;grid-template-columns:70px 1fr;grid-template-rows:1fr auto;align-items:start;gap:1rem;padding:1.5rem;border:1px solid var(--line);border-radius:12px;background:rgba(252,251,247,.6)}
+  .path-list article:hover{transform:translateY(-3px);border-color:color-mix(in srgb,var(--accent) 42%,var(--line));box-shadow:var(--shadow-soft)}
+  .path-list article>div:nth-child(2){align-self:start}.path-list h2{font-size:1.55rem}.path-list .status{grid-column:2;align-self:end}.path-list .enter{grid-column:1/-1;justify-self:end;padding:.5rem .9rem;border-radius:999px}
+  @media(max-width:760px){.path-list{grid-template-columns:1fr}.path-list article{grid-template-columns:52px 1fr;padding:1.2rem}.path-list .status{grid-column:2}.path-list .enter{grid-column:1/-1}}
 </style>

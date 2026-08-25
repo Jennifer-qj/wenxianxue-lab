@@ -1093,3 +1093,40 @@ body{
   .brand{min-width:0}.brand-mark{width:38px}.brand strong{font-size:1rem}.header-tools{gap:.2rem}
   .primary-nav{border-radius:9px}.primary-nav a{padding:.48rem .65rem;font-size:.8rem}
 }
+
+/* Public review feedback drawer */
+.feedback-trigger{position:fixed;right:1.25rem;bottom:5.2rem;z-index:32;display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem .45rem .45rem;border:1px solid rgba(255,255,255,.13);border-radius:999px;color:#f7f1e7;background:#24302b;box-shadow:0 10px 30px rgba(24,32,28,.2);cursor:pointer}
+.feedback-trigger span{display:grid;place-items:center;width:30px;aspect-ratio:1;border-radius:50%;color:#fff;background:var(--cinnabar);font-family:var(--serif)}
+.feedback-trigger b{font-size:.76rem}.feedback-trigger:hover{transform:translateY(-2px)}
+.feedback-overlay{position:fixed;z-index:1001;inset:0;display:grid;place-items:center;padding:1rem;background:rgba(20,25,22,.62);backdrop-filter:blur(8px)}
+.feedback-panel{width:min(720px,100%);max-height:calc(100vh - 2rem);overflow:auto;padding:1.6rem;border:1px solid rgba(255,255,255,.2);border-radius:14px;background:var(--paper);box-shadow:0 28px 90px rgba(0,0,0,.3)}
+.feedback-panel>header{display:flex;align-items:start;justify-content:space-between;gap:2rem}.feedback-panel>header p{margin:0;color:var(--cinnabar);font-size:.65rem;font-weight:700;letter-spacing:.16em}.feedback-panel h2{margin:.15rem 0;font-family:var(--serif);font-size:2rem}.feedback-panel>header>button{display:grid;place-items:center;width:36px;aspect-ratio:1;border:1px solid var(--line);border-radius:50%;background:transparent;font-size:1.4rem;cursor:pointer}.feedback-lead{color:var(--muted);font-size:.82rem}.feedback-kinds{display:grid;grid-template-columns:repeat(2,1fr);gap:.55rem;margin:1.2rem 0}.feedback-kinds button{display:grid;gap:.2rem;padding:.8rem;text-align:left;border:1px solid var(--line);border-radius:8px;color:var(--ink);background:rgba(255,255,255,.4);cursor:pointer}.feedback-kinds button.active{border-color:rgba(163,59,43,.55);background:#f0e2dc;box-shadow:inset 3px 0 var(--cinnabar)}.feedback-kinds strong{font-family:var(--serif)}.feedback-kinds span{color:var(--muted);font-size:.68rem}.feedback-context{display:grid;grid-template-columns:auto 1fr;gap:.25rem .7rem;padding:.8rem;border-radius:7px;background:#e9e3d8}.feedback-context small{grid-row:1/3;color:var(--cinnabar)}.feedback-context code{overflow:hidden;text-overflow:ellipsis}.feedback-context span{overflow:hidden;color:var(--muted);font-size:.68rem;text-overflow:ellipsis}.feedback-panel>footer{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:1.1rem}.feedback-panel>footer>a{color:var(--cinnabar);font-size:.75rem}
+@media(max-width:560px){.feedback-trigger{right:.75rem;bottom:4.8rem}.feedback-trigger b{display:none}.feedback-kinds{grid-template-columns:1fr}.feedback-panel>footer{align-items:stretch;flex-direction:column}.feedback-panel>footer .button{width:100%}}
+
+/* Touch-first graph controls */
+.graph-touch-hint{display:none}
+.graph-toolbar button,.graph-toolbar select{min-height:36px}
+@media(max-width:560px){
+  .display-title,.section-title{overflow-wrap:anywhere;word-break:break-word}
+  .display-title em,.section-title em{white-space:normal}
+  .graph-toolbar{gap:.7rem;padding:.85rem}
+  .graph-toolbar>div{padding-bottom:.15rem;scroll-snap-type:x proximity;scrollbar-width:thin}
+  .graph-toolbar>div:first-child{min-width:0}
+  .graph-toolbar button{min-width:max-content;min-height:44px;scroll-snap-align:start}
+  .graph-extra-filters{align-items:stretch!important;flex-wrap:wrap;overflow:visible!important}
+  .graph-extra-filters label{flex:1 1 135px}
+  .graph-extra-filters select{width:100%}
+  .graph-controls{justify-content:center;overflow:visible!important}
+  .graph-controls b{min-width:54px}
+  .graph-stage{min-height:720px}
+  .graph-touch-hint{display:block;position:absolute;z-index:2;top:.5rem;left:50%;width:max-content;max-width:calc(100% - 1rem);margin:0;padding:.38rem .65rem;border-radius:999px;color:#f2ede4;background:rgba(33,43,38,.82);font-size:.66rem;transform:translateX(-50%);pointer-events:none}
+  .graph-stage svg{height:480px;padding-top:1.6rem}
+  .graph-node{cursor:default}
+}
+
+@media (forced-colors: active){
+  :focus-visible{outline:3px solid Highlight}
+  .primary-nav a[aria-current="page"],.button,.feedback-trigger{border:2px solid ButtonText}
+  .reading-progress span{background:Highlight}
+  .graph-node circle{stroke:CanvasText;stroke-width:.6}
+}

@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./StructuredPractice.css";
+import { getLayeredAnswer, type AnswerLevel } from "../data/layeredAnswers";
 
 type Pair = { left: string; right: string };
 type ClassItem = { label: string; zone: string };
@@ -49,11 +50,14 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
   const [results, setResults] = useState<Record<string, boolean>>({});
   const [selfChecks, setSelfChecks] = useState<Record<string, number[]>>({});
   const [selfDecisions, setSelfDecisions] = useState<Record<string, "pass" | "retry">>({});
+  const [answerLevels, setAnswerLevels] = useState<Record<string, AnswerLevel>>({});
   const quiz = quizzes[index];
   const response = responses[quiz.id];
   const isChecked = checked[quiz.id];
   const completed = Object.keys(checked).length;
   const score = Object.values(results).filter(Boolean).length;
+  const answerLevel = answerLevels[quiz.id] ?? "beginner";
+  const layeredAnswer = getLayeredAnswer(quiz.id, quiz.explanation, quiz.rubric);
 
   const matchRights = useMemo(() => quiz.pairs?.map((pair) => pair.right).reverse() ?? [], [quiz]);
   const ordering = (response as string[] | undefined) ?? (quiz.type === "ordering" ? quiz.items as string[] : []);
@@ -140,7 +144,7 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
 
           {quiz.type === "evidence" && <div className="evidence-board">{quiz.evidence_ids!.map((evidence) => { const selected = ((response as string[] | undefined) ?? []).includes(evidence); return <button disabled={isChecked} aria-pressed={selected} className={selected ? "selected" : ""} onClick={() => toggleList(evidence)} key={evidence}><span>{selected ? "已收入证据链" : "点击选取"}</span><strong>{evidence}</strong></button>; })}</div>}
 
-          {quiz.type === "short_answer" && <div className="short-answer"><textarea disabled={isChecked} value={String(response ?? "")} onChange={(event) => setResponse(event.target.value)} placeholder="先写下你的判断、依据和结论限度……" />{isChecked && <div className="rubric-check"><p>逐项核对自己的答案。勾选表示“答案中已经明确做到”，不是标准答案判定。</p>{quiz.rubric!.map((item, rubricIndex) => { const selected = (selfChecks[quiz.id] ?? []).includes(rubricIndex); return <button disabled={Boolean(selfDecisions[quiz.id])} aria-pressed={selected} className={selected ? "selected" : ""} key={item} onClick={() => toggleRubric(rubricIndex)}><span>{selected ? "✓" : "□"}</span>{item}</button>; })}<aside><strong>建议写作骨架</strong><span>判断对象 → 使用证据 → 推理过程 → 反证或缺口 → 有限度结论</span></aside></div>}{!isChecked && <p>提交后逐项对照评分量规；简答题不由机器替你判断学术质量。</p>}</div>}
+          {quiz.type === "short_answer" && <div className="short-answer"><textarea disabled={isChecked} value={String(response ?? "")} onChange={(event) => setResponse(event.target.value)} placeholder="先写下你的判断、依据和结论限度……" />{isChecked && <><section className="layered-answer" aria-labelledby={`answer-${quiz.id}`}><header><div><small>不是唯一标准答案</small><strong id={`answer-${quiz.id}`}>三级参考答案</strong></div><span>先比较思路，再修改自己的表述</span></header><nav aria-label="选择参考答案深度">{(["beginner", "advanced", "research"] as AnswerLevel[]).map((level) => <button key={level} className={answerLevel === level ? "active" : ""} aria-pressed={answerLevel === level} onClick={() => setAnswerLevels((current) => ({ ...current, [quiz.id]: level }))}>{layeredAnswer[level].title}</button>)}</nav><article aria-live="polite"><small>{answerLevel === "beginner" ? "回答核心问题" : answerLevel === "advanced" ? "补足证据与边界" : "把回答推进为可复核的小研究"}</small><p>{layeredAnswer[answerLevel].answer}</p></article></section><div className="rubric-check"><p>逐项核对自己的答案。勾选表示“答案中已经明确做到”，不是标准答案判定。</p>{quiz.rubric!.map((item, rubricIndex) => { const selected = (selfChecks[quiz.id] ?? []).includes(rubricIndex); return <button disabled={Boolean(selfDecisions[quiz.id])} aria-pressed={selected} className={selected ? "selected" : ""} key={item} onClick={() => toggleRubric(rubricIndex)}><span>{selected ? "✓" : "□"}</span>{item}</button>; })}<aside><strong>建议写作骨架</strong><span>判断对象 → 使用证据 → 推理过程 → 反证或缺口 → 有限度结论</span></aside></div></>}{!isChecked && <p>提交后可对照入门、进阶、研究型三层参考答案，再按评分量规自评；简答题不由机器替你判断学术质量。</p>}</div>}
 
           {!isChecked && quiz.type !== "short_answer" && <button className="submit-answer" disabled={response == null || (Array.isArray(response) && response.length === 0)} onClick={evaluate}>提交判断</button>}
           {!isChecked && quiz.type === "short_answer" && <button className="submit-answer" disabled={!String(response ?? "").trim()} onClick={() => setChecked((state) => ({ ...state, [quiz.id]: true }))}>查看评分要点</button>}

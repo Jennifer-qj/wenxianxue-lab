@@ -28,6 +28,8 @@
 - 可拖动知识图谱、关系与置信度筛选、原创方法图示和研读札记导出
 - 古籍鉴定综合案卷：五室证据研判、综合意见、学习报告与 Markdown 导出
 - 移动端适配、首次访问引导、永久使用指南、项目方法页与覆盖／核验矩阵
+- 公开反馈与章节共校、开放题三级参考答案、无障碍说明与键盘操作
+- 三分钟项目展示、项目报告与面试／答辩演示脚本
 - 适配社交平台的分享卡、结构化数据、站点地图与项目展示截图包
 
 ## 在线入口
@@ -38,6 +40,9 @@
 - 更新日志与开放数据：https://jennifer-qj.github.io/wenxianxue-lab/updates/
 - 个人学习工作台：https://jennifer-qj.github.io/wenxianxue-lab/notebook/
 - 学术内容审计：https://jennifer-qj.github.io/wenxianxue-lab/audit/
+- 参与共校：https://jennifer-qj.github.io/wenxianxue-lab/contribute/
+- 项目展示：https://jennifer-qj.github.io/wenxianxue-lab/showcase/
+- 无障碍说明：https://jennifer-qj.github.io/wenxianxue-lab/accessibility/
 
 ## 后续维护
 
