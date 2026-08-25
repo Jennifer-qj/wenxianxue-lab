@@ -74,47 +74,75 @@ const structuredData = {
   </head>
   <body>
     <a class="skip-link" href="#main">跳到正文</a>
+    <div class="reading-progress" aria-hidden="true"><span></span></div>
     <header class="site-header">
-      <a class="brand" href={base} aria-label="文献学实验室首页">
-        <span class="brand-mark" aria-hidden="true">文</span>
-        <span>
-          <strong>文献学实验室</strong>
-          <small>WENXIANXUE LAB</small>
-        </span>
-      </a>
-      <nav aria-label="主导航">
-        {nav.map(([id, label, href]) => (
-          <a href={href} aria-current={active === id ? "page" : undefined}>{label}</a>
-        ))}
-      </nav>
-      <div class="header-tools">
-        <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}>札记</a>
-        <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}>指南</a>
-        <a href={`${base}search/`} aria-current={active === "search" ? "page" : undefined}>搜索</a>
-        <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}>项目</a>
-        <a class="github-link" href="https://github.com/Jennifer-qj/wenxianxue-lab" target="_blank" rel="noreferrer">GitHub <span aria-hidden="true">↗</span></a>
+      <div class="header-inner">
+        <a class="brand" href={base} aria-label="文献学实验室首页">
+          <span class="brand-mark" aria-hidden="true">文</span>
+          <span>
+            <strong>文献学实验室</strong>
+            <small>WENXIANXUE LAB</small>
+          </span>
+        </a>
+        <nav class="primary-nav" aria-label="主导航">
+          {nav.map(([id, label, href]) => (
+            <a href={href} aria-current={active === id ? "page" : undefined}>{label}</a>
+          ))}
+        </nav>
+        <div class="header-tools">
+          <a class="search-link" href={`${base}search/`} aria-current={active === "search" ? "page" : undefined} aria-label="搜索全站"><span aria-hidden="true">⌕</span><b>搜索</b></a>
+          <details class="more-menu">
+            <summary>更多 <span aria-hidden="true">⌄</span></summary>
+            <div>
+              <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}><span>札记</span><small>收藏、批注与最近浏览</small></a>
+              <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}><span>使用指南</span><small>第一次来，从这里开始</small></a>
+              <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}><span>关于项目</span><small>方法、版权与作者说明</small></a>
+              <a class="github-link" href="https://github.com/Jennifer-qj/wenxianxue-lab" target="_blank" rel="noreferrer"><span>GitHub ↗</span><small>查看代码与更新记录</small></a>
+            </div>
+          </details>
+        </div>
       </div>
     </header>
     <main id="main">
       <slot />
     </main>
-    <footer class="site-footer">
-      <div>
+    <footer class="site-footer container">
+      <div class="footer-intro">
+        <span class="footer-seal" aria-hidden="true">文</span>
+        <div>
         <strong>文献学实验室</strong>
         <p>边读、边辨、边连接。让文献学成为可以操作的知识。</p>
+        </div>
       </div>
+      <nav class="footer-links" aria-label="页脚导航">
+        <a href={`${base}story/`}>作者手记</a>
+        <a href={`${base}about/`}>方法与版权</a>
+        <a href={`${base}guide/`}>使用指南</a>
+        <a href={`${base}updates/`}>更新日志</a>
+        <a href={`${base}audit/`}>内容审计</a>
+      </nav>
       <div class="footer-meta">
         <span>个人学习与数字人文实践</span>
         <span>参考杜泽逊《文献学概要（修订本）》</span>
-        <span>不提供原书全文</span>
-        <a href={`${base}story/`}>作者手记：我为什么做这个网站 →</a>
-        <a href={`${base}about/`}>方法、版权与引用说明 →</a>
-        <a href={`${base}guide/`}>网站使用指南 →</a>
-        <a href={`${base}updates/`}>更新日志、路线图与开放数据 →</a>
-        <a href={`${base}audit/`}>学术内容审计与复核队列 →</a>
+        <span>© 2026 Jennifer-qj · 不提供原书全文</span>
       </div>
     </footer>
     <WelcomeGuide baseUrl={base} client:load />
     {active !== "notebook" && <LearningDock baseUrl={base} title={title} pageType={pageType} client:load />}
+    <script is:inline>
+      const progressBar = document.querySelector('.reading-progress span');
+      const updateReadingProgress = () => {
+        const distance = document.documentElement.scrollHeight - window.innerHeight;
+        const value = distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
+        if (progressBar) progressBar.style.transform = `scaleX(${value})`;
+      };
+      updateReadingProgress();
+      window.addEventListener('scroll', updateReadingProgress, { passive: true });
+      document.addEventListener('click', (event) => {
+        document.querySelectorAll('.more-menu[open]').forEach((menu) => {
+          if (!menu.contains(event.target)) menu.removeAttribute('open');
+        });
+      });
+    </script>
   </body>
 </html>

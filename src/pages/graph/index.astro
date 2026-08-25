@@ -34,4 +34,10 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .page-hero{padding:7rem 0 3rem;display:grid;grid-template-columns:1.35fr .65fr;gap:4rem;align-items:end}.page-hero>p{color:var(--muted)}
   .graph-area{padding-bottom:5rem}.graph-stats{display:flex;align-items:baseline;gap:1.5rem;margin-bottom:1rem}.graph-stats span{display:flex;align-items:baseline;gap:.35rem;color:var(--muted);font-size:.78rem}.graph-stats strong{color:var(--cinnabar);font-family:var(--serif);font-size:1.5rem}.graph-stats a{margin-left:auto;color:var(--cinnabar);font-size:.76rem}.graph-method{padding:3rem 0 6rem;display:grid;grid-template-columns:.6fr 1.4fr;border-top:1px solid var(--line)}.graph-method h2{margin:0;font-family:var(--serif);font-size:1.7rem}.graph-method div p{color:var(--muted)}
   @media(max-width:760px){.page-hero,.graph-method{grid-template-columns:1fr;gap:1rem}}
+  .page-hero{padding:5rem 0 2.5rem;grid-template-columns:1.15fr .85fr;gap:5rem}
+  .page-hero .display-title{font-size:clamp(2.8rem,5.3vw,4.9rem);text-wrap:balance}
+  .graph-shell{border-radius:12px;background:#24302b;box-shadow:var(--shadow)}
+  .graph-searchbar{background:#1e2924}
+  .graph-method{margin-top:1rem}
+  @media(max-width:760px){.page-hero{padding-top:3.5rem;grid-template-columns:1fr;gap:1.25rem}}
 </style>

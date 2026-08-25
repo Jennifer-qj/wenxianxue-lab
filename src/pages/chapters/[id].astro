@@ -183,6 +183,19 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
     {previous ? <a href={`${base}chapters/${previous.id}/`}><small>上一章</small><strong>{previous.title}</strong></a> : <span></span>}
     {next ? <a class="next" href={`${base}chapters/${next.id}/`}><small>下一章</small><strong>{next.title}</strong></a> : <a class="next" href={`${base}lab/`}><small>完成全书导读</small><strong>进入互动实验室</strong></a>}
   </nav>
+  <script is:inline>
+    const tocLinks = [...document.querySelectorAll('.toc a[href^="#"]')];
+    const sections = tocLinks.map((link) => document.querySelector(link.getAttribute('href'))).filter(Boolean);
+    if (sections.length && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        const visible = entries.filter((entry) => entry.isIntersecting).sort((a, b) => a.boundingClientRect.top - b.boundingClientRect.top)[0];
+        if (!visible) return;
+        tocLinks.forEach((link) => link.removeAttribute('aria-current'));
+        document.querySelector(`.toc a[href="#${visible.target.id}"]`)?.setAttribute('aria-current', 'location');
+      }, { rootMargin: '-18% 0px -70% 0px', threshold: 0 });
+      sections.forEach((section) => observer.observe(section));
+    }
+  </script>
 </BaseLayout>
 
 <style>
@@ -199,4 +212,29 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   .unit-meta b{display:block;margin-top:.45rem;color:var(--muted);font-size:.67rem;font-weight:400}
   .deep-dive-heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:.4rem 2rem;margin-bottom:1.5rem}.deep-dive-heading .eyebrow{grid-column:1/-1}.deep-dive-heading h2{margin:0;font-family:var(--serif);font-size:2rem}.deep-dive-heading>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}
   @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol,.provenance{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,.provenance,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
+  /* calmer chapter reading layout */
+  .chapter-hero{padding:3.5rem 0 3.25rem;background:linear-gradient(125deg,rgba(163,59,43,.055),transparent 48%)}
+  .crumbs{margin-bottom:2.5rem}
+  .hero-grid{grid-template-columns:1.45fr .55fr;gap:clamp(3rem,7vw,7rem)}
+  .chapter-hero h1{margin:.25rem 0 .6rem;font-size:clamp(3rem,5.5vw,5rem);font-weight:650;letter-spacing:-.035em;line-height:1.15}
+  .guiding{margin-bottom:0;font-size:1.12rem}
+  .chapter-hero aside{padding:1.15rem 1.25rem;border-radius:10px;background:rgba(252,251,247,.7);box-shadow:var(--shadow-soft)}
+  .chapter-hero dl div{padding-left:.7rem;border:0;border-left:1px solid var(--line)}
+  .chapter-hero dl div:first-child{padding-left:0;border:0}
+  .chapter-layout{grid-template-columns:190px minmax(0,1fr);gap:clamp(3rem,6vw,5.5rem);padding-top:3.5rem}
+  .toc{top:96px;padding:.7rem;border:1px solid var(--line);border-radius:9px;background:rgba(252,251,247,.56);box-shadow:0 8px 24px rgba(36,42,37,.035)}
+  .toc small{padding:.45rem .55rem .7rem;letter-spacing:.08em}
+  .toc a{position:relative;padding:.42rem .55rem;border:0;border-radius:5px;font-size:.75rem}
+  .toc a:hover{color:var(--ink);background:rgba(31,39,34,.045)}
+  .toc a[aria-current="location"]{color:var(--cinnabar);background:rgba(163,59,43,.07)}
+  .toc a[aria-current="location"]::before{content:"";position:absolute;left:-.72rem;top:.55rem;width:3px;height:1rem;border-radius:2px;background:var(--cinnabar)}
+  .provenance{gap:1px;overflow:hidden;border:1px solid var(--line);border-radius:9px;background:var(--line)}
+  .provenance>div{border:0;background:var(--white)}
+  .content-identity span{border:0;border-radius:99px;background:#ebe5da}
+  .unit-list{display:grid;gap:.85rem;border:0}
+  .unit-list article{grid-template-columns:76px 1fr;padding:1.25rem;border:1px solid var(--line);border-radius:10px;background:rgba(252,251,247,.56)}
+  .unit-list dl div{padding:.75rem;border:0;border-radius:6px;background:#efebe2}
+  .unit-list dl div:last-child{background:#f1e6e1}
+  .unit-tags span{border:0}
+  @media(max-width:800px){.chapter-layout{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr;gap:2rem}}
 </style>
