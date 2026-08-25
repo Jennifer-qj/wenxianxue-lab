@@ -31,15 +31,28 @@ const pathReview = new Map(learningPaths.map((path) => {
       </div>
       <p class="hero-boundary">这不是原书电子版，也不是已经完成核验的知识库。它是一项公开迭代中的独立数字人文实践。</p>
     </div>
-    <div class="hero-visual" aria-label="从纸本阅读到互动学习的制作过程">
-      <header><small>一条内容怎样进入网站</small><span>制作记录 01</span></header>
-      <ol>
-        <li><b>纸本阅读</b><p>先确认章节边界，记下不理解的问题。</p></li>
-        <li><b>知识拆分</b><p>把长章节拆成概念、证据和判断边界。</p></li>
-        <li><b>互动转译</b><p>把“记住定义”改造成可以动手完成的任务。</p></li>
-        <li><b>人工复核</b><p>回到纸本核对表述与页码，并公开记录进度。</p></li>
-      </ol>
-      <footer><span>当前纸本已核验</span><strong>{verifiedUnits} / {units.length}</strong><a href={`${base}audit/`}>查看审计记录 →</a></footer>
+    <div class="hero-stage">
+      <div class="hero-motion" aria-hidden="true">
+        <svg viewBox="0 0 620 500" role="presentation">
+          <path d="M55 122 C180 25 296 56 370 150 S525 264 584 163" />
+          <path d="M70 382 C190 462 316 409 384 320 S514 248 590 340" />
+          <path d="M150 80 C124 210 176 315 286 394" />
+          <circle cx="55" cy="122" r="5" /><circle cx="370" cy="150" r="7" /><circle cx="584" cy="163" r="5" />
+          <circle cx="70" cy="382" r="5" /><circle cx="384" cy="320" r="7" /><circle cx="590" cy="340" r="5" />
+        </svg>
+      </div>
+      <div class="hero-fact hero-fact--chapters"><strong>14</strong><span>章知识结构</span></div>
+      <div class="hero-fact hero-fact--concepts"><strong>176</strong><span>个概念节点</span></div>
+      <div class="hero-visual" aria-label="从纸本阅读到互动学习的制作过程">
+        <header><small>一条内容怎样进入网站</small><span><i></i> 制作进行中</span></header>
+        <ol>
+          <li><b>纸本阅读</b><p>先确认章节边界，记下不理解的问题。</p></li>
+          <li><b>知识拆分</b><p>把长章节拆成概念、证据和判断边界。</p></li>
+          <li><b>互动转译</b><p>把“记住定义”改造成可以动手完成的任务。</p></li>
+          <li><b>人工复核</b><p>回到纸本核对表述与页码，并公开记录进度。</p></li>
+        </ol>
+        <footer><span>当前纸本已核验</span><strong>{verifiedUnits} / {units.length}</strong><a href={`${base}audit/`}>查看审计记录 →</a></footer>
+      </div>
     </div>
   </section>
 
@@ -204,4 +217,31 @@ const pathReview = new Map(learningPaths.map((path) => {
   .method-number{font-family:var(--serif);font-size:3rem;color:var(--cinnabar)}.method-note h2{margin:0;font-family:var(--serif);font-size:1.5rem}.method-note p{margin:0;color:var(--muted)}
   @media(max-width:900px){.hero{grid-template-columns:1fr;padding-top:4rem}.hero-visual{width:min(540px,92vw)}.strip-inner{grid-template-columns:1fr 1fr}.strip-line{display:none}.flagship-entry{grid-template-columns:auto 1fr}.flagship-entry>a{grid-column:1/-1}.path-grid{grid-template-columns:repeat(2,1fr)}.path-card:nth-child(7){grid-column:span 2}.graph-preview-grid{grid-template-columns:1fr}.game-row{grid-template-columns:repeat(2,1fr)}.author-note{grid-template-columns:1fr 1fr}.author-note__links{grid-column:1/-1}.method-note{grid-template-columns:auto 1fr}.method-note>p{grid-column:1/-1}}
   @media(max-width:560px){.strip-inner,.path-grid,.game-row,.graph-stats,.flagship-entry,.author-note{grid-template-columns:1fr}.strip-inner{padding-block:1.2rem}.hero h1 br{display:none}.hero-visual li{grid-template-columns:1fr}.hero-visual footer{align-items:flex-start;flex-direction:column}.flagship-entry{margin-top:3rem;padding:1.2rem}.flagship-entry>a{grid-column:auto}.path-card:nth-child(7){grid-column:auto}.section-heading{align-items:start}.game-card{grid-template-columns:auto 1fr;min-height:210px}.method-note{padding:1.5rem}.lexicon-link{display:block;margin-left:0}}
+  /* second-pass hero: use the empty upper-right area as an animated knowledge field */
+  .hero{grid-template-columns:minmax(0,1.04fr) minmax(480px,.96fr);align-items:start;min-height:660px;padding-top:5.5rem}
+  .hero-copy{padding-top:1.8rem}
+  .hero-stage{position:relative;isolation:isolate;min-height:610px;display:grid;align-items:start;padding:3.2rem 2.2rem 2rem}
+  .hero-motion{position:absolute;inset:-1.5rem -2rem 0 -3rem;z-index:0;opacity:.62;pointer-events:none}
+  .hero-motion svg{width:100%;height:100%;overflow:visible}
+  .hero-motion path{fill:none;stroke:rgba(82,106,85,.22);stroke-width:1;stroke-dasharray:5 8;animation:knowledge-flow 18s linear infinite}
+  .hero-motion circle{fill:#f6f3ec;stroke:rgba(163,59,43,.55);stroke-width:2;transform-box:fill-box;transform-origin:center;animation:node-breathe 3.6s ease-in-out infinite}
+  .hero-motion circle:nth-of-type(2),.hero-motion circle:nth-of-type(5){fill:#a33b2b;stroke:#a33b2b;animation-delay:-1.4s}
+  .hero-motion circle:nth-of-type(3),.hero-motion circle:nth-of-type(6){animation-delay:-2.3s}
+  .hero-fact{position:absolute;z-index:2;display:flex;align-items:baseline;gap:.45rem;padding:.55rem .8rem;border:1px solid var(--line);border-radius:999px;background:rgba(252,251,247,.9);box-shadow:var(--shadow-soft);backdrop-filter:blur(8px)}
+  .hero-fact strong{color:var(--cinnabar);font-family:var(--serif);font-size:1.2rem}.hero-fact span{color:var(--muted);font-size:.67rem}
+  .hero-fact--chapters{top:0;right:4.5rem}.hero-fact--concepts{right:-.2rem;bottom:5.8rem}
+  .hero-visual{z-index:1;width:100%;margin:0;align-self:start;box-shadow:0 24px 65px rgba(36,42,37,.12)}
+  .hero-visual header span{display:flex;align-items:center;gap:.35rem}.hero-visual header span i{display:block;width:6px;aspect-ratio:1;border-radius:50%;background:var(--cinnabar);box-shadow:0 0 0 0 rgba(163,59,43,.35);animation:live-pulse 2s ease-out infinite}
+  .hero-visual li{transition:background .35s ease}
+  .hero-visual li::after{content:"";position:absolute;left:-1.2rem;top:50%;width:3px;height:0;border-radius:3px;background:var(--cinnabar);transform:translateY(-50%);opacity:0}
+  .hero-visual li:nth-child(1){animation:step-focus 8s ease-in-out infinite}
+  .hero-visual li:nth-child(2){animation:step-focus 8s 2s ease-in-out infinite}
+  .hero-visual li:nth-child(3){animation:step-focus 8s 4s ease-in-out infinite}
+  .hero-visual li:nth-child(4){animation:step-focus 8s 6s ease-in-out infinite}
+  @keyframes knowledge-flow{to{stroke-dashoffset:-130}}
+  @keyframes node-breathe{0%,100%{transform:scale(1);opacity:.55}50%{transform:scale(1.45);opacity:1}}
+  @keyframes live-pulse{70%{box-shadow:0 0 0 7px rgba(163,59,43,0)}100%{box-shadow:0 0 0 0 rgba(163,59,43,0)}}
+  @keyframes step-focus{0%,18%{background:rgba(163,59,43,.055)}24%,100%{background:transparent}}
+  @media(max-width:1050px){.hero{grid-template-columns:1fr;min-height:auto}.hero-copy{padding-top:0}.hero-stage{width:min(660px,100%);min-height:560px;margin-inline:auto}.hero-motion{inset:-2rem -3rem 0}.hero-fact--concepts{right:0}}
+  @media(max-width:560px){.hero-stage{min-height:auto;padding:3rem 0 1.5rem}.hero-motion{inset:0;opacity:.35}.hero-fact{display:none}.hero-visual{width:100%}}
 </style>
