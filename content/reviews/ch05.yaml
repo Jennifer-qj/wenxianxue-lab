@@ -1,0 +1,328 @@
+chapter: 5
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第5章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-05-01-01
+    page_start: 104
+    page_end: 105
+    focus:
+      - 核对「一、“版本”释义」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“版本为什么同时涉及文字与物质形态？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-01
+    page_start: 105
+    page_end: 107
+    focus:
+      - 核对「（一）写本」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“手稿、清稿、抄稿、影钞和抄本怎样区分？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-02
+    page_start: 107
+    page_end: 107
+    focus:
+      - 核对「（二）刻本」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“同一版片为何仍可能形成不同印本？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-03
+    page_start: 107
+    page_end: 107
+    focus:
+      - 核对「（三）套印本」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“套印本的核心识别特征是什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-04
+    page_start: 107
+    page_end: 108
+    focus:
+      - 核对「（四）饾版与拱花印本」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“分版水印与无墨压印如何协同？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-05
+    page_start: 108
+    page_end: 109
+    focus:
+      - 核对「（五）活字本」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“活字排印会留下哪些重复与不齐痕迹？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-06
+    page_start: 109
+    page_end: 109
+    focus:
+      - 核对「（六）石印本」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“石印如何改变近代复制效率？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-07
+    page_start: 109
+    page_end: 110
+    focus:
+      - 核对「（七）珂罗版印本」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“高仿真复制为何仍不是原件？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-02-08
+    page_start: 110
+    page_end: 110
+    focus:
+      - 核对「（八）批校本、题跋本」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“批校题跋怎样增加传本层次？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-03-01
+    page_start: 110
+    page_end: 112
+    focus:
+      - 核对「（一）善本的两层含义」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对““善”究竟指古、稀还是校勘精良？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-03-02
+    page_start: 112
+    page_end: 114
+    focus:
+      - 核对「（二）四部要籍之精校精注本」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“晚出的精校本为何也可能有善本价值？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-01
+    page_start: 114
+    page_end: 116
+    focus:
+      - 核对「（一）明确撰写年代与（二）细读序跋」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“成书年代与刊刻年代为什么必须区分？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-02
+    page_start: 116
+    page_end: 118
+    focus:
+      - 核对「（三）验牌记」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“牌记为什么既重要又可能误导？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-03
+    page_start: 118
+    page_end: 119
+    focus:
+      - 核对「（四）查避讳」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“避讳证据通常能推出多强的年代结论？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-04
+    page_start: 119
+    page_end: 126
+    focus:
+      - 核对「（五）考刻工与（六）核校阅人时代」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“人物活动年代如何成为刊刻旁证？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-05
+    page_start: 126
+    page_end: 128
+    focus:
+      - 核对「（七）看字体与（八）看版式」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“字体版式为什么适合比较而不宜孤证断代？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-06
+    page_start: 128
+    page_end: 130
+    focus:
+      - 核对「（九）看纸张至（十一）查藏印」的纸本页码边界、核心定义和原书例证
+      - 核对刻工、牌记、避讳、序跋、纸墨等断代证据的效力
+      - 检查项目对“纸张、装潢和藏印分别说明什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-07
+    page_start: 129
+    page_end: 133
+    focus:
+      - 核对「（十二）类比、（十三）查著录与（十四）求旁证」的纸本页码边界、核心定义和原书例证
+      - 避免以单一特征直接判定年代、价值或真伪
+      - 检查项目对“外部比较怎样支持版本判断？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-05-04-08
+    page_start: 133
+    page_end: 134
+    focus:
+      - 核对「（十五）对书影」的纸本页码边界、核心定义和原书例证
+      - 核对版本类型、印刷工艺和装帧术语的识别条件
+      - 检查项目对“书影比较能完成和不能完成什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

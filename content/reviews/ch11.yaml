@@ -1,0 +1,125 @@
+chapter: 11
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第11章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-11-01-01
+    page_start: 288
+    page_end: 295
+    focus:
+      - 核对「总集与选集」的纸本页码边界、核心定义和原书例证
+      - 核对总集、选集、全集、别集等术语与收录边界
+      - 检查项目对“选集怎样通过取舍塑造文学史面貌？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-01-02
+    page_start: 288
+    page_end: 295
+    focus:
+      - 核对「选集举要」的纸本页码边界、核心定义和原书例证
+      - 核对编者、作者、成书与刊刻年代以及版本源流
+      - 检查项目对“阅读代表选集为什么要先识别编选宗旨？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-01-03
+    page_start: 295
+    page_end: 301
+    focus:
+      - 核对「全集举要」的纸本页码边界、核心定义和原书例证
+      - 区分作品归属、编选目的和后世重编造成的文本层次
+      - 检查项目对“全集型总集为何仍不必然完整？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-02-01
+    page_start: 301
+    page_end: 302
+    focus:
+      - 核对「别集的起源」的纸本页码边界、核心定义和原书例证
+      - 核对总集、选集、全集、别集等术语与收录边界
+      - 检查项目对“一人作品怎样逐渐形成独立别集？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-02-02
+    page_start: 302
+    page_end: 306
+    focus:
+      - 核对「别集的内容」的纸本页码边界、核心定义和原书例证
+      - 核对编者、作者、成书与刊刻年代以及版本源流
+      - 检查项目对“别集为何常超出纯文学作品范围？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-02-03
+    page_start: 306
+    page_end: 309
+    focus:
+      - 核对「别集的文献价值」的纸本页码边界、核心定义和原书例证
+      - 区分作品归属、编选目的和后世重编造成的文本层次
+      - 检查项目对“别集怎样补充人物与时代研究？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-11-03-01
+    page_start: 288
+    page_end: 309
+    focus:
+      - 核对「总集与别集的联合使用」的纸本页码边界、核心定义和原书例证
+      - 核对总集、选集、全集、别集等术语与收录边界
+      - 检查项目对“同一作品见于总集和别集时如何比较？”的回答是否保持原书限定
+      - 本单元含教学建模内容，须明确区分教材框架与项目新增推演
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

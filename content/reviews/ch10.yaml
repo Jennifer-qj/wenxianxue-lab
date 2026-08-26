@@ -1,0 +1,158 @@
+chapter: 10
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第10章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-10-01-01
+    page_start: 266
+    page_end: 268
+    focus:
+      - 核对「地方志的产生」的纸本页码边界、核心定义和原书例证
+      - 核对类书与丛书的定义、编排方式和使用目的
+      - 检查项目对“地方记载怎样发展为综合性方志？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-01-02
+    page_start: 268
+    page_end: 270
+    focus:
+      - 核对「历代地方志的数量与存佚」的纸本页码边界、核心定义和原书例证
+      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 检查项目对“方志数量统计为什么必须注明口径？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-01-03
+    page_start: 270
+    page_end: 273
+    focus:
+      - 核对「总志、省志、府州厅县志」的纸本页码边界、核心定义和原书例证
+      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 检查项目对“行政层级如何决定方志覆盖范围？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-01-04
+    page_start: 273
+    page_end: 274
+    focus:
+      - 核对「乡镇、都邑、卫所、边关、土司、盐井与专志」的纸本页码边界、核心定义和原书例证
+      - 核对类书与丛书的定义、编排方式和使用目的
+      - 检查项目对“非标准行政区域为何也会产生方志？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-01-05
+    page_start: 274
+    page_end: 278
+    focus:
+      - 核对「地方志的用途」的纸本页码边界、核心定义和原书例证
+      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 检查项目对“方志资料为何既丰富又必须互证？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-02-01
+    page_start: 278
+    page_end: 282
+    focus:
+      - 核对「家谱的起源与发展」的纸本页码边界、核心定义和原书例证
+      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 检查项目对“家谱功能如何从身份秩序扩展为宗族记忆？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-02-02
+    page_start: 282
+    page_end: 283
+    focus:
+      - 核对「世系、世系录、谱序与谱例」的纸本页码边界、核心定义和原书例证
+      - 核对类书与丛书的定义、编排方式和使用目的
+      - 检查项目对“怎样阅读家谱的关系结构与编纂规则？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-02-03
+    page_start: 283
+    page_end: 284
+    focus:
+      - 核对「恩荣、像赞、传志、家训、文献与修谱记录」的纸本页码边界、核心定义和原书例证
+      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 检查项目对“家谱除世系外还保存哪些材料？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-10-02-04
+    page_start: 284
+    page_end: 289
+    focus:
+      - 核对「家谱的价值与存佚」的纸本页码边界、核心定义和原书例证
+      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 检查项目对“家谱怎样用于人口、移民和宗族研究？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

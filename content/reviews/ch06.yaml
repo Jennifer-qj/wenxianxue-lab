@@ -1,0 +1,141 @@
+chapter: 6
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第6章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-06-01-01
+    page_start: 134
+    page_end: 137
+    focus:
+      - 核对「讹、脱、衍、倒、错乱」的纸本页码边界、核心定义和原书例证
+      - 核对讹、脱、衍、倒等错误类型及原书例证
+      - 检查项目对“五类讹误如何从表面症状区分？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-01-02
+    page_start: 137
+    page_end: 137
+    focus:
+      - 核对「校勘的目的」的纸本页码边界、核心定义和原书例证
+      - 核对对校、本校、他校、理校等方法的适用范围
+      - 检查项目对“校勘为什么不等于追求唯一“原文”？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-02-01
+    page_start: 137
+    page_end: 141
+    focus:
+      - 核对「主观条件与精研本书」的纸本页码边界、核心定义和原书例证
+      - 区分发现异文、解释异文和决定改字三个判断层次
+      - 检查项目对“校勘者需要哪些知识和判断纪律？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-02-02
+    page_start: 138
+    page_end: 140
+    focus:
+      - 核对「广求异本与相关资料」的纸本页码边界、核心定义和原书例证
+      - 核对讹、脱、衍、倒等错误类型及原书例证
+      - 检查项目对“为什么底本之外还要广求异本和旁证？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-03-01
+    page_start: 141
+    page_end: 146
+    focus:
+      - 核对「对校法与他校法」的纸本页码边界、核心定义和原书例证
+      - 核对对校、本校、他校、理校等方法的适用范围
+      - 检查项目对“对校和他校分别依赖什么材料？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-03-02
+    page_start: 146
+    page_end: 147
+    focus:
+      - 核对「本校法与综合考证法」的纸本页码边界、核心定义和原书例证
+      - 区分发现异文、解释异文和决定改字三个判断层次
+      - 检查项目对“没有可靠异本时怎样形成可检验判断？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-04-01
+    page_start: 147
+    page_end: 149
+    focus:
+      - 核对「四、校勘成果的处理及校勘记的写法」的纸本页码边界、核心定义和原书例证
+      - 核对讹、脱、衍、倒等错误类型及原书例证
+      - 检查项目对“一条可复核的校勘记要包含什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-06-05-01
+    page_start: 149
+    page_end: 150
+    focus:
+      - 核对「五、校书的态度：多闻阙疑」的纸本页码边界、核心定义和原书例证
+      - 核对对校、本校、他校、理校等方法的适用范围
+      - 检查项目对“什么时候应当保留原文或存疑？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

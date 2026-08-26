@@ -1,0 +1,193 @@
+chapter: 14
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第14章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-14-01-01
+    page_start: 368
+    page_end: 371
+    focus:
+      - 核对「一、敦煌、敦煌石窟、莫高窟与藏经洞」的纸本页码边界、核心定义和原书例证
+      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
+      - 检查项目对“四个地理与遗址概念怎样避免混用？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-02-01
+    page_start: 371
+    page_end: 372
+    focus:
+      - 核对「藏经洞的发现」的纸本页码边界、核心定义和原书例证
+      - 核对发现、封闭、流散、收藏机构和编号系统
+      - 检查项目对“发现史怎样影响早期文献记录？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-02-02
+    page_start: 372
+    page_end: 375
+    focus:
+      - 核对「封闭时间与原因」的纸本页码边界、核心定义和原书例证
+      - 对封闭原因、残卷缀合及材料比例保留竞争解释
+      - 检查项目对“怎样表达藏经洞封闭原因的不同假说？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-02-03
+    page_start: 375
+    page_end: 379
+    focus:
+      - 核对「敦煌遗书的流散」的纸本页码边界、核心定义和原书例证
+      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
+      - 检查项目对“文献流散为何同时造成损失与新的研究任务？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-03-01
+    page_start: 379
+    page_end: 388
+    focus:
+      - 核对「三、敦煌文献的目录」的纸本页码边界、核心定义和原书例证
+      - 核对发现、封闭、流散、收藏机构和编号系统
+      - 检查项目对“怎样从不同国家和机构编号定位同一写卷？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-04-01
+    page_start: 388
+    page_end: 396
+    focus:
+      - 核对「四、敦煌文献的汇编整理与刊行」的纸本页码边界、核心定义和原书例证
+      - 对封闭原因、残卷缀合及材料比例保留竞争解释
+      - 检查项目对“影印、释录和校订各保留什么信息？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-04-02
+    page_start: 388
+    page_end: 396
+    focus:
+      - 核对「残卷缀合」的纸本页码边界、核心定义和原书例证
+      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
+      - 检查项目对“分藏两地的残片怎样证明原属一卷？”的回答是否保持原书限定
+      - 本单元含教学建模内容，须明确区分教材框架与项目新增推演
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-05-01
+    page_start: 396
+    page_end: 400
+    focus:
+      - 核对「宗教文献与儒家经籍」的纸本页码边界、核心定义和原书例证
+      - 核对发现、封闭、流散、收藏机构和编号系统
+      - 检查项目对“敦煌写本怎样呈现宗教实践与经典传播？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-05-02
+    page_start: 400
+    page_end: 410
+    focus:
+      - 核对「语言、史地、子书与文学」的纸本页码边界、核心定义和原书例证
+      - 对封闭原因、残卷缀合及材料比例保留竞争解释
+      - 检查项目对“非正统和日常文本为何格外珍贵？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-05-03
+    page_start: 405
+    page_end: 414
+    focus:
+      - 核对「考古艺术与科技史料」的纸本页码边界、核心定义和原书例证
+      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
+      - 检查项目对“怎样联合文字、图像和物质信息研究敦煌？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-14-06-01
+    page_start: 414
+    page_end: 414
+    focus:
+      - 核对「附录、修订本后记」的纸本页码边界、核心定义和原书例证
+      - 核对发现、封闭、流散、收藏机构和编号系统
+      - 检查项目对“修订说明为什么也是理解教材版本的重要材料？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

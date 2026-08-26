@@ -1,0 +1,158 @@
+chapter: 4
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第4章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-04-01-01
+    page_start: 56
+    page_end: 64
+    focus:
+      - 核对「（一）历代官府文献收藏概况」的纸本页码边界、核心定义和原书例证
+      - 核对藏书家、藏书楼、目录和机构名称及活动年代
+      - 检查项目对“官藏如何建立文献秩序？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-01-02
+    page_start: 64
+    page_end: 69
+    focus:
+      - 核对「（二）历代文献的大量散佚」的纸本页码边界、核心定义和原书例证
+      - 对战乱、火灾、禁毁和散佚数量逐项寻找纸本依据
+      - 检查项目对“为什么集中收藏仍会反复遭遇大规模散佚？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-01
+    page_start: 69
+    page_end: 70
+    focus:
+      - 核对「（一）周秦私家藏书概况」的纸本页码边界、核心定义和原书例证
+      - 区分递藏事实、后人推测与项目提出的保存风险解释
+      - 检查项目对“私人收藏如何补充公共保存？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-02
+    page_start: 70
+    page_end: 71
+    focus:
+      - 核对「（二）汉魏晋南北朝的私人藏书」的纸本页码边界、核心定义和原书例证
+      - 核对藏书家、藏书楼、目录和机构名称及活动年代
+      - 检查项目对“动荡时代私藏承担了什么作用？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-03
+    page_start: 71
+    page_end: 73
+    focus:
+      - 核对「（三）唐宋私家藏书」的纸本页码边界、核心定义和原书例证
+      - 对战乱、火灾、禁毁和散佚数量逐项寻找纸本依据
+      - 检查项目对“印刷发展如何改变私家收藏？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-04
+    page_start: 73
+    page_end: 79
+    focus:
+      - 核对「（四）元明私家藏书」的纸本页码边界、核心定义和原书例证
+      - 区分递藏事实、后人推测与项目提出的保存风险解释
+      - 检查项目对“藏书楼与目录怎样共同塑造收藏记忆？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-05
+    page_start: 79
+    page_end: 89
+    focus:
+      - 核对「（五）清代著名藏书家（上）」的纸本页码边界、核心定义和原书例证
+      - 核对藏书家、藏书楼、目录和机构名称及活动年代
+      - 检查项目对“清代藏书活动为何与校勘整理密切结合？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-06
+    page_start: 89
+    page_end: 98
+    focus:
+      - 核对「（六）清代著名藏书家（下）」的纸本页码边界、核心定义和原书例证
+      - 对战乱、火灾、禁毁和散佚数量逐项寻找纸本依据
+      - 检查项目对“收藏网络如何影响版本流传？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-04-02-07
+    page_start: 98
+    page_end: 104
+    focus:
+      - 核对「（七）近代著名藏书家」的纸本页码边界、核心定义和原书例证
+      - 区分递藏事实、后人推测与项目提出的保存风险解释
+      - 检查项目对“近代制度变化如何重组古籍收藏？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

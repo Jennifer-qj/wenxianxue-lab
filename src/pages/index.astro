@@ -19,17 +19,17 @@ const pathReview = new Map(learningPaths.map((path) => {
 <BaseLayout active="home">
   <section class="hero container">
     <div class="hero-copy">
-      <p class="eyebrow">个人读书实验 · 持续更新</p>
-      <h1 class="display-title">把一本书的阅读过程，<br />变成可以探索的<em>学习实验室</em></h1>
+      <p class="eyebrow">我的《文献学概要》读书现场 · 持续修订</p>
+      <h1 class="display-title">把书边的问号，<em>搬进学习实验室</em></h1>
       <p class="hero-lead">
-        我想知道：一本专业教材除了被顺序读完，还能不能被重新连接、反复判断并亲手练习？
-        于是，我从纸张与装帧、版本、校勘和目录出发，把自己的学习过程逐步转化成这座网站。
+        读到卷子装、善本和校勘法时，我常在纸边画箭头，却很难把跨章线索留住。
+        这个网站收纳的正是这些箭头：哪里要查概念，哪里要比较证据，哪里暂时不能下结论。
       </p>
       <div class="hero-actions">
         <a class="button" href={`${base}paths/`}>开始第一条学习路径 <span>→</span></a>
         <a class="button secondary" href={`${base}story/`}>先读我的制作手记</a>
       </div>
-      <p class="hero-boundary">这不是原书电子版，也不是已经完成核验的知识库。它是一项公开迭代中的独立数字人文实践。</p>
+      <p class="hero-boundary">这里不替代原书，也不把尚未核对的草稿装成定论。它记录我怎样读、怎样拆、怎样改。</p>
     </div>
     <div class="hero-stage">
       <div class="hero-motion" aria-hidden="true">
@@ -44,12 +44,12 @@ const pathReview = new Map(learningPaths.map((path) => {
       <div class="hero-fact hero-fact--chapters"><strong>14</strong><span>章知识结构</span></div>
       <div class="hero-fact hero-fact--concepts"><strong>176</strong><span>个概念节点</span></div>
       <div class="hero-visual" aria-label="从纸本阅读到互动学习的制作过程">
-        <header><small>一条内容怎样进入网站</small><span><i></i> 制作进行中</span></header>
+        <header><small>一条读书札记怎样变成网页</small><span><i></i> 制作进行中</span></header>
         <ol>
-          <li><b>纸本阅读</b><p>先确认章节边界，记下不理解的问题。</p></li>
-          <li><b>知识拆分</b><p>把长章节拆成概念、证据和判断边界。</p></li>
-          <li><b>互动转译</b><p>把“记住定义”改造成可以动手完成的任务。</p></li>
-          <li><b>人工复核</b><p>回到纸本核对表述与页码，并公开记录进度。</p></li>
+          <li><b>在书边提问</b><p>圈出术语、例证和读不通的地方。</p></li>
+          <li><b>拆开长章节</b><p>分清概念、材料、证据和不能越过的边界。</p></li>
+          <li><b>改成一次操作</b><p>让读者排序、称量、比较，而不只背一句定义。</p></li>
+          <li><b>回书上逐条查</b><p>核对页码和表述，保留尚未解决的问题。</p></li>
         </ol>
         <footer><span>当前纸本已核验</span><strong>{verifiedUnits} / {units.length}</strong><a href={`${base}audit/`}>查看审计记录 →</a></footer>
       </div>
@@ -58,7 +58,7 @@ const pathReview = new Map(learningPaths.map((path) => {
 
   <section class="flagship-entry container">
     <div class="flagship-mark"><span>综合</span><strong>案卷</strong></div>
-    <div><p class="eyebrow">New flagship case</p><h2>你能否为一部“宋刻”残本写出谨慎的鉴定意见？</h2><p>跨越纸张、装帧、牌记、避讳、刻工、版式、目录和递藏记录。不是猜答案，而是给证据分配角色、限制结论强度并导出报告。</p></div>
+    <div><p class="eyebrow">New flagship case</p><h2>旧题签写着“宋刻”，你会信到哪一步？</h2><p>纸张、装帧、牌记、避讳、刻工、版式、目录和递藏记录并不总说同一件事。先安排证据角色，再决定结论能写多满。</p></div>
     <a class="button" href={`${base}lab/#rare-book-dossier`}>打开古籍鉴定案卷 <span>→</span></a>
   </section>
 
@@ -76,7 +76,7 @@ const pathReview = new Map(learningPaths.map((path) => {
     <div class="section-heading">
       <div>
         <p class="eyebrow">七条学习路径</p>
-        <h2 class="section-title">七条路径，重建全书知识结构</h2>
+        <h2 class="section-title">如果不按目录顺序读，可以从哪里进入？</h2>
       </div>
       <p>网站已经依据原书目录建立十四章覆盖框架；具体表述与精确页码仍按单元持续进行纸本复核。</p>
     </div>
@@ -99,8 +99,8 @@ const pathReview = new Map(learningPaths.map((path) => {
     <div class="container graph-preview-grid">
       <div>
         <p class="eyebrow">知识关系</p>
-        <h2 class="section-title">知识不是章节的队列，<br />而是彼此牵引的网络</h2>
-        <p>点击概念，看它与载体、版本、方法、人物、典籍和时代发生怎样的关系。图谱将随阅读持续扩充。</p>
+        <h2 class="section-title">版本、校勘和目录，<br />为什么总会碰到一起？</h2>
+        <p>点开一个概念，顺着连线查看它借用了哪类材料、通向哪种方法。每条关系都附有说明和置信度。</p>
         <a class="text-link" href={`${base}graph/`}>探索知识图谱 →</a><a class="text-link lexicon-link" href={`${base}concepts/`}>浏览 176 个概念词条 →</a>
       </div>
       <div class="mini-graph" aria-hidden="true">
@@ -136,7 +136,7 @@ const pathReview = new Map(learningPaths.map((path) => {
     <div class="section-heading">
       <div>
         <p class="eyebrow">互动实验</p>
-        <h2 class="section-title">综合案卷、六项旗舰实验与十五个章节案例</h2>
+        <h2 class="section-title">综合案卷、七项旗舰实验与十五个章节案例</h2>
       </div>
       <a class="text-link" href={`${base}lab/`}>查看全部实验 →</a>
     </div>
@@ -157,7 +157,7 @@ const pathReview = new Map(learningPaths.map((path) => {
       <p class="eyebrow">作者手记</p>
       <h2>我没有等到“全部读懂”以后才开始</h2>
     </div>
-    <blockquote>我希望边做边读：每遇到一个难以把握的概念，就追问它能否被画成关系、变成判断，或者设计成一次真正需要动手的练习。</blockquote>
+    <blockquote>我希望边做边读：遇到一个难以把握的概念，就试着画出它和别章的关系，再把它改成一次排序、比较或证据判断。</blockquote>
     <div class="author-note__links"><a href={`${base}story/`}>阅读完整制作手记 →</a><a href={`${base}showcase/`}>打开三分钟项目展示 →</a><a href={`${base}audit/`}>查看还没有完成的部分 →</a></div>
   </section>
 

@@ -1,0 +1,141 @@
+chapter: 7
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第7章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-07-01-01
+    page_start: 151
+    page_end: 154
+    focus:
+      - 核对「一、“目录”的产生及其含义」的纸本页码边界、核心定义和原书例证
+      - 核对目录类型、分类体系、著录项目和提要功能
+      - 检查项目对“古代“目录”为什么兼有篇目与叙录之意？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-02-01
+    page_start: 154
+    page_end: 160
+    focus:
+      - 核对「二、古籍分类」的纸本页码边界、核心定义和原书例证
+      - 核对历代目录书名、作者、卷数、时代与存佚情况
+      - 检查项目对“分类体系如何表达一个时代的知识观？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-03-01
+    page_start: 160
+    page_end: 163
+    focus:
+      - 核对「书名与篇卷」的纸本页码边界、核心定义和原书例证
+      - 区分目录事实、分类判断和由目录推导出的研究结论
+      - 检查项目对“书名和卷数为什么不能机械视为作品身份？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-03-02
+    page_start: 163
+    page_end: 165
+    focus:
+      - 核对「撰人朝代与版本」的纸本页码边界、核心定义和原书例证
+      - 核对目录类型、分类体系、著录项目和提要功能
+      - 检查项目对“著录责任者和版本时应避免哪些误判？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-03-03
+    page_start: 165
+    page_end: 168
+    focus:
+      - 核对「提要与大小序」的纸本页码边界、核心定义和原书例证
+      - 核对历代目录书名、作者、卷数、时代与存佚情况
+      - 检查项目对“提要和序怎样把书目转化为学术史？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-04-01
+    page_start: 168
+    page_end: 173
+    focus:
+      - 核对「公藏、私藏与史志目录」的纸本页码边界、核心定义和原书例证
+      - 区分目录事实、分类判断和由目录推导出的研究结论
+      - 检查项目对“收藏主体如何影响目录的信息密度？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-04-02
+    page_start: 173
+    page_end: 174
+    focus:
+      - 核对「专科目录」的纸本页码边界、核心定义和原书例证
+      - 核对目录类型、分类体系、著录项目和提要功能
+      - 检查项目对“专科目录为什么适合追踪细分学科文献？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-07-04-03
+    page_start: 174
+    page_end: 175
+    focus:
+      - 核对「特种目录」的纸本页码边界、核心定义和原书例证
+      - 核对历代目录书名、作者、卷数、时代与存佚情况
+      - 检查项目对“怎样根据研究任务选择特种目录？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

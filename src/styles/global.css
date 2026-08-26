@@ -1094,6 +1094,15 @@ body{
   .primary-nav{border-radius:9px}.primary-nav a{padding:.48rem .65rem;font-size:.8rem}
 }
 
+/* Quiet motion and stronger interaction feedback. Motion never carries meaning. */
+.reveal-enabled [data-reveal]{opacity:0;transform:translateY(18px);transition:opacity .62s ease var(--reveal-delay,0ms),transform .62s cubic-bezier(.2,.7,.2,1) var(--reveal-delay,0ms)}
+.reveal-enabled [data-reveal].is-visible{opacity:1;transform:none}
+a,button,summary,input,textarea,select{outline-offset:3px}
+a:focus-visible,button:focus-visible,summary:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--cinnabar)}
+.button,.text-link,.enter,.site-footer a{transition:color .2s ease,background-color .2s ease,border-color .2s ease,transform .2s ease,box-shadow .2s ease}
+.text-link:hover,.site-footer a:hover{color:#7f2f25}
+@media(prefers-reduced-motion:reduce){.reveal-enabled [data-reveal]{opacity:1;transform:none;transition:none}}
+
 /* Public review feedback drawer */
 .feedback-trigger{position:fixed;right:1.25rem;bottom:5.2rem;z-index:32;display:flex;align-items:center;gap:.5rem;padding:.45rem .75rem .45rem .45rem;border:1px solid rgba(255,255,255,.13);border-radius:999px;color:#f7f1e7;background:#24302b;box-shadow:0 10px 30px rgba(24,32,28,.2);cursor:pointer}
 .feedback-trigger span{display:grid;place-items:center;width:30px;aspect-ratio:1;border-radius:50%;color:#fff;background:var(--cinnabar);font-family:var(--serif)}

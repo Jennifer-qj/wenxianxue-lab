@@ -1,0 +1,141 @@
+chapter: 12
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第12章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-12-01-01
+    page_start: 309
+    page_end: 312
+    focus:
+      - 核对「甲骨文的发现」的纸本页码边界、核心定义和原书例证
+      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
+      - 检查项目对“甲骨怎样从旧物药材转变为学术文献？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-01-02
+    page_start: 312
+    page_end: 313
+    focus:
+      - 核对「乱掘时期」的纸本页码边界、核心定义和原书例证
+      - 核对著录书、编号体系、材料数量和重要人物专名
+      - 检查项目对“失去出土记录会损失哪些信息？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-01-03
+    page_start: 313
+    page_end: 315
+    focus:
+      - 核对「科学发掘时期」的纸本页码边界、核心定义和原书例证
+      - 区分科学出土语境、传世来源和早期收藏叙事
+      - 检查项目对“科学发掘怎样提升甲骨文证据价值？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-01-04
+    page_start: 315
+    page_end: 325
+    focus:
+      - 核对「资料结集与考释」的纸本页码边界、核心定义和原书例证
+      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
+      - 检查项目对“甲骨整理为什么包括缀合与著录而不只释字？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-01-05
+    page_start: 325
+    page_end: 328
+    focus:
+      - 核对「语言文字与殷商史价值」的纸本页码边界、核心定义和原书例证
+      - 核对著录书、编号体系、材料数量和重要人物专名
+      - 检查项目对“占卜记录怎样成为语言与历史材料？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-02-01
+    page_start: 328
+    page_end: 331
+    focus:
+      - 核对「金文的出土」的纸本页码边界、核心定义和原书例证
+      - 区分科学出土语境、传世来源和早期收藏叙事
+      - 检查项目对“研究金文为何必须同时看器物与铭文？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-02-02
+    page_start: 331
+    page_end: 340
+    focus:
+      - 核对「汇集及考释」的纸本页码边界、核心定义和原书例证
+      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
+      - 检查项目对“金文著录怎样应对器物流散与释文分歧？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-12-02-03
+    page_start: 340
+    page_end: 346
+    focus:
+      - 核对「语言、传世文献与古史价值」的纸本页码边界、核心定义和原书例证
+      - 核对著录书、编号体系、材料数量和重要人物专名
+      - 检查项目对“金文怎样校验传世文献和补充古史？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

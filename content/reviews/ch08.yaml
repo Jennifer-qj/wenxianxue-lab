@@ -1,0 +1,209 @@
+chapter: 8
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第8章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-08-01-01
+    page_start: 176
+    page_end: 178
+    focus:
+      - 核对「古书亡佚及其原因」的纸本页码边界、核心定义和原书例证
+      - 核对辑佚对象、材料来源和辑录程序的术语
+      - 检查项目对“亡佚为何是多种历史过程共同造成的？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-01-02
+    page_start: 178
+    page_end: 180
+    focus:
+      - 核对「前人辑佚的成绩」的纸本页码边界、核心定义和原书例证
+      - 核对佚书、佚文、存目与残本等相邻概念边界
+      - 检查项目对“辑本为什么既能保存文献又必须重新校核？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-01-03
+    page_start: 180
+    page_end: 182
+    focus:
+      - 核对「辑佚的方法」的纸本页码边界、核心定义和原书例证
+      - 检查辑佚成果是否保留出处、版本和可靠性差异
+      - 检查项目对“怎样从散见引文重建一部亡书？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-01
+    page_start: 182
+    page_end: 183
+    focus:
+      - 核对「伪书的界定」的纸本页码边界、核心定义和原书例证
+      - 核对辑佚对象、材料来源和辑录程序的术语
+      - 检查项目对“哪些身份问题会使文献被称为伪书？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-02
+    page_start: 183
+    page_end: 186
+    focus:
+      - 核对「作伪的动机」的纸本页码边界、核心定义和原书例证
+      - 核对佚书、佚文、存目与残本等相邻概念边界
+      - 检查项目对“作伪动机如何帮助解释文献而非代替证据？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-03
+    page_start: 186
+    page_end: 189
+    focus:
+      - 核对「作伪的主要手段」的纸本页码边界、核心定义和原书例证
+      - 检查辑佚成果是否保留出处、版本和可靠性差异
+      - 检查项目对“伪书如何借用旧作者、旧名和旧材料制造可信外观？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-04
+    page_start: 189
+    page_end: 203
+    focus:
+      - 核对「我国辨伪的历史」的纸本页码边界、核心定义和原书例证
+      - 核对辑佚对象、材料来源和辑录程序的术语
+      - 检查项目对“辨伪为什么是一项不断修正的学术传统？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-05
+    page_start: 203
+    page_end: 205
+    focus:
+      - 核对「授受、依托者与传出者」的纸本页码边界、核心定义和原书例证
+      - 核对佚书、佚文、存目与残本等相邻概念边界
+      - 检查项目对“一部古书突然出现时应怎样检查传承链？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-06
+    page_start: 206
+    page_end: 210
+    focus:
+      - 核对「文体、风格、语词、声韵、因袭与称引」的纸本页码边界、核心定义和原书例证
+      - 检查辑佚成果是否保留出处、版本和可靠性差异
+      - 检查项目对“语言特征如何形成可检验的年代下限？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-07
+    page_start: 210
+    page_end: 213
+    focus:
+      - 核对「史实、称谓、制度与地理沿革」的纸本页码边界、核心定义和原书例证
+      - 核对辑佚对象、材料来源和辑录程序的术语
+      - 检查项目对“时间错置为什么是辨伪强证据？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-08
+    page_start: 213
+    page_end: 214
+    focus:
+      - 核对「思想、学术水平与发展次序」的纸本页码边界、核心定义和原书例证
+      - 核对佚书、佚文、存目与残本等相邻概念边界
+      - 检查项目对“怎样避免用刻板印象判断作者思想？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-08-02-09
+    page_start: 214
+    page_end: 219
+    focus:
+      - 核对「伪书的价值与案例」的纸本页码边界、核心定义和原书例证
+      - 检查辑佚成果是否保留出处、版本和可靠性差异
+      - 检查项目对“确认为伪后为什么仍要保存和研究？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

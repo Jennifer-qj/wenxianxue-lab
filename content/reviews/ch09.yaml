@@ -1,0 +1,141 @@
+chapter: 9
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第9章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-09-01-01
+    page_start: 220
+    page_end: 222
+    focus:
+      - 核对「类书的定义与起源」的纸本页码边界、核心定义和原书例证
+      - 核对辨伪史中的人物、书名、年代与代表性主张
+      - 检查项目对“类书与普通著作的组织方式有何不同？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-01-02
+    page_start: 222
+    page_end: 225
+    focus:
+      - 核对「查找史料与辞藻」的纸本页码边界、核心定义和原书例证
+      - 区分作伪动机、作伪手段和后世流传结果
+      - 检查项目对“类书如何把问题转化为可检索的类目？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-01-03
+    page_start: 225
+    page_end: 226
+    focus:
+      - 核对「校勘考订与辑佚」的纸本页码边界、核心定义和原书例证
+      - 检查结论是否允许真伪混合、层累形成和暂缓判断
+      - 检查项目对“类书征引为何能保存失传异文？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-01-04
+    page_start: 226
+    page_end: 232
+    focus:
+      - 核对「唐宋代表类书」的纸本页码边界、核心定义和原书例证
+      - 核对辨伪史中的人物、书名、年代与代表性主张
+      - 检查项目对“不同类书的体例如何决定检索路径？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-01-05
+    page_start: 232
+    page_end: 240
+    focus:
+      - 核对「明清代表类书」的纸本页码边界、核心定义和原书例证
+      - 区分作伪动机、作伪手段和后世流传结果
+      - 检查项目对“大型类书怎样成为亡佚文献的资料库？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-02-01
+    page_start: 240
+    page_end: 240
+    focus:
+      - 核对「丛书的定义」的纸本页码边界、核心定义和原书例证
+      - 检查结论是否允许真伪混合、层累形成和暂缓判断
+      - 检查项目对“丛书与类书最关键的结构差异是什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-02-02
+    page_start: 240
+    page_end: 242
+    focus:
+      - 核对「丛书的起源与功用」的纸本页码边界、核心定义和原书例证
+      - 核对辨伪史中的人物、书名、年代与代表性主张
+      - 检查项目对“丛书怎样改变稀见著作的存续机会？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-09-02-03
+    page_start: 242
+    page_end: 266
+    focus:
+      - 核对「丛书举要」的纸本页码边界、核心定义和原书例证
+      - 区分作伪动机、作伪手段和后世流传结果
+      - 检查项目对“选择丛书本时应查哪些版本信息？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

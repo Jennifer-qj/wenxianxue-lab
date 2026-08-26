@@ -143,6 +143,7 @@ export const learningPaths: LearningPath[] = [
 
 export const games: LabGame[] = [
   { id: "version-detective", title: "版本鉴定侦探", description: "从牌记、避讳、字体、版式和纸张等线索建立证据链。", chapters: "第五章", status: "可体验", icon: "鉴" },
+  { id: "evidence-calibration", title: "证据称量室", description: "为相互冲突的线索分配强度，写出带证据边界的阶段结论。", chapters: "第五、六、九、十四章", status: "可体验", icon: "衡" },
   { id: "four-fold", title: "四部分类挑战", description: "根据典籍内容与传统部类判断经、史、子、集，并阅读边界解释。", chapters: "第七章", status: "可体验", icon: "目" },
   { id: "collation-clinic", title: "校勘诊所", description: "拖动重排从记录异文、核查版本到形成校记的完整流程。", chapters: "第六章", status: "可体验", icon: "校" },
   { id: "carrier-museum", title: "载体博物馆", description: "把物质与形制线索送回五类载体标本柜。", chapters: "第二章", status: "可体验", icon: "材" },

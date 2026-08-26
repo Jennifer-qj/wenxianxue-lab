@@ -1,0 +1,192 @@
+chapter: 3
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第3章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-03-01-01
+    page_start: 30
+    page_end: 32
+    focus:
+      - 核对「（一）著」的纸本页码边界、核心定义和原书例证
+      - 核对著、述、编、译等形成方式的责任主体及相互边界
+      - 检查项目对““著”为什么不等于文本从未借鉴前人？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-01-02
+    page_start: 32
+    page_end: 33
+    focus:
+      - 核对「（二）述」的纸本页码边界、核心定义和原书例证
+      - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
+      - 检查项目对““述”怎样处理既有知识？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-01-03
+    page_start: 33
+    page_end: 34
+    focus:
+      - 核对「（三）编」的纸本页码边界、核心定义和原书例证
+      - 检查译经角色、传播环节和差错类型等术语是否准确
+      - 检查项目对“编纂如何改变材料意义？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-01-04
+    page_start: 34
+    page_end: 41
+    focus:
+      - 核对「（四）译：佛典翻译」的纸本页码边界、核心定义和原书例证
+      - 核对著、述、编、译等形成方式的责任主体及相互边界
+      - 检查项目对“佛典汉译为什么常是协作形成过程？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-01-05
+    page_start: 41
+    page_end: 46
+    focus:
+      - 核对「（四）译：学术翻译」的纸本页码边界、核心定义和原书例证
+      - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
+      - 检查项目对“学术翻译如何引入新的知识结构？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-01-06
+    page_start: 46
+    page_end: 47
+    focus:
+      - 核对「（四）译：文学翻译」的纸本页码边界、核心定义和原书例证
+      - 检查译经角色、传播环节和差错类型等术语是否准确
+      - 检查项目对“文学翻译为什么不能只逐字对应？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-02-01
+    page_start: 47
+    page_end: 52
+    focus:
+      - 核对「（一）讲唱」的纸本页码边界、核心定义和原书例证
+      - 核对著、述、编、译等形成方式的责任主体及相互边界
+      - 检查项目对“口头流传怎样生成文本差异？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-02-02
+    page_start: 52
+    page_end: 52
+    focus:
+      - 核对「（二）镌刻」的纸本页码边界、核心定义和原书例证
+      - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
+      - 检查项目对“镌刻如何同时追求耐久与公开？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-02-03
+    page_start: 52
+    page_end: 53
+    focus:
+      - 核对「（三）抄写」的纸本页码边界、核心定义和原书例证
+      - 检查译经角色、传播环节和差错类型等术语是否准确
+      - 检查项目对“抄写为什么会产生系统性差异？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-02-04
+    page_start: 53
+    page_end: 55
+    focus:
+      - 核对「（四）印刷」的纸本页码边界、核心定义和原书例证
+      - 核对著、述、编、译等形成方式的责任主体及相互边界
+      - 检查项目对“印刷扩大传播后为何仍有版本问题？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-03-02-05
+    page_start: 55
+    page_end: 55
+    focus:
+      - 核对「（五）摄影」的纸本页码边界、核心定义和原书例证
+      - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
+      - 检查项目对“摄影复制保留和丢失了什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null

@@ -5,6 +5,7 @@ import FourFoldChallenge from "../../components/FourFoldChallenge";
 import SkillArcade from "../../components/SkillArcade";
 import CaseGallery from "../../components/CaseGallery";
 import RareBookDossier from "../../components/RareBookDossier";
+import EvidenceCalibrationLab from "../../components/EvidenceCalibrationLab";
 import { getCollection } from "astro:content";
 import { games } from "../../data/site";
 
@@ -16,9 +17,9 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
 <BaseLayout title="互动实验室" active="lab">
   <header class="page-hero container">
-    <p class="eyebrow">Interactive laboratory</p>
-    <h1 class="display-title">把定义放进<em>具体判断</em>里</h1>
-    <p>每项实验都对应明确的学习目标。拖动、排序、配对、分级和批量归架，让知识进入一套可以反复调整的操作流程。</p>
+    <p class="eyebrow">Interactive laboratory · 动手以后再回书上</p>
+    <h1 class="display-title">先别背定义，<em>来处理一份材料</em></h1>
+    <p>有的案子要给证据称重，有的要重排校勘步骤，还有的必须承认材料暂时不够。做完以后，再带着结果回到章节。</p>
   </header>
 
   <section id="rare-book-dossier" class="dossier-section">
@@ -57,6 +58,13 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
   </section>
 
+  <section id="evidence-calibration" class="calibration-section">
+    <div class="container">
+      <div class="section-heading calibration-heading"><div><p class="eyebrow">Evidence calibration</p><h2 class="section-title">证据称量室</h2></div><p>不是选择“正确答案”，而是亲手给证据分配强度、写出有限度结论，再比较推理跨度。四份案卷横跨版本、校勘、辨伪和敦煌残卷。</p></div>
+      <EvidenceCalibrationLab client:load />
+    </div>
+  </section>
+
   <section class="arcade-section">
     <div class="container">
       <div class="section-heading arcade-heading">
@@ -81,7 +89,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     <div class="section-heading">
       <div>
         <p class="eyebrow">The full collection</p>
-        <h2 class="section-title">六项旗舰实验</h2>
+        <h2 class="section-title">七项旗舰实验</h2>
       </div>
       <p>这里只展示已经可以完整操作并获得反馈的实验，不以路线图或占位卡代替交付。</p>
     </div>
@@ -105,7 +113,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .dossier-section{padding:7rem 0;background:#d8c9b2}.dossier-heading>p{max-width:38rem;color:var(--muted)}
   .game-intro h2{margin:1rem 0;font-family:var(--serif);font-size:2.4rem}.game-intro>p{color:#bbb6ad}.chapter-tag{color:#d89882;font-size:.72rem;letter-spacing:.12em}.game-intro dl{margin-top:2rem;border-top:1px solid rgba(255,255,255,.13)}.game-intro dl div{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.13)}dt{color:#99958d}dd{margin:0}
   .all-games{padding-block:7rem}.game-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
-  .arcade-section{padding:7rem 0;background:#292a27}.arcade-heading{color:#f9f2e6}.arcade-heading p{color:#aaa59d}
+  .arcade-section{padding:7rem 0;background:#292a27}.arcade-heading{color:#f9f2e6}.arcade-heading p{color:#aaa59d}.calibration-section{padding:7rem 0;background:#cfc0aa}.calibration-heading{margin-bottom:2rem}.calibration-heading>p{max-width:40rem;color:var(--muted)}
   .case-gallery-section{padding:7rem 0;background:#e9dfcf}.case-gallery-heading{margin-bottom:2rem}.case-gallery-heading>p{max-width:34rem;color:var(--muted)}
   :global(.skill-arcade){overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#f6f0e4}
   :global(.arcade-tabs){display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#20211f}:global(.arcade-tabs button){padding:1rem;text-align:left;border:0;border-right:1px solid rgba(255,255,255,.1);color:#aaa59d;background:transparent;cursor:pointer}:global(.arcade-tabs button.active){color:#fff7e9;background:#8f352b}:global(.arcade-tabs small),:global(.arcade-tabs strong){display:block}:global(.arcade-tabs small){font-size:.62rem}:global(.arcade-tabs strong){font-family:var(--serif)}
@@ -139,7 +147,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .featured-game,.arcade-section{background:#24302b}
   .featured-game{padding:4.5rem 0}
   .dossier-section{padding:5.5rem 0;background:#e7e0d4}
-  .all-games,.arcade-section,.case-gallery-section{padding-block:5.5rem}
+  .all-games,.arcade-section,.case-gallery-section,.calibration-section{padding-block:5.5rem}
   .case-gallery-section{background:#ece6dc}
   .fourfold-section{padding:5.5rem 0;background:#ebe4d8}
   :global(.skill-arcade),:global(.fourfold-game),:global(.fourfold-result){border-radius:12px;box-shadow:var(--shadow)}
@@ -153,7 +161,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .game-grid article.ready{background:var(--white)}
   .game-grid article:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
   @media(max-width:560px){
-    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section{padding-block:4rem}
+    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section,.calibration-section{padding-block:4rem}
     :global(.arcade-tabs){display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
     :global(.arcade-tabs button){min-width:148px;min-height:70px;scroll-snap-align:start}
     :global(.arcade-stage){min-height:0;padding:1.05rem}

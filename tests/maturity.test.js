@@ -98,4 +98,23 @@ describe("公开项目成熟度门禁", () => {
     expect(read("src/pages/sitemap.xml.ts")).toContain("reviewRoutes");
     expect(read("src/pages/sitemap.xml.ts")).toContain('"usability/"');
   });
+
+  it("为全部待核验章节提供专属复核包，并保留编辑语气门禁", () => {
+    for (let chapter = 2; chapter <= 14; chapter += 1) {
+      const id = String(chapter).padStart(2, "0");
+      const packet = read(`content/reviews/ch${id}.yaml`);
+      expect(packet).toContain("source_requirement: paper_copy");
+      expect(packet).toContain("status: queued");
+    }
+    expect(read("package.json")).toContain("audit-editorial-voice.mjs");
+    expect(existsSync(resolve(root, "docs/编辑与术语规范.md"))).toBe(true);
+  });
+
+  it("证据称量实验要求强度判断和有限度结论，而非单选作答", () => {
+    const lab = read("src/components/EvidenceCalibrationLab.tsx");
+    expect(lab).toContain('type="range"');
+    expect(lab).toContain("有限度结论");
+    expect(lab).toContain("分歧不等于简单答错");
+    expect(lab).not.toContain("radio");
+  });
 });

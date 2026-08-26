@@ -1,0 +1,175 @@
+chapter: 13
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 第13章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-13-01-01
+    page_start: 346
+    page_end: 348
+    focus:
+      - 核对「战国楚简与曾侯乙简」的纸本页码边界、核心定义和原书例证
+      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
+      - 检查项目对“不同墓葬楚简为何不能混成一个文本系统？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-01-02
+    page_start: 348
+    page_end: 351
+    focus:
+      - 核对「秦汉墓葬简帛」的纸本页码边界、核心定义和原书例证
+      - 避免把宽泛材料类别当作同一文本系统
+      - 检查项目对“墓葬简帛怎样同时保存典籍和行政生活材料？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-01-03
+    page_start: 351
+    page_end: 354
+    focus:
+      - 核对「边塞、汉晋与吴简」的纸本页码边界、核心定义和原书例证
+      - 区分出土本的早出、具体文本价值与作者原本三个层次
+      - 检查项目对“日常行政简牍如何重建基层制度？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-02-01
+    page_start: 354
+    page_end: 356
+    focus:
+      - 核对「佚籍复出与传世古籍校读」的纸本页码边界、核心定义和原书例证
+      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
+      - 检查项目对“出土本为何会改变我们理解古书的方式？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-02-02
+    page_start: 356
+    page_end: 359
+    focus:
+      - 核对「历史、文字与书籍制度」的纸本页码边界、核心定义和原书例证
+      - 避免把宽泛材料类别当作同一文本系统
+      - 检查项目对“简帛实物能回答传世文本不能回答的哪些问题？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-03-01
+    page_start: 359
+    page_end: 363
+    focus:
+      - 核对「石刻文献要籍」的纸本页码边界、核心定义和原书例证
+      - 区分出土本的早出、具体文本价值与作者原本三个层次
+      - 检查项目对“石刻总集和著录怎样保存散布各地的铭文？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-03-02
+    page_start: 363
+    page_end: 365
+    focus:
+      - 核对「史料与文学价值」的纸本页码边界、核心定义和原书例证
+      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
+      - 检查项目对“墓志碑铭怎样补史又为何需要批判阅读？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-03-03
+    page_start: 365
+    page_end: 365
+    focus:
+      - 核对「文字书法、经学与宗教价值」的纸本页码边界、核心定义和原书例证
+      - 避免把宽泛材料类别当作同一文本系统
+      - 检查项目对“石刻怎样连接文字形体、经典传播与宗教实践？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-04-01
+    page_start: 365
+    page_end: 366
+    focus:
+      - 核对「盟书、玺印与砖瓦文字」的纸本页码边界、核心定义和原书例证
+      - 区分出土本的早出、具体文本价值与作者原本三个层次
+      - 检查项目对“短小文字材料为何仍能提供制度证据？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-13-04-02
+    page_start: 366
+    page_end: 368
+    focus:
+      - 核对「纸质出土文献」的纸本页码边界、核心定义和原书例证
+      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
+      - 检查项目对“出土纸文献与传世纸本文献的证据差异是什么？”的回答是否保持原书限定
+    required_checks:
+      - page_range
+      - names_dates
+      - summary_fidelity
+      - boundary_strength
+      - linked_content
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
