@@ -10,7 +10,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     <h1 class="display-title">把零散阅读变成可回看的<em>学习现场</em></h1>
     <p>在任意章节、概念或实验页面写札记和收藏，再回到这里整理。无需登录，内容不会离开当前浏览器。</p>
   </header>
-  <main class="container notebook-area"><NotebookDashboard baseUrl={base} client:load /></main>
+  <div class="container notebook-area"><NotebookDashboard baseUrl={base} client:load /></div>
 </BaseLayout>
 
 <style>

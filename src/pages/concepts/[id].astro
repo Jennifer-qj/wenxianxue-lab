@@ -44,7 +44,7 @@ const correctionUrl = `https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?
     </div>
   </header>
 
-  <main class="concept-main container">
+  <div class="concept-main container">
     <nav class="concept-breadcrumb"><a href={`${base}graph/`}>知识图谱</a><span>／</span><a href={`${base}concepts/`}>概念词表</a><span>／</span><b>{concept.label}</b></nav>
     <div class="concept-layout">
       <article>
@@ -65,7 +65,7 @@ const correctionUrl = `https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?
         <section><small>继续探索</small><a href={`${base}graph/?q=${encodeURIComponent(concept.label)}`}>在知识图谱中查看 →</a><a href={`${base}search/?q=${encodeURIComponent(concept.label)}`}>搜索全站相关内容 →</a></section>
       </aside>
     </div>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>

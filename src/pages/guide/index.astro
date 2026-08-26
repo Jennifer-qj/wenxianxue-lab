@@ -17,7 +17,7 @@ const steps = [
     <div class="container"><p class="eyebrow">USER GUIDE · 使用指南</p><h1 class="display-title">不要先把所有页面看完，<em>先完成一次学习循环</em></h1><p>读懂一个问题，做一次判断，查看反馈，再回到证据。下面这条路线大约十分钟，可以让你理解网站的全部核心机制。</p><div><a href="#quickstart">开始十分钟体验 ↓</a><a href={`${base}?welcome=1`}>重新打开新手引导</a></div></div>
   </header>
 
-  <main class="guide-main container">
+  <div class="guide-main container">
     <aside class="guide-toc"><small>本页目录</small><a href="#quickstart">十分钟入门</a><a href="#map">功能地图</a><a href="#records">记录与隐私</a><a href="#reading">怎样使用内容</a><a href="#faq">常见问题</a></aside>
     <article>
       <section id="quickstart"><p class="eyebrow">01 · Quick start</p><h2>十分钟入门路线</h2><div class="quick-steps">{steps.map((step) => <article><span>{step.n}</span><div><h3>{step.title}</h3><p>{step.text}</p><a href={step.href}>{step.action} →</a></div></article>)}</div></section>
@@ -38,7 +38,7 @@ const steps = [
 
       <section id="faq"><p class="eyebrow">05 · FAQ</p><h2>常见问题</h2><details open><summary>为什么我刷新后仍然保留进度？</summary><p>记录保存在浏览器 localStorage 中。它不会上传，但同一浏览器再次访问时仍然存在。</p></details><details><summary>为什么新手引导不再出现？</summary><p>它默认只出现一次。点击本页顶部“重新打开新手引导”即可再次查看。</p></details><details><summary>为什么有些关系标为“教学归纳”？</summary><p>知识图谱区分原书确认、教学归纳和待考关系，避免把为了教学建立的联系伪装成原书原话。</p></details><details><summary>可以在手机上使用吗？</summary><p>可以。章节、练习与进度页均适配手机；知识图谱在桌面端操作空间更充足。</p></details><details><summary>能把原书全文放进来吗？</summary><p>公开网站不会保存或提供原书全文、扫描件或大段转录，主要展示原创概括、评论、元数据和互动案例。</p></details></section>
     </article>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>

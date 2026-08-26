@@ -13,7 +13,7 @@ const counts = {
 
 <BaseLayout title="更新日志与路线图" description="文献学实验室的版本记录、后续路线与开放元数据下载">
   <header class="updates-hero"><div class="container"><p class="eyebrow">CHANGELOG · ROADMAP · OPEN DATA</p><h1 class="display-title">项目不是成品箱，<em>而是一份可核验的生长记录</em></h1><p>这里说明网站已经做了什么、还欠什么，以及哪些结构化成果可以下载检查。</p></div></header>
-  <main class="updates-main container">
+  <div class="updates-main container">
     <section class="open-data">
       <div><p class="eyebrow">Open metadata</p><h2>开放学习元数据</h2><p>可下载全书概念、关系和学习单元索引。数据不含原书全文，也不包含访客数据。</p></div>
       <div class="data-stats"><span><strong>{counts.concepts}</strong>概念</span><span><strong>{counts.edges}</strong>关系</span><span><strong>{counts.units}</strong>学习单元</span></div>
@@ -24,6 +24,7 @@ const counts = {
       <article>
         <p class="eyebrow">Released</p><h2>更新日志</h2>
         <ol class="release-list">
+          <li><time>2026-08-27 · v0.2.0</time><h3>结构化公测版封版</h3><p>清理九类页面中的重复正文地标，改善读屏器与页面结构识别；页脚新增统一版本号、更新时间和更新日志入口。完成核心页面巡检，并把后续内容复核、真实读者测试和图像许可工作留入公开路线图。</p></li>
           <li><time>2026-08 · 第十三轮</time><h3>把复核提示、互动判断和项目语气再做实一层</h3><p>第3—14章补齐专属纸本核对包，第2—14章共覆盖 134 个待核验单元；互动实验室新增四案卷“证据称量室”。首页、路径页、实验室与方法页改为更具体的个人读书叙事，并增加编辑术语门禁、滚动显现和键盘焦点反馈。</p></li>
           <li><time>2026-08 · 第十二轮</time><h3>从“等待人工核验”走向真正可执行的复核</h3><p>十四章新增逐条纸本复核工作台，支持本地勾选、证据记录、阶段判断、筛选与快照导出；第二章建立 14 条专属核对重点。共校页加入不虚构数据的公开成果台账，并新增六任务可用性测试、匿名结果导出和主持手册。</p></li>
           <li><time>2026-08 · 第十一轮</time><h3>从公开网站走向可展示、可参与的成熟项目</h3><p>完成公开反馈与章节共校、内容来源与版本历史、十九道开放题三级答案、手机图谱手势与游戏替代操作、无障碍说明；新增三分钟项目展示、英文摘要、项目报告和面试演示脚本。</p></li>
@@ -51,7 +52,7 @@ const counts = {
       </aside>
     </div>
     <section class="release-standard"><p class="eyebrow">Release standard</p><h2>什么才算“可以发布”？</h2><div><span>内容结构通过模式校验</span><span>站内链接无断链</span><span>核心交互自动测试通过</span><span>公开文件无原书全文</span><span>待复核结论明确标注</span></div><a href={`${base}about/`}>查看完整研究方法与版权边界 →</a></section>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>

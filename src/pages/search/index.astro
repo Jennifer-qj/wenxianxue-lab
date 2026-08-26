@@ -26,7 +26,7 @@ const items = rawItems.map((item) => ({ ...item, aliases: aliasesFor(item.title,
 
 <BaseLayout title="全站搜索" description="搜索文献学实验室的十四章、学习单元、概念、题目、实验与深度研读" active="search">
   <header class="page-hero container"><p class="eyebrow">Search the laboratory</p><h1 class="display-title">从一个词，进入全书的<em>知识现场</em></h1><p>一次检索覆盖章节、143 个学习单元、176 个概念、134 道题、实验与深度研读；支持相关检索词、近似纠错与复核状态筛选。</p></header>
-  <main class="container search-area"><SearchExplorer items={items} client:load /></main>
+  <div class="container search-area"><SearchExplorer items={items} client:load /></div>
 </BaseLayout>
 
 <style>

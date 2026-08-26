@@ -9,3 +9,10 @@ export const EDITION = {
 } as const;
 
 export const REVIEW_STATUS = ["not_started", "drafting", "pending_review", "reviewed", "verified"] as const;
+
+/** 公开页面与项目材料共用的版本身份。 */
+export const PROJECT_RELEASE = {
+  version: "0.2.0",
+  label: "结构化公测版",
+  updated: "2026-08-27",
+} as const;

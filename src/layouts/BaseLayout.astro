@@ -4,6 +4,7 @@ import WelcomeGuide from "../components/WelcomeGuide";
 import LearningDock from "../components/LearningDock";
 import FeedbackPanel from "../components/FeedbackPanel";
 import type { LibraryPageType } from "../lib/learningArchive";
+import { PROJECT_RELEASE } from "../consts";
 
 interface Props {
   title?: string;
@@ -131,6 +132,10 @@ const structuredData = {
         <a href={`${base}accessibility/`}>无障碍说明</a>
       </nav>
       <div class="footer-meta">
+        <a class="release-stamp" href={`${base}updates/`} aria-label={`查看 ${PROJECT_RELEASE.label} ${PROJECT_RELEASE.version} 的更新记录`}>
+          <b>{PROJECT_RELEASE.label} v{PROJECT_RELEASE.version}</b>
+          <time datetime={PROJECT_RELEASE.updated}>更新于 {PROJECT_RELEASE.updated}</time>
+        </a>
         <span>个人学习与数字人文实践</span>
         <span>参考杜泽逊《文献学概要（修订本）》</span>
         <span>© 2026 Jennifer-qj · 不提供原书全文</span>

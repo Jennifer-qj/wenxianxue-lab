@@ -1041,6 +1041,9 @@ body{
 .footer-links a{padding:0;color:var(--muted);font-size:.78rem;text-decoration:none}
 .footer-links a:hover{color:var(--cinnabar)}
 .footer-meta{align-items:end;text-align:right}
+.release-stamp{display:flex;align-items:flex-end;flex-direction:column;gap:.12rem;margin-bottom:.35rem;color:inherit;text-decoration:none}
+.release-stamp b{color:var(--ink);font-family:var(--sans);font-size:.72rem;letter-spacing:.04em}
+.release-stamp time{font-size:.66rem}
 
 @media (hover:hover){
   .button,.path-card,.game-card,.game-grid article,.chapter-pagination a,.more-menu>div a{transition:transform .2s ease,box-shadow .2s ease,background .2s ease,border-color .2s ease,color .2s ease}
@@ -1059,6 +1062,7 @@ body{
   .search-link b{display:none}
   .site-footer{grid-template-columns:1fr;gap:1.5rem}
   .footer-meta{align-items:start;text-align:left}
+  .release-stamp{align-items:flex-start}
 }
 
 /* Stronger primary navigation */

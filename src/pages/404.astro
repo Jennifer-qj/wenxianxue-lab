@@ -4,13 +4,13 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 ---
 
 <BaseLayout title="页面未找到" description="这个地址没有对应的文献学实验室页面">
-  <main class="not-found container">
+  <div class="not-found container">
     <div class="error-code" aria-hidden="true"><span>四</span><span>〇</span><span>四</span></div>
     <p class="eyebrow">404 · LEAF MISSING</p>
     <h1>这一叶暂时<em>散佚</em>了</h1>
     <p>你访问的地址可能已经移动、拼写有误，或尚未收入实验室。可以返回首页，也可以直接检索概念和章节。</p>
     <div><a class="button" href={base}>返回首页 →</a><a class="button secondary" href={`${base}search/`}>搜索全站</a><a href={`${base}coverage/`}>查看十四章覆盖矩阵</a></div>
-  </main>
+  </div>
 </BaseLayout>
 
 <style>
