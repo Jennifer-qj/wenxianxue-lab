@@ -1,0 +1,29 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import ReviewWorkspace from "../../components/ReviewWorkspace";
+import { getCollection } from "astro:content";
+import { chapters } from "../../data/site";
+import { EDITION } from "../../consts";
+
+export async function getStaticPaths() {
+  return chapters.map((chapter) => ({ params: { chapter: chapter.id }, props: { chapter } }));
+}
+
+const { chapter } = Astro.props;
+const chapterNumber = Number(chapter.id.slice(2));
+const [outlineFiles, reviewFiles] = await Promise.all([getCollection("outline"), getCollection("reviews")]);
+const units = outlineFiles.flatMap((entry) => entry.data.items).filter((unit) => unit.chapter === chapterNumber);
+const packet = reviewFiles.find((entry) => entry.data.chapter === chapterNumber)?.data;
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+const edition = packet?.edition ?? `${EDITION.author}《${EDITION.book}》，${EDITION.publisher}${EDITION.year}年版`;
+const sourceNote = packet?.note ?? "本章尚未建立专门复核提示；工作台会提供统一检查框架，所有结论仍须回到纸本。";
+---
+
+<BaseLayout title={`第${chapterNumber}章纸本复核工作台`} description={`${chapter.title}逐条纸本核验、证据记录与共校提交界面`} active="about">
+  <header class="review-hero"><div class="container"><p class="eyebrow">PAPER REVIEW · 第 {chapterNumber} 章</p><h1 class="display-title">把“我看过了”变成<em>可以复查的记录</em></h1><p>{chapter.title}共 {units.length} 个学习单元。这里保存本地核对过程，但不会越过人工审定，自动把内容标成“已核验”。</p><div><span>{edition}</span><span>浏览器本地保存</span><span>可导出 JSON</span><span>可提交公开共校</span></div></div></header>
+  <div class="container"><ReviewWorkspace chapter={chapterNumber} chapterTitle={chapter.title} edition={edition} sourceNote={sourceNote} units={units} packet={packet?.items ?? []} baseUrl={base} client:load /></div>
+</BaseLayout>
+
+<style>
+  .review-hero{padding:5rem 0 4rem;color:#f7f1e7;background:#24332c}.review-hero h1{max-width:920px;margin:.4rem 0}.review-hero>div>p:not(.eyebrow){max-width:760px;color:#c5cec8;font-family:var(--serif);line-height:1.9}.review-hero>div>div{display:flex;flex-wrap:wrap;gap:.45rem;margin-top:1.4rem}.review-hero span{padding:.32rem .6rem;border:1px solid rgba(255,255,255,.16);border-radius:999px;color:#cad2cd;font-size:.65rem}@media(max-width:560px){.review-hero{padding:4rem 0 3.5rem}.review-hero .display-title{font-size:clamp(2.2rem,10vw,3rem)}}
+</style>

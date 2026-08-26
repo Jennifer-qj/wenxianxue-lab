@@ -71,9 +71,27 @@ export const deepDiveSchema = z.object({
   status: reviewStatusSchema,
 });
 
+export const reviewRecordSchema = z.object({
+  unit_id: z.string().regex(/^mku-\d{2}-\d{2}-\d{2}$/),
+  page_start: z.number().int().positive(), page_end: z.number().int().positive().optional(),
+  focus: z.array(z.string().min(1)).min(1),
+  required_checks: z.array(z.enum(["page_range", "names_dates", "summary_fidelity", "boundary_strength", "linked_content"])).min(3),
+  status: z.enum(["queued", "in_review", "submitted", "accepted"]),
+  reviewer: z.string().nullable(), reviewed_at: z.string().nullable(), evidence_note: z.string().nullable(),
+});
+
+export const reviewPacketSchema = z.object({
+  chapter: z.number().int().min(1).max(14),
+  edition: z.string().min(1),
+  source_requirement: z.literal("paper_copy"),
+  note: z.string().min(1),
+  items: z.array(reviewRecordSchema).min(1),
+});
+
 export const outlineFileSchema = z.object({ items: z.array(mkuSchema) });
 export const conceptFileSchema = z.object({ items: z.array(conceptSchema) });
 export const graphFileSchema = z.object({ items: z.array(graphEdgeSchema) });
 export const quizFileSchema = z.object({ items: z.array(quizSchema) });
 export const labFileSchema = z.object({ items: z.array(labSchema) });
 export const deepDiveFileSchema = z.object({ items: z.array(deepDiveSchema) });
+export const reviewFileSchema = reviewPacketSchema;

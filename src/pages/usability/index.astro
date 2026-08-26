@@ -1,0 +1,12 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UsabilitySession from "../../components/UsabilitySession";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+<BaseLayout title="参与用户测试" description="用六个真实任务检验文献学实验室是否容易理解、容易找到、容易操作" active="about">
+  <header class="test-hero"><div class="container"><p class="eyebrow">USABILITY TEST · 可用性测试</p><h1 class="display-title">不要告诉我“好不好看”，<em>请试着完成一件事</em></h1><p>这不是考试，测的是网站而不是你。请按顺序完成六个任务，记录犹豫、绕路和受阻的位置；一个真实动作，比十句笼统评价更能推动改进。</p></div></header>
+  <div class="test-intro container"><div><small>建议方式</small><strong>找一位没有参与开发的同学</strong><p>让对方边操作边说出正在想什么。观察者不要提示路径，只记录事实。</p></div><div><small>预计时间</small><strong>15—25 分钟</strong><p>不要求全部成功；“找不到”本身就是重要结果。</p></div><div><small>结果用途</small><strong>形成可复测的改进依据</strong><p>后续改版继续跑相同任务，比较完成率、耗时和受阻点。</p></div></div>
+  <div class="container"><UsabilitySession baseUrl={base} client:load /></div>
+</BaseLayout>
+<style>.test-hero{padding:6rem 0 5rem;color:#f6f1e8;background:#24302b}.test-hero .display-title{max-width:980px}.test-hero>div>p:not(.eyebrow){max-width:52rem;color:#c6c9c1;font-family:var(--serif);font-size:1.05rem}.test-intro{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;padding-block:4rem}.test-intro>div{padding:1.25rem;border-top:2px solid var(--cinnabar)}.test-intro small{color:var(--cinnabar)}.test-intro strong{display:block;margin:.5rem 0;font-family:var(--serif);font-size:1.2rem}.test-intro p{color:var(--muted);font-size:.78rem}@media(max-width:700px){.test-hero{padding:4rem 0}.test-intro{grid-template-columns:1fr;padding-block:3rem}}</style>
+

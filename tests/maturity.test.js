@@ -85,4 +85,17 @@ describe("公开项目成熟度门禁", () => {
     expect(signature).toContain('chapterId === "ch07"');
     expect(read("src/components/WelcomeGuide.tsx")).toContain('welcomeMode === "0"');
   });
+
+  it("把纸本复核、真实贡献和用户测试做成可执行工具", () => {
+    const review = read("src/components/ReviewWorkspace.tsx");
+    const usability = read("src/components/UsabilitySession.tsx");
+    expect(existsSync(resolve(root, "content/reviews/ch02.yaml"))).toBe(true);
+    expect(review).toContain("本地勾选只帮助你工作");
+    expect(review).toContain("导出本地复核记录");
+    expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
+    expect(read("src/pages/usability/index.astro")).toContain("测的是网站而不是你");
+    expect(usability).toContain("导出 JSON");
+    expect(read("src/pages/sitemap.xml.ts")).toContain("reviewRoutes");
+    expect(read("src/pages/sitemap.xml.ts")).toContain('"usability/"');
+  });
 });

@@ -1,0 +1,131 @@
+chapter: 2
+edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
+source_requirement: paper_copy
+note: 本复核包根据现有结构化单元生成，只用于定位和记录；任何条目都必须回到纸本后才能改为已核验。
+items:
+  - unit_id: mku-02-01-01
+    page_start: 11
+    page_end: 12
+    focus: [核对甲骨材料范围和占卜流程概括, 核对出土数量与年代等可能受研究进展影响的数字, 区分原书陈述与项目补充的出土语境边界]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-02-01
+    page_start: 12
+    page_end: 14
+    focus: [核对金与金文的范围, 检查八类青铜器是否被摘要过度压缩, 区分器物功能事实与项目提出的解释方法]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-03-01
+    page_start: 14
+    page_end: 16
+    focus: [核对碣摩崖碑的定义和例证范围, 检查时代与专名, 注意碑与墓志等相邻概念的边界]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-04-01
+    page_start: 16
+    page_end: 20
+    focus: [核对简牍尺寸制度与实物变通, 核对牍检封泥和编联术语, 检查册篇卷词源是否保持原书限定]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-05-01
+    page_start: 20
+    page_end: 21
+    focus: [核对帛的材料性质和使用范围, 检查与简策并用的时间表述, 避免把材料优势写成普遍使用]
+    required_checks: [page_range, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-06-01
+    page_start: 21
+    page_end: 22
+    focus: [核对莎草纸制作步骤和译名, 核对卷本连接方式, 检查跨文化年代比较是否沿用教材旧说而未注明]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-07-01
+    page_start: 22
+    page_end: 23
+    focus: [核对羊皮纸制作及普及年代, 核对人物地名和外文译名, 区分材料普及史与册页装订史]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-08-01
+    page_start: 23
+    page_end: 24
+    focus: [核对贝叶与贝多罗等术语, 核对穿孔和夹板装订方式, 区分真实贝叶与中国纸本仿梵夹形态]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-01
+    page_start: 24
+    page_end: 25
+    focus: [核对各次早期纸张发现的地点年代和性质, 避免把出土年代等同技术发明年代, 检查蔡伦相关表述是否足够审慎]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-02
+    page_start: 25
+    page_end: 27
+    focus: [核对卷子结构部件和术语, 核对纸幅尺寸与一帙卷数等数字, 区分原始形态与后配改装风险]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-03
+    page_start: 27
+    page_end: 27
+    focus: [核对经折装结构及与梵夹的关系, 核对替代卷子的时间判断, 保留多种形制长期并存的边界]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-04
+    page_start: 27
+    page_end: 28
+    focus: [核对版心方向和粘连位置, 核对蝴蝶装通行年代, 强调现存古书可能后改装]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-05
+    page_start: 28
+    page_end: 29
+    focus: [核对包背装折叶和装订位置, 核对与蝴蝶装的关键区别, 检查永乐大典与四库全书等例证]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
+  - unit_id: mku-02-09-06
+    page_start: 29
+    page_end: 29
+    focus: [核对线装工序和常见孔数, 核对兴起与沿用年代, 区分现装线装与原始成书年代]
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: queued
+    reviewer: null
+    reviewed_at: null
+    evidence_note: null
