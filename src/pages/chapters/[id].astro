@@ -6,6 +6,7 @@ import StructuredPractice from "../../components/StructuredPractice";
 import DeepDiveStudio from "../../components/DeepDiveStudio";
 import ChapterSignature from "../../components/ChapterSignature.astro";
 import ChapterReadingNote from "../../components/ChapterReadingNote.astro";
+import ChapterJourney from "../../components/ChapterJourney";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
 import { EDITION, PROJECT_RELEASE } from "../../consts";
@@ -59,6 +60,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   <div class="chapter-layout container">
     <aside class="toc">
       <small>本章导航</small>
+      <a href="#journey">学习地图</a>
       <a href="#overview">导读</a>
       {["ch01", "ch05", "ch07"].includes(chapterId) && <a href="#signature">本章专属入口</a>}
       {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
@@ -68,10 +70,27 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
       {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
       <a href="#workflow">方法步骤</a>
       <a href="#check">本章检测</a>
+      <a href="#chapter-review">章末复盘</a>
       <a href="#source">来源说明</a>
     </aside>
 
     <article class="lesson">
+      <section id="journey" class="chapter-journey-section">
+        <ChapterJourney
+          mode="map"
+          chapterId={chapterId}
+          chapterNumber={chapter.number}
+          title={chapter.title}
+          focus={chapter.focus}
+          sections={chapter.sections}
+          keywords={chapter.keywords}
+          unitCount={chapterUnits.length}
+          quizCount={structuredQuizzes.length || lesson.quiz.length}
+          deepDiveId={deepDive?.id}
+          client:load
+        />
+      </section>
+
       <section id="overview" class="overview">
         <p class="eyebrow">本章导读</p>
         <p>{lesson.introduction}</p>
@@ -185,6 +204,23 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
         {lesson.furtherQuestions.map((question) => <blockquote>{question}</blockquote>)}
       </section>
 
+      <section id="chapter-review" class="chapter-review-section">
+        <div class="chapter-review-heading"><p class="eyebrow">章末复盘</p><h2>不是“我读完了”，而是“我现在能说清什么”</h2><p>三段文字会保存在当前浏览器，并与本章任务地图同步。导出文件只在你主动点击后生成。</p></div>
+        <ChapterJourney
+          mode="review"
+          chapterId={chapterId}
+          chapterNumber={chapter.number}
+          title={chapter.title}
+          focus={chapter.focus}
+          sections={chapter.sections}
+          keywords={chapter.keywords}
+          unitCount={chapterUnits.length}
+          quizCount={structuredQuizzes.length || lesson.quiz.length}
+          deepDiveId={deepDive?.id}
+          client:load
+        />
+      </section>
+
       <section id="source" class="source-note">
         <div>
           <p class="eyebrow">来源与版权</p>
@@ -229,7 +265,8 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
   .unit-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.65rem;padding-top:.55rem;border-top:1px dashed var(--line)}.unit-actions a{color:var(--muted);font-size:.65rem;text-decoration:none}.unit-actions a:hover{color:var(--cinnabar)}
   .unit-provenance{margin-top:.8rem;border-top:1px dashed var(--line)}.unit-provenance summary{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;color:var(--muted);font-size:.68rem;cursor:pointer}.unit-provenance summary small{color:var(--cinnabar)}.unit-provenance dl{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem;margin:0;padding:.8rem;border-radius:7px;background:#e9e3d8}.unit-provenance dl div{display:grid;grid-template-columns:76px 1fr;gap:.5rem}.unit-provenance dt{color:var(--cinnabar);font-size:.62rem}.unit-provenance dd{margin:0;color:var(--muted);font-size:.65rem}.unit-provenance nav{display:flex;flex-wrap:wrap;gap:.8rem;padding:.65rem 0}.unit-provenance nav a{padding:0;color:var(--cinnabar);font-size:.65rem;text-decoration:none;white-space:normal}
   .deep-dive-heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:.4rem 2rem;margin-bottom:1.5rem}.deep-dive-heading .eyebrow{grid-column:1/-1}.deep-dive-heading h2{margin:0;font-family:var(--serif);font-size:2rem}.deep-dive-heading>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}
-  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol,.provenance{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,.provenance,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
+  .chapter-journey-section{padding-top:0!important}.chapter-review-heading{display:grid;grid-template-columns:.72fr 1.28fr;gap:.3rem 2rem;margin-bottom:1.4rem}.chapter-review-heading .eyebrow{grid-column:1/-1}.chapter-review-heading h2{margin:0;font-family:var(--serif);font-size:2rem;line-height:1.45}.chapter-review-heading>p:last-child{margin:0;color:var(--muted);font-size:.82rem;line-height:1.8}
+  @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol,.provenance{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,.provenance,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading,.chapter-review-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
   /* calmer chapter reading layout */
   .chapter-hero{padding:3.5rem 0 3.25rem;background:linear-gradient(125deg,rgba(163,59,43,.055),transparent 48%)}
   .crumbs{margin-bottom:2.5rem}

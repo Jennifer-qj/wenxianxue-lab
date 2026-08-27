@@ -44,7 +44,7 @@ describe("公开项目成熟度门禁", () => {
     expect(existsSync(resolve(root, "src/pages/notebook/index.astro"))).toBe(true);
     expect(read("src/lib/learningArchive.ts")).toContain("recent: LibraryEntry[]");
     expect(progress).toContain("library: readLibrary()");
-    expect(progress).toContain("version: 2");
+    expect(progress).toContain("version: 3");
   });
 
   it("搜索支持相关检索词、近似匹配与状态筛选", () => {
@@ -195,7 +195,25 @@ describe("公开项目成熟度门禁", () => {
     expect(panel).toContain("当前审核状态");
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
-    expect(progress).toContain("{gameCount}/8");
-    expect(read("src/consts.ts")).toContain('version: "0.4.1"');
+    expect(progress).toContain("{gameCount}/9");
+    expect(read("src/consts.ts")).toContain('version: "0.5.0"');
+  });
+
+  it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
+    const journey = read("src/components/ChapterJourney.tsx");
+    const chapter = read("src/pages/chapters/[id].astro");
+    const progress = read("src/components/ProgressDashboard.tsx");
+    expect(chapter.match(/<ChapterJourney/g)?.length).toBe(2);
+    expect(chapter).toContain('href="#journey"');
+    expect(chapter).toContain('id="chapter-review"');
+    expect(journey).toContain("速览");
+    expect(journey).toContain("标准");
+    expect(journey).toContain("深研");
+    expect(journey).toContain("我带走的一条认识");
+    expect(journey).toContain("导出本章学习复盘 .md");
+    expect(progress).toContain("chapterJourneys");
+    expect(progress).toContain("version: 3");
+    expect(progress).toContain("{gameCount}/9");
+    expect(progress).toContain("const totalActivities = 54");
   });
 });

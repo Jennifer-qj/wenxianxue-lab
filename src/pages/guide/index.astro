@@ -4,7 +4,7 @@ import BaseLayout from "../../layouts/BaseLayout.astro";
 const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 const steps = [
   { n: "01", title: "选一条入口", text: "第一次学习走入门路径；带着问题来用搜索和概念词典；想动手则直接进入实验室。", href: `${base}?welcome=1`, action: "重新打开入口选择" },
-  { n: "02", title: "读一章并做练习", text: "先看关键问题与学习单元，再完成九题型综合练习。错题会自动进入错题本。", href: `${base}chapters/ch01/`, action: "从第一章试读" },
+  { n: "02", title: "选择一章的读法", text: "进入章节后先选速览、标准或深研模式，再沿六步学习地图阅读；不要求一次做完。", href: `${base}chapters/ch01/#journey`, action: "从第一章试读" },
   { n: "03", title: "把概念连起来", text: "在知识图谱选择起点和终点，查看概念之间最短的知识路径，再进入词条细读。", href: `${base}graph/`, action: "打开知识图谱" },
   { n: "04", title: "完成一次判断", text: "在互动实验室做分类、排序、校勘或古籍鉴定案卷，把定义转化为判断过程。", href: `${base}lab/`, action: "进入互动实验室" },
   { n: "05", title: "留下自己的札记", text: "点击页面右下角“学习札记”，收藏当前页面并记录判断、疑问或待核对事项。", href: `${base}notebook/`, action: "打开个人工作台" },
@@ -24,7 +24,7 @@ const steps = [
 
       <section id="map"><p class="eyebrow">02 · Feature map</p><h2>每个功能解决什么问题？</h2><div class="feature-manual">
         <article><small>学习路径</small><h3>不知道从哪里开始</h3><p>七条路径按学习目的重排十四章，不要求机械依照原书章节顺序。</p><ol><li>选择一个目标</li><li>按路径进入相关章节</li><li>完成练习和研读</li></ol><a href={`${base}paths/`}>查看全部路径 →</a></article>
-        <article><small>章节学习页</small><h3>需要系统读懂一章</h3><p>每章由关键问题、学习单元、概念链接、案例、研读和综合练习组成。</p><ol><li>先读“关键问题”</li><li>区分概括与判断边界</li><li>最后用题目检验</li></ol><a href={`${base}coverage/`}>查看十四章覆盖 →</a></article>
+        <article><small>章节学习页</small><h3>需要系统读懂一章</h3><p>每章提供三档预计用时、六步学习地图、学习单元、案例、综合练习和章末复盘。</p><ol><li>选择速览、标准或深研</li><li>沿任务地图留下进度</li><li>导出本章复盘成果</li></ol><a href={`${base}chapters/ch01/#journey`}>体验章节学习地图 →</a></article>
         <article><small>概念词典与图谱</small><h3>概念太多，关系混乱</h3><p>词典用于精确查义，图谱用于理解跨章关系。路径探索会说明两个概念间隔着哪些节点。</p><ol><li>搜索概念</li><li>筛选关系与置信度</li><li>打开词条核对定义</li></ol><a href={`${base}concepts/`}>打开概念词典 →</a></article>
         <article><small>互动实验室</small><h3>“看懂了”但不会判断</h3><p>实验不只做选择题，还包括分类、排序、拼合、模拟、证据研判和综合案卷。</p><ol><li>先独立作答</li><li>阅读诊断反馈</li><li>带着错误返回章节</li></ol><a href={`${base}lab/`}>选择一个实验 →</a></article>
         <article><small>搜索</small><h3>我带着一个具体问题来</h3><p>搜索同时覆盖章节、学习单元、概念和实验入口，适合把网站当作个人知识索引。</p><ol><li>输入术语或问题词</li><li>观察结果所属类型</li><li>进入章节或词条</li></ol><a href={`${base}search/`}>搜索全站内容 →</a></article>
@@ -32,7 +32,7 @@ const steps = [
         <article><small>学习进度</small><h3>如何知道接下来学什么</h3><p>掌握度综合练习、研读和案例完成情况，并结合错题给出下一步推荐。</p><ol><li>查看推荐章节</li><li>复习今日到期错题</li><li>定期导出学习档案</li></ol><a href={`${base}progress/`}>打开进度页 →</a></article>
       </div></section>
 
-      <section id="records"><p class="eyebrow">03 · Local records</p><h2>学习记录、备份与隐私</h2><div class="record-flow"><span>在浏览器学习与写札记</span><i>→</i><span>仅保存到本机</span><i>→</i><span>工作台与进度页汇总</span><i>→</i><span>导出 JSON 备份</span></div><ul><li>网站不要求注册，不把学习进度、札记或浏览记录上传到服务器。</li><li>最近浏览仅用于在本机提供“继续学习”，最多保留 30 条。</li><li>更换浏览器、设备或清除浏览器数据时，本地记录可能丢失。</li><li>请在进度页使用“导出 JSON”；换设备后用“导入档案”恢复进度、错题、札记和收藏。</li><li>学习档案不包含账号、设备指纹或站外浏览历史。</li></ul></section>
+      <section id="records"><p class="eyebrow">03 · Local records</p><h2>学习记录、备份与隐私</h2><div class="record-flow"><span>在浏览器学习与写札记</span><i>→</i><span>仅保存到本机</span><i>→</i><span>工作台与进度页汇总</span><i>→</i><span>导出 JSON 备份</span></div><ul><li>网站不要求注册，不把学习进度、札记、章节复盘或浏览记录上传到服务器。</li><li>最近浏览仅用于在本机提供“继续学习”，最多保留 30 条。</li><li>更换浏览器、设备或清除浏览器数据时，本地记录可能丢失。</li><li>请在进度页使用“备份数据 .json”；换设备后可恢复进度、错题、札记、收藏与章节复盘。</li><li>学习档案不包含账号、设备指纹或站外浏览历史。</li></ul></section>
 
       <section id="reading"><p class="eyebrow">04 · Reading notes</p><h2>怎样理解网站里的内容状态？</h2><div class="status-guide"><article><b>原创概括</b><p>把原书知识重新组织为学习语言，不等于逐字引文。</p></article><article><b>教学归纳</b><p>为了帮助初学者建立联系而添加的解释，会与原书确认关系区分。</p></article><article><b>待复核</b><p>已经进入结构化系统，但精确页码或学术表述仍待纸本逐条核验。</p></article><article><b>已核验</b><p>已经依据纸本完成核对；仍建议在正式论文中直接引用原书。</p></article></div><p class="guide-warning">这个网站适合学习、复盘与发现问题，不代替原书阅读，也不应作为正式论文中的二手引文来源。</p></section>
 
