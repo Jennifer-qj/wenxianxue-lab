@@ -183,4 +183,19 @@ describe("公开项目成熟度门禁", () => {
     expect(endpoint).toContain("page_locator_status");
     expect(endpoint).toContain("derivative_note");
   });
+
+  it("把首页续学、条目级共校与可读报告连成学习闭环", () => {
+    const home = read("src/components/HomeResume.tsx");
+    const panel = read("src/components/FeedbackPanel.tsx");
+    const progress = read("src/components/ProgressDashboard.tsx");
+    expect(home).toContain("从上次停下的地方继续");
+    expect(home).toContain("readLibrary");
+    expect(read("src/pages/index.astro")).toContain("<HomeResume");
+    expect(panel).toContain("data-claim-id");
+    expect(panel).toContain("当前审核状态");
+    expect(progress).toContain("exportMarkdownReport");
+    expect(progress).toContain("文献学实验室 · 我的学习报告");
+    expect(progress).toContain("{gameCount}/8");
+    expect(read("src/consts.ts")).toContain('version: "0.4.1"');
+  });
 });

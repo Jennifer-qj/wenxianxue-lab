@@ -87,6 +87,56 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     setNotice("学习档案已经导出。文件只包含本地学习记录。 ");
   }
 
+  function exportMarkdownReport() {
+    const library = readLibrary();
+    const generated = new Date();
+    const readableDate = generated.toLocaleDateString("zh-CN");
+    const lines = [
+      "# 文献学实验室 · 我的学习报告",
+      "",
+      `- 生成日期：${readableDate}`,
+      `- 已完成活动：${completed} / ${totalActivities}`,
+      `- 综合进度：${percent}%`,
+      `- 连续学习：${streak} 天`,
+      `- 当前错题：${wrongItems.length}（今日到期 ${dueItems.length}）`,
+      "",
+      "> 本报告由浏览器中的本地学习记录生成，不代表课程成绩或学术能力认证。",
+      "",
+      "## 十四章掌握度",
+      "",
+      "| 章节 | 主题 | 掌握度 | 练习 | 研读 | 案例 |",
+      "| --- | --- | ---: | --- | --- | --- |",
+      ...chapterMastery.map((item) => `| 第 ${item.chapter} 章 | ${chapterTitles[item.chapter - 1]} | ${item.mastery}% | ${item.practice ? "完成" : "未完成"} | ${item.deep ? "完成" : "未完成"} | ${item.chapterCase ? "完成" : "未完成"} |`),
+      "",
+      "## 最近完成",
+      "",
+      ...(entries.length ? entries.slice(0, 20).map(([id, item]) => `- ${new Date(item.updatedAt).toLocaleDateString("zh-CN")} · ${item.title ?? names[id] ?? id}（${item.score}/${item.total}）`) : ["- 尚无已完成活动。"]),
+      "",
+      "## 待复习问题",
+      "",
+      ...(wrongItems.length ? wrongItems.slice(0, 20).map((item) => `- 第 ${item.chapter} 章 · ${item.prompt}（错误 ${item.attempts} 次）`) : ["- 当前没有错题记录。"]),
+      "",
+      "## 收藏与札记",
+      "",
+      `- 收藏：${Object.keys(library.bookmarks).length} 项`,
+      `- 札记：${Object.keys(library.notes).length} 条`,
+      "",
+      ...Object.values(library.notes).slice(0, 30).flatMap((item) => [
+        `### ${item.title}`,
+        "",
+        item.text.trim(),
+        "",
+        `页面：${new URL(item.url, window.location.origin).href}`,
+        "",
+      ]),
+      "---",
+      "由“文献学实验室”生成：https://jennifer-qj.github.io/wenxianxue-lab/",
+    ];
+    const url = URL.createObjectURL(new Blob([lines.join("\n")], { type: "text/markdown;charset=utf-8" }));
+    const anchor = document.createElement("a"); anchor.href = url; anchor.download = `文献学实验室-学习报告-${generated.toISOString().slice(0, 10)}.md`; anchor.click(); URL.revokeObjectURL(url);
+    setNotice("可阅读的 Markdown 学习报告已经生成。札记仅在你主动导出的文件中出现。");
+  }
+
   async function importArchive(file?: File) {
     if (!file) return;
     try {
@@ -113,7 +163,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     <section className="progress-summary">
       <p className="mini-label">保存在当前浏览器</p><strong>{completed}</strong><span>项学习活动已完成，共 {totalActivities} 项</span>
       <div className="ring" style={{ "--value": `${percent}%` } as React.CSSProperties}><b>{percent}%</b></div>
-      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/6</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
+      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/8</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
       <div className="study-vitals"><span><b>{streak}</b>连续学习天数</span><span><b>{dueItems.length}</b>今日到期错题</span></div>
     </section>
     <section className="mastery-panel">
@@ -131,7 +181,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     </section>
     <section className="archive-tools" id="archive">
       <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>统一备份进度、错题、研读勾选、札记、收藏和最近浏览；不包含账号或设备信息。</p></div>
-      <div><button onClick={exportArchive}>导出 JSON</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
+      <div><button onClick={exportMarkdownReport}>生成学习报告 .md</button><button onClick={exportArchive}>备份数据 .json</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
       {notice && <p className="archive-notice" role="status">{notice}</p>}
     </section>
   </div>;

@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import RepoPulse from "../components/RepoPulse";
+import HomeResume from "../components/HomeResume";
 import { games, graphStats, learningPaths } from "../data/site";
 import { getCollection } from "astro:content";
 
@@ -55,6 +56,8 @@ const pathReview = new Map(learningPaths.map((path) => {
       </div>
     </div>
   </section>
+
+  <HomeResume baseUrl={base} client:load />
 
   <section class="flagship-entry container">
     <div class="flagship-mark"><span>综合</span><strong>案卷</strong></div>
@@ -219,7 +222,7 @@ const pathReview = new Map(learningPaths.map((path) => {
   @media(max-width:560px){.strip-inner,.path-grid,.game-row,.graph-stats,.flagship-entry,.author-note{grid-template-columns:1fr}.strip-inner{padding-block:1.2rem}.hero h1 br{display:none}.hero-visual li{grid-template-columns:1fr}.hero-visual footer{align-items:flex-start;flex-direction:column}.flagship-entry{margin-top:3rem;padding:1.2rem}.flagship-entry>a{grid-column:auto}.path-card:nth-child(7){grid-column:auto}.section-heading{align-items:start}.game-card{grid-template-columns:auto 1fr;min-height:210px}.method-note{padding:1.5rem}.lexicon-link{display:block;margin-left:0}}
   /* second-pass hero: use the empty upper-right area as an animated knowledge field */
   .hero{grid-template-columns:minmax(0,1.04fr) minmax(480px,.96fr);align-items:start;min-height:660px;padding-top:5.5rem}
-  .hero-copy{padding-top:1.8rem}
+  .hero-copy{min-width:0;padding-top:1.8rem}
   .hero-stage{position:relative;isolation:isolate;min-height:610px;display:grid;align-items:start;padding:3.2rem 2.2rem 2rem}
   .hero-motion{position:absolute;inset:-1.5rem -2rem 0 -3rem;z-index:0;opacity:.62;pointer-events:none}
   .hero-motion svg{width:100%;height:100%;overflow:visible}
@@ -243,5 +246,5 @@ const pathReview = new Map(learningPaths.map((path) => {
   @keyframes live-pulse{70%{box-shadow:0 0 0 7px rgba(163,59,43,0)}100%{box-shadow:0 0 0 0 rgba(163,59,43,0)}}
   @keyframes step-focus{0%,18%{background:rgba(163,59,43,.055)}24%,100%{background:transparent}}
   @media(max-width:1050px){.hero{grid-template-columns:1fr;min-height:auto}.hero-copy{padding-top:0}.hero-stage{width:min(660px,100%);min-height:560px;margin-inline:auto}.hero-motion{inset:-2rem -3rem 0}.hero-fact--concepts{right:0}}
-  @media(max-width:560px){.hero-stage{min-height:auto;padding:3rem 0 1.5rem}.hero-motion{inset:0;opacity:.35}.hero-fact{display:none}.hero-visual{width:100%}}
+  @media(max-width:560px){.hero-stage{min-height:auto;padding:3rem 0 1.5rem}.hero-motion{inset:0;opacity:.35}.hero-fact{display:none}.hero-visual{width:100%}.hero-actions{display:grid;grid-template-columns:1fr}.hero-actions .button{width:100%;justify-content:center;white-space:normal;text-align:center}}
 </style>

@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 
 type Kind = "content" | "source" | "quiz" | "feature" | "bug" | "review";
+type UnitContext = { id: string; reviewStatus: string; contentKind: string };
 
 const options: Array<{ id: Kind; label: string; description: string; template: string; prefix: string }> = [
   { id: "content", label: "知识表述", description: "概念、人物、年代或判断边界可能有误", template: "content-correction.yml", prefix: "内容纠错" },
@@ -25,6 +26,7 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
   const [copied, setCopied] = useState(false);
   const [note, setNote] = useState("");
   const [selection, setSelection] = useState("");
+  const [unitContext, setUnitContext] = useState<UnitContext | null>(null);
   const triggerRef = useRef<HTMLButtonElement>(null);
   const closeRef = useRef<HTMLButtonElement>(null);
   const dialogRef = useRef<HTMLElement>(null);
@@ -33,10 +35,13 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
     `页面：${title}`,
     `地址：${window.location.href}`,
     `反馈类型：${current.label}`,
+    `学习单元：${unitContext?.id ?? "（页面级反馈）"}`,
+    `当前审核状态：${unitContext?.reviewStatus ?? "（不适用）"}`,
+    `内容类型：${unitContext?.contentKind ?? "（不适用）"}`,
     `页面选文：${selection || "（未选中文字）"}`,
     `补充说明：${note.trim() || "（待填写）"}`,
     "提醒：不要粘贴原书大段文字或上传扫描件。",
-  ].join("\n"), [title, current.label, note, selection]);
+  ].join("\n"), [title, current.label, note, selection, unitContext]);
 
   useEffect(() => {
     if (!open) return;
@@ -61,8 +66,17 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
     window.setTimeout(() => triggerRef.current?.focus(), 0);
   }
   function openPanel() {
-    const selected = window.getSelection()?.toString().replace(/\s+/g, " ").trim().slice(0, 280) ?? "";
+    const browserSelection = window.getSelection();
+    const selected = browserSelection?.toString().replace(/\s+/g, " ").trim().slice(0, 280) ?? "";
+    const anchor = browserSelection?.anchorNode;
+    const anchorElement = anchor instanceof Element ? anchor : anchor?.parentElement;
+    const unit = anchorElement?.closest<HTMLElement>("[data-claim-id]");
     setSelection(selected);
+    setUnitContext(unit ? {
+      id: unit.dataset.claimId ?? "",
+      reviewStatus: unit.dataset.reviewStatus ?? "unknown",
+      contentKind: unit.dataset.contentKind ?? "unknown",
+    } : null);
     setCopied(false);
     setOpen(true);
   }
@@ -95,7 +109,8 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
             <strong>{item.label}</strong><span>{item.description}</span>
           </button>)}
         </div>
-        <div className="feedback-context"><small>将自动附带</small><code>{title}</code><span>{typeof window !== "undefined" ? window.location.pathname : "当前页面"}</span></div>
+        <div className="feedback-context"><small>将自动附带</small><code>{unitContext ? `${title} · ${unitContext.id}` : title}</code><span>{typeof window !== "undefined" ? window.location.pathname : "当前页面"}{unitContext ? ` · ${unitContext.reviewStatus}` : ""}</span></div>
+        {unitContext && <p className="feedback-unit" role="status"><b>已定位到学习单元 {unitContext.id}</b><span>提交时会附带审核状态与内容类型，便于作者直接找到待改条目。</span></p>}
         {selection && <blockquote className="feedback-selection"><small>已捕捉你在页面中选中的文字</small><p>{selection}</p><button onClick={() => setSelection("")}>不附带这段选文</button></blockquote>}
         <div className="feedback-evidence"><small>这类反馈最好包含</small><ul>{evidencePrompts[kind].map((item) => <li key={item}>{item}</li>)}</ul></div>
         <label className="feedback-note"><span>先记一句问题说明 <small>可选，会和页面信息一起复制</small></span><textarea value={note} onChange={(event) => { setNote(event.target.value); setCopied(false); }} placeholder="例如：这里把一条局部证据写成了整部书的结论……" /></label>
