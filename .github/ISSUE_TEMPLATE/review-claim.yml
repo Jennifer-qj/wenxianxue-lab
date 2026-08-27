@@ -1,7 +1,7 @@
 name: 认领共校
 description: 公开记录准备核对的章节、概念或关系
 title: "[共校认领] "
-labels: [content]
+labels: [content, "status: needs-triage"]
 body:
   - type: input
     id: scope
@@ -22,6 +22,13 @@ body:
     attributes:
       label: 计划提交什么
       options: [核对结果与纸本页码, 问题清单, 补充参考文献, 只认领一项短核对]
+    validations:
+      required: true
+  - type: input
+    id: edition
+    attributes:
+      label: 准备使用的版本或资料
+      description: 例如出版社、年份、版次或馆藏数据库名称；尚未确定时请如实说明。
     validations:
       required: true
   - type: checkboxes

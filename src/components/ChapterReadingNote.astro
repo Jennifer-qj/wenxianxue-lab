@@ -1,0 +1,72 @@
+---
+interface Props { chapterId: string; baseUrl: string; }
+const { chapterId, baseUrl } = Astro.props;
+const notes = {
+  ch02: {
+    label: "载体不是知识的外包装",
+    split: "我把这一章拆成“材料—形制—阅读动作”三层，因为纸、简帛或石刻不仅决定文字放在哪里，也影响篇幅、次序、保存和今天能怎样读取它。",
+    mistake: "初读时最容易把载体史读成发明年代清单。年代重要，但真正需要追问的是：材料条件怎样改变了文献的形成与流传？",
+    boundary: "看到某种材料，不能直接推出文献内容的准确年代；旧料后用、后期改装与出土语境都可能改变判断。",
+    question: "如果同一篇文字分别写在简册、卷轴和册页上，哪些阅读动作会随之改变？",
+    concept: "m_paper",
+    conceptLabel: "从“纸”进入图谱",
+  },
+  ch05: {
+    label: "版本判断首先是管理证明范围",
+    split: "这一章没有按“看见一个特征—给出一个年代”来整理，而是把证据分为物质层、文字层、著录层与递藏层。每一层能证明的对象并不相同。",
+    mistake: "牌记、避讳、字体或旧纸都很醒目，因此也最容易被当成一锤定音的证据。醒目不等于证明力强。",
+    boundary: "局部书叶的年代、一次重装记录和整部书的刊刻年代必须分开表述；证据冲突时先解释层次，不急着淘汰材料。",
+    question: "如果牌记可靠，却与正文纸张和版框不同，我们究竟确认了什么？",
+    concept: "c_version_evidence",
+    conceptLabel: "查看“版本证据链”",
+  },
+  ch06: {
+    label: "校勘不是替古人挑一个顺眼的字",
+    split: "我把校勘理解成四步：发现差异、说明来源、比较证据、记录取舍。最后一项尤其重要，因为没有记录的改字无法被后来者复查。",
+    mistake: "把多数版本的文字、语义更顺的文字或自己熟悉的表达直接判作“正确”，都会跳过版本来源和讹误机制。",
+    boundary: "异文存在不等于必须改字；证据不足时保留异文与疑问，也是一种负责任的整理结果。",
+    question: "当两个版本都能讲通，而来源关系又不清楚时，校勘记应该怎样写？",
+    concept: "c_suspensive_judgment",
+    conceptLabel: "查看“多闻阙疑”",
+  },
+  ch08: {
+    label: "目录是在公开一种知识秩序",
+    split: "我没有把目录只当作找书工具，而是分开观察著录、分类和提要：它们分别回答“这是什么”“放在哪里”“为什么值得这样理解”。",
+    mistake: "分类看起来像稳定的格子，但类目、时代和编目目的不同，同一书可能获得不同位置与解释。",
+    boundary: "目录中的著录可以提供线索，却不能自动替代实物核验；目录失收也不直接证明某书当时不存在。",
+    question: "一本书的位置变化，反映的是书本身改变了，还是知识秩序改变了？",
+    concept: "c_bibliographic_classification",
+    conceptLabel: "查看“目录分类”",
+  },
+  ch14: {
+    label: "从发现故事转向分布式文献工作",
+    split: "我把这一章的重心从“藏经洞被发现”移向“对象怎样被定位、比较和重新关联”：流散史、机构编号、目录、缀合与数字重聚构成一条连续工作链。",
+    mistake: "数字图像容易制造“材料已经在一起”的错觉。事实上，不同机构的编号、图像质量、著录传统和权利信息仍需保留。",
+    boundary: "图像相似或内容接续只能提出缀合假说；纸张、书手、行款、破损边缘与收藏史需要共同支持。",
+    question: "数字化让残卷重新相遇以后，哪些原始语境仍然无法被屏幕替代？",
+    concept: "c_fragment_reunification",
+    conceptLabel: "查看“残卷缀合”",
+  },
+} as const;
+const note = notes[chapterId as keyof typeof notes];
+---
+
+{note && (
+  <section id="reading-note" class="reading-note">
+    <header><p class="eyebrow">我的章节旁注 · EDITORIAL NOTE</p><h2>{note.label}</h2></header>
+    <div class="reading-note__grid">
+      <article><small>为什么这样拆</small><p>{note.split}</p></article>
+      <article><small>初读容易踩的坑</small><p>{note.mistake}</p></article>
+      <article><small>这一步不能越过</small><p>{note.boundary}</p></article>
+    </div>
+    <footer>
+      <div><small>留在书边的问题</small><blockquote>{note.question}</blockquote></div>
+      <a href={`${baseUrl}concepts/${note.concept}/`}>{note.conceptLabel} →</a>
+    </footer>
+    <p class="reading-note__identity">以上是项目作者为初学者设计的阅读提示，不作为原书引文；涉及页码和具体史实的判断仍以纸本复核记录为准。</p>
+  </section>
+)}
+
+<style>
+  .reading-note{position:relative;padding:3.5rem 0;border-bottom:1px solid var(--line)}.reading-note::before{position:absolute;top:3.5rem;right:0;color:rgba(163,59,43,.09);font-family:var(--serif);font-size:5rem;content:"读"}.reading-note header{display:grid;grid-template-columns:.65fr 1.35fr;gap:2rem;align-items:end;margin-bottom:1.5rem}.reading-note h2{max-width:42rem;margin:0;font-family:var(--serif);font-size:clamp(1.8rem,3vw,2.5rem);line-height:1.4}.reading-note__grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}.reading-note article{padding:1.2rem;border-right:1px solid var(--line);border-bottom:1px solid var(--line);background:rgba(255,250,240,.62)}.reading-note article small,.reading-note footer small{color:var(--cinnabar);font-size:.67rem;letter-spacing:.08em}.reading-note article p{margin:.55rem 0 0;color:var(--muted);font-family:var(--serif);font-size:.88rem;line-height:1.85}.reading-note footer{display:grid;grid-template-columns:1fr auto;gap:2rem;align-items:center;padding:1.2rem;color:#f3ecdf;background:#24302b}.reading-note blockquote{margin:.35rem 0 0;font-family:var(--serif);font-size:1rem}.reading-note footer a{padding:.55rem .75rem;color:#f1c4ad;border:1px solid rgba(255,255,255,.18);font-size:.72rem;text-decoration:none;white-space:nowrap}.reading-note__identity{margin:.8rem 0 0;padding-left:.7rem;border-left:2px solid var(--line);color:var(--muted);font-size:.66rem;line-height:1.6}@media(max-width:720px){.reading-note header,.reading-note footer{grid-template-columns:1fr}.reading-note__grid{grid-template-columns:1fr}.reading-note footer a{width:max-content}}
+</style>

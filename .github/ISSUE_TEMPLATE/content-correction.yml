@@ -1,7 +1,7 @@
 name: 内容纠错
 description: 报告概念、章节、题目、关系或页码问题
 title: "[内容纠错] "
-labels: [content]
+labels: [content, "status: needs-triage"]
 body:
   - type: input
     id: page
@@ -25,6 +25,20 @@ body:
     validations:
       required: true
   - type: dropdown
+    id: evidence_type
+    attributes:
+      label: 依据类型
+      options: [原书纸本, 其他正式出版物, 馆藏目录或机构数据库, 实物或图像观察, 推理与讨论线索]
+    validations:
+      required: true
+  - type: textarea
+    id: boundary
+    attributes:
+      label: 这项依据能够证明到哪一步
+      description: 请区分“支持一种可能”“限定时间范围”和“足以确认”等不同强度。
+    validations:
+      required: true
+  - type: dropdown
     id: kind
     attributes:
       label: 问题类型
@@ -36,6 +50,13 @@ body:
     attributes:
       label: 建议修改方向
       description: 可以只说明判断方向，不要求提供完整改写。
+  - type: dropdown
+    id: attribution
+    attributes:
+      label: 如果建议被采用，如何记录贡献
+      options: [公开我的 GitHub 用户名, 记为匿名读者, 不进入网站贡献台账]
+    validations:
+      required: true
   - type: checkboxes
     id: copyright
     attributes:

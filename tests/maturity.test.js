@@ -117,4 +117,41 @@ describe("公开项目成熟度门禁", () => {
     expect(lab).toContain("分歧不等于简单答错");
     expect(lab).not.toContain("radio");
   });
+
+  it("旗舰案卷保留理由、信心校准和可撤回的决策轨迹", () => {
+    const dossier = read("src/components/RareBookDossier.tsx");
+    expect(dossier).toContain("用自己的话说明理由");
+    expect(dossier).toContain('type="range"');
+    expect(dossier).toContain("高信心偏差");
+    expect(dossier).toContain("撤回并修改");
+    expect(dossier).toContain("五阶段决策轨迹");
+  });
+
+  it("知识图谱提供问题驱动的分步导览", () => {
+    const graph = read("src/components/KnowledgeGraph.tsx");
+    expect(graph).toContain("GUIDED READING");
+    expect(graph).toContain("一条版本判断怎样成立");
+    expect(graph).toContain("校勘不是挑一个顺眼的字");
+    expect(graph).toContain("一片残卷怎样回到原来的位置");
+    expect(graph).toContain("moveTour");
+  });
+
+  it("代表章节公开作者旁注而不冒充原书引文", () => {
+    const note = read("src/components/ChapterReadingNote.astro");
+    expect(note).toContain("为什么这样拆");
+    expect(note).toContain("初读容易踩的坑");
+    expect(note).toContain("这一步不能越过");
+    expect(note).toContain("不作为原书引文");
+    expect(read("src/pages/chapters/[id].astro")).toContain("editorialChapters");
+  });
+
+  it("共校入口携带页面证据并公开处理状态", () => {
+    const panel = read("src/components/FeedbackPanel.tsx");
+    const page = read("src/pages/contribute/index.astro");
+    expect(panel).toContain("window.getSelection");
+    expect(panel).toContain("复制证据包并提交");
+    expect(page).toContain("status: needs-evidence");
+    expect(page).toContain("status: in-review");
+    expect(read(".github/ISSUE_TEMPLATE/content-correction.yml")).toContain("这项依据能够证明到哪一步");
+  });
 });

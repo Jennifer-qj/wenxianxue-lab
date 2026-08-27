@@ -4,6 +4,7 @@ type ConceptType = "concept" | "material" | "work" | "person" | "event" | "metho
 type Concept = { id: string; label: string; type: ConceptType; definition: string; chapter_ids: string[]; status: string };
 type Edge = { id: string; source: string; target: string; type: string; evidence: string; confidence: "confirmed" | "pedagogical" | "doubtful" };
 type PositionedNode = Concept & { x: number; y: number; degree: number };
+type GraphTour = { id: string; title: string; summary: string; steps: Array<{ nodeId: string; heading: string; prompt: string }> };
 
 const WIDTH = 1100;
 const HEIGHT = 720;
@@ -13,6 +14,26 @@ const relationLabels: Record<string, string> = { isA: "属于", isPartOf: "组�
 const confidenceLabels = { confirmed: "原书确认", pedagogical: "教学归纳", doubtful: "待考关系" } as const;
 const statusLabels: Record<string, string> = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" };
 const confidenceOptions = ["all", "confirmed", "pedagogical", "doubtful"] as const;
+const graphTours: GraphTour[] = [
+  { id: "version", title: "一条版本判断怎样成立", summary: "从版本概念走到可核查的证据组合。", steps: [
+    { nodeId: "c_version", heading: "先问：这里的“版本”指什么？", prompt: "版本不只是一段文字，也包括形成、复制与流传留下的物质形态。" },
+    { nodeId: "c_version_evidence", heading: "再把孤证改成证据链", prompt: "年代、牌记、避讳、刻工、版式和著录需要互相限制，不能让其中一项独自下结论。" },
+    { nodeId: "me_taboo_character", heading: "看一个容易被夸大的线索", prompt: "避讳可以帮助缩小时间范围，但须排除偶然缺笔、版损、翻刻和后期挖改。" },
+    { nodeId: "me_catalog_comparison", heading: "最后回到可复查的旁证", prompt: "目录与书影能提供比较入口；同书名不自动等于同一具体传本。" },
+  ] },
+  { id: "collation", title: "校勘不是挑一个顺眼的字", summary: "沿讹误、比较、记录和保留判断走一遍。", steps: [
+    { nodeId: "c_textual_error", heading: "从异常开始，而不是从改字开始", prompt: "先说明讹、脱、衍、倒或错乱发生在哪里，再判断是否真的需要改动。" },
+    { nodeId: "c_collation", heading: "比较只是第一步", prompt: "异文对读提供差异，判断仍需结合版本来源、语境与其他证据。" },
+    { nodeId: "c_collation_note", heading: "让后来者能够复查", prompt: "校勘记应保留底本文字、异文、证据、判断和处理方式。" },
+    { nodeId: "c_suspensive_judgment", heading: "证据不够时允许停下来", prompt: "多闻阙疑不是逃避结论，而是把未知范围准确写进结论。" },
+  ] },
+  { id: "dunhuang", title: "一片残卷怎样回到原来的位置", summary: "把流散、目录、缀合与数字重聚连成工作流。", steps: [
+    { nodeId: "c_dunhuang_dispersal", heading: "先理解分藏现状", prompt: "流散史解释了为什么同一写卷的残片可能分处不同机构。" },
+    { nodeId: "c_dunhuang_catalog", heading: "用编号建立查找入口", prompt: "机构号与目录著录是定位对象的起点，还不是残片同源的证明。" },
+    { nodeId: "c_fragment_reunification", heading: "用多种特征提出缀合", prompt: "纸张、书手、行款、内容与收藏史需共同支持同卷判断。" },
+    { nodeId: "c_digital_reunification", heading: "数字重聚不等于实物归还", prompt: "联合目录和数字图像让分藏文献重新关联，但必须保留机构、编号与来源信息。" },
+  ] },
+];
 
 function chapterNumber(node: Concept) {
   const match = node.chapter_ids[0]?.match(/\d+/);
@@ -60,6 +81,8 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const [pathEnd, setPathEnd] = useState("");
   const [pathIds, setPathIds] = useState<string[]>([]);
   const [pathNotice, setPathNotice] = useState("");
+  const [tourId, setTourId] = useState("");
+  const [tourStep, setTourStep] = useState(0);
   const svgRef = useRef<SVGSVGElement>(null);
   const pointersRef = useRef(new Map<number, { x: number; y: number }>());
   const pinchRef = useRef<{ distance: number; zoom: number } | null>(null);
@@ -103,6 +126,9 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
   const selectedEdges = selected ? filteredEdges.filter((edge) => edge.source === selected.id || edge.target === selected.id) : [];
   const connected = new Set(selectedEdges.flatMap((edge) => [edge.source, edge.target]));
   const pathNodeSet = new Set(pathIds);
+  const activeTour = graphTours.find((tour) => tour.id === tourId);
+  const activeTourStep = activeTour?.steps[tourStep];
+  const tourNodeSet = new Set(activeTour?.steps.map((step) => step.nodeId) ?? []);
   const pathEdgeSet = new Set(pathIds.slice(1).map((id, index) => {
     const previous = pathIds[index];
     return filteredEdges.find((edge) => (edge.source === previous && edge.target === id) || (edge.target === previous && edge.source === id))?.id;
@@ -146,7 +172,17 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
     setDragging(null);
   }
   function reset() {
-    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? ""); setPathStart(""); setPathEnd(""); setPathIds([]); setPathNotice("");
+    setNodes(initialNodes); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setZoom(1); setSelectedId(concepts[0]?.id ?? ""); setPathStart(""); setPathEnd(""); setPathIds([]); setPathNotice(""); setTourId(""); setTourStep(0);
+  }
+  function openTour(id: string) {
+    const tour = graphTours.find((item) => item.id === id);
+    if (!tour) return;
+    setTourId(id); setTourStep(0); setActiveType("all"); setChapter("all"); setQuery(""); setConfidence("all"); setRelation("all"); setCrossChapter(false); setPathIds([]); setPathNotice(""); setSelectedId(tour.steps[0].nodeId);
+  }
+  function moveTour(next: number) {
+    if (!activeTour) return;
+    const index = Math.max(0, Math.min(activeTour.steps.length - 1, next));
+    setTourStep(index); setSelectedId(activeTour.steps[index].nodeId);
   }
   function resolveConcept(value: string) {
     const normalized = value.trim().toLocaleLowerCase("zh-CN");
@@ -192,6 +228,11 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
       <div className="graph-extra-filters"><label>关系<select value={relation} onChange={(event) => setRelation(event.target.value)}><option value="all">全部关系</option>{Object.entries(relationLabels).map(([id, label]) => <option key={id} value={id}>{label}</option>)}</select></label><label>置信度<select value={confidence} onChange={(event) => setConfidence(event.target.value as (typeof confidenceOptions)[number])}><option value="all">全部置信度</option>{(confidenceOptions.slice(1) as Array<Exclude<(typeof confidenceOptions)[number], "all">>).map((id) => <option key={id} value={id}>{confidenceLabels[id]}</option>)}</select></label><label className="graph-check"><input type="checkbox" checked={crossChapter} onChange={(event) => setCrossChapter(event.target.checked)} />只看跨章关系</label></div>
       <div className="graph-controls"><span>拖动节点 · 滚轮或双指缩放</span><button aria-label="缩小图谱" onClick={() => setZoom((value) => Math.max(1, value - .2))}>−</button><b aria-live="polite">{Math.round(zoom * 100)}%</b><button aria-label="放大图谱" onClick={() => setZoom((value) => Math.min(2.4, value + .2))}>＋</button><button onClick={reset}>复位</button></div>
     </div>
+    <section className="graph-tours" aria-labelledby="graph-tour-title">
+      <div className="graph-tour-intro"><small>GUIDED READING</small><h2 id="graph-tour-title">不知从哪里点，就沿一条问题走</h2><p>导览会依次选中概念，并说明这一步在研究判断中承担什么作用。</p></div>
+      <div className="graph-tour-list">{graphTours.map((tour) => <button key={tour.id} className={tour.id === tourId ? "active" : ""} onClick={() => openTour(tour.id)}><strong>{tour.title}</strong><span>{tour.summary}</span><small>{tour.steps.length} 站 →</small></button>)}</div>
+      {activeTour && activeTourStep && <div className="graph-tour-player" aria-live="polite"><div><small>{tourStep + 1} / {activeTour.steps.length} · {nodeMap.get(activeTourStep.nodeId)?.label}</small><strong>{activeTourStep.heading}</strong><p>{activeTourStep.prompt}</p></div><nav aria-label="图谱导览步骤"><button disabled={tourStep === 0} onClick={() => moveTour(tourStep - 1)}>← 上一站</button>{tourStep < activeTour.steps.length - 1 ? <button onClick={() => moveTour(tourStep + 1)}>下一站 →</button> : <button onClick={() => { setTourId(""); setTourStep(0); }}>结束导览 ✓</button>}</nav></div>}
+    </section>
     <section className="graph-pathfinder" aria-labelledby="pathfinder-title">
       <div><small>PATH EXPLORER</small><h2 id="pathfinder-title">两个概念之间，隔着哪些知识？</h2><p>按当前关系与置信度筛选寻找最短路径；结果会同步高亮在图中。</p></div>
       <div className="graph-path-inputs">
@@ -223,7 +264,7 @@ export default function KnowledgeGraph({ concepts, edges, baseUrl }: { concepts:
           </g>;
         })}
         {nodes.map((node) => {
-          const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id); const pathNode = pathNodeSet.has(node.id);
+          const show = visible.has(node.id); const selectedNode = node.id === selectedId; const related = connected.has(node.id); const pathNode = pathNodeSet.has(node.id) || tourNodeSet.has(node.id);
           const radius = Math.min(10, 4.2 + node.degree * .8);
           return <g key={node.id} className={`graph-node ${dragging === node.id ? "dragging" : ""} ${selectedNode ? "selected" : ""} ${pathNode ? "path-node" : ""}`} opacity={show ? (selected && !related && !selectedNode && !pathNode ? .4 : 1) : .035} transform={`translate(${node.x} ${node.y})`} onPointerDown={(event) => { if (!show) return; event.currentTarget.setPointerCapture(event.pointerId); if (event.isPrimary) setDragging(node.id); setSelectedId(node.id); }} onClick={() => show && setSelectedId(node.id)} role="button" aria-label={`${node.label}，${typeLabels[node.type]}，${node.degree} 条直接关系`} aria-pressed={selectedNode} tabIndex={show ? 0 : -1} onKeyDown={(event) => { if (event.key === "Enter" || event.key === " ") { event.preventDefault(); setSelectedId(node.id); } }}>
             <circle r={radius} fill={typeColors[node.type]} />

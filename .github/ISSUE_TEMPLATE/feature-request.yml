@@ -1,7 +1,7 @@
 name: 功能与学习活动建议
 description: 建议新的交互、展示、游戏或学习方式
 title: "[功能建议] "
-labels: [enhancement]
+labels: [enhancement, "status: needs-triage"]
 body:
   - type: input
     id: page

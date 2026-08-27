@@ -5,6 +5,7 @@ import ResearchQuestionWorkbench from "../../components/ResearchQuestionWorkbenc
 import StructuredPractice from "../../components/StructuredPractice";
 import DeepDiveStudio from "../../components/DeepDiveStudio";
 import ChapterSignature from "../../components/ChapterSignature.astro";
+import ChapterReadingNote from "../../components/ChapterReadingNote.astro";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
 import { EDITION } from "../../consts";
@@ -31,6 +32,7 @@ const structuredConcepts = conceptEntries.flatMap((entry) => entry.data.items).f
 const structuredQuizzes = quizEntries.flatMap((entry) => entry.data.items).filter((quiz) => quiz.chapter === chapterIndex + 1);
 const deepDive = deepDiveEntries.flatMap((entry) => entry.data.items).find((study) => study.chapter === chapterIndex + 1);
 const statusLabels = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
+const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
 ---
 
 <BaseLayout title={`${chapter.number} ${chapter.title}`} active="paths">
@@ -61,6 +63,7 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
       <a href="#overview">导读</a>
       {["ch01", "ch05", "ch07"].includes(chapterId) && <a href="#signature">本章专属入口</a>}
       {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
+      {editorialChapters.includes(chapterId) && <a href="#reading-note">我的章节旁注</a>}
       {deepDive && <a href="#deep-dive">案例研读工作台</a>}
       {chapterId === "ch01" && <a href="#workbench">研究问题装配台</a>}
       {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
@@ -115,6 +118,8 @@ const statusLabels = { not_started: "未开始", drafting: "整理中", pending_
           </div>
         </section>
       )}
+
+      {editorialChapters.includes(chapterId) && <ChapterReadingNote chapterId={chapterId} baseUrl={base} />}
 
       {chapterId === "ch01" && (
         <section id="workbench" class="workbench-section">
