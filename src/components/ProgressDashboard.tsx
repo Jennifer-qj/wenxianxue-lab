@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { LIBRARY_KEY, emptyLibrary, readLibrary } from "../lib/learningArchive";
+import LearningPortfolio from "./LearningPortfolio";
 
 type ProgressItem = { completed: boolean; score: number; total: number; updatedAt: string; title?: string };
 type SavedProgress = Record<string, ProgressItem>;
@@ -170,22 +171,23 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
       <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/9</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
       <div className="study-vitals"><span><b>{streak}</b>连续学习天数</span><span><b>{dueItems.length}</b>今日到期错题</span></div>
     </section>
+    <section className="progress-list">
+      <div className="progress-list-title"><h2>最近记录</h2>{entries[0] && <a href={hrefFor(entries[0][0], baseUrl)}>继续上次学习 →</a>}</div>
+      {completed === 0 ? <div className="empty-state"><span>卷</span><p>还没有学习记录。完成任意章节综合练习、研读案例或互动实验，就会形成第一条档案。</p></div> : entries.slice(0, 10).map(([id, item]) => <article key={id}><div><strong>{item.title ?? names[id] ?? id}</strong><small>{new Date(item.updatedAt).toLocaleDateString("zh-CN")}</small></div><span>{item.score} / {item.total}</span><a href={hrefFor(id, baseUrl)}>继续</a></article>)}
+    </section>
     <section className="mastery-panel">
       <header><div><p className="mini-label">Chapter mastery</p><h2>十四章掌握度</h2></div><aside><span>下一步建议</span><strong>第 {recommended.chapter} 章 · {chapterTitles[recommended.chapter - 1]}</strong><p>{recommended.practice ? recommended.wrong ? `先重做本章 ${recommended.wrong} 道错题，再完成案例。` : "继续完成深度研读或章节案例。" : "先完成本章综合练习，建立第一条掌握度记录。"}</p><a href={`${baseUrl}chapters/${recommended.token}/`}>开始建议任务 →</a></aside></header>
       <div className="mastery-grid">{chapterMastery.map((item) => <a href={`${baseUrl}chapters/${item.token}/`} key={item.token} style={{ "--mastery": `${item.mastery}%` } as React.CSSProperties}><small>第 {item.chapter} 章</small><strong>{item.mastery}%</strong><span>{chapterTitles[item.chapter - 1]}</span><i><b /></i><em>{item.practice ? "练习✓" : "练习—"} · {item.deep ? "研读✓" : "研读—"} · {item.chapterCase ? "案例✓" : "案例—"}</em></a>)}</div>
       <p className="mastery-note">掌握度为本地学习指标：综合练习占 55%，深度研读占 25%，章节案例占 20%；未订正错题会适度扣分。它不是学术能力认证。</p>
     </section>
-    <section className="progress-list">
-      <div className="progress-list-title"><h2>最近记录</h2>{entries[0] && <a href={hrefFor(entries[0][0], baseUrl)}>继续上次学习 →</a>}</div>
-      {completed === 0 ? <div className="empty-state"><span>卷</span><p>还没有学习记录。完成任意章节综合练习、研读案例或互动实验，就会形成第一条档案。</p></div> : entries.slice(0, 10).map(([id, item]) => <article key={id}><div><strong>{item.title ?? names[id] ?? id}</strong><small>{new Date(item.updatedAt).toLocaleDateString("zh-CN")}</small></div><span>{item.score} / {item.total}</span><a href={hrefFor(id, baseUrl)}>继续</a></article>)}
-    </section>
+    <LearningPortfolio baseUrl={baseUrl} progress={progress} />
     <section className="wrongbook-panel">
       <header><div><p className="mini-label">Wrong book</p><h2>错题本</h2></div><strong>{wrongItems.length}</strong></header>
       {wrongItems.length ? wrongItems.slice(0, 8).map((item) => <article key={item.id}><div><small>第 {item.chapter} 章 · {item.type} · 错误 {item.attempts} 次 {dueItems.some((due) => due.id === item.id) ? "· 今日应复习" : "· 等待间隔复习"}</small><h3>{item.prompt}</h3><p>{item.explanation}</p></div><a href={`${baseUrl}chapters/ch${String(item.chapter).padStart(2, "0")}/#check`}>返回重做 →</a></article>) : <p className="wrong-empty">暂时没有错题。答错的结构化题目会自动进入这里；重新答对后自动移出。</p>}
     </section>
     <section className="archive-tools" id="archive">
       <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>统一备份进度、错题、研读勾选、章节复盘、札记、收藏和最近浏览；不包含账号或设备信息。</p></div>
-      <div><button onClick={exportMarkdownReport}>生成学习报告 .md</button><button onClick={exportArchive}>备份数据 .json</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
+      <div><button onClick={exportMarkdownReport}>生成活动报告 .md</button><button onClick={exportArchive}>备份数据 .json</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
       {notice && <p className="archive-notice" role="status">{notice}</p>}
     </section>
   </div>;

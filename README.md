@@ -18,6 +18,7 @@
 
 - 七条学习路径、十四章导读与覆盖矩阵
 - 十四章学习地图、三档预计用时、六步任务轨迹与章末复盘导出
+- 十四章个人成果册、六维学习证据画像、待追问题索引与完整成果报告
 - 143 个结构化学习单元、176 个独立概念词条与 98 条有证据关系
 - 134 道九题型练习、十四章深度研读、九项旗舰实验与十五个章节案例
 - 支持同义入口、近似纠错、相关度排序和复核状态筛选的全站搜索
@@ -45,6 +46,7 @@
 - 使用指南：https://jennifer-qj.github.io/wenxianxue-lab/guide/
 - 更新日志与开放数据：https://jennifer-qj.github.io/wenxianxue-lab/updates/
 - 个人学习工作台：https://jennifer-qj.github.io/wenxianxue-lab/notebook/
+- 十四章个人成果册：https://jennifer-qj.github.io/wenxianxue-lab/progress/#portfolio
 - 学术内容审计：https://jennifer-qj.github.io/wenxianxue-lab/audit/
 - 参与共校：https://jennifer-qj.github.io/wenxianxue-lab/contribute/
 - 纸本复核工作台：https://jennifer-qj.github.io/wenxianxue-lab/review/ch02/

@@ -6,9 +6,10 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
 <BaseLayout title="学习进度" active="progress">
   <header class="page-hero container">
-    <p class="eyebrow">Your learning archive</p>
-    <h1 class="display-title">只属于这台设备的<em>学习档案</em></h1>
-    <p>不需要注册或登录。完成实验、测验与学习单元后，记录只保存在当前浏览器中，不上传个人信息。</p>
+    <p class="eyebrow">Your learning archive · Your portfolio</p>
+    <h1 class="display-title">让学习记录逐渐成为<em>个人成果</em></h1>
+    <p>不需要注册或登录。这里把实验、测验、章节任务与复盘收束成一份只属于当前浏览器的学习档案和阶段成果册。</p>
+    <nav class="page-shortcuts" aria-label="学习档案页快捷入口"><a href="#portfolio">查看十四章成果册</a><a href="#archive">备份或导出档案</a></nav>
   </header>
   <section class="container dashboard-area">
     <ProgressDashboard baseUrl={base} client:load />
@@ -21,7 +22,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 </BaseLayout>
 
 <style>
-  .page-hero{padding:7rem 0 4rem}.page-hero>p:last-child{max-width:44rem;color:var(--muted)}
+  .page-hero{padding:7rem 0 4rem}.page-hero>p{max-width:48rem;color:var(--muted)}.page-hero .eyebrow{color:var(--cinnabar)}.page-shortcuts{display:flex;gap:.6rem;margin-top:1.5rem}.page-shortcuts a{padding:.6rem .9rem;border:1px solid var(--ink);border-radius:999px;color:var(--ink);font-size:.72rem;text-decoration:none}.page-shortcuts a:first-child{color:#fff;border-color:#28312c;background:#28312c}
   .dashboard-area{padding-bottom:6rem}.privacy-note{margin-top:2rem;padding:2rem;display:grid;grid-template-columns:auto 1fr auto;gap:2rem;align-items:center;border:1px solid var(--line);background:#eae0d0}.privacy-note strong{font-family:var(--serif)}.privacy-note p{margin:0;color:var(--muted)}
-  @media(max-width:720px){.privacy-note{grid-template-columns:1fr}}
+  @media(max-width:720px){.privacy-note{grid-template-columns:1fr}.page-shortcuts{align-items:flex-start;flex-direction:column}}
 </style>

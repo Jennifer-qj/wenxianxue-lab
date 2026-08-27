@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.5.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.6.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -215,5 +215,20 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("version: 3");
     expect(progress).toContain("{gameCount}/9");
     expect(progress).toContain("const totalActivities = 54");
+  });
+
+  it("将十四章本地记录整理成可解释、可导出的个人成果册", () => {
+    const portfolio = read("src/components/LearningPortfolio.tsx");
+    const progress = read("src/components/ProgressDashboard.tsx");
+    const page = read("src/pages/progress/index.astro");
+    expect(progress).toContain("<LearningPortfolio");
+    expect(page).toContain('href="#portfolio"');
+    expect(portfolio).toContain("六维学习证据画像");
+    expect(portfolio).toContain("待追问题索引");
+    expect(portfolio).toContain("十四章成果脊柱");
+    expect(portfolio).toContain("复制这段说明");
+    expect(portfolio).toContain("导出完整成果 .md");
+    expect(portfolio).toContain("不是课程成绩、能力认证或原书内容替代品");
+    expect(portfolio).toContain("任务轨迹占 50%");
   });
 });

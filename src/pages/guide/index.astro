@@ -8,7 +8,7 @@ const steps = [
   { n: "03", title: "把概念连起来", text: "在知识图谱选择起点和终点，查看概念之间最短的知识路径，再进入词条细读。", href: `${base}graph/`, action: "打开知识图谱" },
   { n: "04", title: "完成一次判断", text: "在互动实验室做分类、排序、校勘或古籍鉴定案卷，把定义转化为判断过程。", href: `${base}lab/`, action: "进入互动实验室" },
   { n: "05", title: "留下自己的札记", text: "点击页面右下角“学习札记”，收藏当前页面并记录判断、疑问或待核对事项。", href: `${base}notebook/`, action: "打开个人工作台" },
-  { n: "06", title: "回看与备份", text: "进度页会给出章节掌握度、到期错题和下一步推荐；可统一导出全部本地学习档案。", href: `${base}progress/`, action: "查看学习进度" },
+  { n: "06", title: "收束、回看与备份", text: "进度页会把章节任务和复盘整理成个人成果册，同时给出到期错题、下一步推荐和完整档案备份。", href: `${base}progress/#portfolio`, action: "查看个人成果册" },
 ];
 ---
 
@@ -29,7 +29,7 @@ const steps = [
         <article><small>互动实验室</small><h3>“看懂了”但不会判断</h3><p>实验不只做选择题，还包括分类、排序、拼合、模拟、证据研判和综合案卷。</p><ol><li>先独立作答</li><li>阅读诊断反馈</li><li>带着错误返回章节</li></ol><a href={`${base}lab/`}>选择一个实验 →</a></article>
         <article><small>搜索</small><h3>我带着一个具体问题来</h3><p>搜索同时覆盖章节、学习单元、概念和实验入口，适合把网站当作个人知识索引。</p><ol><li>输入术语或问题词</li><li>观察结果所属类型</li><li>进入章节或词条</li></ol><a href={`${base}search/`}>搜索全站内容 →</a></article>
         <article><small>札记与收藏</small><h3>读过之后容易忘记</h3><p>每个页面右下角都有随身札记；个人工作台集中编辑札记、收藏和最近浏览。</p><ol><li>收藏重要页面</li><li>写下疑问与判断</li><li>导出 Markdown 复习</li></ol><a href={`${base}notebook/`}>打开个人工作台 →</a></article>
-        <article><small>学习进度</small><h3>如何知道接下来学什么</h3><p>掌握度综合练习、研读和案例完成情况，并结合错题给出下一步推荐。</p><ol><li>查看推荐章节</li><li>复习今日到期错题</li><li>定期导出学习档案</li></ol><a href={`${base}progress/`}>打开进度页 →</a></article>
+        <article><small>学习进度与成果册</small><h3>如何知道学过什么、接下来做什么</h3><p>进度页综合练习、研读和案例给出下一步推荐，并把十四章复盘整理成学习证据画像和成果报告。</p><ol><li>查看推荐章节与待追问题</li><li>检查十四章成果脊柱</li><li>导出完整成果或备份档案</li></ol><a href={`${base}progress/#portfolio`}>打开个人成果册 →</a></article>
       </div></section>
 
       <section id="records"><p class="eyebrow">03 · Local records</p><h2>学习记录、备份与隐私</h2><div class="record-flow"><span>在浏览器学习与写札记</span><i>→</i><span>仅保存到本机</span><i>→</i><span>工作台与进度页汇总</span><i>→</i><span>导出 JSON 备份</span></div><ul><li>网站不要求注册，不把学习进度、札记、章节复盘或浏览记录上传到服务器。</li><li>最近浏览仅用于在本机提供“继续学习”，最多保留 30 条。</li><li>更换浏览器、设备或清除浏览器数据时，本地记录可能丢失。</li><li>请在进度页使用“备份数据 .json”；换设备后可恢复进度、错题、札记、收藏与章节复盘。</li><li>学习档案不包含账号、设备指纹或站外浏览历史。</li></ul></section>
