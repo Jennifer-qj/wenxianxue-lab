@@ -142,7 +142,9 @@ describe("公开项目成熟度门禁", () => {
     expect(note).toContain("初读容易踩的坑");
     expect(note).toContain("这一步不能越过");
     expect(note).toContain("不作为原书引文");
-    expect(read("src/pages/chapters/[id].astro")).toContain("editorialChapters");
+    for (let chapter = 1; chapter <= 14; chapter += 1) expect(note).toContain(`ch${String(chapter).padStart(2, "0")}:`);
+    expect(note).toContain("辑佚与辨伪都在管理不完整的证据");
+    expect(read("src/pages/chapters/[id].astro")).not.toContain("editorialChapters");
   });
 
   it("共校入口携带页面证据并公开处理状态", () => {
@@ -153,5 +155,32 @@ describe("公开项目成熟度门禁", () => {
     expect(page).toContain("status: needs-evidence");
     expect(page).toContain("status: in-review");
     expect(read(".github/ISSUE_TEMPLATE/content-correction.yml")).toContain("这项依据能够证明到哪一步");
+  });
+
+  it("公开共校页读取真实 GitHub 队列并按章节形成修订索引", () => {
+    const ledger = read("src/components/CommunityLedger.tsx");
+    expect(ledger).toContain("api.github.com/repos");
+    expect(ledger).toContain("章节修订索引");
+    expect(ledger).toContain("不会用示例数据制造参与度");
+    expect(ledger).toContain("不建立用户画像");
+  });
+
+  it("进阶校勘实验要求产出校勘记与版本谱系假说", () => {
+    const studio = read("src/components/TextualCriticismStudio.tsx");
+    expect(studio).toContain("写一条可供别人复查的校勘记");
+    expect(studio).toContain("导出校勘工作单");
+    expect(studio).toContain("用共误建立版本家族");
+    expect(studio).toContain("当前信心");
+    expect(studio).not.toContain('type="radio"');
+  });
+
+  it("学习单元公开机器标识、来源、复核等级与版本身份", () => {
+    const chapter = read("src/pages/chapters/[id].astro");
+    const endpoint = read("src/pages/data/knowledge.json.ts");
+    expect(chapter).toContain("查看这条知识的来源与修订身份");
+    expect(chapter).toContain("data-claim-id");
+    expect(endpoint).toContain('schema_version: "1.1"');
+    expect(endpoint).toContain("page_locator_status");
+    expect(endpoint).toContain("derivative_note");
   });
 });

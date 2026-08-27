@@ -8,11 +8,12 @@ type WrongItem = { id: string; chapter: number; type: string; prompt: string; ex
 const names: Record<string, string> = {
   "version-detective": "版本鉴定侦探", "four-fold": "四部分类挑战", "collation-clinic": "校勘诊所",
   "carrier-museum": "载体博物馆", "binding-puzzle": "装帧演变拼图", "leishu-congshu": "类书与丛书分拣",
+  "collation-workbench": "校勘工作台", "version-stemma": "版本谱系推理",
   "ch01-research-workbench": "第一章·研究问题装配台",
   "rare-book-dossier": "古籍鉴定综合案卷",
 };
-const gameIds = new Set(["version-detective", "four-fold", "collation-clinic", "carrier-museum", "binding-puzzle", "leishu-congshu"]);
-const totalActivities = 51; // 14 章综合练习 + 14 章研读 + 6 项旗舰实验 + 15 个案例 + 1 个研究问题工作台 + 1 个综合案卷
+const gameIds = new Set(["version-detective", "four-fold", "collation-clinic", "carrier-museum", "binding-puzzle", "leishu-congshu", "collation-workbench", "version-stemma"]);
+const totalActivities = 53; // 14 章综合练习 + 14 章研读 + 8 项技能实验 + 15 个案例 + 1 个研究问题工作台 + 1 个综合案卷
 const chapterTitles = ["文献与文献学", "文献的载体", "文献的形成与流布", "文献的收藏与散佚", "文献的版本", "文献的校勘", "文献目录", "辑佚与辨伪", "类书与丛书", "地方志与家谱", "总集与别集", "出土文献（上）", "出土文献（下）", "敦煌文献"];
 
 function safeRead<T>(key: string, fallback: T): T {

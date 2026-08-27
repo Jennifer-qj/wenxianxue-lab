@@ -8,7 +8,7 @@ import ChapterSignature from "../../components/ChapterSignature.astro";
 import ChapterReadingNote from "../../components/ChapterReadingNote.astro";
 import { chapters, learningPaths } from "../../data/site";
 import { getLesson, lessons } from "../../data/lessons";
-import { EDITION } from "../../consts";
+import { EDITION, PROJECT_RELEASE } from "../../consts";
 import { getCollection } from "astro:content";
 
 export function getStaticPaths() {
@@ -32,7 +32,6 @@ const structuredConcepts = conceptEntries.flatMap((entry) => entry.data.items).f
 const structuredQuizzes = quizEntries.flatMap((entry) => entry.data.items).filter((quiz) => quiz.chapter === chapterIndex + 1);
 const deepDive = deepDiveEntries.flatMap((entry) => entry.data.items).find((study) => study.chapter === chapterIndex + 1);
 const statusLabels = { not_started: "未开始", drafting: "整理中", pending_review: "待复核", reviewed: "已复核", verified: "已核验" } as const;
-const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
 ---
 
 <BaseLayout title={`${chapter.number} ${chapter.title}`} active="paths">
@@ -63,7 +62,7 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
       <a href="#overview">导读</a>
       {["ch01", "ch05", "ch07"].includes(chapterId) && <a href="#signature">本章专属入口</a>}
       {chapterUnits.length > 0 && <a href="#learning-units">结构化学习单元</a>}
-      {editorialChapters.includes(chapterId) && <a href="#reading-note">我的章节旁注</a>}
+      <a href="#reading-note">我的章节旁注</a>
       {deepDive && <a href="#deep-dive">案例研读工作台</a>}
       {chapterId === "ch01" && <a href="#workbench">研究问题装配台</a>}
       {lesson.concepts.map((concept, index) => <a href={`#concept-${index + 1}`}>{String(index + 1).padStart(2, "0")} {concept.title}</a>)}
@@ -100,7 +99,7 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
           </div>
           <div class="unit-list">
             {chapterUnits.map((unit, index) => (
-              <article id={unit.id}>
+              <article id={unit.id} data-claim-id={unit.id} data-review-status={unit.status} data-content-kind="educational-summary">
                 <div class="unit-meta"><span>{String(index + 1).padStart(2, "0")}</span><small>{statusLabels[unit.status]}</small><b>{unit.status === "verified" ? `第 ${unit.page_start}${unit.page_end && unit.page_end !== unit.page_start ? `—${unit.page_end}` : ""} 页` : "页码待纸本核验"}</b></div>
                 <div>
                   <h3>{unit.subsection ?? unit.section}</h3>
@@ -111,7 +110,18 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
                   </dl>
                   <div class="unit-tags"><span>原书目录锚点</span><span>项目原创概括</span><span>{statusLabels[unit.status]}</span><span>{unit.concept_ids.length} 个概念</span><span>{unit.quiz_ids.length} 道题</span><span>{unit.lab_ids.length} 个实验</span></div>
                   <div class="unit-concepts">{unit.concept_ids.map((id) => { const item = structuredConcepts.find((concept) => concept.id === id) ?? conceptEntries.flatMap((entry) => entry.data.items).find((concept) => concept.id === id); return <a href={`${base}concepts/${id}/`}>{item?.label ?? id}</a>; })}</div>
-                  <div class="unit-actions"><a href={`https://github.com/Jennifer-qj/wenxianxue-lab/commits/main/content/outline/${chapterId}.yaml`} target="_blank" rel="noreferrer">修改历史 ↗</a><a href={`https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?template=content-correction.yml&title=${encodeURIComponent(`[内容纠错] ${chapter.number} · ${unit.subsection ?? unit.section}`)}`} target="_blank" rel="noreferrer">反馈此单元 ↗</a></div>
+                  <details class="unit-provenance">
+                    <summary><span>查看这条知识的来源与修订身份</span><small>{unit.id}</small></summary>
+                    <dl>
+                      <div><dt>内容性质</dt><dd>依据原书章节结构制作的项目原创学习概括</dd></div>
+                      <div><dt>参考版本</dt><dd>{EDITION.publisher} {EDITION.year} 年修订本</dd></div>
+                      <div><dt>纸本定位</dt><dd>{unit.status === "verified" ? `第 ${unit.page_start}${unit.page_end && unit.page_end !== unit.page_start ? `—${unit.page_end}` : ""} 页，已核验` : "候选位置已经记录；精确页码等待纸本逐条核验"}</dd></div>
+                      <div><dt>复核等级</dt><dd>{statusLabels[unit.status]}；不能作为原书逐字引文</dd></div>
+                      <div><dt>当前版本</dt><dd>v{PROJECT_RELEASE.version} · {PROJECT_RELEASE.updated}</dd></div>
+                      <div><dt>机器标识</dt><dd><code>{unit.id}</code></dd></div>
+                    </dl>
+                    <nav><a href={`https://github.com/Jennifer-qj/wenxianxue-lab/blob/main/content/outline/${chapterId}.yaml`} target="_blank" rel="noreferrer">查看结构化记录 ↗</a><a href={`https://github.com/Jennifer-qj/wenxianxue-lab/commits/main/content/outline/${chapterId}.yaml`} target="_blank" rel="noreferrer">查看修改历史 ↗</a><a href={`https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?template=content-correction.yml&title=${encodeURIComponent(`[内容纠错] ${chapter.number} · ${unit.subsection ?? unit.section}`)}`} target="_blank" rel="noreferrer">反馈此单元 ↗</a></nav>
+                  </details>
                 </div>
               </article>
             ))}
@@ -119,7 +129,7 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
         </section>
       )}
 
-      {editorialChapters.includes(chapterId) && <ChapterReadingNote chapterId={chapterId} baseUrl={base} />}
+      <ChapterReadingNote chapterId={chapterId} baseUrl={base} />
 
       {chapterId === "ch01" && (
         <section id="workbench" class="workbench-section">
@@ -217,6 +227,7 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
   .unit-intro{display:grid;grid-template-columns:.7fr 1.3fr;gap:2rem;margin-bottom:1.5rem}.unit-intro h2,.workbench-section>h2{margin:.2rem 0;font-family:var(--serif);font-size:2rem}.unit-intro>p,.workbench-lead{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}.unit-list{border-top:1px solid var(--line)}.unit-list article{display:grid;grid-template-columns:90px 1fr;gap:1.2rem;padding:1.3rem 0;border-bottom:1px solid var(--line)}.unit-meta span{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.6rem}.unit-meta small{display:inline-block;margin-top:.35rem;padding:.16rem .42rem;border-radius:99px;color:#7a5b2d;background:#eee1c5;font-size:.62rem}.unit-list h3{margin:0;font-family:var(--serif);font-size:1.25rem}.unit-question{margin:.3rem 0 1rem;color:var(--cinnabar);font-family:var(--serif)}.unit-list dl{display:grid;grid-template-columns:1fr 1fr;gap:.7rem;margin:0}.unit-list dl div{padding:.7rem;border-left:2px solid #a77734;background:rgba(255,255,255,.35)}.unit-list dl div:last-child{border-color:var(--cinnabar)}.unit-list dt{color:var(--muted);font-size:.68rem}.unit-list dd{margin:.25rem 0 0;color:var(--muted);font-size:.8rem;line-height:1.65}.unit-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.75rem}.unit-tags span{padding:.15rem .45rem;border:1px solid var(--line);color:var(--muted);font-size:.68rem}.workbench-lead{margin-bottom:1.2rem}
   .unit-meta b{display:block;margin-top:.45rem;color:var(--muted);font-size:.67rem;font-weight:400}
   .unit-actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:.65rem;padding-top:.55rem;border-top:1px dashed var(--line)}.unit-actions a{color:var(--muted);font-size:.65rem;text-decoration:none}.unit-actions a:hover{color:var(--cinnabar)}
+  .unit-provenance{margin-top:.8rem;border-top:1px dashed var(--line)}.unit-provenance summary{display:flex;justify-content:space-between;gap:1rem;padding:.65rem 0;color:var(--muted);font-size:.68rem;cursor:pointer}.unit-provenance summary small{color:var(--cinnabar)}.unit-provenance dl{display:grid;grid-template-columns:repeat(2,1fr);gap:.45rem;margin:0;padding:.8rem;border-radius:7px;background:#e9e3d8}.unit-provenance dl div{display:grid;grid-template-columns:76px 1fr;gap:.5rem}.unit-provenance dt{color:var(--cinnabar);font-size:.62rem}.unit-provenance dd{margin:0;color:var(--muted);font-size:.65rem}.unit-provenance nav{display:flex;flex-wrap:wrap;gap:.8rem;padding:.65rem 0}.unit-provenance nav a{padding:0;color:var(--cinnabar);font-size:.65rem;text-decoration:none;white-space:normal}
   .deep-dive-heading{display:grid;grid-template-columns:.7fr 1.3fr;gap:.4rem 2rem;margin-bottom:1.5rem}.deep-dive-heading .eyebrow{grid-column:1/-1}.deep-dive-heading h2{margin:0;font-family:var(--serif);font-size:2rem}.deep-dive-heading>p:last-child{margin:0;color:var(--muted);font-size:.88rem;line-height:1.8}
   @media(max-width:800px){.hero-grid,.chapter-layout{grid-template-columns:1fr;gap:2rem}.toc{position:static;display:none}.workflow ol,.provenance{grid-template-columns:repeat(2,1fr)}}@media(max-width:560px){.section-map,.evidence-pair,.workflow ol,.provenance,:global(.check-options),.source-note,.unit-intro,.unit-list dl,.deep-dive-heading{grid-template-columns:1fr}.unit-list article{grid-template-columns:55px 1fr}.chapter-pagination{flex-direction:column}.chapter-pagination a{width:100%}}
   /* calmer chapter reading layout */
@@ -243,5 +254,5 @@ const editorialChapters = ["ch02", "ch05", "ch06", "ch08", "ch14"];
   .unit-list dl div{padding:.75rem;border:0;border-radius:6px;background:#efebe2}
   .unit-list dl div:last-child{background:#f1e6e1}
   .unit-tags span{border:0}
-  @media(max-width:800px){.chapter-layout{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr;gap:2rem}}
+  @media(max-width:800px){.chapter-layout{grid-template-columns:1fr}.hero-grid{grid-template-columns:1fr;gap:2rem}}@media(max-width:560px){.unit-provenance dl{grid-template-columns:1fr}}
 </style>

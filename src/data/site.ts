@@ -149,6 +149,8 @@ export const games: LabGame[] = [
   { id: "carrier-museum", title: "载体博物馆", description: "把物质与形制线索送回五类载体标本柜。", chapters: "第二章", status: "可体验", icon: "材" },
   { id: "binding-puzzle", title: "装帧演变拼图", description: "亲手重建卷子装至线装的学习序列。", chapters: "第二章", status: "可体验", icon: "装" },
   { id: "leishu-congshu", title: "类书还是丛书", description: "按组织单位把典籍放入正确的工具书类别。", chapters: "第九章", status: "可体验", icon: "类" },
+  { id: "collation-workbench", title: "校勘工作台", description: "为四份异文材料分配证据角色，写出可以被后来者复查的校勘记。", chapters: "第六章", status: "可体验", icon: "勘" },
+  { id: "version-stemma", title: "版本谱系推理", description: "依据共享讹误亲手连接版本家族，同时标明谱系假说的证据限度。", chapters: "第五、六章", status: "可体验", icon: "谱" },
 ];
 
 export const graphStats = [

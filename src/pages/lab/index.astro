@@ -6,6 +6,7 @@ import SkillArcade from "../../components/SkillArcade";
 import CaseGallery from "../../components/CaseGallery";
 import RareBookDossier from "../../components/RareBookDossier";
 import EvidenceCalibrationLab from "../../components/EvidenceCalibrationLab";
+import TextualCriticismStudio from "../../components/TextualCriticismStudio";
 import { getCollection } from "astro:content";
 import { games } from "../../data/site";
 
@@ -65,6 +66,13 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
   </section>
 
+  <section id="criticism-studio" class="criticism-studio-section">
+    <div class="container">
+      <div class="section-heading criticism-heading"><div><p class="eyebrow">Textual criticism studio</p><h2 class="section-title">从辨认差异，走到写出可复查的判断</h2></div><p>两项进阶实验不要求猜一个选项：你需要给材料分配证据角色、写校勘记，或亲手连接版本亲缘并说明模型的限制。</p></div>
+      <TextualCriticismStudio client:load />
+    </div>
+  </section>
+
   <section class="arcade-section">
     <div class="container">
       <div class="section-heading arcade-heading">
@@ -89,7 +97,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     <div class="section-heading">
       <div>
         <p class="eyebrow">The full collection</p>
-        <h2 class="section-title">七项旗舰实验</h2>
+        <h2 class="section-title">九项旗舰实验</h2>
       </div>
       <p>这里只展示已经可以完整操作并获得反馈的实验，不以路线图或占位卡代替交付。</p>
     </div>
@@ -115,6 +123,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .all-games{padding-block:7rem}.game-grid{display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid var(--line);border-left:1px solid var(--line)}
   .arcade-section{padding:7rem 0;background:#292a27}.arcade-heading{color:#f9f2e6}.arcade-heading p{color:#aaa59d}.calibration-section{padding:7rem 0;background:#cfc0aa}.calibration-heading{margin-bottom:2rem}.calibration-heading>p{max-width:40rem;color:var(--muted)}
   .case-gallery-section{padding:7rem 0;background:#e9dfcf}.case-gallery-heading{margin-bottom:2rem}.case-gallery-heading>p{max-width:34rem;color:var(--muted)}
+  .criticism-studio-section{padding:7rem 0;color:#f8f1e6;background:#29362f}.criticism-heading>p{max-width:39rem;color:#b9beb9}
   :global(.skill-arcade){overflow:hidden;border:1px solid rgba(255,255,255,.13);border-radius:8px;background:#f6f0e4}
   :global(.arcade-tabs){display:grid;grid-template-columns:repeat(4,1fr);gap:0;background:#20211f}:global(.arcade-tabs button){padding:1rem;text-align:left;border:0;border-right:1px solid rgba(255,255,255,.1);color:#aaa59d;background:transparent;cursor:pointer}:global(.arcade-tabs button.active){color:#fff7e9;background:#8f352b}:global(.arcade-tabs small),:global(.arcade-tabs strong){display:block}:global(.arcade-tabs small){font-size:.62rem}:global(.arcade-tabs strong){font-family:var(--serif)}
   :global(.arcade-stage){min-height:550px;padding:2rem;color:var(--ink)}:global(.arcade-stage>header){display:flex;justify-content:space-between;gap:2rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}:global(.arcade-stage>header small){color:var(--cinnabar)}:global(.arcade-stage>header h2){margin:.2rem 0;font-family:var(--serif);font-size:2rem}:global(.arcade-stage>header p){max-width:30rem;color:var(--muted)}
@@ -147,7 +156,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .featured-game,.arcade-section{background:#24302b}
   .featured-game{padding:4.5rem 0}
   .dossier-section{padding:5.5rem 0;background:#e7e0d4}
-  .all-games,.arcade-section,.case-gallery-section,.calibration-section{padding-block:5.5rem}
+  .all-games,.arcade-section,.case-gallery-section,.calibration-section,.criticism-studio-section{padding-block:5.5rem}
   .case-gallery-section{background:#ece6dc}
   .fourfold-section{padding:5.5rem 0;background:#ebe4d8}
   :global(.skill-arcade),:global(.fourfold-game),:global(.fourfold-result){border-radius:12px;box-shadow:var(--shadow)}
@@ -161,7 +170,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .game-grid article.ready{background:var(--white)}
   .game-grid article:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
   @media(max-width:560px){
-    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section,.calibration-section{padding-block:4rem}
+    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section,.calibration-section,.criticism-studio-section{padding-block:4rem}
     :global(.arcade-tabs){display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
     :global(.arcade-tabs button){min-width:148px;min-height:70px;scroll-snap-align:start}
     :global(.arcade-stage){min-height:0;padding:1.05rem}

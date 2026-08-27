@@ -1,10 +1,8 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { chapters } from "../../data/site";
-import { contributionRecords } from "../../data/community";
+import CommunityLedger from "../../components/CommunityLedger";
 const issueBase = "https://github.com/Jennifer-qj/wenxianxue-lab/issues/new";
-const accepted = contributionRecords.filter((item) => item.decision === "accepted" || item.decision === "partially_accepted");
-const contributors = new Set(accepted.map((item) => item.contributor)).size;
 const stages = [
   ["01", "发现与提交", "指出具体页面、短句或知识点，并说明问题类型。"],
   ["02", "提供依据", "给出纸本页码、书目信息或可靠研究来源，不上传扫描件。"],
@@ -36,8 +34,8 @@ const reviewStates = [
     </section>
     <section class="workflow"><p class="eyebrow">公开处理流程</p><h2>一条反馈怎样进入网站？</h2><ol>{stages.map(([number,title,text]) => <li data-step={number}><span>{number}</span><div><strong>{title}</strong><p>{text}</p></div></li>)}</ol></section>
     <section class="review-states"><header><div><p class="eyebrow">公开状态板</p><h2>提交以后，不会掉进一个看不见的邮箱</h2></div><p>每条 GitHub Issue 都可以沿以下状态移动。状态表示处理进度，不代表用投票决定学术结论。</p></header><div>{reviewStates.map(([title,description,label], index) => <article><span>{String(index + 1).padStart(2,"0")}</span><strong>{title}</strong><p>{description}</p><code>{label}</code></article>)}</div><footer><p>项目目前没有虚构处理时限。作者会在实际核对后公开结论、依据和对应版本；不同意见即使不采用，也保留在原讨论中。</p><a href="https://github.com/Jennifer-qj/wenxianxue-lab/issues" target="_blank" rel="noreferrer">查看真实公开队列 ↗</a></footer></section>
+    <CommunityLedger client:load />
     <section class="chapter-claims"><header><div><p class="eyebrow">章节认领</p><h2>从你正在读的一章开始</h2></div><p>认领不意味着独占，也不要求一次核对整章；可以只说明准备检查的范围。</p></header><div>{chapters.map((chapter) => <a data-chapter={chapter.number} href={`${issueBase}?template=review-claim.yml&title=${encodeURIComponent(`[共校认领] ${chapter.number} ${chapter.title}`)}`}><small>{chapter.number}</small><strong>{chapter.title}</strong><span>创建认领记录 ↗</span></a>)}</div></section>
-    <section class="contribution-ledger"><header><div><p class="eyebrow">贡献成果记录</p><h2>只展示真实处理完成的贡献</h2></div><div class="ledger-counts"><span><strong>{accepted.length}</strong> 已采用修订</span><span><strong>{contributors}</strong> 位公开贡献者</span></div></header>{accepted.length ? <div class="ledger-list">{accepted.map((item) => <article data-contribution={item.id}><small>{item.date} · {item.area}</small><strong>{item.summary}</strong><span>贡献者：{item.contributor} · {item.decision === "accepted" ? "已采用" : "部分采用"}{item.release ? ` · ${item.release}` : ""}</span><a href={item.issue_url}>查看证据与处理记录 ↗</a></article>)}</div> : <div class="ledger-empty"><span aria-hidden="true">〇</span><div><strong>公开贡献记录仍是空的</strong><p>这里没有用示例姓名或虚构数字制造热闹。第一条反馈经过证据核对、作者判断和实际合并后，才会出现在这里。</p></div><a href={`${issueBase}?template=content-correction.yml`}>成为第一条真实记录 ↗</a></div>}<footer><p>姓名只在贡献者明确同意后公开；匿名贡献记为“匿名读者”。未采纳意见仍保留在 GitHub 讨论中，但不计入已采用成果。</p></footer></section>
     <section class="rights"><div><p class="eyebrow">贡献与权利</p><h2>提交前请确认</h2></div><ul><li>提交内容为本人原创，或你有权提供。</li><li>不包含原书扫描件、整本自动识别稿或大段逐字转录。</li><li>同意项目在记录贡献来源的前提下整理、修改和采用反馈。</li><li>项目作者保留最终学术判断与合并决定。</li></ul></section>
     <section class="channels"><a href={`${issueBase}?template=content-correction.yml`}><small>学术内容</small><strong>报告知识、页码或关系问题</strong><span>打开内容纠错表单 ↗</span></a><a href={`${issueBase}?template=bug-report.yml`}><small>产品体验</small><strong>报告显示、操作或记录故障</strong><span>打开网站问题表单 ↗</span></a><a href={`${issueBase}?template=feature-request.yml`}><small>共同设计</small><strong>建议新功能或学习活动</strong><span>打开功能建议表单 ↗</span></a></section>
   </div>
