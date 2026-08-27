@@ -29,6 +29,7 @@ const pathReview = new Map(learningPaths.map((path) => {
       <div class="hero-actions">
         <a class="button" href={`${base}paths/`}>开始第一条学习路径 <span>→</span></a>
         <a class="button secondary" href={`${base}story/`}>先读我的制作手记</a>
+        <a class="button demo-button" href={`${base}progress/?welcome=0&portfolio=sample#portfolio`}>先看一份示例成果</a>
       </div>
       <p class="hero-boundary">这里不替代原书，也不把尚未核对的草稿装成定论。它记录我怎样读、怎样拆、怎样改。</p>
     </div>
@@ -179,6 +180,7 @@ const pathReview = new Map(learningPaths.map((path) => {
   .hero h1{font-size:clamp(2.7rem,4.7vw,4.65rem);line-height:1.17;text-wrap:balance}
   .hero-lead { max-width: 40rem; margin:1.7rem 0; color:var(--muted); font-family:var(--serif); font-size:1.04rem; line-height:1.95; }
   .hero-actions { display:flex; gap:.8rem; flex-wrap:wrap; }
+  .hero-actions .demo-button{color:var(--cinnabar);border-color:color-mix(in srgb,var(--cinnabar) 55%,var(--line));background:color-mix(in srgb,var(--white) 60%,transparent)}
   .hero-boundary{max-width:39rem;margin-top:1.35rem;padding-left:.8rem;border-left:2px solid color-mix(in srgb,var(--cinnabar) 60%,transparent);color:var(--muted);font-size:.75rem;line-height:1.7}
   .hero-visual{position:relative;margin:auto;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--white) 90%,transparent);box-shadow:var(--shadow)}
   .hero-visual::before{content:"";position:absolute;inset:8px;border:1px solid rgba(163,59,43,.08);border-radius:7px;pointer-events:none}

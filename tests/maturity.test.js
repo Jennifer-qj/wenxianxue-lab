@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.6.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.6.1"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -230,5 +230,21 @@ describe("公开项目成熟度门禁", () => {
     expect(portfolio).toContain("导出完整成果 .md");
     expect(portfolio).toContain("不是课程成绩、能力认证或原书内容替代品");
     expect(portfolio).toContain("任务轨迹占 50%");
+  });
+
+  it("为公开访客提供不污染个人档案的只读示例成果", () => {
+    const portfolio = read("src/components/LearningPortfolio.tsx");
+    const sample = read("src/data/samplePortfolio.ts");
+    const home = read("src/pages/index.astro");
+    expect(portfolio).toContain('get("portfolio") === "sample"');
+    expect(portfolio).toContain("我的学习记录");
+    expect(portfolio).toContain("查看示例成果");
+    expect(portfolio).toContain("不会写入、覆盖或混入你的本地档案");
+    expect(portfolio).toContain("window.history.replaceState");
+    expect(portfolio).not.toContain("localStorage.setItem");
+    expect(sample.match(/reflection:/g)?.length).toBe(6);
+    expect(sample).toContain("更通顺的文本不一定更早或更可靠");
+    expect(home).toContain("先看一份示例成果");
+    expect(home).toContain("portfolio=sample#portfolio");
   });
 });

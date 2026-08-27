@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import { chapters } from "../data/site";
+import { sampleJourneys, sampleProgress } from "../data/samplePortfolio";
 import "./LearningPortfolio.css";
 
 type ProgressItem = { completed?: boolean; score?: number; total?: number; updatedAt?: string };
@@ -39,20 +40,25 @@ function downloadMarkdown(filename: string, markdown: string) {
 
 export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: string; progress: ProgressArchive }) {
   const [journeys, setJourneys] = useState<JourneyArchive>({});
+  const [viewMode, setViewMode] = useState<"personal" | "sample">("personal");
   const [notice, setNotice] = useState("");
 
   useEffect(() => {
     const refresh = () => setJourneys(readJourneys());
     refresh();
+    if (new URLSearchParams(window.location.search).get("portfolio") === "sample") setViewMode("sample");
     window.addEventListener("wxlab-chapter-journey-updated", refresh);
     return () => window.removeEventListener("wxlab-chapter-journey-updated", refresh);
   }, []);
 
+  const activeJourneys = viewMode === "sample" ? sampleJourneys as unknown as JourneyArchive : journeys;
+  const activeProgress = viewMode === "sample" ? sampleProgress as unknown as ProgressArchive : progress;
+
   const chapterEvidence = useMemo(() => chapters.map((chapter, index) => {
-    const record = journeys[chapter.id] ?? {};
+    const record = activeJourneys[chapter.id] ?? {};
     const reflection = record.reflection ?? {};
-    const practice = progress[`${chapter.id}-structured-practice`];
-    const deep = Object.entries(progress).some(([id, item]) => id.startsWith(`deep-${chapter.id}`) && item.completed);
+    const practice = activeProgress[`${chapter.id}-structured-practice`];
+    const deep = Object.entries(activeProgress).some(([id, item]) => id.startsWith(`deep-${chapter.id}`) && item.completed);
     const completed = new Set((record.completed ?? []).filter((id) => taskIds.includes(id)));
     if (practice?.completed) completed.add("practice");
     if (deep) completed.add("evidence");
@@ -62,7 +68,7 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
     const practicePercent = practice?.completed && practice.total ? Math.round((practice.score ?? 0) / practice.total * 100) : 0;
     const evidenceScore = Math.round(routePercent * .5 + practicePercent * .3 + (deep ? 20 : 0));
     return { chapter, index: index + 1, record, reflection, completed, reflected, deep, practice, routePercent, practicePercent, evidenceScore };
-  }), [journeys, progress]);
+  }), [activeJourneys, activeProgress]);
 
   const profiles = capabilityTracks.map((track) => {
     const items = track.chapters.map((chapter) => chapterEvidence[chapter - 1]);
@@ -76,7 +82,9 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
   const strongest = [...profiles].sort((a, b) => b.score - a.score)[0];
   const hasEvidence = strongest.score > 0;
   const readiness = reflectedCount === 14 ? "完整成果" : reflectedCount >= 10 ? "系统成形" : reflectedCount >= 5 ? "持续生长" : reflectedCount ? "已经起笔" : "等待第一笔";
-  const projectStatement = `我正在通过“文献学实验室”把《文献学概要》的阅读转化为可核验的数字学习过程。目前已完成 ${routeCount} 章完整任务路线、${reflectedCount} 章结构化复盘，并留下 ${questions.length} 个待追问题。网站用章节地图、证据实践和本地学习档案连接阅读与判断；这些记录是阶段性学习证据，不替代纸本核验。`;
+  const projectStatement = viewMode === "sample"
+    ? `这份演示档案展示了一位读者怎样通过“文献学实验室”留下阶段性学习证据：完成 ${routeCount} 章完整任务路线、${reflectedCount} 章结构化复盘，并保留 ${questions.length} 个待追问题。它特意保留空白、弱项和未决问题，用来说明成果册怎样生成，不代表真实用户或能力认证。`
+    : `我正在通过“文献学实验室”把《文献学概要》的阅读转化为可核验的数字学习过程。目前已完成 ${routeCount} 章完整任务路线、${reflectedCount} 章结构化复盘，并留下 ${questions.length} 个待追问题。网站用章节地图、证据实践和本地学习档案连接阅读与判断；这些记录是阶段性学习证据，不替代纸本核验。`;
 
   const radarPoints = profiles.map((profile, index) => {
     const angle = (-90 + index * 60) * Math.PI / 180;
@@ -98,10 +106,19 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
     window.setTimeout(() => setNotice(""), 2000);
   }
 
+  function selectView(next: "personal" | "sample") {
+    setViewMode(next);
+    const url = new URL(window.location.href);
+    if (next === "sample") url.searchParams.set("portfolio", "sample"); else url.searchParams.delete("portfolio");
+    window.history.replaceState({}, "", `${url.pathname}${url.search}#portfolio`);
+    setNotice(next === "sample" ? "正在查看只读示例，个人记录没有改变" : "已经回到你的本地记录");
+    window.setTimeout(() => setNotice(""), 2200);
+  }
+
   function exportPortfolio() {
     const today = new Date();
     const lines = [
-      "# 文献学实验室 · 我的十四章学习成果",
+      `# 文献学实验室 · ${viewMode === "sample" ? "示例" : "我的"}十四章学习成果`,
       "",
       `- 生成日期：${today.toLocaleDateString("zh-CN")}`,
       `- 完整任务路线：${routeCount} / 14`,
@@ -109,7 +126,7 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
       `- 待追问题：${questions.length}`,
       `- 阶段状态：${readiness}`,
       "",
-      "> 这是一份由本地学习记录生成的阶段成果，不是课程成绩、能力认证或原书内容替代品。正式引用请回到纸本与可靠学术资料核验。",
+      viewMode === "sample" ? "> 这是网站内置的演示档案，不来自真实用户，也不会写入浏览器学习记录。" : "> 这是一份由本地学习记录生成的阶段成果，不是课程成绩、能力认证或原书内容替代品。正式引用请回到纸本与可靠学术资料核验。",
       "",
       "## 阶段成果说明",
       "",
@@ -154,25 +171,29 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
       "---",
       "由“文献学实验室”在本地生成：https://jennifer-qj.github.io/wenxianxue-lab/",
     ];
-    downloadMarkdown(`文献学实验室-十四章学习成果-${today.toISOString().slice(0, 10)}.md`, lines.join("\n"));
-    setNotice("完整学习成果已导出");
+    downloadMarkdown(`文献学实验室-${viewMode === "sample" ? "示例" : "十四章"}学习成果-${today.toISOString().slice(0, 10)}.md`, lines.join("\n"));
+    setNotice(viewMode === "sample" ? "只读示例报告已导出" : "完整学习成果已导出");
     window.setTimeout(() => setNotice(""), 2000);
   }
 
   return <section className="learning-portfolio" id="portfolio">
     <header className="portfolio-heading">
-      <div><p className="mini-label">Personal portfolio · 本地生成</p><h2>把十四次阅读，收束成一份阶段成果</h2><p>成果册只读取当前浏览器中的学习记录。它呈现做过什么、留下什么和还要查什么，不替你宣称“已经掌握”。</p></div>
-      <div className="portfolio-status"><small>当前阶段</small><strong>{readiness}</strong><span>{reflectedCount}/14 章形成复盘</span></div>
+      <div><p className="mini-label">Personal portfolio · {viewMode === "sample" ? "只读演示" : "本地生成"}</p><h2>把十四次阅读，收束成一份阶段成果</h2><p>{viewMode === "sample" ? "这份示例故意保留未读章节、薄弱方向和待追问题，让第一次访问的人看到成果怎样从真实学习动作中长出来。" : "成果册只读取当前浏览器中的学习记录。它呈现做过什么、留下什么和还要查什么，不替你宣称“已经掌握”。"}</p></div>
+      <div className={`portfolio-status ${viewMode === "sample" ? "sample" : ""}`}><small>{viewMode === "sample" ? "示例阶段" : "当前阶段"}</small><strong>{readiness}</strong><span>{reflectedCount}/14 章形成复盘</span></div>
     </header>
 
-    <div className="portfolio-metrics" aria-label="成果册概览">
+    <div className="portfolio-switcher" aria-label="选择成果册数据"><div role="group"><button className={viewMode === "personal" ? "active" : ""} aria-pressed={viewMode === "personal"} onClick={() => selectView("personal")}>我的学习记录</button><button className={viewMode === "sample" ? "active" : ""} aria-pressed={viewMode === "sample"} onClick={() => selectView("sample")}>查看示例成果</button></div><p><b>{viewMode === "sample" ? "只读示例" : "隐私说明"}</b>{viewMode === "sample" ? "示例数据内置在网站中，不会写入、覆盖或混入你的本地档案。" : "当前视图只读取这台设备的浏览器记录，不上传札记或学习进度。"}</p></div>
+
+    <div className="portfolio-metrics" aria-label="成果册概览" key={`metrics-${viewMode}`}>
       <article><small>完整路线</small><strong>{routeCount}<i>/14</i></strong><span>六步任务全部留痕</span></article>
       <article><small>章节复盘</small><strong>{reflectedCount}<i>/14</i></strong><span>认识、边界与问题齐备</span></article>
       <article><small>待追问题</small><strong>{questions.length}</strong><span>下一轮纸本核验入口</span></article>
       <article><small>证据最充足</small><strong className="metric-label">{hasEvidence ? strongest.label : "尚未形成"}</strong><span>{hasEvidence ? `当前覆盖 ${strongest.score}%` : "完成任务后自动更新"}</span></article>
     </div>
 
-    <div className="portfolio-analysis">
+    <div className="portfolio-provenance" aria-label="成果生成过程"><span><b>01</b>章节任务留下动作记录</span><i>→</i><span><b>02</b>练习与研读形成证据</span><i>→</i><span><b>03</b>三栏复盘保留判断边界</span><i>→</i><span><b>04</b>跨章汇总生成阶段成果</span></div>
+
+    <div className="portfolio-analysis" key={`analysis-${viewMode}`}>
       <article className="capability-radar">
         <header><small>六维学习证据画像</small><h3>哪些方向已经留下较多证据？</h3></header>
         <div className="radar-layout">
@@ -193,16 +214,16 @@ export default function LearningPortfolio({ baseUrl, progress }: { baseUrl: stri
       </article>
     </div>
 
-    <div className="chapter-spine">
+    <div className="chapter-spine" key={`spine-${viewMode}`}>
       <header><div><small>Fourteen chapter outputs</small><h3>十四章成果脊柱</h3></div><span>点击任一章继续补写</span></header>
       <div>{chapterEvidence.map((item) => <a key={item.chapter.id} href={`${baseUrl}chapters/${item.chapter.id}/#chapter-review`} style={{ "--chapter-progress": `${item.routePercent}%` } as React.CSSProperties}>
         <small>{String(item.index).padStart(2, "0")}</small><strong>{item.chapter.title}</strong><p>{(item.reflection.takeaway ?? "").trim() || "尚未形成本章认识"}</p><i><b /></i><span>{item.completed.size}/6 任务 · {item.reflected ? "复盘完成" : "待复盘"}</span>
       </a>)}</div>
     </div>
 
-    <footer className="portfolio-export">
-      <div><small>可复用的阶段说明</small><p>{projectStatement}</p></div>
-      <div><button onClick={copyStatement}>复制这段说明</button><button className="primary" onClick={exportPortfolio}>导出完整成果 .md</button></div>
+    <footer className="portfolio-export" key={`export-${viewMode}`}>
+      <div><small>{viewMode === "sample" ? "示例成果说明 · 非真实用户" : "可复用的阶段说明"}</small><p>{projectStatement}</p></div>
+      <div><button onClick={copyStatement}>{viewMode === "sample" ? "复制示例说明" : "复制这段说明"}</button><button className="primary" onClick={exportPortfolio}>{viewMode === "sample" ? "导出示例报告 .md" : "导出完整成果 .md"}</button></div>
       {notice && <span role="status">{notice}</span>}
     </footer>
   </section>;
