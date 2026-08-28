@@ -1,0 +1,20 @@
+.usability-debrief {
+  margin-top: 3rem;
+  padding: 1.5rem;
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: #f4ecdf;
+}
+
+.usability-debrief header { max-width: 760px; }
+.usability-debrief header small { color: var(--cinnabar); letter-spacing: .1em; }
+.usability-debrief h2 { margin: .25rem 0; font-family: var(--serif); font-size: 1.7rem; }
+.usability-debrief header p { color: var(--muted); font-size: .78rem; }
+.usability-debrief > div { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.2rem; }
+.usability-debrief label span { display: block; margin-bottom: .35rem; font-size: .72rem; font-weight: 700; }
+.usability-debrief textarea { box-sizing: border-box; width: 100%; min-height: 92px; padding: .7rem; border: 1px solid #cfc4b3; border-radius: 7px; background: #fffaf0; resize: vertical; font: inherit; }
+.usability-debrief textarea:focus { outline: 2px solid rgba(166, 58, 43, .22); border-color: var(--cinnabar); }
+
+@media (max-width: 850px) {
+  .usability-debrief > div { grid-template-columns: 1fr; }
+}

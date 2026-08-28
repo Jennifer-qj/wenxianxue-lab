@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.7.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.8.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -271,5 +271,35 @@ describe("公开项目成熟度门禁", () => {
     expect(detective).toContain("撤回并修改");
     expect(detective).toContain("导出研判单 .md");
     expect(detective).toContain("高信心偏差提醒");
+  });
+
+  it("四部分类挑战先声明框架，再处理边界并导出判断", () => {
+    const catalog = read("src/components/FourFoldChallenge.tsx");
+    expect(catalog).toContain("确定框架");
+    expect(catalog).toContain("按现代学科分区");
+    expect(catalog).toContain("按传统四部著录");
+    expect(catalog).toContain("边界书 · 《梦溪笔谈》");
+    expect(catalog).toContain("说明最终依据和仍需核对的地方");
+    expect(catalog).toContain("撤回并修改");
+    expect(catalog).toContain("导出目录判断单 .md");
+  });
+
+  it("章节案例把点击操作转成有限度判断，而非自动满分", () => {
+    const gallery = read("src/components/CaseGallery.tsx");
+    expect(gallery).toContain("把操作转成自己的判断");
+    expect(gallery).toContain("但现有材料还不能证明");
+    expect(gallery).toContain('type="range"');
+    expect(gallery).toContain("这个数字表示本轮任务覆盖情况");
+    expect(gallery).toContain("撤回并修改");
+    expect(gallery).not.toContain("saveCase(lab, 1, 1)");
+  });
+
+  it("真实读者测试同时记录任务行为与结束访谈", () => {
+    const usability = read("src/components/UsabilitySession.tsx");
+    expect(usability).toContain("理解项目定位");
+    expect(read("src/pages/usability/index.astro")).toContain("七个任务");
+    expect(usability).toContain("结束访谈");
+    expect(usability).toContain("哪里最困惑、最像机器生成或最不可信");
+    expect(read("docs/试用邀请模板.md")).toContain("不用照顾我的感受");
   });
 });

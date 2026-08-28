@@ -12,7 +12,7 @@ export const REVIEW_STATUS = ["not_started", "drafting", "pending_review", "revi
 
 /** 公开页面与项目材料共用的版本身份。 */
 export const PROJECT_RELEASE = {
-  version: "0.7.0",
-  label: "导览与推理版",
+  version: "0.8.0",
+  label: "公开试用版",
   updated: "2026-08-28",
 } as const;
