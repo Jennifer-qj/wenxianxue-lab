@@ -9,7 +9,7 @@ import { PROJECT_RELEASE } from "../consts";
 interface Props {
   title?: string;
   description?: string;
-  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "guide" | "about" | "notebook";
+  active?: "home" | "paths" | "graph" | "lab" | "progress" | "search" | "guide" | "tour" | "about" | "notebook";
 }
 
 const {
@@ -31,7 +31,7 @@ const pageType: LibraryPageType = Astro.url.pathname.includes("/chapters/") ? "c
   : Astro.url.pathname.includes("/concepts/") ? "concept"
   : Astro.url.pathname.includes("/lab/") ? "lab"
   : Astro.url.pathname.includes("/paths/") ? "path"
-  : Astro.url.pathname.includes("/guide/") ? "guide" : "other";
+  : Astro.url.pathname.includes("/guide/") || Astro.url.pathname.includes("/tour/") ? "guide" : "other";
 const ogImage = new URL(`${base}og-cover.png`, Astro.site ?? Astro.url.origin);
 const structuredData = {
   "@context": "https://schema.org",
@@ -97,6 +97,7 @@ const structuredData = {
             <summary>更多 <span aria-hidden="true">⌄</span></summary>
             <div>
               <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}><span>札记</span><small>收藏、批注与最近浏览</small></a>
+              <a href={`${base}tour/`} aria-current={active === "tour" ? "page" : undefined}><span>十分钟导览</span><small>亲手走完一次学习闭环</small></a>
               <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}><span>使用指南</span><small>第一次来，从这里开始</small></a>
               <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}><span>关于项目</span><small>方法、版权与作者说明</small></a>
               <a href={`${base}showcase/`}><span>项目展示</span><small>三分钟演示与成果证据</small></a>
@@ -124,6 +125,7 @@ const structuredData = {
         <a href={`${base}story/`}>作者手记</a>
         <a href={`${base}about/`}>方法与版权</a>
         <a href={`${base}guide/`}>使用指南</a>
+        <a href={`${base}tour/`}>十分钟导览</a>
         <a href={`${base}updates/`}>更新日志</a>
         <a href={`${base}audit/`}>内容审计</a>
         <a href={`${base}showcase/`}>项目展示</a>

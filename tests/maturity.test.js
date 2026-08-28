@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.6.1"');
+    expect(read("src/consts.ts")).toContain('version: "0.7.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -246,5 +246,30 @@ describe("公开项目成熟度门禁", () => {
     expect(sample).toContain("更通顺的文本不一定更早或更可靠");
     expect(home).toContain("先看一份示例成果");
     expect(home).toContain("portfolio=sample#portfolio");
+  });
+
+  it("提供不离开页面的十分钟项目导览，并避免首次弹窗遮挡", () => {
+    const tour = read("src/components/ProjectTour.tsx");
+    const page = read("src/pages/tour/index.astro");
+    expect(page).toContain("<ProjectTour");
+    expect(page).toContain("10-MINUTE PROJECT TOUR");
+    expect(tour).toContain("怎样拆一章");
+    expect(tour).toContain("怎样判断");
+    expect(tour).toContain("怎样成为成果");
+    expect(tour).toContain("sessionStorage");
+    expect(tour).toContain("复制我的导览记录");
+    expect(read("src/components/WelcomeGuide.tsx")).toContain('endsWith("/tour/")');
+    expect(read("src/pages/sitemap.xml.ts")).toContain('"tour/"');
+  });
+
+  it("版本侦探记录假说、分批证据、书面理由和可撤回报告", () => {
+    const detective = read("src/components/VersionDetective.tsx");
+    expect(detective).toContain("封存初始判断");
+    expect(detective).toContain("拆封第");
+    expect(detective).toContain("用自己的话说明");
+    expect(detective).toContain('type="range"');
+    expect(detective).toContain("撤回并修改");
+    expect(detective).toContain("导出研判单 .md");
+    expect(detective).toContain("高信心偏差提醒");
   });
 });

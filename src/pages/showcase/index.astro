@@ -7,7 +7,7 @@ const [outline, concepts, graph, quizzes, labs, deepdives] = await Promise.all([
   getCollection("quiz"), getCollection("labs"), getCollection("deepdives"),
 ]);
 const stats = [
-  [14, "原书章节全覆盖"],
+  [14, "章进入学习结构"],
   [outline.flatMap((entry) => entry.data.items).length, "学习单元"],
   [concepts.flatMap((entry) => entry.data.items).length, "概念节点"],
   [graph.flatMap((entry) => entry.data.items).length, "关系边"],
@@ -19,8 +19,8 @@ const stats = [
 <BaseLayout title="项目展示" description="文献学实验室的三分钟项目介绍、数字人文方法、个人贡献与成果证据">
   <header class="showcase-hero">
     <div class="container showcase-hero__grid">
-      <div><p class="eyebrow">PORTFOLIO CASE · DIGITAL HUMANITIES</p><h1 class="display-title">我怎样把一本专业教材，<br />转化为一座可操作的学习实验室</h1><p class="showcase-lead">这是一个面向大学生和初学者的独立数字人文项目。它不复制原书，而是把阅读中的概念、证据、判断与练习重新建模，并公开保留人工复核边界。</p><div class="showcase-actions"><a class="button" href="#pitch">开始三分钟演示 ↓</a><button class="button secondary print-project" type="button">打印项目摘要</button></div></div>
-      <aside><small>一句话项目定义</small><blockquote>让读者不是“看完一本书”，而是能沿路径学习、在图谱中连接、在案例中判断，并把疑问送回公开共校流程。</blockquote><dl><div><dt>角色</dt><dd>策划／内容建模／教学交互／前端实现／维护</dd></div><div><dt>对象</dt><dd>杜泽逊《文献学概要（修订本）》</dd></div><div><dt>状态</dt><dd>公开迭代，结构全覆盖，纸本复核进行中</dd></div></dl></aside>
+      <div><p class="eyebrow">PORTFOLIO CASE · DIGITAL HUMANITIES</p><h1 class="display-title">我怎样把一本专业教材，<br />转化为一座可操作的学习实验室</h1><p class="showcase-lead">最初，我只是在“卷子装”“善本”和“校勘法”旁边画箭头。箭头越画越多，我才发现真正难保存的不是原文，而是自己怎样跨章连接、怎样比较证据、又在哪一步不敢下结论。</p><div class="showcase-actions"><a class="button" href={`${base}tour/`}>亲手走十分钟导览 →</a><a class="button secondary" href="#pitch">查看三分钟讲述 ↓</a><button class="button secondary print-project" type="button">打印项目摘要</button></div></div>
+      <aside><small>我给自己的制作约束</small><blockquote>十四章都要进来，但原文不能被整本搬来；每一个“学会了”都尽量落到一次操作、一个判断或一段复盘。</blockquote><dl><div><dt>我负责</dt><dd>策划／内容建模／教学交互／前端实现／维护</dd></div><div><dt>参考</dt><dd>杜泽逊《文献学概要（修订本）》</dd></div><div><dt>仍在做</dt><dd>逐条纸本核验、真实读者测试与公开修订</dd></div></dl></aside>
     </div>
   </header>
 
@@ -33,9 +33,9 @@ const stats = [
     <div class="pitch-board">
       <nav aria-label="三分钟演示段落"><button class="active" data-pitch="0"><b>00′–01′</b><span>问题与选择</span></button><button data-pitch="1"><b>01′–02′</b><span>方法与实现</span></button><button data-pitch="2"><b>02′–03′</b><span>价值与反思</span></button></nav>
       <div class="pitch-slides">
-        <article class="active" data-slide="0"><small>WHY</small><h3>我不想再做一本只能向下翻的“在线电子书”</h3><p>传统顺序阅读不容易呈现跨章关系，也难以练习版本、目录、校勘中的判断过程。因此我把目标改成：全书覆盖，但不按原书机械复制；让学习者能查概念、走路径、做任务、留札记。</p><a href={`${base}story/`}>查看问题形成过程 →</a></article>
-        <article data-slide="1"><small>HOW</small><h3>先做内容模型，再做界面</h3><p>我把十四章拆成学习单元、概念、关系、题目、实验与复核状态；每条关系保留证据和置信度。前端把这些数据渲染为七条路径、知识图谱、九题型练习、综合案卷和学习档案。</p><a href={`${base}about/`}>查看完整方法 →</a></article>
-        <article data-slide="2"><small>SO WHAT</small><h3>成果不只是一个网站，也是一个可审查的研究过程</h3><p>项目公开版权边界、AI协作方式、纸本核验进度和修订历史，并邀请读者共校。它展示了我如何把阅读问题转化为数据结构、教学设计与可持续维护的公共作品。</p><a href={`${base}audit/`}>查看审计与未完成部分 →</a></article>
+        <article class="active" data-slide="0"><small>WHY</small><h3>我第一次意识到：记住定义，和会处理材料，是两回事</h3><p>我读到版本鉴定时能够复述牌记、避讳和刻工，却说不清三条线索冲突时该先信谁。于是项目目标从“整理完十四章”改成“让读者亲手做一次有限度判断”，同时仍保留全书结构。</p><a href={`${base}story/`}>查看这个念头怎样形成 →</a></article>
+        <article data-slide="1"><small>HOW</small><h3>我先给每条笔记找到位置，再决定它该长成什么交互</h3><p>定义进入概念词典，跨章箭头进入图谱，判断边界进入练习，仍不确定的页码进入复核队列。只有当内容需要排序、称量或对照时，我才把它做成游戏，而不是给每节硬套一张卡片。</p><a href={`${base}about/`}>查看数据层与工作方法 →</a></article>
+        <article data-slide="2"><small>SO WHAT</small><h3>我更愿意展示“怎样改”，而不只展示“已经做了多少”</h3><p>所以网站公开待核内容、AI 协作边界、版本历史和读者共校入口。它留下的不只是 230 个页面，也是一次阅读怎样变成结构、交互、错误记录和下一轮问题的过程。</p><a href={`${base}audit/`}>查看审计与仍未完成的部分 →</a></article>
       </div>
     </div>
   </section>
@@ -45,7 +45,7 @@ const stats = [
   </section>
 
   <section class="container contribution-section">
-    <div><p class="eyebrow">MY CONTRIBUTION</p><h2>我负责的不是“把文字放上网”，而是定义整个学习系统</h2></div>
+    <div><p class="eyebrow">MY CONTRIBUTION</p><h2>从第一张纸边箭头到每一次公开发布，我具体做了什么</h2></div>
     <div class="contribution-grid"><article><b>研究与策划</b><p>确定受众、研究问题、内容边界、版权策略与复核标准。</p></article><article><b>内容工程</b><p>设计学习单元、概念、图谱、题库、实验和状态元数据。</p></article><article><b>学习设计</b><p>将抽象方法转成路径、证据链、分层答案与可重做任务。</p></article><article><b>产品与界面</b><p>设计无登录学习档案、搜索、手机交互、无障碍和公开反馈。</p></article><article><b>质量与发布</b><p>建立内容校验、测试、断链检查、GitHub Actions 和版本日志。</p></article><article><b>学术责任</b><p>AI协助结构化与实现；项目作者决定边界并承担最终纸本复核。</p></article></div>
   </section>
 

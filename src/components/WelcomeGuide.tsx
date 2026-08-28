@@ -9,6 +9,7 @@ export default function WelcomeGuide({ baseUrl }: { baseUrl: string }) {
   useEffect(() => {
     const welcomeMode = new URLSearchParams(window.location.search).get("welcome");
     if (welcomeMode === "0") return;
+    if (window.location.pathname.endsWith("/tour/")) return;
     const replay = welcomeMode === "1";
     if (replay || !window.localStorage.getItem(STORAGE_KEY)) setOpen(true);
   }, []);
