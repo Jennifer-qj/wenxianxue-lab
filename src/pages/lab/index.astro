@@ -110,7 +110,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
     <div class="game-grid">
       {games.map((game, index) => (
-        <article id={game.id} class:list={{ ready: game.status === "可体验" }}>
+        <article id={`catalog-${game.id}`} class:list={{ ready: game.status === "可体验" }}>
           <div class="game-top"><span>{game.icon}</span><small>{String(index + 1).padStart(2, "0")}</small></div>
           <small>{game.chapters}</small>
           <h3>{game.title}</h3>

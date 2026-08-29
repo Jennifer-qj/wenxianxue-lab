@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.10.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.11.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -373,5 +373,31 @@ describe("公开项目成熟度门禁", () => {
     expect(audit).toContain("boundary");
     expect(audit).toContain("跨单元完全重复");
     expect(read("docs/编辑与术语规范.md")).toContain("不得互相改写充数");
+  });
+
+  it("发布前审计全部公开页面的可发现性、结构与外链安全", () => {
+    const audit = read("scripts/audit-public-pages.mjs");
+    const layout = read("src/layouts/BaseLayout.astro");
+    expect(read("package.json")).toContain("audit-public-pages.mjs");
+    expect(audit).toContain("重复 id");
+    expect(audit).toContain("twitter:image");
+    expect(audit).toContain("新窗口链接缺少 noopener/noreferrer");
+    expect(audit).toContain("公开 HTML 未进入 sitemap.xml");
+    expect(layout).toContain('twitter:description');
+    expect(layout).toContain("isCurrentPath");
+    expect(read("public/site.webmanifest")).toContain('"categories"');
+  });
+
+  it("首次引导、反馈和札记提供可恢复的键盘焦点闭环", () => {
+    const welcome = read("src/components/WelcomeGuide.tsx");
+    const feedback = read("src/components/FeedbackPanel.tsx");
+    const dock = read("src/components/LearningDock.tsx");
+    expect(welcome).toContain("previousFocusRef");
+    expect(welcome).toContain('setAttribute("inert"');
+    expect(welcome).toContain('event.key !== "Tab"');
+    expect(feedback).toContain("triggerRef.current?.focus()");
+    expect(dock).toContain("triggerRef.current?.focus()");
+    expect(read("src/styles/global.css")).toContain("100dvh");
+    expect(read("src/pages/lab/index.astro")).toContain("catalog-${game.id}");
   });
 });

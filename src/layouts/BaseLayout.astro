@@ -27,6 +27,8 @@ const nav = [
 ];
 const fullTitle = title === "文献学实验室" ? title : `${title}｜文献学实验室`;
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url.origin);
+const currentPath = Astro.url.pathname.endsWith("/") ? Astro.url.pathname : `${Astro.url.pathname}/`;
+const isCurrentPath = (slug = "") => currentPath === `${base}${slug}`;
 const pageType: LibraryPageType = Astro.url.pathname.includes("/chapters/") ? "chapter"
   : Astro.url.pathname.includes("/concepts/") ? "concept"
   : Astro.url.pathname.includes("/lab/") ? "lab"
@@ -42,9 +44,14 @@ const structuredData = {
   image: ogImage,
   inLanguage: "zh-CN",
   isAccessibleForFree: true,
+  version: PROJECT_RELEASE.version,
+  dateModified: PROJECT_RELEASE.updated,
   educationalLevel: "大学初学者",
+  educationalUse: ["自主学习", "复习", "证据判断训练"],
   learningResourceType: ["互动学习网站", "数字人文项目", "知识图谱"],
   about: ["文献学", "古典文献学", "目录学", "版本学", "校勘学", "数字人文"],
+  accessMode: ["textual", "visual"],
+  accessibilityFeature: ["structuralNavigation", "keyboardControl", "displayTransformability"],
   author: { "@type": "Person", name: "Jennifer-qj" },
   citation: "杜泽逊：《文献学概要（修订本）》",
 };
@@ -56,10 +63,14 @@ const structuredData = {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
+    <meta name="author" content="Jennifer-qj" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="color-scheme" content="light" />
     <meta name="theme-color" content="#f1eadc" />
     <link rel="canonical" href={canonical} />
     <link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
     <link rel="manifest" href={`${base}site.webmanifest`} />
+    <link rel="alternate" type="application/json" title="文献学实验室开放知识数据" href={`${base}data/knowledge.json`} />
     <meta property="og:locale" content="zh_CN" />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="文献学实验室" />
@@ -67,10 +78,15 @@ const structuredData = {
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonical} />
     <meta property="og:image" content={ogImage} />
+    <meta property="og:image:type" content="image/png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="文献学实验室：边读、边辨、边连接" />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={fullTitle} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+    <meta name="twitter:image:alt" content="文献学实验室：边读、边辨、边连接" />
     <script is:inline type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     <title>{fullTitle}</title>
   </head>
@@ -94,17 +110,17 @@ const structuredData = {
         <div class="header-tools">
           <a class="search-link" href={`${base}search/`} aria-current={active === "search" ? "page" : undefined} aria-label="搜索全站"><span aria-hidden="true">⌕</span><b>搜索</b></a>
           <details class="more-menu">
-            <summary>更多 <span aria-hidden="true">⌄</span></summary>
+            <summary aria-label="打开更多页面导航">更多 <span aria-hidden="true">⌄</span></summary>
             <div>
-              <a href={`${base}notebook/`} aria-current={active === "notebook" ? "page" : undefined}><span>札记</span><small>收藏、批注与最近浏览</small></a>
-              <a href={`${base}tour/`} aria-current={active === "tour" ? "page" : undefined}><span>十分钟导览</span><small>亲手走完一次学习闭环</small></a>
-              <a href={`${base}guide/`} aria-current={active === "guide" ? "page" : undefined}><span>使用指南</span><small>第一次来，从这里开始</small></a>
-              <a href={`${base}about/`} aria-current={active === "about" ? "page" : undefined}><span>关于项目</span><small>方法、版权与作者说明</small></a>
-              <a href={`${base}making-of/`}><span>制作方法</span><small>一本书怎样变成学习平台</small></a>
-              <a href={`${base}showcase/`}><span>项目展示</span><small>三分钟演示与成果证据</small></a>
-              <a href={`${base}contribute/`}><span>参与共校</span><small>纠错、认领与功能建议</small></a>
-              <a href={`${base}usability/`}><span>参与用户测试</span><small>用七个任务检验网站体验</small></a>
-              <a href={`${base}accessibility/`}><span>无障碍说明</span><small>键盘、小屏与阅读辅助</small></a>
+              <a href={`${base}notebook/`} aria-current={isCurrentPath("notebook/") ? "page" : undefined}><span>札记</span><small>收藏、批注与最近浏览</small></a>
+              <a href={`${base}tour/`} aria-current={isCurrentPath("tour/") ? "page" : undefined}><span>十分钟导览</span><small>亲手走完一次学习闭环</small></a>
+              <a href={`${base}guide/`} aria-current={isCurrentPath("guide/") ? "page" : undefined}><span>使用指南</span><small>第一次来，从这里开始</small></a>
+              <a href={`${base}about/`} aria-current={isCurrentPath("about/") ? "page" : undefined}><span>关于项目</span><small>方法、版权与作者说明</small></a>
+              <a href={`${base}making-of/`} aria-current={isCurrentPath("making-of/") ? "page" : undefined}><span>制作方法</span><small>一本书怎样变成学习平台</small></a>
+              <a href={`${base}showcase/`} aria-current={isCurrentPath("showcase/") ? "page" : undefined}><span>项目展示</span><small>三分钟演示与成果证据</small></a>
+              <a href={`${base}contribute/`} aria-current={isCurrentPath("contribute/") ? "page" : undefined}><span>参与共校</span><small>纠错、认领与功能建议</small></a>
+              <a href={`${base}usability/`} aria-current={isCurrentPath("usability/") ? "page" : undefined}><span>参与用户测试</span><small>用七个任务检验网站体验</small></a>
+              <a href={`${base}accessibility/`} aria-current={isCurrentPath("accessibility/") ? "page" : undefined}><span>无障碍说明</span><small>键盘、小屏与阅读辅助</small></a>
               <a class="github-link" href="https://github.com/Jennifer-qj/wenxianxue-lab" target="_blank" rel="noreferrer"><span>GitHub ↗</span><small>查看代码与更新记录</small></a>
             </div>
           </details>
@@ -150,10 +166,15 @@ const structuredData = {
     <FeedbackPanel baseUrl={base} title={title} client:load />
     <script is:inline>
       const progressBar = document.querySelector('.reading-progress span');
+      let readingFrame = 0;
       const updateReadingProgress = () => {
+        if (readingFrame) return;
+        readingFrame = window.requestAnimationFrame(() => {
         const distance = document.documentElement.scrollHeight - window.innerHeight;
         const value = distance > 0 ? Math.min(1, Math.max(0, window.scrollY / distance)) : 0;
         if (progressBar) progressBar.style.transform = `scaleX(${value})`;
+          readingFrame = 0;
+        });
       };
       updateReadingProgress();
       window.addEventListener('scroll', updateReadingProgress, { passive: true });
@@ -162,6 +183,17 @@ const structuredData = {
           if (!menu.contains(event.target)) menu.removeAttribute('open');
         });
       });
+      document.querySelectorAll('.more-menu').forEach((menu) => {
+        menu.addEventListener('keydown', (event) => {
+          if (event.key !== 'Escape' || !menu.hasAttribute('open')) return;
+          event.preventDefault();
+          menu.removeAttribute('open');
+          menu.querySelector('summary')?.focus();
+        });
+      });
+      if (window.matchMedia('(max-width: 980px)').matches) {
+        document.querySelector('.primary-nav a[aria-current="page"]')?.scrollIntoView({ block: 'nearest', inline: 'center' });
+      }
       const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
       if (!reduceMotion && 'IntersectionObserver' in window) {
         const revealTargets = [...document.querySelectorAll('main > section:not(:first-child), main > div > section, .section-heading')];

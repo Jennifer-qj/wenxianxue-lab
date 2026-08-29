@@ -1,17 +1,18 @@
 {
   "name": "wenxianxue-lab",
   "type": "module",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "private": true,
   "scripts": {
     "dev": "astro dev",
     "build": "astro check && astro build",
-    "postbuild": "node scripts/build-search.mjs",
+    "postbuild": "node scripts/build-search.mjs && node scripts/audit-public-pages.mjs",
     "preview": "astro preview",
     "check": "astro check",
     "validate": "node scripts/validate-content.mjs && node scripts/audit-academic.mjs && node scripts/scan-ocr.mjs && node scripts/audit-repo.mjs && node scripts/audit-editorial-voice.mjs && node scripts/audit-content-voice.mjs",
     "audit:academic": "node scripts/audit-academic.mjs",
     "audit:voice": "node scripts/audit-content-voice.mjs",
+    "audit:public": "node scripts/audit-public-pages.mjs",
     "check:links": "node scripts/check-links.mjs",
     "test": "vitest run",
     "subset-fonts": "node scripts/subset-fonts.mjs"

@@ -1,7 +1,7 @@
 items:
   - {id: c_version, label: 版本, type: concept, definition: 同一文献在形成、复制和流传中产生的不同文本与物质形态。, chapter_ids: [ch05], status: pending_review}
   - {id: c_manuscript, label: 写本, type: concept, definition: 以手工书写方式形成的文献版本。, chapter_ids: [ch05], status: pending_review}
-  - {id: c_blockprint, label: 刻本, type: concept, definition: 由雕版印刷形成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_blockprint, label: 刻本, type: concept, definition: 以雕刻文字或图像的版片刷印而成的书籍版本；同一版片在修版、补版与不同刷印阶段仍可能形成差异。, chapter_ids: [ch05], status: pending_review}
   - {id: c_color_print, label: 套印本, type: concept, definition: 使用多块版分色套印形成的版本。, chapter_ids: [ch05], status: pending_review}
   - {id: c_embossed_print, label: 饾版拱花, type: concept, definition: 通过分版水印与无墨压印表现色彩层次和凹凸纹理的印刷技术。, chapter_ids: [ch05], status: pending_review}
   - {id: c_movable_type, label: 活字本, type: concept, definition: 以可重复排列的单字字模印成的版本。, chapter_ids: [ch05], status: pending_review}
@@ -17,4 +17,3 @@ items:
   - {id: me_paper_binding_analysis, label: 纸张装潢分析, type: method, definition: 结合纸张特征和装订形制判断制作与后改信息。, chapter_ids: [ch05], status: pending_review}
   - {id: me_catalog_comparison, label: 著录书影旁证, type: method, definition: 以目录著录、相关材料和可靠书影比较待鉴版本。, chapter_ids: [ch05], status: pending_review}
   - {id: c_version_evidence, label: 版本证据链, type: concept, definition: 将年代、序跋、牌记、避讳、刻工、版式、纸张和著录等线索组合的鉴定结构。, chapter_ids: [ch05], status: drafting}
-
