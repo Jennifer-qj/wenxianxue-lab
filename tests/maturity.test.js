@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.8.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.9.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -301,5 +301,44 @@ describe("公开项目成熟度门禁", () => {
     expect(usability).toContain("结束访谈");
     expect(usability).toContain("哪里最困惑、最像机器生成或最不可信");
     expect(read("docs/试用邀请模板.md")).toContain("不用照顾我的感受");
+  });
+
+  it("实验室先提供可筛选目录，再把访客送到指定实验", () => {
+    const directory = read("src/components/LabDirectory.tsx");
+    const page = read("src/pages/lab/index.astro");
+    expect(page).toContain("<LabDirectory");
+    expect(directory).toContain("今天想练哪一种判断");
+    expect(directory).toContain("最多用时");
+    expect(directory).toContain("产出");
+    expect(directory).toContain("?experiment=");
+    expect(directory).toContain("本机已完成");
+  });
+
+  it("轻量游戏也要求解释证据边界、校准信心并生成记录", () => {
+    const arcade = read("src/components/SkillArcade.tsx");
+    expect(arcade).toContain("ArcadeReflection");
+    expect(arcade).toContain("适用边界");
+    expect(arcade).toContain('type="range"');
+    expect(arcade).toContain("复制学习记录");
+    expect(arcade).toContain("撤回并重新");
+  });
+
+  it("公开完整制作方法，而不是只陈列功能清单", () => {
+    const page = read("src/pages/making-of/index.astro");
+    expect(page).toContain("从一本书到学习平台");
+    expect(page).toContain("六种不同对象");
+    expect(page).toContain("人机协作");
+    expect(page).toContain("尚未产生首轮样本");
+    expect(read("src/layouts/BaseLayout.astro")).toContain("making-of/");
+  });
+
+  it("本地汇总多份真实测试记录且不伪造演示数据", () => {
+    const analysis = read("src/components/UsabilityAnalysis.tsx");
+    expect(existsSync(resolve(root, "src/pages/usability/results.astro"))).toBe(true);
+    expect(analysis).toContain("不会上传到网站或 GitHub");
+    expect(analysis).toContain("这里不会填入演示数据");
+    expect(analysis).toContain("中位耗时");
+    expect(analysis).toContain("结束访谈原话");
+    expect(analysis).toContain("按修复优先度排列");
   });
 });

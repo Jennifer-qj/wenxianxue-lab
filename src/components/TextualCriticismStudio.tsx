@@ -106,7 +106,10 @@ function StemmaLab() {
 }
 
 export default function TextualCriticismStudio() {
-  const [tab, setTab] = useState<"collation" | "stemma">("collation");
+  const [tab, setTab] = useState<"collation" | "stemma">(() => {
+    if (typeof window === "undefined") return "collation";
+    return new URLSearchParams(window.location.search).get("experiment") === "version-stemma" ? "stemma" : "collation";
+  });
   return <div className="criticism-studio">
     <nav aria-label="选择进阶实验"><button className={tab === "collation" ? "active" : ""} onClick={() => setTab("collation")}><small>第六章</small><strong>校勘工作台</strong><span>整理异文并写校勘记</span></button><button className={tab === "stemma" ? "active" : ""} onClick={() => setTab("stemma")}><small>第五、六章</small><strong>版本谱系推理</strong><span>根据共误建立亲缘假说</span></button></nav>
     <section key={tab}>{tab === "collation" ? <CollationDesk /> : <StemmaLab />}</section>

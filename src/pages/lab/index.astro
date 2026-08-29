@@ -7,6 +7,7 @@ import CaseGallery from "../../components/CaseGallery";
 import RareBookDossier from "../../components/RareBookDossier";
 import EvidenceCalibrationLab from "../../components/EvidenceCalibrationLab";
 import TextualCriticismStudio from "../../components/TextualCriticismStudio";
+import LabDirectory from "../../components/LabDirectory";
 import { getCollection } from "astro:content";
 import { games } from "../../data/site";
 
@@ -21,7 +22,10 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     <p class="eyebrow">Interactive laboratory · 动手以后再回书上</p>
     <h1 class="display-title">先别背定义，<em>来处理一份材料</em></h1>
     <p>我把读书时最容易糊弄过去的几个瞬间留在这里：纸黄是不是就够老？序跋有纪年是不是就能定版？底本不同的时候，哪个字才该进正文？先动手，再带着自己的错误回到章节。</p>
+    <div class="hero-actions"><a class="button" href="#lab-directory">按时间和难度选实验 ↓</a><a href="#four-fold">第一次来，先做四部分类 →</a></div>
   </header>
+
+  <section id="lab-directory" class="directory-section"><div class="container"><LabDirectory baseUrl={base} client:load /></div></section>
 
   <section id="rare-book-dossier" class="dossier-section">
     <div class="container">
@@ -73,7 +77,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
     </div>
   </section>
 
-  <section class="arcade-section">
+  <section id="skill-arcade" class="arcade-section">
     <div class="container">
       <div class="section-heading arcade-heading">
         <div><p class="eyebrow">Skill arcade</p><h2 class="section-title">四种可调整的操作台</h2></div>
@@ -117,6 +121,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
 <style>
   .page-hero{padding:7rem 0 5rem}.page-hero>p:last-child{max-width:46rem;color:var(--muted);font-family:var(--serif)}
+  .hero-actions{display:flex;align-items:center;gap:1rem;margin-top:1.5rem}.hero-actions>a:last-child{color:var(--cinnabar);font-size:.78rem}.directory-section{padding:0 0 5.5rem}
   .featured-game{padding:5rem 0;background:#2b2c29;color:#f9f2e6}.featured-grid{display:grid;grid-template-columns:.65fr 1.35fr;gap:4rem;align-items:center}
   .dossier-section{padding:7rem 0;background:#d8c9b2}.dossier-heading>p{max-width:38rem;color:var(--muted)}
   .game-intro h2{margin:1rem 0;font-family:var(--serif);font-size:2.4rem}.game-intro>p{color:#bbb6ad}.chapter-tag{color:#d89882;font-size:.72rem;letter-spacing:.12em}.game-intro dl{margin-top:2rem;border-top:1px solid rgba(255,255,255,.13)}.game-intro dl div{display:flex;justify-content:space-between;padding:.65rem 0;border-bottom:1px solid rgba(255,255,255,.13)}dt{color:#99958d}dd{margin:0}
@@ -174,7 +179,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
   .game-grid article.ready{background:var(--white)}
   .game-grid article:hover{transform:translateY(-3px);box-shadow:var(--shadow-soft)}
   @media(max-width:560px){
-    .page-hero{padding:3.5rem 0 3rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section,.calibration-section,.criticism-studio-section{padding-block:4rem}
+    .page-hero{padding:3.5rem 0 3rem}.hero-actions{align-items:stretch;flex-direction:column}.hero-actions>a{text-align:center}.directory-section{padding-bottom:4rem}.all-games,.arcade-section,.case-gallery-section,.dossier-section,.fourfold-section,.calibration-section,.criticism-studio-section{padding-block:4rem}
     :global(.arcade-tabs){display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:thin}
     :global(.arcade-tabs button){min-width:148px;min-height:70px;scroll-snap-align:start}
     :global(.arcade-stage){min-height:0;padding:1.05rem}

@@ -22,6 +22,8 @@
 - 十四章个人成果册、六维学习证据画像、待追问题索引、只读示例与完整成果报告
 - 143 个结构化学习单元、176 个独立概念词条与 98 条有证据关系
 - 134 道九题型练习、十四章深度研读、九项旗舰实验与十五个章节案例
+- 可按训练方式、难度和时间筛选的实验目录，十项工作台均标明预期产出与本地完成状态
+- 四项轻量游戏补齐解释、证据边界、信心校准、撤回重做与学习记录复制
 - 支持同义入口、近似纠错、相关度排序和复核状态筛选的全站搜索
 - 自动错题本、本地学习进度，以及包含札记、收藏和章节复盘的统一档案导入导出
 - 首页本地续学入口，以及可直接阅读、整理与分享的 Markdown 学习报告
@@ -38,6 +40,8 @@
 - 143 个学习单元公开稳定标识、来源身份、纸本定位状态和版本记录
 - 十四章逐条纸本复核工作台、第2—14章专属核对包与公开共校成果台账
 - 七项固定任务、四问结束访谈、匿名结果导出与复测手册
+- 多份匿名测试 JSON 的浏览器本地汇总：完成率、中位耗时、阻碍优先队列与访谈原话
+- 完整制作方法长文：内容建模、互动转译、证据边界、轻量技术选择与人机责任分工
 - 三分钟项目展示、项目报告与面试／答辩演示脚本
 - 适配社交平台的分享卡、结构化数据、站点地图与项目展示截图包
 
@@ -54,6 +58,8 @@
 - 参与共校：https://jennifer-qj.github.io/wenxianxue-lab/contribute/
 - 纸本复核工作台：https://jennifer-qj.github.io/wenxianxue-lab/review/ch02/
 - 参与用户测试：https://jennifer-qj.github.io/wenxianxue-lab/usability/
+- 汇总用户测试：https://jennifer-qj.github.io/wenxianxue-lab/usability/results/
+- 完整制作方法：https://jennifer-qj.github.io/wenxianxue-lab/making-of/
 - 项目展示：https://jennifer-qj.github.io/wenxianxue-lab/showcase/
 - 无障碍说明：https://jennifer-qj.github.io/wenxianxue-lab/accessibility/
 

@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 export const prerender = true;
 
 const root = "https://jennifer-qj.github.io/wenxianxue-lab/";
-const staticRoutes = ["", "about/", "accessibility/", "audit/", "concepts/", "contribute/", "coverage/", "graph/", "guide/", "lab/", "notebook/", "paths/", "progress/", "search/", "showcase/", "story/", "tour/", "updates/", "usability/"];
+const staticRoutes = ["", "about/", "accessibility/", "audit/", "concepts/", "contribute/", "coverage/", "graph/", "guide/", "lab/", "making-of/", "notebook/", "paths/", "progress/", "search/", "showcase/", "story/", "tour/", "updates/", "usability/", "usability/results/"];
 const pathRoutes = ["intro", "material", "circulation", "collection", "criticism", "organization", "special"].map((id) => `paths/${id}/`);
 const chapterRoutes = Array.from({ length: 14 }, (_, index) => `chapters/ch${String(index + 1).padStart(2, "0")}/`);
 const reviewRoutes = Array.from({ length: 14 }, (_, index) => `review/ch${String(index + 1).padStart(2, "0")}/`);

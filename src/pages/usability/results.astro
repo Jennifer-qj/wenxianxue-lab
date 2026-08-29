@@ -1,0 +1,10 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import UsabilityAnalysis from "../../components/UsabilityAnalysis";
+const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
+---
+<BaseLayout title="用户测试汇总" description="在浏览器本地汇总文献学实验室真实用户测试的完成率、耗时、阻碍与访谈原话" active="about">
+  <header class="results-hero"><div class="container"><p class="eyebrow">USABILITY EVIDENCE · 测试证据</p><h1 class="display-title">先保存参与者原话，<br /><em>再决定该改什么</em></h1><p>这个页面不提供演示数据，也不接收上传。等真实试用完成后，把测试页导出的 JSON 放进来，浏览器会在本地生成任务统计、优先队列和访谈原话汇总。</p><div><a class="button" href={`${base}usability/`}>打开测试执行页</a><a href={`${base}making-of/#evaluation`}>阅读评价方法 →</a></div></div></header>
+  <div class="container"><UsabilityAnalysis client:load /></div>
+</BaseLayout>
+<style>.results-hero{padding:6rem 0 5rem;color:#f6f0e7;background:#24302b}.results-hero>div>p:not(.eyebrow){max-width:52rem;color:#c4cac5;font-family:var(--serif);line-height:1.85}.results-hero>div>div{display:flex;align-items:center;gap:1rem;margin-top:1.5rem}.results-hero>div>div>a:last-child{color:#e0a18a;font-size:.76rem}@media(max-width:560px){.results-hero{padding:4rem 0}.results-hero>div>div{align-items:stretch;flex-direction:column}.results-hero>div>div>a{text-align:center}}</style>

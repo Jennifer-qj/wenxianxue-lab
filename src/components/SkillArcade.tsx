@@ -1,16 +1,34 @@
 import { useMemo, useState } from "react";
+import "./SkillArcade.css";
 
-function save(id: string, score: number, total: number) {
+function save(id: string, score: number, total: number, note = "") {
   const key = "wxlab-progress";
   const progress = JSON.parse(localStorage.getItem(key) || "{}");
-  progress[id] = { completed: true, score, total, updatedAt: new Date().toISOString() };
+  progress[id] = { completed: true, score, total, note, updatedAt: new Date().toISOString() };
   localStorage.setItem(key, JSON.stringify(progress));
   window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
 }
 
 type SequenceItem = { id: string; title: string; detail: string };
 
-function SequenceBoard({ id, items, shuffled, note }: { id: string; items: SequenceItem[]; shuffled: string[]; note: string }) {
+function ArcadeReflection({ id, title, score, total, prompt, limitationPrompt }: { id: string; title: string; score: number; total: number; prompt: string; limitationPrompt: string }) {
+  const [reason, setReason] = useState("");
+  const [limitation, setLimitation] = useState("");
+  const [confidence, setConfidence] = useState(3);
+  const [archived, setArchived] = useState(false);
+  const [message, setMessage] = useState("");
+  const ready = reason.trim().length >= 18 && limitation.trim().length >= 12;
+  const report = `## ${title} · 学习记录\n\n- 操作得分：${score}/${total}\n- 当前把握：${confidence}/5\n- 我的解释：${reason.trim()}\n- 适用边界：${limitation.trim()}\n\n> 得分只反映本轮操作结果，不代表学术判断已经获得唯一答案。`;
+
+  async function copyReport() {
+    try { await navigator.clipboard.writeText(report); setMessage("学习记录已复制"); } catch { setMessage("浏览器未允许复制，请手动选择上方文字"); }
+    window.setTimeout(() => setMessage(""), 2200);
+  }
+
+  return <section className="arcade-reflection"><header><small>SECOND PASS · 第二遍判断</small><h3>答案核验以后，还要说明为什么</h3><p>分数记录位置或分类是否吻合；下面的文字才记录你怎样理解这次操作。</p></header><label><span>{prompt}</span><textarea disabled={archived} value={reason} onChange={(event) => setReason(event.target.value)} placeholder="至少 18 字。不要只复述正确答案。" /><small className={reason.trim().length >= 18 ? "ready" : ""}>{reason.trim().length}/18</small></label><label><span>{limitationPrompt}</span><textarea disabled={archived} value={limitation} onChange={(event) => setLimitation(event.target.value)} placeholder="至少 12 字。写出例外、未知或不能直接推出的部分。" /><small className={limitation.trim().length >= 12 ? "ready" : ""}>{limitation.trim().length}/12</small></label><label className="arcade-confidence"><span>当前把握程度</span><input disabled={archived} type="range" min="1" max="5" value={confidence} onChange={(event) => setConfidence(Number(event.target.value))} /><b>{confidence}/5</b></label>{!archived ? <button className="arcade-primary" disabled={!ready} onClick={() => { save(id, score, total, `${reason.trim()}｜边界：${limitation.trim()}｜把握 ${confidence}/5`); setArchived(true); }}>归档本次解释</button> : <footer><div><strong>本次记录已进入当前浏览器</strong><p>{reason}；但{limitation}</p><small>任务得分 {score}/{total} · 把握 {confidence}/5</small></div><button type="button" onClick={copyReport}>复制学习记录</button></footer>}{message && <p className="arcade-copy-status" role="status">{message}</p>}</section>;
+}
+
+function SequenceBoard({ id, title, items, shuffled, note, reflectionPrompt, limitationPrompt }: { id: string; title: string; items: SequenceItem[]; shuffled: string[]; note: string; reflectionPrompt: string; limitationPrompt: string }) {
   const byId = new Map(items.map((item) => [item.id, item]));
   const [order, setOrder] = useState(shuffled);
   const [dragging, setDragging] = useState<string | null>(null);
@@ -35,7 +53,7 @@ function SequenceBoard({ id, items, shuffled, note }: { id: string; items: Seque
     });
   }
 
-  function check() { setChecked(true); save(id, score, items.length); }
+  function check() { setChecked(true); }
   function reset() { setOrder(shuffled); setChecked(false); }
 
   return <div className="sequence-game">
@@ -47,14 +65,14 @@ function SequenceBoard({ id, items, shuffled, note }: { id: string; items: Seque
         <nav aria-label={`调整“${item.title}”的位置`}><button aria-label={`上移${item.title}`} disabled={checked || index === 0} onClick={() => shift(index, -1)}>↑</button><button aria-label={`下移${item.title}`} disabled={checked || index === order.length - 1} onClick={() => shift(index, 1)}>↓</button></nav>
       </li>;
     })}</ol>
-    {!checked ? <button className="arcade-primary" onClick={check}>核验流程</button> : <div className={`arcade-feedback ${score === items.length ? "success" : ""}`}><strong>正确位置 {score}/{items.length}</strong><p>{note}</p><button onClick={reset}>重新排列</button></div>}
+    {!checked ? <button className="arcade-primary" onClick={check}>核验流程</button> : <><div className={`arcade-feedback ${score === items.length ? "success" : ""}`}><strong>正确位置 {score}/{items.length}</strong><p>{note}</p><button onClick={reset}>撤回并重新排列</button></div><ArcadeReflection id={id} title={title} score={score} total={items.length} prompt={reflectionPrompt} limitationPrompt={limitationPrompt} /></>}
   </div>;
 }
 
 type SortCard = { id: string; title: string; detail: string; answer: string; reason: string };
 type SortBin = { id: string; title: string; hint: string };
 
-function BatchSorter({ id, cards, bins, mode, conclusion }: { id: string; cards: SortCard[]; bins: SortBin[]; mode: string; conclusion: string }) {
+function BatchSorter({ id, title, cards, bins, mode, conclusion, reflectionPrompt, limitationPrompt }: { id: string; title: string; cards: SortCard[]; bins: SortBin[]; mode: string; conclusion: string; reflectionPrompt: string; limitationPrompt: string }) {
   const [placed, setPlaced] = useState<Record<string, string>>({});
   const [active, setActive] = useState<string | null>(null);
   const [checked, setChecked] = useState(false);
@@ -82,7 +100,7 @@ function BatchSorter({ id, cards, bins, mode, conclusion }: { id: string; cards:
     return <button key={card.id} draggable={!checked} onDragStart={(event) => event.dataTransfer.setData("text/plain", card.id)} onClick={() => !checked && setActive(active === card.id ? null : card.id)} className={`batch-card ${active === card.id ? "active" : ""} ${checked ? (correct ? "correct" : "incorrect") : ""}`}><strong>{card.title}</strong><span>{card.detail}</span>{checked && <small>{card.reason}</small>}</button>;
   }
 
-  function check() { setChecked(true); save(id, score, cards.length); }
+  function check() { setChecked(true); }
   function reset() { setPlaced({}); setActive(null); setChecked(false); }
 
   return <div className={`batch-sorter ${mode}`}>
@@ -90,7 +108,7 @@ function BatchSorter({ id, cards, bins, mode, conclusion }: { id: string; cards:
     <div className={`mobile-selection ${active ? "visible" : ""}`} role="status" aria-live="polite">{active ? <>已选：<strong>{cards.find((card) => card.id === active)?.title}</strong>，现在点一个目标区域。</> : "先点一张卡片，再选择目标区域。"}</div>
     <section className="sorting-tray" role="button" tabIndex={active ? 0 : -1} aria-label="移回待处理卡片" onKeyDown={(event) => { if (active && (event.key === "Enter" || event.key === " ")) move(active); }} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event)} onClick={() => active && move(active)}><header><strong>待处理卡片</strong><small>{cards.length - Object.keys(placed).length} 项</small></header><div>{cards.filter((card) => !placed[card.id]).map(cardView)}</div></section>
     <div className="sorting-bins">{bins.map((bin) => <section key={bin.id} role="button" tabIndex={active ? 0 : -1} aria-label={`把已选卡片放入${bin.title}`} className={active ? "accepting" : ""} onKeyDown={(event) => { if (active && (event.key === "Enter" || event.key === " ")) move(active, bin.id); }} onDragOver={(event) => event.preventDefault()} onDrop={(event) => drop(event, bin.id)} onClick={() => active && move(active, bin.id)}><header><strong>{bin.title}</strong><small>{bin.hint}</small></header><div>{cards.filter((card) => placed[card.id] === bin.id).map(cardView)}</div></section>)}</div>
-    {!checked ? <button className="arcade-primary" disabled={Object.keys(placed).length !== cards.length} onClick={check}>全部完成，统一核验</button> : <div className={`arcade-feedback ${score === cards.length ? "success" : ""}`}><strong>匹配正确 {score}/{cards.length}</strong><p>{conclusion}</p><button onClick={reset}>重新挑战</button></div>}
+    {!checked ? <button className="arcade-primary" disabled={Object.keys(placed).length !== cards.length} onClick={check}>全部完成，统一核验</button> : <><div className={`arcade-feedback ${score === cards.length ? "success" : ""}`}><strong>匹配正确 {score}/{cards.length}</strong><p>{conclusion}</p><button onClick={reset}>撤回并重新分类</button></div><ArcadeReflection id={id} title={title} score={score} total={cards.length} prompt={reflectionPrompt} limitationPrompt={limitationPrompt} /></>}
   </div>;
 }
 
@@ -135,14 +153,19 @@ const toolCards: SortCard[] = [
 ];
 
 const games = [
-  { id: "collation-clinic", tab: "校勘诊所", chapter: "第六章", intro: "把一次校勘调查从记录异文排到形成校记。", render: () => <SequenceBoard id="collation-clinic" items={collationSteps} shuffled={["judge", "record", "external", "note", "source", "internal"]} note="校勘不是先猜正确答案，而是先固定异文事实和版本来源，再逐层互证，最后把依据写进校记。" /> },
-  { id: "carrier-museum", tab: "载体博物馆", chapter: "第二章", intro: "把五组物质线索送回对应的载体标本柜。", render: () => <BatchSorter id="carrier-museum" cards={carrierCards} bins={carrierBins} mode="museum-matcher" conclusion="辨认载体要同时看材料、制作方式、书写方式和装联结构，不能只凭“看起来很旧”。" /> },
-  { id: "binding-puzzle", tab: "装帧拼图", chapter: "第二章", intro: "拖动五种装帧，重建便于学习的形制演变序列。", render: () => <SequenceBoard id="binding-puzzle" items={bindingItems} shuffled={["thread", "accordion", "wrapped", "scroll", "butterfly"]} note="这一序列用于理解形制演变，但真实文献中多种装帧可能长期并存，现存装帧也可能经过后改。" /> },
-  { id: "leishu-congshu", tab: "工具书分拣", chapter: "第九章", intro: "一次处理六部书，按组织单位分入类书或丛书。", render: () => <BatchSorter id="leishu-congshu" cards={toolCards} bins={[{ id: "leishu", title: "类书", hint: "拆分材料，按类重组" }, { id: "congshu", title: "丛书", hint: "汇集多书，各自成篇" }]} mode="tool-sorter" conclusion="核心区别不在书名，而在组织单位：类书拆分原书材料再分类，丛书汇集多种相对完整的书。" /> },
+  { id: "collation-clinic", tab: "校勘诊所", chapter: "第六章", intro: "把一次校勘调查从记录异文排到形成校记。", render: () => <SequenceBoard id="collation-clinic" title="校勘诊所" items={collationSteps} shuffled={["judge", "record", "external", "note", "source", "internal"]} note="校勘不是先猜正确答案，而是先固定异文事实和版本来源，再逐层互证，最后把依据写进校记。" reflectionPrompt="选择一组相邻步骤，说明为什么前一步必须先完成。" limitationPrompt="这套流程在哪些情况下不能机械套用？" /> },
+  { id: "carrier-museum", tab: "载体博物馆", chapter: "第二章", intro: "把五组物质线索送回对应的载体标本柜。", render: () => <BatchSorter id="carrier-museum" title="载体博物馆" cards={carrierCards} bins={carrierBins} mode="museum-matcher" conclusion="辨认载体要同时看材料、制作方式、书写方式和装联结构，不能只凭“看起来很旧”。" reflectionPrompt="选一张卡，说明你实际组合了哪两类物质线索。" limitationPrompt="仅凭当前线索，为什么还不能完成断代或真伪判断？" /> },
+  { id: "binding-puzzle", tab: "装帧拼图", chapter: "第二章", intro: "拖动五种装帧，重建便于学习的形制演变序列。", render: () => <SequenceBoard id="binding-puzzle" title="装帧演变拼图" items={bindingItems} shuffled={["thread", "accordion", "wrapped", "scroll", "butterfly"]} note="这一序列用于理解形制演变，但真实文献中多种装帧可能长期并存，现存装帧也可能经过后改。" reflectionPrompt="说明一个形制变化怎样改变阅读或装订方式。" limitationPrompt="为什么这条学习序列不能直接当成每部书的绝对年代线？" /> },
+  { id: "leishu-congshu", tab: "工具书分拣", chapter: "第九章", intro: "一次处理六部书，按组织单位分入类书或丛书。", render: () => <BatchSorter id="leishu-congshu" title="类书还是丛书" cards={toolCards} bins={[{ id: "leishu", title: "类书", hint: "拆分材料，按类重组" }, { id: "congshu", title: "丛书", hint: "汇集多书，各自成篇" }]} mode="tool-sorter" conclusion="核心区别不在书名，而在组织单位：类书拆分原书材料再分类，丛书汇集多种相对完整的书。" reflectionPrompt="不用举书名，说明类书与丛书的组织单位有何不同。" limitationPrompt="只凭名称或规模判断时，可能出现什么误判？" /> },
 ];
 
 export default function SkillArcade() {
-  const [active, setActive] = useState(0);
+  const [active, setActive] = useState(() => {
+    if (typeof window === "undefined") return 0;
+    const requested = new URLSearchParams(window.location.search).get("experiment");
+    const index = games.findIndex((item) => item.id === requested);
+    return index >= 0 ? index : 0;
+  });
   const game = games[active];
   return <div className="skill-arcade">
     <nav className="arcade-tabs" aria-label="选择互动任务">{games.map((item, index) => <button className={active === index ? "active" : ""} onClick={() => setActive(index)} key={item.id}><small>{item.chapter}</small><strong>{item.tab}</strong></button>)}</nav>
