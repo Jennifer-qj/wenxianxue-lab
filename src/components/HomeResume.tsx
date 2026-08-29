@@ -52,7 +52,7 @@ export default function HomeResume({ baseUrl }: { baseUrl: string }) {
       <p>{hasArchive ? `最近浏览：${targetTitle}。记录只保存在这台设备，不会上传。` : "先读第一章的一个学习单元，再完成一次证据判断；网站会从这里开始保留你的进度。"}</p>
     </div>
     <dl aria-label="本地学习档案摘要">
-      <div><dt>已完成</dt><dd>{state.completed}<small>/54 项</small></dd></div>
+      <div><dt>已完成</dt><dd>{state.completed}<small>/55 项</small></dd></div>
       <div><dt>札记</dt><dd>{notes}<small> 条</small></dd></div>
       <div><dt>今日复习</dt><dd>{state.due}<small> 题</small></dd></div>
     </dl>

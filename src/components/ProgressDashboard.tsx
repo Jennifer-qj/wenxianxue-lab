@@ -13,9 +13,10 @@ const names: Record<string, string> = {
   "collation-workbench": "校勘工作台", "version-stemma": "版本谱系推理",
   "ch01-research-workbench": "第一章·研究问题装配台",
   "rare-book-dossier": "古籍鉴定综合案卷",
+  "fragment-casebook": "残卷归档调查",
 };
 const gameIds = new Set(["version-detective", "evidence-calibration", "four-fold", "collation-clinic", "carrier-museum", "binding-puzzle", "leishu-congshu", "collation-workbench", "version-stemma"]);
-const totalActivities = 54; // 14 章综合练习 + 14 章研读 + 9 项技能实验 + 15 个案例 + 1 个研究问题工作台 + 1 个综合案卷
+const totalActivities = 55; // 14 章综合练习 + 14 章研读 + 9 项技能实验 + 15 个案例 + 1 个研究问题工作台 + 2 个跨章案卷
 const chapterTitles = ["文献与文献学", "文献的载体", "文献的形成与流布", "文献的收藏与散佚", "文献的版本", "文献的校勘", "文献目录", "辑佚与辨伪", "类书与丛书", "地方志与家谱", "总集与别集", "出土文献（上）", "出土文献（下）", "敦煌文献"];
 
 function safeRead<T>(key: string, fallback: T): T {
@@ -27,6 +28,7 @@ function hrefFor(id: string, baseUrl: string) {
   if (/^deep-ch\d{2}/.test(id)) return `${baseUrl}chapters/${id.slice(5, 9)}/#deep-dive`;
   if (id === "ch01-research-workbench") return `${baseUrl}chapters/ch01/#workbench`;
   if (id === "rare-book-dossier") return `${baseUrl}lab/#rare-book-dossier`;
+  if (id === "fragment-casebook") return `${baseUrl}lab/#fragment-casebook`;
   if (id.startsWith("case-")) return `${baseUrl}lab/#case-gallery`;
   if (gameIds.has(id)) return `${baseUrl}lab/#${id}`;
   return `${baseUrl}paths/`;
@@ -56,7 +58,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   const deepCount = entries.filter(([id]) => id.startsWith("deep-ch")).length;
   const gameCount = entries.filter(([id]) => gameIds.has(id)).length;
   const caseCount = entries.filter(([id]) => id.startsWith("case-")).length;
-  const dossierCount = entries.filter(([id]) => id === "rare-book-dossier").length;
+  const dossierCount = entries.filter(([id]) => id === "rare-book-dossier" || id === "fragment-casebook").length;
   const wrongItems = Object.values(wrongBook).sort((a, b) => Date.parse(b.updatedAt) - Date.parse(a.updatedAt));
   const dueItems = wrongItems.filter((item) => {
     const interval = [1, 3, 7][Math.min(Math.max(item.attempts - 1, 0), 2)];
@@ -76,6 +78,30 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     return { chapter, token, mastery, wrong, practice: Boolean(practice), deep, chapterCase };
   });
   const recommended = chapterMastery.find((item) => item.mastery < 60) ?? chapterMastery.find((item) => item.mastery < 85) ?? chapterMastery[0];
+  const recommendedHref = !recommended.practice || recommended.wrong
+    ? `${baseUrl}chapters/${recommended.token}/#check`
+    : !recommended.deep
+      ? `${baseUrl}chapters/${recommended.token}/#deep-dive`
+      : !recommended.chapterCase
+        ? `${baseUrl}lab/#case-gallery`
+        : `${baseUrl}chapters/${recommended.token}/#chapter-review`;
+  const recommendedAction = !recommended.practice
+    ? "先完成综合练习，建立本章的第一条基线。"
+    : recommended.wrong
+      ? `先订正本章 ${recommended.wrong} 道错题，检查误解来自概念还是证据。`
+      : !recommended.deep
+        ? "把已答对的知识带入竞争性结论，补一次深度研读。"
+        : !recommended.chapterCase
+          ? "知识与研读已经有记录，下一步用章节案例完成迁移。"
+          : "本章三类任务已覆盖，回到章末写下认识、边界和待追问题。";
+  const studyPlans = [
+    ...(dueItems.length ? [{ id: "due", kicker: "到期复习", title: `${dueItems.length} 道错题已经到复习时间`, reason: "依据错误次数和上次作答日期安排；先回忆，再查看解释。", time: `${Math.min(15, 4 + dueItems.length * 2)} 分钟`, href: `${baseUrl}chapters/ch${String(dueItems[0].chapter).padStart(2, "0")}/#check` }] : []),
+    { id: "chapter", kicker: "当前主线", title: `第 ${recommended.chapter} 章 · ${chapterTitles[recommended.chapter - 1]}`, reason: recommendedAction, time: recommended.practice ? "10—15 分钟" : "8—12 分钟", href: recommendedHref },
+    ...(practiceCount >= 2 && !entries.some(([id]) => id === "fragment-casebook") ? [{ id: "capstone", kicker: "跨章迁移", title: "残卷归档调查", reason: "你已经留下至少两章练习记录，可以尝试联合载体、版本、目录和敦煌文献证据。", time: "约 18 分钟", href: `${baseUrl}lab/#fragment-casebook` }] : []),
+    ...(completed >= 3 ? [{ id: "portfolio", kicker: "收束记录", title: "整理一条阶段成果", reason: "把已经完成的动作、弱项和待追问题放回成果册，避免只累计完成数。", time: "约 6 分钟", href: `${baseUrl}progress/#portfolio` }] : []),
+    { id: "tour", kicker: "理解方法", title: "走完一次十分钟导览", reason: "如果还没有连续记录，先用同一案例经历猜测、证据修订与复盘。", time: "约 10 分钟", href: `${baseUrl}tour/` },
+    { id: "lab", kicker: "自由练习", title: "从实验目录挑一项判断", reason: "按训练方式、难度和时间筛选，不必按固定章节顺序前进。", time: "4—18 分钟", href: `${baseUrl}lab/#lab-directory` },
+  ].filter((item, index, items) => items.findIndex((candidate) => candidate.id === item.id) === index).slice(0, 3);
 
   function exportArchive() {
     const deepdives: Record<string, unknown> = {};
@@ -168,12 +194,16 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     <section className="progress-summary">
       <p className="mini-label">保存在当前浏览器</p><strong>{completed}</strong><span>项学习活动已完成，共 {totalActivities} 项</span>
       <div className="ring" style={{ "--value": `${percent}%` } as React.CSSProperties}><b>{percent}%</b></div>
-      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/9</b>旗舰实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/1</b>综合案卷</span></div>
+      <div className="progress-breakdown"><span><b>{practiceCount}/14</b>章综合练习</span><span><b>{deepCount}/14</b>章深度研读</span><span><b>{gameCount}/9</b>技能实验</span><span><b>{caseCount}/15</b>章案例</span><span><b>{dossierCount}/2</b>跨章案卷</span></div>
       <div className="study-vitals"><span><b>{streak}</b>连续学习天数</span><span><b>{dueItems.length}</b>今日到期错题</span></div>
     </section>
     <section className="progress-list">
       <div className="progress-list-title"><h2>最近记录</h2>{entries[0] && <a href={hrefFor(entries[0][0], baseUrl)}>继续上次学习 →</a>}</div>
       {completed === 0 ? <div className="empty-state"><span>卷</span><p>还没有学习记录。完成任意章节综合练习、研读案例或互动实验，就会形成第一条档案。</p></div> : entries.slice(0, 10).map(([id, item]) => <article key={id}><div><strong>{item.title ?? names[id] ?? id}</strong><small>{new Date(item.updatedAt).toLocaleDateString("zh-CN")}</small></div><span>{item.score} / {item.total}</span><a href={hrefFor(id, baseUrl)}>继续</a></article>)}
+    </section>
+    <section className="study-compass" id="study-compass">
+      <header><div><p className="mini-label">Study compass · 本地生成</p><h2>现在最值得做的三件事</h2></div><p>推荐只依据这台设备中的错题、完成记录和章节覆盖；它解释排序理由，不分析身份，也不把路径包装成唯一答案。</p></header>
+      <div>{studyPlans.map((item, index) => <article key={item.id}><span>0{index + 1}</span><small>{item.kicker}</small><h3>{item.title}</h3><p>{item.reason}</p><footer><b>{item.time}</b><a href={item.href}>开始 →</a></footer></article>)}</div>
     </section>
     <section className="mastery-panel">
       <header><div><p className="mini-label">Chapter mastery</p><h2>十四章掌握度</h2></div><aside><span>下一步建议</span><strong>第 {recommended.chapter} 章 · {chapterTitles[recommended.chapter - 1]}</strong><p>{recommended.practice ? recommended.wrong ? `先重做本章 ${recommended.wrong} 道错题，再完成案例。` : "继续完成深度研读或章节案例。" : "先完成本章综合练习，建立第一条掌握度记录。"}</p><a href={`${baseUrl}chapters/${recommended.token}/`}>开始建议任务 →</a></aside></header>

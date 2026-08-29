@@ -788,6 +788,7 @@ main {
   color: var(--ink);
 }
 .study-vitals{display:grid;grid-template-columns:1fr 1fr;gap:.4rem;margin-top:1rem}.study-vitals span{padding:.55rem;border:1px solid var(--line);color:var(--muted);font-size:.68rem}.study-vitals b{display:block;color:var(--cinnabar);font-family:var(--serif);font-size:1.25rem}
+.study-compass{grid-column:1/-1;padding:2rem;border-top:1px solid var(--line);background:#24312b;color:#f5eee4}.study-compass>header{display:grid;grid-template-columns:1fr 1fr;gap:2rem;align-items:end}.study-compass h2{margin:.15rem 0;font-family:var(--serif);font-size:1.8rem}.study-compass>header>p{max-width:42rem;margin:0;color:#b9c1bc;font-size:.75rem;line-height:1.7}.study-compass>div{display:grid;grid-template-columns:repeat(3,1fr);gap:.65rem;margin-top:1.3rem}.study-compass article{position:relative;display:flex;min-height:230px;flex-direction:column;padding:1.2rem;border:1px solid rgba(255,255,255,.13);background:rgba(255,255,255,.035)}.study-compass article>span{position:absolute;top:1rem;right:1rem;color:#d99279;font-family:var(--serif);font-size:1.25rem}.study-compass article>small{color:#d99279;font-size:.62rem;letter-spacing:.12em}.study-compass h3{max-width:85%;margin:.55rem 0;font-family:var(--serif);font-size:1.2rem}.study-compass article>p{margin:0;color:#b7bfb9;font-size:.72rem;line-height:1.65}.study-compass article footer{display:flex;justify-content:space-between;align-items:center;margin-top:auto;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}.study-compass article footer b{color:#d4d9d5;font-size:.66rem;font-weight:400}.study-compass article footer a{color:#efb098;font-size:.72rem;text-decoration:none}
 .mastery-panel{grid-column:1/-1;padding:2rem;border-top:1px solid var(--line)}.mastery-panel>header{display:grid;grid-template-columns:.65fr 1.35fr;gap:2rem;align-items:start}.mastery-panel h2{margin:0;font-family:var(--serif)}.mastery-panel>header aside{padding:1rem;border-left:3px solid var(--cinnabar);background:#e9dfcf}.mastery-panel>header aside span,.mastery-panel>header aside strong{display:block}.mastery-panel>header aside span{color:var(--cinnabar);font-size:.68rem}.mastery-panel>header aside strong{margin:.2rem 0;font-family:var(--serif)}.mastery-panel>header aside p{margin:.2rem 0;color:var(--muted);font-size:.75rem}.mastery-panel>header aside a{color:var(--cinnabar);font-size:.72rem}.mastery-grid{display:grid;grid-template-columns:repeat(7,1fr);margin-top:1rem;border-top:1px solid var(--line);border-left:1px solid var(--line)}.mastery-grid>a{display:flex;min-width:0;min-height:150px;padding:.7rem;flex-direction:column;border-right:1px solid var(--line);border-bottom:1px solid var(--line);text-decoration:none}.mastery-grid small,.mastery-grid span,.mastery-grid em{color:var(--muted);font-size:.62rem;font-style:normal}.mastery-grid strong{margin:.2rem 0;color:var(--cinnabar);font-family:var(--serif);font-size:1.5rem}.mastery-grid span{min-height:2.8em}.mastery-grid i{height:4px;margin-top:auto;background:#ddd2bf}.mastery-grid i b{display:block;width:var(--mastery);height:100%;background:#5c8066}.mastery-grid em{margin-top:.45rem;line-height:1.45}.mastery-note{margin:1rem 0 0;color:var(--muted);font-size:.7rem}
 
 .progress-list-title {
@@ -964,11 +965,13 @@ main {
 
   .progress-dashboard--full .wrongbook-panel,
   .progress-dashboard--full .archive-tools,
+  .progress-dashboard--full .study-compass,
   .progress-dashboard--full .mastery-panel {
     grid-column: auto;
   }
 
   .mastery-panel>header{grid-template-columns:1fr}.mastery-grid{grid-template-columns:repeat(2,1fr)}
+  .study-compass>header{grid-template-columns:1fr}.study-compass>div{grid-template-columns:1fr}
 
   .archive-tools {
     grid-template-columns: 1fr;

@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.9.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.10.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -214,7 +214,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("chapterJourneys");
     expect(progress).toContain("version: 3");
     expect(progress).toContain("{gameCount}/9");
-    expect(progress).toContain("const totalActivities = 54");
+    expect(progress).toContain("const totalActivities = 55");
   });
 
   it("将十四章本地记录整理成可解释、可导出的个人成果册", () => {
@@ -340,5 +340,38 @@ describe("公开项目成熟度门禁", () => {
     expect(analysis).toContain("中位耗时");
     expect(analysis).toContain("结束访谈原话");
     expect(analysis).toContain("按修复优先度排列");
+  });
+
+  it("残卷归档调查跨章组织证据、命题和可复查报告", () => {
+    const casebook = read("src/components/FragmentCasebook.tsx");
+    const lab = read("src/pages/lab/index.astro");
+    expect(lab).toContain("<FragmentCasebook");
+    expect(casebook).toContain("教学虚构案例");
+    expect(casebook).toContain("直接支持");
+    expect(casebook).toContain("不能这样推出");
+    expect(casebook).toContain("不能越过的证据边界");
+    expect(casebook).toContain('type="range"');
+    expect(casebook).toContain("残卷归档调查报告");
+    expect(casebook).toContain('progress["fragment-casebook"]');
+  });
+
+  it("学习罗盘用本地证据解释三项下一步行动", () => {
+    const progress = read("src/components/ProgressDashboard.tsx");
+    expect(progress).toContain("现在最值得做的三件事");
+    expect(progress).toContain("到期复习");
+    expect(progress).toContain("当前主线");
+    expect(progress).toContain("跨章迁移");
+    expect(progress).toContain("推荐只依据这台设备");
+    expect(progress).toContain("slice(0, 3)");
+  });
+
+  it("发布前阻止学习单元空泛、过短或跨单元复制", () => {
+    const audit = read("scripts/audit-content-voice.mjs");
+    expect(read("package.json")).toContain("audit-content-voice.mjs");
+    expect(audit).toContain("key_question");
+    expect(audit).toContain("summary");
+    expect(audit).toContain("boundary");
+    expect(audit).toContain("跨单元完全重复");
+    expect(read("docs/编辑与术语规范.md")).toContain("不得互相改写充数");
   });
 });

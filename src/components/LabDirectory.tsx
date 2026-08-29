@@ -9,6 +9,7 @@ type Experiment = {
 };
 
 const experiments: Experiment[] = [
+  { id: "fragment-casebook", title: "残卷归档调查", chapter: "第二、五、七、十四章", method: "证据推理", level: "综合", minutes: 18, output: "残卷归档调查报告", description: "区分物质、目录与流传证据，控制缀合命题的强度。", anchor: "fragment-casebook" },
   { id: "rare-book-dossier", title: "古籍鉴定综合案卷", chapter: "跨章", method: "证据推理", level: "综合", minutes: 15, output: "综合鉴定意见", description: "在六间证据室之间推进，管理互相支持或冲突的线索。", anchor: "rare-book-dossier" },
   { id: "version-detective", title: "版本鉴定侦探", chapter: "第五章", method: "证据推理", level: "进阶", minutes: 8, output: "版本研判单", description: "先封存初始假说，再分批揭证并记录信心变化。", anchor: "version-detective" },
   { id: "four-fold", title: "四部分类挑战", chapter: "第七章", method: "分类判断", level: "入门", minutes: 6, output: "目录判断单", description: "声明分类框架、批量归架，并解释一部边界书。", anchor: "four-fold" },
@@ -27,7 +28,7 @@ const levels: Array<"全部" | Level> = ["全部", "入门", "进阶", "综合"]
 export default function LabDirectory({ baseUrl }: { baseUrl: string }) {
   const [method, setMethod] = useState<(typeof methods)[number]>("全部");
   const [level, setLevel] = useState<(typeof levels)[number]>("全部");
-  const [time, setTime] = useState(15);
+  const [time, setTime] = useState(18);
   const [completed, setCompleted] = useState<string[]>([]);
   const [suggested, setSuggested] = useState("four-fold");
 
@@ -54,8 +55,8 @@ export default function LabDirectory({ baseUrl }: { baseUrl: string }) {
 
   return <section className="lab-directory" aria-labelledby="lab-directory-title">
     <header><div><small>EXPERIMENT DIRECTORY · 实验目录</small><h2 id="lab-directory-title">今天想练哪一种判断？</h2><p>先按训练方式、难度和时间缩小范围。完成标记只读取当前浏览器，不代表能力认证。</p></div><aside><span>建议第一次体验</span><strong>{recommendation.title}</strong><small>{recommendation.minutes} 分钟 · 产出：{recommendation.output}</small><div><a href={hrefFor(recommendation)}>开始这项实验 →</a><button type="button" onClick={chooseOne}>换一个</button></div></aside></header>
-    <div className="lab-filters"><fieldset><legend>训练方式</legend>{methods.map((item) => <button type="button" className={method === item ? "active" : ""} aria-pressed={method === item} onClick={() => setMethod(item)} key={item}>{item}</button>)}</fieldset><fieldset><legend>难度</legend>{levels.map((item) => <button type="button" className={level === item ? "active" : ""} aria-pressed={level === item} onClick={() => setLevel(item)} key={item}>{item}</button>)}</fieldset><label><span>最多用时 <b>{time} 分钟</b></span><input type="range" min="4" max="15" step="1" value={time} onChange={(event) => setTime(Number(event.target.value))} /></label></div>
-    <div className="lab-directory-count"><strong>{filtered.length}</strong><span>项符合当前条件</span>{!filtered.length && <button type="button" onClick={() => { setMethod("全部"); setLevel("全部"); setTime(15); }}>清除筛选</button>}</div>
+    <div className="lab-filters"><fieldset><legend>训练方式</legend>{methods.map((item) => <button type="button" className={method === item ? "active" : ""} aria-pressed={method === item} onClick={() => setMethod(item)} key={item}>{item}</button>)}</fieldset><fieldset><legend>难度</legend>{levels.map((item) => <button type="button" className={level === item ? "active" : ""} aria-pressed={level === item} onClick={() => setLevel(item)} key={item}>{item}</button>)}</fieldset><label><span>最多用时 <b>{time} 分钟</b></span><input type="range" min="4" max="18" step="1" value={time} onChange={(event) => setTime(Number(event.target.value))} /></label></div>
+    <div className="lab-directory-count"><strong>{filtered.length}</strong><span>项符合当前条件</span>{!filtered.length && <button type="button" onClick={() => { setMethod("全部"); setLevel("全部"); setTime(18); }}>清除筛选</button>}</div>
     <div className="lab-directory-grid">{filtered.map((item, index) => <article className={suggested === item.id ? "suggested" : ""} key={item.id}><header><span>{String(index + 1).padStart(2, "0")}</span>{completed.includes(item.id) && <b>本机已完成</b>}</header><small>{item.chapter} · {item.method}</small><h3>{item.title}</h3><p>{item.description}</p><dl><div><dt>难度</dt><dd>{item.level}</dd></div><div><dt>预计</dt><dd>{item.minutes} 分钟</dd></div><div><dt>产出</dt><dd>{item.output}</dd></div></dl><a href={hrefFor(item)}>进入实验 →</a></article>)}</div>
   </section>;
 }

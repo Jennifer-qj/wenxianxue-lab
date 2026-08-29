@@ -19,6 +19,7 @@ const rawItems: SearchItem[] = [
   ...quizzes.flatMap((entry) => entry.data.items).map((quiz) => ({ id: quiz.id, type: "quiz" as const, chapter: quiz.chapter, title: quiz.prompt, text: quiz.explanation, meta: quiz.type, href: `${base}chapters/ch${String(quiz.chapter).padStart(2, "0")}/#check` })),
   ...labs.flatMap((entry) => entry.data.items.map((lab) => ({ id: lab.id, type: "lab" as const, chapter: Number(entry.id.slice(2)), title: lab.title, text: `关联 ${lab.concept_ids.length} 个概念的${lab.engine}互动案例`, meta: lab.engine, href: `${base}lab/#case-gallery` }))),
   { id: "rare-book-dossier", type: "lab" as const, chapter: 5, title: "古籍鉴定综合案卷", text: "综合纸张、装帧、牌记、避讳、刻工、版式、目录和递藏证据，形成并导出有限度鉴定意见。", meta: "综合证据推理", href: `${base}lab/#rare-book-dossier` },
+  { id: "fragment-casebook", type: "lab" as const, chapter: 14, title: "残卷归档调查", text: "联合纸幅、断口、虫孔、书手、目录题名和入藏记录，形成带证据边界的跨馆残卷归档意见。", meta: "跨章证据推理", href: `${base}lab/#fragment-casebook` },
   ...deepdives.flatMap((entry) => entry.data.items).map((study) => ({ id: study.id, type: "deepdive" as const, chapter: study.chapter, title: study.title, text: `${study.scenario} ${study.question}`, meta: study.deliverable, href: `${base}chapters/ch${String(study.chapter).padStart(2, "0")}/#deep-dive`, status: statusName[study.status] })),
 ];
 const items = rawItems.map((item) => ({ ...item, aliases: aliasesFor(item.title, item.text, item.meta) }));
