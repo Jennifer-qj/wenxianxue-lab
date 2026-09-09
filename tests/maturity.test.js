@@ -102,7 +102,7 @@ describe("公开项目成熟度门禁", () => {
   });
 
   it("为全部待核验章节提供专属复核包，并保留编辑语气门禁", () => {
-    for (const chapter of [2, 3, 4, 5, 6]) {
+    for (const chapter of [2, 3, 4, 5, 6, 7]) {
       const id = String(chapter).padStart(2, "0");
       const packet = read(`content/reviews/ch${id}.yaml`);
       expect(packet).toContain("status: in_review");
@@ -113,7 +113,7 @@ describe("公开项目成熟度门禁", () => {
       const id = String(chapter).padStart(2, "0");
       const packet = read(`content/reviews/ch${id}.yaml`);
       expect(packet).toContain("source_requirement: paper_copy");
-      if (chapter > 6) expect(packet).toContain("status: queued");
+      if (chapter > 7) expect(packet).toContain("status: queued");
     }
     expect(read("package.json")).toContain("audit-editorial-voice.mjs");
     expect(existsSync(resolve(root, "docs/编辑与术语规范.md"))).toBe(true);
@@ -205,7 +205,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.12.4"');
+    expect(read("src/consts.ts")).toContain('version: "0.12.5"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

@@ -16,10 +16,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行285—329；目录定位第151—154页。原书由刘向校书说明单书的目次与叙录如何汇成群书目录，并以《别录》《七略》《汉书·艺文志》《四库全书总目》展示目录的著录和学术功能；已撤回项目中未经原书明示的‘由清点书目发展而来’线性叙述。纸本终审需核对《晏子书录》四项内容、书名卷数及引文标点。"
   - unit_id: mku-07-02-01
     page_start: 154
     page_end: 160
@@ -33,10 +33,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行331—524；目录定位第154—160页。分类有便于查找和总结学术源流两重目的，主线由《七略》六分法、《七志》《七录》到经史子集四部及清末五部展开；已纠正‘六分、七略和四部’的层级混称，并补入新旧分类各有适用对象的边界。纸本终审需核对各目录分类细目、卷数、存佚及《中国丛书综录》层级。"
   - unit_id: mku-07-03-01
     page_start: 160
     page_end: 163
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行526—585；目录定位第160—163页。原书分述书名的七类来源、同书异名与异书同名，以及篇、卷、册在内容与物质分段上的不同；项目以名称、篇卷、传本联合识别作品的概括可对应。纸本终审需逐项核对书例、人物与篇卷数字，尤其避免把正文分篇和装订分册混同。"
   - unit_id: mku-07-03-02
     page_start: 163
     page_end: 165
@@ -67,10 +67,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行586—611；目录定位第163—165页。著录著者需兼顾朝代、籍贯、姓名字号及撰编辑校注等责任方式，版本则应说明刻本形态、时代、刻书者或地点、钞校者、题跋及丛书归属。纸本终审需核对‘遗民’著录惯例、责任用语和版本示例，确认页面边界。"
   - unit_id: mku-07-03-03
     page_start: 165
     page_end: 168
@@ -84,10 +84,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行612—658；目录定位第165—168页。提要可说明作者、内容、评价、流传、版本和特殊材料价值，辑录体提要本身尤具资料价值；大小序用于说明类别与学术源流，但缺少序或提要并不使书目失去目录性质。纸本终审需核对《四库全书总目》案例、大小序层级及引文。"
   - unit_id: mku-07-04-01
     page_start: 168
     page_end: 173
@@ -101,10 +101,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行660—779；目录定位第168—173页。公藏目录显示机构藏书，私藏目录多保存善本、精校名钞与题跋成果；史志目录须再分追记一代藏书与限收一朝著述，并辨直接据书或沿用前目。已把项目问题从抽象的‘信息密度’改为各类目录能证明什么。纸本终审需核对目录书名、作者、卷数及史志亡佚推例。"
   - unit_id: mku-07-04-02
     page_start: 173
     page_end: 174
@@ -118,10 +118,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行781—793；目录定位第173—174页。专科目录按经学、小学、史部、子部、集部列举代表著作，在窄领域集中提供存佚、序跋、版本和研究线索；其效用仍受编者见闻、取材与标注体例制约。纸本终审需核对各书作者、书名与卷数，并检查跨部类书目归属。"
   - unit_id: mku-07-04-03
     page_start: 174
     page_end: 175
@@ -135,7 +135,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行795—815；目录定位第174—175页。特种目录包括举要、丛书、知见、经眼、禁毁、版本图录、辨伪等；知见兼含直接所见与间接所知，经眼只收亲见，不能混作同等证据。已将这一差别写入章节、概念和练习。纸本终审需核对代表书目、作者、收录数量和本节末尾的工具书／著述体裁判断。"
