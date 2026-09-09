@@ -9,17 +9,17 @@ items:
     focus:
       - 核对「一、“版本”释义」的纸本页码边界、核心定义和原书例证
       - 核对版本类型、印刷工艺和装帧术语的识别条件
-      - 检查项目对“版本为什么同时涉及文字与物质形态？”的回答是否保持原书限定
+      - 检查项目对“‘版本’怎样从雕版书名词扩展为广义概念？”的回答是否保持原书限定
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1628—1644；目录定位第104—105页。早期“板本”与写本相对，后续用法扩展到抄本、排印本和电子版；已据此改写主问题与释义。纸本终审需核对引文、用例年代及“板／版”用字。"
   - unit_id: mku-05-02-01
     page_start: 105
     page_end: 107
@@ -33,10 +33,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1650—1662；目录定位第105—107页。写本分为手稿本、清稿本、抄稿本、影钞本和一般抄本，分类依据与项目概括相符。纸本终审需核对各类定义、人物书名、堂号和写本用纸术语。"
   - unit_id: mku-05-02-02
     page_start: 107
     page_end: 107
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1666—1668；目录定位第107页。刻本按时代、地域、出资者、刊刻先后、刷印早晚、墨色、开本、版式、行款和字体分类，支持同版仍有刷印差异的概括。纸本终审需核对全部分类名目及“覆刻／影刻”等术语。"
   - unit_id: mku-05-02-03
     page_start: 107
     page_end: 107
@@ -67,10 +67,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1670—1672；目录定位第107页。套印定义为两色以上经多版次印刷，另列同版分次刷色与活字套印等例，能支持分色观察。纸本终审需核对案例版本、人物名称与套印方式。"
   - unit_id: mku-05-02-04
     page_start: 107
     page_end: 108
@@ -84,44 +84,44 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1674—1680；目录定位第107—108页。饾版按画面层次分刻多版套印，拱花以压印形成凸纹，项目定义基本对应。纸本终审需确认原书标题用字、工艺名词及《十竹斋笺谱》说明。"
   - unit_id: mku-05-02-05
     page_start: 108
     page_end: 109
     focus:
       - 核对「（五）活字本」的纸本页码边界、核心定义和原书例证
       - 避免以单一特征直接判定年代、价值或真伪
-      - 检查项目对“活字排印会留下哪些重复与不齐痕迹？”的回答是否保持原书限定
+      - 检查项目对“活字排印会留下哪些排版与刷印线索？”的回答是否保持原书限定
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1682—1688；目录定位第108—109页。原书以版框拼缝、摆字歪斜、墨色浓淡、上下字笔画不交叉及序跋牌记作为活字线索；已删除“同字重复”的不稳妥主线。纸本终审需核对毕昇引文、早期实物年代与内外聚珍辨别。"
   - unit_id: mku-05-02-06
     page_start: 109
     page_end: 109
     focus:
       - 核对「（六）石印本」的纸本页码边界、核心定义和原书例证
       - 核对版本类型、印刷工艺和装帧术语的识别条件
-      - 检查项目对“石印如何改变近代复制效率？”的回答是否保持原书限定
+      - 检查项目对“石印本怎样利用油水相斥完成印刷？”的回答是否保持原书限定
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1690—1692；目录定位第109页。本节仅说明药墨写石或药纸转写、油水相斥和滚墨刷印的石印工艺；已撤回“提高效率、便于缩印”的超出概括。纸本终审需核对材料名称与工艺步骤。"
   - unit_id: mku-05-02-07
     page_start: 109
     page_end: 110
@@ -135,10 +135,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1694—1696；目录定位第109—110页。珂罗版以照相制版、磨砂玻璃和感光材料成版，原书并举影印实例，支持其复制用途。纸本终审需核对外来术语、材料名称及所举书目。"
   - unit_id: mku-05-02-08
     page_start: 110
     page_end: 110
@@ -152,10 +152,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1698—1700；目录定位第110页。写本或印本经读者批注、校勘或题跋形成批校本、题跋本，名家手迹受重视。纸本终审需核对人物名单，并区分原刻内容与后加阅读层。"
   - unit_id: mku-05-03-01
     page_start: 110
     page_end: 112
@@ -169,10 +169,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1702—1728；目录定位第110—112页。原书明确区分文物价值意义与讹误少、精校精注意义上的善本，并强调治学应重精校本；项目两维概括相符。纸本终审需核对张之洞定义、例证版本系统及“精注精校、不缺不讹”表述。"
   - unit_id: mku-05-03-02
     page_start: 112
     page_end: 114
@@ -186,10 +186,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1730—1838；目录定位第112—114页。本节按经史子集列举通行而精校精注的要籍，说明后出整理本也可具学术意义上的善本价值。纸本终审需逐项核对书名、卷数、撰校者与版本信息，项目不公开转录整份书目。"
   - unit_id: mku-05-04-01
     page_start: 114
     page_end: 116
@@ -203,10 +203,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1839—1857；目录定位第114—116页。鉴定目标、先明撰写年代以定上限、再细读前后序跋形成刊刻线索均有对应；序跋也可能被沿刻或撤去。纸本终审需核对《危言》《禹贡论》案例的年代、官衔和推断步骤。"
   - unit_id: mku-05-04-02
     page_start: 116
     page_end: 118
@@ -220,10 +220,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1859—1883；目录定位第116—118页。牌记可记时间、地点、刻书人或书铺，但存在假冒、后加和旧版重印加牌记，支持“重要而可能误导”的边界。纸本终审需核对各牌记原文、版次关系及地域判断。"
   - unit_id: mku-05-04-03
     page_start: 118
     page_end: 119
@@ -237,10 +237,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1885—1899；目录定位第118—119页。避讳用于限定版刻时间，原书同时展示误判、配本、翻刻沿袭和多字互证的复杂性。纸本终审需核对历代避讳规则、字形及《文中子》《明谥考》案例。"
   - unit_id: mku-05-04-04
     page_start: 119
     page_end: 126
@@ -254,10 +254,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1901—2001；目录定位第119—126页。刻工和校阅人的活动时地可与标准件系联，但同名、误合刻工及不同卷配本会造成偏差；人物证据必须与其他线索合用。纸本终审需重点复核长篇《龙龛手鉴》案例、刻工名单、书目著录与年代。"
   - unit_id: mku-05-04-05
     page_start: 126
     page_end: 128
@@ -271,10 +271,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行2003—2041；目录定位第126—128页。原书分别归纳宋元明清字体风格与版口、鱼尾、边栏、书耳等版式特征，并通过实例说明比较判断。纸本终审需核对地域与时代特征，避免将概括性类型当作无例外规则。"
   - unit_id: mku-05-04-06
     page_start: 128
     page_end: 130
@@ -288,10 +288,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行2043—2065；目录定位第128—130页。纸张用于观察时代地域材料，装潢反映装订形制，藏印可限定收藏与抄刊下限，三者证据对象不同。纸本终审需核对纸名、原料、帘纹尺度、装帧时代和《天府广记》案例。"
   - unit_id: mku-05-04-07
     page_start: 129
     page_end: 133
@@ -305,10 +305,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行2067—2071及续稿行3—23；目录定位第129—133页。类比法依赖可靠标准本，查著录缩小候选范围，旁证补足内证无法回答的问题；内外证必须结合。纸本终审需核对跨文件页码衔接及《说文解字句读》等案例的版次结论。"
   - unit_id: mku-05-04-08
     page_start: 133
     page_end: 134
@@ -322,7 +322,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "续稿行25—31；目录定位第133—134页。对书影可比较同书不同本，识别原被误作不同版本的同版异印；结尾强调十五种方法应综合使用。纸本终审需核对《读书敏求记》三次刷印案例，并保留书影无法替代纸张装订实物观察的项目边界。"

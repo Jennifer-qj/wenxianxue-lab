@@ -1,5 +1,5 @@
 items:
-  - {id: c_version, label: 版本, type: concept, definition: 同一文献在形成、复制和流传中产生的不同文本与物质形态。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_version, label: 版本, type: concept, definition: 由早期主要指雕版印本逐步扩展而来、用以区分同一文献不同本子的广义概念。, chapter_ids: [ch05], status: pending_review}
   - {id: c_manuscript, label: 写本, type: concept, definition: 以手工书写方式形成的文献版本。, chapter_ids: [ch05], status: pending_review}
   - {id: c_blockprint, label: 刻本, type: concept, definition: 以雕刻文字或图像的版片刷印而成的书籍版本；同一版片在修版、补版与不同刷印阶段仍可能形成差异。, chapter_ids: [ch05], status: pending_review}
   - {id: c_color_print, label: 套印本, type: concept, definition: 使用多块版分色套印形成的版本。, chapter_ids: [ch05], status: pending_review}
