@@ -8,7 +8,7 @@ items:
     page_end: 268
     focus:
       - 核对「地方志的产生」的纸本页码边界、核心定义和原书例证
-      - 核对类书与丛书的定义、编排方式和使用目的
+      - 核对从地方史、地理书、图经到成熟方志体例的发展线索
       - 检查项目对“地方记载怎样发展为综合性方志？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -16,16 +16,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2252—2282；目录定位第266—268页。原书由周代地方史、汉晋地理书与人物地方记录、隋唐图经，推进到《华阳国志》《太平寰宇记》和宋代成熟方志；项目以史地与人物艺文逐步结合概括，基本相符。纸本终审需核对书名、卷数、人物、图经藏地及‘现存最早’等判断。"
   - unit_id: mku-10-01-02
     page_start: 268
     page_end: 270
     focus:
       - 核对「历代地方志的数量与存佚」的纸本页码边界、核心定义和原书例证
-      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 区分可考、现存、残存、出版等数量口径
       - 检查项目对“方志数量统计为什么必须注明口径？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -33,16 +33,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2284—2304；目录定位第268—270页。原书分别列宋元可考与现存、明清现存、民国修纂和新修方志出版数量，统计对象并不相同；已去掉本节未展开的战乱、收藏原因，改为公开数量口径。纸本终审需核对各朝种数、政府条例年份、机构沿革和统计截止时间。"
   - unit_id: mku-10-01-03
     page_start: 270
     page_end: 273
     focus:
       - 核对「总志、省志、府州厅县志」的纸本页码边界、核心定义和原书例证
-      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 核对总志、省志、府志、州志、厅志和县志的行政范围
       - 检查项目对“行政层级如何决定方志覆盖范围？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -50,16 +50,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2306—2350；目录定位第270—273页。总志以全国为对象，省、府、州、厅、县按当时行政关系缩小范围；原书以《浙江通志》和江阴县志、续志详示栏目与资料差异。纸本终审需核对行政隶属、卷数、五十四门与县志比例，长目录应逐项对纸本。"
   - unit_id: mku-10-01-04
     page_start: 273
     page_end: 274
     focus:
       - 核对「乡镇、都邑、卫所、边关、土司、盐井与专志」的纸本页码边界、核心定义和原书例证
-      - 核对类书与丛书的定义、编排方式和使用目的
+      - 核对乡镇、都邑、卫所、边关、土司、盐井与专志的对象
       - 检查项目对“非标准行政区域为何也会产生方志？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -67,16 +67,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2352—2380；目录定位第273—274页。原书列乡镇、都邑、卫所、边关、土司、盐井与专志，专志或为特殊区域、或为某一门类，属于地方志分支或变种；已撤回‘独立治理与记忆需求’的无据归因。纸本终审需核对卫所人数、土司制度、盐井沿革和代表志书。"
   - unit_id: mku-10-01-05
     page_start: 274
     page_end: 278
     focus:
       - 核对「地方志的用途」的纸本页码边界、核心定义和原书例证
-      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 核对政治、地理沿革、文学与历史资料等用途及原书例证
       - 检查项目对“方志资料为何既丰富又必须互证？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -84,16 +84,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2382—2424；目录定位第274—278页。用途主线为政治治理、地理沿革、文学创作与搜集、历史资料，并扩展到方言、灾害、物产、旅游和天文；已将编纂立场与互证明确为网站研究提醒，而非冒充原书本节结论。纸本终审需核对引文、案例地名、统计数字和工具书名称。"
   - unit_id: mku-10-02-01
     page_start: 278
     page_end: 282
     focus:
       - 核对「家谱的起源与发展」的纸本页码边界、核心定义和原书例证
-      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 核对官修通谱、选官门第与宋以后私修家谱的功能变化
       - 检查项目对“家谱功能如何从身份秩序扩展为宗族记忆？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -101,16 +101,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第二册行2426—2446、第三册行1—25；目录定位第278—282页。原书说明家谱异名和男子主干结构，追溯官修谱牒与选官婚姻关系，再写唐代政治功能降低及宋以后私修成为主流，并比较欧阳修、苏洵谱式。纸本终审需核对官修谱书卷数、姓氏家数、五世一图格式及跨册衔接。"
   - unit_id: mku-10-02-02
     page_start: 282
     page_end: 283
     focus:
       - 核对「世系、世系录、谱序与谱例」的纸本页码边界、核心定义和原书例证
-      - 核对类书与丛书的定义、编排方式和使用目的
+      - 核对世系、世系录、谱序、恩荣录和谱例的结构与功能
       - 检查项目对“怎样阅读家谱的关系结构与编纂规则？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -118,16 +118,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第三册行27—47；目录定位第282—283页。世系是血缘关系图，世系录记录排行、字号、科第、婚姻、生卒、葬所与子女，谱序交代历次修纂，恩荣录保存褒奖，谱例规定修谱并可附排行字。纸本终审需核对示例人物关系、栏目名称和原书对妇女婚姻记录的历史性表述。"
   - unit_id: mku-10-02-03
     page_start: 283
     page_end: 284
     focus:
       - 核对「恩荣、像赞、传志、家训、文献与修谱记录」的纸本页码边界、核心定义和原书例证
-      - 核对代表性类书、丛书的书名、时代、规模和存佚
+      - 核对像赞、图、传志、诵芬录、家训、文献与领谱字号等栏目
       - 检查项目对“家谱除世系外还保存哪些材料？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -135,16 +135,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第三册行49—71；目录定位第283—284页。家谱其余栏目包括像赞、祖庙祖茔等图、传志、诵芬录、懿行录、宗规家训、文献、各类专志、修谱人员、陈设图和领谱字号；项目已覆盖这些非世系材料。纸本终审需核对第十项栏目题名、十六项次序及两首字号诗。"
   - unit_id: mku-10-02-04
     page_start: 284
     page_end: 289
     focus:
       - 核对「家谱的价值与存佚」的纸本页码边界、核心定义和原书例证
-      - 区分保存佚文的价值与转引、删改、底本不明等风险
+      - 核对人物、诗文、人口、移民、宗族制度价值及家谱存藏数量
       - 检查项目对“家谱怎样用于人口、移民和宗族研究？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -152,7 +152,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿第三册行73—129；目录定位第284—289页。原书将价值分为人物传记、诗文、人口学、移民史和宗族制度，并详述存佚、抢救与海内外收藏；项目保留性别、旁支和收录规则作为现代统计前提。纸本终审需核对人物案例、篇数、人口数字、馆藏种册数和统计年代。"
