@@ -16,10 +16,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1393—1451；目录定位第220—222页。原书先定义类书，再分别与丛书、百科全书、辞书辨界，并由《皇览》及六朝用事、辞藻风气说明起源；已把项目问题从含混的‘普通著作’改为四类结构比较。纸本终审需核对《皇览》卷数、修撰者、存佚及各段引文。"
   - unit_id: mku-09-01-02
     page_start: 222
     page_end: 225
@@ -33,10 +33,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1453—1517；目录定位第222—225页。查史料与辞藻分别通过《艺文类聚》《太平御览》《初学记》《佩文韵府》举例，原书明确要求类书命中后尽可能回查原书、分析片段和删误；项目的检索—回查边界可对应。纸本终审需核对类目卷次、条数、诗句作者与题名。"
   - unit_id: mku-09-01-03
     page_start: 225
     page_end: 226
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1518—1530；目录定位第225—226页。类书可据早期引文补校脱误，并因大量摘引古书成为辑佚重要来源；但前章已说明节引、误引和类书自身文字差异仍须鉴别。纸本终审需核对《水经注》《魏书》补校数字及《太平御览》引书种数。"
   - unit_id: mku-09-01-04
     page_start: 226
     page_end: 232
@@ -67,10 +67,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1532—1673；目录定位第226—232页。原书逐部说明《北堂书钞》《艺文类聚》《初学记》《太平广记》《太平御览》《册府元龟》的卷数、门类、编者、成书与版本，体例差异决定检索入口。纸本终审需核对六书题名、卷数、分类层级、引书规模及现存版本。"
   - unit_id: mku-09-01-05
     page_start: 232
     page_end: 240
@@ -84,10 +84,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1674—1737；目录定位第232—240页。《永乐大典》《古今图书集成》《佩文韵府》《韵府拾遗》《骈字类编》分别按韵、汇编、词尾或双字词组织材料，并保存多种佚文；项目保留大规模并不消除取舍、存佚和引文核查的边界。纸本终审需核对卷数、编者、存佚数量及各书检索法。"
   - unit_id: mku-09-02-01
     page_start: 240
     page_end: 240
@@ -101,10 +101,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1738—1743；目录定位第240页。丛书是把多种不同的书编在一起并冠总名，原书通常保持整体而不分割；类书则摘取词句段落分类。项目的结构边界与原书一致。纸本终审需核对定义原句及《四库全书》《大藏经》《道藏》的举例层次。"
   - unit_id: mku-09-02-02
     page_start: 240
     page_end: 242
@@ -118,10 +118,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1744—1754；目录定位第240—242页。‘丛书’之名虽见《笠泽丛书》，该书实为文集；综合性丛书一般以南宋《儒学警悟》为起点，专科性成组文献则可上溯六经等，丛书尤能保存小书。已撤回原项目未直接获证的‘降低获取成本’概括。纸本终审需核对六经至十三经、诸史汇刻及各版本年代。"
   - unit_id: mku-09-02-03
     page_start: 242
     page_end: 266
@@ -135,7 +135,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1756—2245；目录定位第242—266页。原书列举一百四十五种丛书，持续记录编者、种卷数、刊刻或影印时间、底本、补刻续编、残缺和版本抽换；已据此强化选择丛书本所需的版本身份，而不把总名相同视为文本相同。纸本终审需分批核对书名、人名、数字、时代、底本和版本评价，长表不宜一次性确认。"
