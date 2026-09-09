@@ -16,10 +16,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1194—1280；目录定位第56—64页。周秦官职与府库、汉代征集写录和刘向父子校书编目，以及后世馆阁收藏均能对应项目概括。纸本终审需核对历代机构、人物年代与藏量数字。"
   - unit_id: mku-04-01-02
     page_start: 64
     page_end: 69
@@ -33,10 +33,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1282—1334；目录定位第64—69页。所列史事覆盖焚毁、战乱、河运沉没、宫火、禁毁及收藏体系瓦解，支持“集中收藏仍有单点风险”的归纳。纸本终审需逐项核对十七次散佚事件的名称、次序、年代和损失数字。"
   - unit_id: mku-04-02-01
     page_start: 69
     page_end: 70
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1336—1358；目录定位第69—70页。学术下移、墨子与惠施等人物藏书，以及秦火后私家所藏《诗》《书》重新出现，能支持私人收藏补充官方保存的概括。纸本终审需核对人物引文与上博楚简相关表述。"
   - unit_id: mku-04-02-02
     page_start: 70
     page_end: 71
@@ -67,27 +67,27 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1360—1378；目录定位第70—71页。蔡邕赠书、张华私藏补官藏、范蔚借书供食、沈麟士灾后补抄等事例，重点在赠书、借阅、传抄与补缺；已删除原摘要中依据不足的“家族传递”主线。纸本终审需核对人物姓名、书名及数量。"
   - unit_id: mku-04-02-03
     page_start: 71
     page_end: 73
     focus:
       - 核对「（三）唐宋私家藏书」的纸本页码边界、核心定义和原书例证
       - 对战乱、火灾、禁毁和散佚数量逐项寻找纸本依据
-      - 检查项目对“印刷发展如何改变私家收藏？”的回答是否保持原书限定
+      - 检查项目对“唐宋私藏怎样从数量积累走向校书、借阅和目录记录？”的回答是否保持原书限定
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1380—1420；目录定位第71—73页。人物材料集中体现藏量、亲自校书、多置副本、编制目录、开放借阅及火灾战乱后的散失；原项目“印刷推动私藏”缺少本节直接支撑，已改写主问题、摘要和题目。纸本终审需核对人物、藏量、目录名与灾变经过。"
   - unit_id: mku-04-02-04
     page_start: 73
     page_end: 79
@@ -101,10 +101,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1422—1488；目录定位第73—79页。元明藏家事迹可见藏书处、目录、手校、影抄、题跋与藏印，也记录多次聚散和转手，支持从物质痕迹追踪收藏记忆。纸本终审需核对藏书楼名、目录名、印文和递藏节点。"
   - unit_id: mku-04-02-05
     page_start: 79
     page_end: 89
@@ -118,10 +118,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1490—1550；目录定位第79—89页。所举清代藏家兼有访书、借抄、手校、编目与刻书活动，能够支持“收藏者也是整理与传播参与者”的概括。纸本终审需重点核对人名字号、斋楼名、目录与丛书名、藏量及印记。"
   - unit_id: mku-04-02-06
     page_start: 89
     page_end: 98
@@ -135,10 +135,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1552—1592；目录定位第89—98页。吴骞、黄丕烈、汪士钟、瞿氏、杨氏、丁氏、陆氏、缪氏等收藏的购求、互校、著录、转售与入藏，显示版本沿人际和机构网络迁移。纸本终审需逐项核对藏书家谱系、书目数字、交易时间与最终去向。"
   - unit_id: mku-04-02-07
     page_start: 98
     page_end: 104
@@ -152,7 +152,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1594—1624；目录定位第98—104页。李盛铎、傅增湘、张氏、刘承干、周叔弢与郑振铎等案例呈现私藏经收购、转让、捐献和机构整理进入公共收藏，并保留书目、题跋与旧藏印记。纸本终审需核对数量、年代、机构名称和流转去向。"
