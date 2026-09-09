@@ -92,6 +92,8 @@ describe("公开项目成熟度门禁", () => {
     expect(existsSync(resolve(root, "content/reviews/ch02.yaml"))).toBe(true);
     expect(review).toContain("本地勾选只帮助你工作");
     expect(review).toContain("导出本地复核记录");
+    expect(review).toContain("文字稿预对读 · 待纸本终审");
+    expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
     expect(read("src/pages/usability/index.astro")).toContain("测的是网站而不是你");
     expect(usability).toContain("导出 JSON");
@@ -100,11 +102,18 @@ describe("公开项目成熟度门禁", () => {
   });
 
   it("为全部待核验章节提供专属复核包，并保留编辑语气门禁", () => {
+    for (const chapter of [2, 3]) {
+      const id = String(chapter).padStart(2, "0");
+      const packet = read(`content/reviews/ch${id}.yaml`);
+      expect(packet).toContain("status: in_review");
+      expect(packet).toContain("文字稿预对读");
+      expect(packet).toContain("纸本终审需");
+    }
     for (let chapter = 2; chapter <= 14; chapter += 1) {
       const id = String(chapter).padStart(2, "0");
       const packet = read(`content/reviews/ch${id}.yaml`);
       expect(packet).toContain("source_requirement: paper_copy");
-      expect(packet).toContain("status: queued");
+      if (chapter > 3) expect(packet).toContain("status: queued");
     }
     expect(read("package.json")).toContain("audit-editorial-voice.mjs");
     expect(existsSync(resolve(root, "docs/编辑与术语规范.md"))).toBe(true);
@@ -196,7 +205,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.12.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.12.1"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

@@ -1,131 +1,131 @@
 chapter: 2
 edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
 source_requirement: paper_copy
-note: 本复核包根据现有结构化单元生成，只用于定位和记录；任何条目都必须回到纸本后才能改为已核验。
+note: 2026-09-09 已依据用户提供的带页码文字稿完成第一轮逐条对读；文字稿只作定位和原意预核，任何条目仍须回到指定纸本后才能改为已核验。
 items:
   - unit_id: mku-02-01-01
     page_start: 11
     page_end: 12
     focus: [核对甲骨材料范围和占卜流程概括, 核对出土数量与年代等可能受研究进展影响的数字, 区分原书陈述与项目补充的出土语境边界]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行618—620；目录定位第11—12页。载体、占卜程序与卜辞内容均可对应；出土语境属于项目的方法补充。纸本终审需核对1991年统计数和商代纪年。"
   - unit_id: mku-02-02-01
     page_start: 12
     page_end: 14
     focus: [核对金与金文的范围, 检查八类青铜器是否被摘要过度压缩, 区分器物功能事实与项目提出的解释方法]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行622—662；目录定位第12—14页。原书列礼、乐、兵、农、度量衡、钱币、符玺、日用器八类；项目概括用“等”收束，未把器类与铭文功能写成一一对应。纸本终审需核对器名异体与读音。"
   - unit_id: mku-02-03-01
     page_start: 14
     page_end: 16
     focus: [核对碣摩崖碑的定义和例证范围, 检查时代与专名, 注意碑与墓志等相邻概念的边界]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行664—694；目录定位第14—16页。碣、摩崖、碑的形制、位置和功能差异与概括相符；“名称随时代变化”是项目保留的解释边界。纸本终审需核对碑碣专名、年代和数量。"
   - unit_id: mku-02-04-01
     page_start: 16
     page_end: 20
     focus: [核对简牍尺寸制度与实物变通, 核对牍检封泥和编联术语, 检查册篇卷词源是否保持原书限定]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行696—734；目录定位第16—20页。简牍尺寸、牍检封泥、先写后编／先编后写及册篇卷词源均有对应；次序风险是由残简断札与编联材料归纳。纸本终审需重点核对“不準”、尺寸和出土数量。"
   - unit_id: mku-02-05-01
     page_start: 20
     page_end: 21
     focus: [核对帛的材料性质和使用范围, 检查与简策并用的时间表述, 避免把材料优势写成普遍使用]
     required_checks: [page_range, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行736—750；目录定位第20—21页。已删除原书未直接表达的“轻便”和笼统的“保存条件”，改用竹帛并用、帛书绘图、出土与宫廷使用事实；价格昂贵有明确依据。纸本终审需核对出土品名和尺寸。"
   - unit_id: mku-02-06-01
     page_start: 21
     page_end: 22
     focus: [核对莎草纸制作步骤和译名, 核对卷本连接方式, 检查跨文化年代比较是否沿用教材旧说而未注明]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行754—760；目录定位第21—22页。茎片纵横排列、树胶处理、捶压平滑及单页连接成卷均能对应。纸本终审需核对译名、英寸和跨文化年代；这些数字可能反映教材写作时资料。"
   - unit_id: mku-02-07-01
     page_start: 22
     page_end: 23
     focus: [核对羊皮纸制作及普及年代, 核对人物地名和外文译名, 区分材料普及史与册页装订史]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行762—772；目录定位第22—23页。已把未经原书明说的“坚韧”改为制作过程和“光滑平展”；宗教、法律文书及欧洲长期使用均有对应。纸本终审需核对人名、地名、外文和年代。"
   - unit_id: mku-02-08-01
     page_start: 23
     page_end: 24
     focus: [核对贝叶与贝多罗等术语, 核对穿孔和夹板装订方式, 区分真实贝叶与中国纸本仿梵夹形态]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行774—790；目录定位第23—24页。贝多罗、刺写涂色、散叶叠放、夹板穿孔与中国纸本仿梵夹均有对应。纸本终审需核对梵文转写和引书卷次。"
   - unit_id: mku-02-09-01
     page_start: 24
     page_end: 25
     focus: [核对各次早期纸张发现的地点年代和性质, 避免把出土年代等同技术发明年代, 检查蔡伦相关表述是否足够审慎]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行792—814；目录定位第24—25页。西汉纸实物早于蔡伦记载、纸与简牍并用及东晋基本取代简牍均能对应；项目用“逐步过程”概括。纸本终审需逐项核对地点、年代、尺寸和纸张性质。"
   - unit_id: mku-02-09-02
     page_start: 25
     page_end: 27
     focus: [核对卷子结构部件和术语, 核对纸幅尺寸与一帙卷数等数字, 区分原始形态与后配改装风险]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行820—834；目录定位第25—27页。纸叶粘接、轴卷、襦带、牙签、帙及染潢均有对应；后配、改装和截断是项目鉴定边界。纸本终审需核对部件用字“襦／褾”及尺寸、帙数。"
   - unit_id: mku-02-09-03
     page_start: 27
     page_end: 27
     focus: [核对经折装结构及与梵夹的关系, 核对替代卷子的时间判断, 保留多种形制长期并存的边界]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行836—838；目录定位第27页。长幅往返折叠、夹板与卷轴关系及佛经使用均能对应；“较快定位”属于形制作用的教学归纳。纸本终审需核对大藏经名称和年代。"
   - unit_id: mku-02-09-04
     page_start: 27
     page_end: 28
     focus: [核对版心方向和粘连位置, 核对蝴蝶装通行年代, 强调现存古书可能后改装]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行840—848；目录定位第27—28页。版心向内折、有字面相向、折线粘连及宋元通行均可对应；后改装边界与原书强调宋刻多经重装相合。纸本终审需核对列举书名。"
   - unit_id: mku-02-09-05
     page_start: 28
     page_end: 29
     focus: [核对包背装折叶和装订位置, 核对与蝴蝶装的关键区别, 检查永乐大典与四库全书等例证]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行850—854；目录定位第28—29页。原概括误称“改善牢固程度”，已改为版面向外折、版心对侧装订和封皮裹背，并补明书背仍可能破损。纸本终审需核对永乐大典、四库全书例证。"
   - unit_id: mku-02-09-06
     page_start: 29
     page_end: 29
     focus: [核对线装工序和常见孔数, 核对兴起与沿用年代, 区分现装线装与原始成书年代]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行856—860；目录定位第29页。已删除原书未明说的“便于修补”，改写为纸捻、裁齐、包角、封皮、打眼上线的工序及明中叶后沿用。纸本终审需核对四眼、六眼和兴起年代。"

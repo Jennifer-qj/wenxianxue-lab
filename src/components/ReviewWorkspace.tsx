@@ -4,7 +4,17 @@ import "./ReviewWorkspace.css";
 type CheckId = "page_range" | "names_dates" | "summary_fidelity" | "boundary_strength" | "linked_content";
 type Verdict = "pending" | "confirmed" | "needs_edit" | "needs_source";
 type Unit = { id: string; section: string; subsection?: string; page_start: number; page_end?: number; key_question: string; summary: string; boundary: string; status: string };
-type RecordItem = { unit_id: string; page_start: number; page_end?: number; focus: string[]; required_checks: CheckId[]; status: string };
+type RecordItem = {
+  unit_id: string;
+  page_start: number;
+  page_end?: number;
+  focus: string[];
+  required_checks: CheckId[];
+  status: string;
+  reviewer?: string | null;
+  reviewed_at?: string | null;
+  evidence_note?: string | null;
+};
 type Entry = { checks: Partial<Record<CheckId, boolean>>; note: string; verdict: Verdict; updatedAt?: string };
 
 const checkLabels: Record<CheckId, string> = {
@@ -87,8 +97,9 @@ export default function ReviewWorkspace({ chapter, chapterTitle, edition, source
     <div className="review-boundary" role="note"><strong>重要边界</strong><span>本地勾选只帮助你工作，不会自动更改网站状态。必须提供纸本依据并经过公开合并，单元才可从“待复核”改为“已核验”。</span></div>
     <nav className="review-filters" aria-label="筛选复核条目">{([['all','全部'],['unfinished','未完成'],['attention','需修改／补查'],['ready','可提交']] as const).map(([id,label]) => <button key={id} className={filter === id ? "active" : ""} onClick={() => setFilter(id)}>{label}</button>)}</nav>
     <div className="review-list">{visible.map(({ unit, record, required, entry, checked, complete }) => <article className={complete ? "complete" : entry.verdict !== "pending" ? "attention" : ""} key={unit.id}>
-      <header><div><small>{unit.id}</small><h3>{unit.section}{unit.subsection ? ` · ${unit.subsection}` : ""}</h3></div><span>纸本第 {record?.page_start ?? unit.page_start}{(record?.page_end ?? unit.page_end) ? `—${record?.page_end ?? unit.page_end}` : ""} 页</span></header>
+      <header><div><small>{unit.id}</small><h3>{unit.section}{unit.subsection ? ` · ${unit.subsection}` : ""}</h3></div><div className="review-location"><span>纸本第 {record?.page_start ?? unit.page_start}{(record?.page_end ?? unit.page_end) ? `—${record?.page_end ?? unit.page_end}` : ""} 页</span>{record?.status === "in_review" ? <small>文字稿预对读</small> : null}</div></header>
       <div className="review-source"><div><small>当前关键问题</small><p>{unit.key_question}</p></div><div><small>项目原创概括</small><p>{unit.summary}</p></div><div><small>当前判断边界</small><p>{unit.boundary}</p></div></div>
+      {record?.evidence_note ? <aside className="review-precheck"><strong>文字稿预对读 · 待纸本终审</strong><div><p>{record.evidence_note}</p><small>{record.reviewer ?? "未署名"}{record.reviewed_at ? ` · ${record.reviewed_at}` : ""}</small></div></aside> : null}
       {record?.focus?.length ? <aside><strong>本单元优先核对</strong><ul>{record.focus.map((item) => <li key={item}>{item}</li>)}</ul></aside> : null}
       <div className="review-checks">{required.map((id) => <button key={id} aria-pressed={Boolean(entry.checks[id])} className={entry.checks[id] ? "checked" : ""} onClick={() => toggle(unit.id, id)}><span>{entry.checks[id] ? "✓" : "□"}</span>{checkLabels[id]}</button>)}</div>
       <div className="review-note"><label><span>纸本证据、疑点或建议改写</span><textarea value={entry.note} onChange={(event) => update(unit.id, { note: event.target.value })} placeholder="记录具体页码、短语、版本差异或需要进一步检索的资料；不要粘贴大段原文。" /></label><label><span>阶段判断</span><select value={entry.verdict} onChange={(event) => update(unit.id, { verdict: event.target.value as Verdict })}>{Object.entries(verdictLabels).map(([id,label]) => <option key={id} value={id}>{label}</option>)}</select></label></div>

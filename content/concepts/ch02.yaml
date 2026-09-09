@@ -1,5 +1,5 @@
 items:
-  - {id: m_oracle_bone, label: 甲骨, type: material, definition: 商周时期刻写卜辞等内容的龟甲与兽骨载体。, chapter_ids: [ch02], status: pending_review}
+  - {id: m_oracle_bone, label: 甲骨, type: material, definition: 刻写占卜记录等内容的龟甲与兽骨载体；本章重点讨论商代甲骨文。, chapter_ids: [ch02], status: pending_review}
   - {id: m_bronze, label: 金, type: material, definition: 以青铜器为主的铭文载体，器类与使用场景多样。, chapter_ids: [ch02], status: pending_review}
   - {id: m_stone, label: 石, type: material, definition: 以碣、摩崖、碑等形态保存文字的耐久载体。, chapter_ids: [ch02], status: pending_review}
   - {id: c_jie, label: 碣, type: concept, definition: 石刻形态之一，需结合时代语境和实物形制辨识。, chapter_ids: [ch02], status: pending_review}
@@ -17,7 +17,7 @@ items:
   - {id: c_scroll_binding, label: 卷子装, type: concept, definition: 将纸叶粘连成长幅并卷起收存的装潢形制。, chapter_ids: [ch02], status: pending_review}
   - {id: c_accordion_binding, label: 经折装, type: concept, definition: 将长卷按一定宽度往返折叠形成册页的装潢形制。, chapter_ids: [ch02], status: pending_review}
   - {id: c_butterfly_binding, label: 蝴蝶装, type: concept, definition: 书叶有字面相向、版心向内折叠，展开形似蝶翼的形制。, chapter_ids: [ch02], status: pending_review}
-  - {id: c_wrapped_back_binding, label: 包背装, type: concept, definition: 书叶折叠后以纸包裹书背的册页形制。, chapter_ids: [ch02], status: pending_review}
-  - {id: c_thread_binding, label: 线装, type: concept, definition: 书叶齐整后在近书脊处打孔穿线装订的形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_wrapped_back_binding, label: 包背装, type: concept, definition: 书叶版面向外对折、在版心对侧装订，并以一张封皮裹住书背的册页形制。, chapter_ids: [ch02], status: pending_review}
+  - {id: c_thread_binding, label: 线装, type: concept, definition: 书叶经纸捻初订、裁齐、包角和加封皮后，在近书脊处打孔穿线的装订形制。, chapter_ids: [ch02], status: pending_review}
   - {id: c_carrier_constraint, label: 载体约束, type: concept, definition: 材料性质与加工方式对书写、容量、次序、传播和保存形成的限制。, chapter_ids: [ch02], status: drafting}
   - {id: me_material_reading, label: 物质形态判读, type: method, definition: 结合材质、尺寸、书写方式、装订和后修判断文献形态的方法。, chapter_ids: [ch02], status: drafting}

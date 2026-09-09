@@ -1,7 +1,7 @@
 chapter: 3
 edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
 source_requirement: paper_copy
-note: 第3章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+note: 2026-09-09 已依据用户提供的带页码文字稿完成第一轮逐条对读；文字稿只作定位和原意预核，任何条目仍须回到指定纸本后才能改为已核验。
 items:
   - unit_id: mku-03-01-01
     page_start: 30
@@ -16,10 +16,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行868—886；目录定位第30—32页。原书以“前所未有”和原创性界定著，又明确要求新结论有实际与证据支撑，项目概括和边界与此相符。纸本终审需核对引文、篇名和焦循、张舜徽书名。"
   - unit_id: mku-03-01-02
     page_start: 32
     page_end: 33
@@ -33,10 +33,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行888—898；目录定位第32—33页。述不仅是遵循旧说，还包含理解、增益、删订和发掘隐义；项目概括与“并非透明复制”的边界相符。纸本终审需核对焦循引文及经注例证。"
   - unit_id: mku-03-01-03
     page_start: 33
     page_end: 34
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行900—910；目录定位第33—34页。原稿误写“删节、重构”，与原书强调旧文原则上不加改窜相冲突，已改为依体例缀辑、通常注出处及辑佚价值。纸本终审需核对所举总集、类书、丛书和辑佚书名。"
   - unit_id: mku-03-01-04
     page_start: 34
     page_end: 41
@@ -67,10 +67,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行912—988；目录定位第34—41页。口译、助手、译场、旧译对勘和文体调整均有实例；已删除没有在本节明确列出的固定角色清单。纸本终审需集中核对译师姓名、经名、年代、部卷数及异说。"
   - unit_id: mku-03-01-05
     page_start: 41
     page_end: 46
@@ -84,10 +84,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行990—1048；目录定位第41—46页。已由抽象的“知识结构协调”改为原书实际展开的中外合作、口译笔述、翻译机构、刻印发行及严复标准。纸本终审需核对人物外文名、机构沿革、译书数量与出版年份。"
   - unit_id: mku-03-01-06
     page_start: 46
     page_end: 47
@@ -101,10 +101,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1050—1058；目录定位第46—47页。已改以林纾由他人口译、本人文言笔述并增删润饰为核心，不再加入原书未逐项讨论的节奏和文化语境。纸本终审需核对林译数量、书名和评论出处。"
   - unit_id: mku-03-02-01
     page_start: 47
     page_end: 52
@@ -118,10 +118,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1060—1138；目录定位第47—52页。史诗、叙事诗、佛经结集和唱本实例共同说明口传会被历代讲唱者充实加工，并与书面传播并存；项目概括基本相符。纸本终审需核对各民族史诗专名、行数、年代和佛教结集说法。"
   - unit_id: mku-03-02-02
     page_start: 52
     page_end: 52
@@ -135,10 +135,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1140—1142；目录定位第52页。本节只界定把文字刻在甲骨、金属或石头等载体上；原稿关于耐久、公开与拓印差异超出本节，已收回并明确知识边界。纸本终审需确认本节是否跨页。"
   - unit_id: mku-03-02-03
     page_start: 52
     page_end: 53
@@ -152,10 +152,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1144—1150；目录定位第52—53页。原稿把讹、脱、衍、倒的机制写成本节内容，现已改为印刷普及后抄写仍长期存在及大型文献、孤传抄本实例。纸本终审需核对四库七阁现存情况等时代性陈述。"
   - unit_id: mku-03-02-04
     page_start: 53
     page_end: 55
@@ -169,10 +169,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1152—1180；目录定位第53—55页。原稿的底本错误、修版补版并非本节重点，已改为比较起源诸说、传世记载与早期实物的证据判断。纸本终审需核对经名、出土收藏信息、武周制字和年代。"
   - unit_id: mku-03-02-05
     page_start: 55
     page_end: 55
@@ -186,7 +186,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行1182—1186；目录定位第55页。已把泛化的材质触感、裁切色彩改为原书具体说明的缩微胶卷保护与复制功能，以及色盲卷可能滤掉浅色印记、批点的限制。纸本终审需核对术语原貌。"
