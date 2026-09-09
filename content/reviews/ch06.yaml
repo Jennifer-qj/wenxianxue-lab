@@ -16,27 +16,27 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行37—77；目录定位第134—137页。原书依次说明讹、脱、衍、倒和错乱，并以《水经注》《史记》《太平御览》等展示误读与传误后果，项目分类可对应。纸本终审需核对标题“错讹”、各例文字、版本名称及脱衍字数。"
   - unit_id: mku-06-01-02
     page_start: 137
     page_end: 137
     focus:
       - 核对「校勘的目的」的纸本页码边界、核心定义和原书例证
-      - 核对对校、本校、他校、理校等方法的适用范围
-      - 检查项目对“校勘为什么不等于追求唯一“原文”？”的回答是否保持原书限定
+      - 核对对校、本校、他校、综合考证等方法的适用范围
+      - 检查项目对“校勘为何要恢复古书原貌，而不能替古人修改文章？”的回答是否保持原书限定
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行79—81；目录定位第137页。原书明确以恢复古书原貌、正本清源为校勘目的，并反对替古人修改文章；已纠正项目原有“并不追求唯一原文”的偏移。纸本终审需核对本节原句与标点。"
   - unit_id: mku-06-02-01
     page_start: 137
     page_end: 141
@@ -50,10 +50,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行85—99、117—133；目录定位第137—141页。主观条件包括古代语言文字、文化知识和行文习惯，精研所校之书则要求熟悉内容与文例以便前后互证。纸本终审需核对正文注文混淆与《后汉书》案例的版本、人物和七十四字范围。"
   - unit_id: mku-06-02-02
     page_start: 138
     page_end: 140
@@ -67,16 +67,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行101—116；目录定位第138—140页。广求异本尤其重古本，相关史籍、类书和地理文献可提供参证；原书案例也表明仅凭考证发现问题未必足以定改。纸本终审需核对傅增湘引文、闻人诠本和“八千／八十里”等例。"
   - unit_id: mku-06-03-01
     page_start: 141
     page_end: 146
     focus:
       - 核对「对校法与他校法」的纸本页码边界、核心定义和原书例证
-      - 核对对校、本校、他校、理校等方法的适用范围
+      - 核对对校、本校、他校、综合考证等方法的适用范围
       - 检查项目对“对校和他校分别依赖什么材料？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -84,10 +84,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行135—207；目录定位第141—146页。对校以同书不同版本为主并先辨版本系统，他校利用本书与他书的征引或同事互见；两法的材料入口与项目概括相符。纸本终审需核对“死校”、祖本参校本、李白传脱文及《荀子》《战国策》案例。"
   - unit_id: mku-06-03-02
     page_start: 146
     page_end: 147
@@ -101,10 +101,10 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行209—228；目录定位第146—147页。本校从目录、正文、注文、复文和文例寻找本书内证；综合考证兼用对校、他校、本校、语言与历史文化知识。纸本终审需核对《庄子》《离骚》《荀子》各例的异文、引书和推理层次。"
   - unit_id: mku-06-04-01
     page_start: 147
     page_end: 149
@@ -118,16 +118,16 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行229—267；目录定位第147—149页。原书先要求交代传本源流及底本、校本、参校本，再比较两种成果处理方式并列十类简明校语；已撤回“今据某本改本身不可用”的过度要求。纸本终审需核对校语格式、底本与工作本之别及两种处理法。"
   - unit_id: mku-06-05-01
     page_start: 149
     page_end: 150
     focus:
       - 核对「五、校书的态度：多闻阙疑」的纸本页码边界、核心定义和原书例证
-      - 核对对校、本校、他校、理校等方法的适用范围
+      - 核对对校、本校、他校、综合考证等方法的适用范围
       - 检查项目对“什么时候应当保留原文或存疑？”的回答是否保持原书限定
     required_checks:
       - page_range
@@ -135,7 +135,7 @@ items:
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-09"
+    evidence_note: "文字稿行269—281；目录定位第149—150页。“多闻阙疑”用于反对强不知以为知和凭通顺臆改，治忽、钩鱼等例说明貌似合理的改字也可能损害原貌。纸本终审需核对引文出处、钩鱼出现次数与版本差异。"

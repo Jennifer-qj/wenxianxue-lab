@@ -1,6 +1,6 @@
 items:
   - {id: c_textual_error, label: 文献讹误, type: concept, definition: 文献在形成与流传中出现的讹、脱、衍、倒及错乱等文字异常。, chapter_ids: [ch06], status: pending_review}
-  - {id: c_collation, label: 校勘, type: concept, definition: 比较异文并结合内外证据判断文本差异、说明取舍的研究过程。, chapter_ids: [ch06], status: pending_review}
+  - {id: c_collation, label: 校勘, type: concept, definition: 通过版本比较和相关考证发现、判断文献讹误，以恢复古书原貌为目标的研究过程。, chapter_ids: [ch06], status: pending_review}
   - {id: c_variant, label: 异文, type: concept, definition: 同一文本在不同传本或引文中出现的文字差异。, chapter_ids: [ch06], status: pending_review}
   - {id: me_duijiao, label: 对校法, type: method, definition: 以同书不同版本逐字逐句比较来发现异同的校勘方法。, chapter_ids: [ch06], status: pending_review}
   - {id: me_tajiao, label: 他校法, type: method, definition: 用他书引文、类书征引或相关文献校核本书文字的方法。, chapter_ids: [ch06], status: pending_review}
