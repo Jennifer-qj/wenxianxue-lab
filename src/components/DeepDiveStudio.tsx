@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./DeepDiveStudio.css";
+import { readLocalJson, writeLocalJson } from "../lib/localData";
+import { removeProgressEntry, saveProgressEntry } from "../lib/progressArchive";
 
 type Evidence = { id: string; label: string; role: string; limitation: string };
 type Conclusion = { id: string; label: string; claim: string; requires: string[]; caution: string };
@@ -19,14 +21,12 @@ export default function DeepDiveStudio({ study }: { study: DeepDive }) {
   const [view, setView] = useState<"evidence" | "workflow" | "deliverable">("evidence");
 
   useEffect(() => {
-    try {
-      const saved = JSON.parse(localStorage.getItem(storageKey) ?? "null");
-      if (saved) { setSelected(saved.selected ?? []); setSteps(saved.steps ?? []); setNote(saved.note ?? ""); setConclusion(saved.conclusion ?? ""); setGap(saved.gap ?? ""); }
-    } catch { /* 浏览器禁用存储时仍可正常使用 */ }
+    const saved = readLocalJson<any>(storageKey, null);
+    if (saved) { setSelected(saved.selected ?? []); setSteps(saved.steps ?? []); setNote(saved.note ?? ""); setConclusion(saved.conclusion ?? ""); setGap(saved.gap ?? ""); }
   }, [storageKey]);
 
   useEffect(() => {
-    try { localStorage.setItem(storageKey, JSON.stringify({ version: 2, selected, steps, note, conclusion, gap })); } catch { /* ignore */ }
+    writeLocalJson(storageKey, { version: 2, selected, steps, note, conclusion, gap });
   }, [selected, steps, note, conclusion, gap, storageKey]);
 
   const evidenceReady = selected.length >= Math.min(2, study.evidence.length);
@@ -36,13 +36,7 @@ export default function DeepDiveStudio({ study }: { study: DeepDive }) {
 
   useEffect(() => {
     if (completed !== total) return;
-    try {
-      const key = "wxlab-progress";
-      const archive = JSON.parse(localStorage.getItem(key) || "{}");
-      archive[study.id] = { completed: true, score: total, total, title: `第${study.chapter ?? Number(study.id.slice(7, 9))}章·${study.title}`, updatedAt: new Date().toISOString() };
-      localStorage.setItem(key, JSON.stringify(archive));
-      window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
-    } catch { /* ignore */ }
+    saveProgressEntry(study.id, { completed: true, score: total, total, title: `第${study.chapter ?? Number(study.id.slice(7, 9))}章·${study.title}` });
   }, [completed, study.chapter, study.id, study.title, total]);
   const toggleEvidence = (id: string) => setSelected((items) => items.includes(id) ? items.filter((item) => item !== id) : [...items, id]);
   const toggleStep = (index: number) => setSteps((items) => items.includes(index) ? items.filter((item) => item !== index) : [...items, index]);
@@ -92,7 +86,7 @@ export default function DeepDiveStudio({ study }: { study: DeepDive }) {
     {view === "deliverable" && <section className="deep-deliverable">
       <div className="deep-output"><small>本章小成果</small><h4>{study.deliverable}</h4><p>已选 {chosenEvidence.length} 条证据。先比较竞争解释，再声明最关键的证据缺口。</p><fieldset className="conclusion-paths"><legend>选择一条暂定结论路径</legend>{study.conclusions.map((item) => <button className={conclusion === item.id ? "selected" : ""} aria-pressed={conclusion === item.id} onClick={() => setConclusion(item.id)} key={item.id}><strong>{item.label}</strong><span>{item.claim}</span><small>限度：{item.caution}</small></button>)}</fieldset><label className="gap-picker"><span>哪一项局限最可能改变结论？</span><select value={gap} onChange={(event) => setGap(event.target.value)}><option value="">请选择关键缺口</option>{study.evidence.map((item) => <option value={item.id} key={item.id}>{item.label}：{item.limitation}</option>)}</select></label>{chosenConclusion && <aside className={`adaptive-feedback ${feedbackTrigger}`}><strong>{feedbackTrigger === "supported" ? "这条路径得到当前证据支持" : feedbackTrigger === "conflict" ? "结论与证据之间仍有缺口" : "还不能形成结论"}</strong>{missingEvidence.length > 0 && <p>这条路径还依赖：{missingEvidence.map((id) => study.evidence.find((item) => item.id === id)?.label ?? id).join("、")}</p>}<p>{followup}</p></aside>}<label className="deep-note"><span>我的学习札记</span><textarea value={note} onChange={(event) => setNote(event.target.value)} placeholder="写下你的判断、反证、疑问或还需要回到原书核对的地方……" /></label></div>
       <ul>{study.rubric.map((item) => <li key={item}>{item}</li>)}</ul>
-      <div className="deep-deliverable__actions"><button disabled={completed !== total} onClick={exportNote}>导出本章 Markdown</button><button onClick={() => { setSelected([]); setSteps([]); setNote(""); setConclusion(""); setGap(""); setView("evidence"); try { const key = "wxlab-progress"; const archive = JSON.parse(localStorage.getItem(key) || "{}"); delete archive[study.id]; localStorage.setItem(key, JSON.stringify(archive)); window.dispatchEvent(new CustomEvent("wxlab-progress-updated")); } catch { /* ignore */ } }}>重置研读记录</button></div>
+      <div className="deep-deliverable__actions"><button disabled={completed !== total} onClick={exportNote}>导出本章 Markdown</button><button onClick={() => { setSelected([]); setSteps([]); setNote(""); setConclusion(""); setGap(""); setView("evidence"); removeProgressEntry(study.id); }}>重置研读记录</button></div>
     </section>}
   </div>;
 }

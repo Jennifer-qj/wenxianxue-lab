@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./FragmentCasebook.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type Role = "" | "support" | "context" | "risk";
 type Strength = "" | "supported" | "plausible" | "unsupported";
@@ -70,10 +71,7 @@ export default function FragmentCasebook() {
 
   function finish() {
     if (!writingReady) return;
-    const progress = JSON.parse(localStorage.getItem("wxlab-progress") || "{}");
-    progress["fragment-casebook"] = { completed: true, score, total, title: "残卷归档调查", note: `${identity.trim()}｜边界：${boundary.trim()}｜下一步：${nextStep.trim()}｜信心 ${confidence}%`, updatedAt: new Date().toISOString() };
-    localStorage.setItem("wxlab-progress", JSON.stringify(progress));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+    saveProgressEntry("fragment-casebook", { completed: true, score, total, title: "残卷归档调查", note: `${identity.trim()}｜边界：${boundary.trim()}｜下一步：${nextStep.trim()}｜信心 ${confidence}%` });
     setFinished(true);
   }
 

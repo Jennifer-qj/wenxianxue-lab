@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./LabDirectory.css";
+import { readProgressRecord } from "../lib/progressArchive";
 
 type Method = "证据推理" | "分类判断" | "流程重建" | "物质观察";
 type Level = "入门" | "进阶" | "综合";
@@ -33,10 +34,8 @@ export default function LabDirectory({ baseUrl }: { baseUrl: string }) {
   const [suggested, setSuggested] = useState("four-fold");
 
   useEffect(() => {
-    try {
-      const progress = JSON.parse(localStorage.getItem("wxlab-progress") || "{}");
-      setCompleted(Object.entries(progress).filter(([, value]: [string, any]) => value?.completed).map(([key]) => key.replace(/^case-/, "")));
-    } catch { /* 没有本地记录时保持空白 */ }
+    const progress = readProgressRecord();
+    setCompleted(Object.entries(progress).filter(([, value]) => value?.completed).map(([key]) => key.replace(/^case-/, "")));
   }, []);
 
   const filtered = useMemo(() => experiments.filter((item) => (method === "全部" || item.method === method) && (level === "全部" || item.level === level) && item.minutes <= time), [method, level, time]);

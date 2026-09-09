@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import type { LessonQuiz } from "../data/lessons";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 export default function ChapterCheck({ chapterId, title, quiz }: { chapterId: string; title: string; quiz: LessonQuiz[] }) {
   const [answers, setAnswers] = useState<Record<number, number>>({});
@@ -9,11 +10,7 @@ export default function ChapterCheck({ chapterId, title, quiz }: { chapterId: st
 
   useEffect(() => {
     if (!completed || saved) return;
-    const key = "wxlab-progress";
-    const progress = JSON.parse(localStorage.getItem(key) || "{}");
-    progress[chapterId] = { completed: true, score, total: quiz.length, title, updatedAt: new Date().toISOString() };
-    localStorage.setItem(key, JSON.stringify(progress));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+    saveProgressEntry(chapterId, { completed: true, score, total: quiz.length, title });
     setSaved(true);
   }, [chapterId, completed, saved, score, quiz.length, title]);
 

@@ -1,6 +1,8 @@
 import { useMemo, useState } from "react";
 import "./StructuredPractice.css";
 import { getLayeredAnswer, type AnswerLevel } from "../data/layeredAnswers";
+import { removeProgressEntry, saveProgressEntry, WRONGBOOK_KEY } from "../lib/progressArchive";
+import { dispatchLocalUpdate, updateLocalRecord } from "../lib/localData";
 
 type Pair = { left: string; right: string };
 type ClassItem = { label: string; zone: string };
@@ -21,26 +23,19 @@ function equalSets(a: Array<number | string>, b: Array<number | string>) {
 }
 
 function save(score: number, total: number, chapter: number) {
-  const key = "wxlab-progress";
-  const progress = JSON.parse(localStorage.getItem(key) || "{}");
-  progress[`ch${String(chapter).padStart(2, "0")}-structured-practice`] = { completed: true, score, total, title: `第${chapter === 1 ? "一" : chapter === 2 ? "二" : chapter}章·九题型综合练习`, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(progress));
-  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  saveProgressEntry(`ch${String(chapter).padStart(2, "0")}-structured-practice`, { completed: true, score, total, title: `第${chapter === 1 ? "一" : chapter === 2 ? "二" : chapter}章·九题型综合练习` });
 }
 
 function updateWrongBook(quiz: Quiz, correct: boolean) {
-  const key = "wxlab-wrongbook";
-  try {
-    const wrongBook = JSON.parse(localStorage.getItem(key) || "{}");
+  const result = updateLocalRecord<any>(WRONGBOOK_KEY, (wrongBook) => {
     if (correct) delete wrongBook[quiz.id];
     else wrongBook[quiz.id] = {
       id: quiz.id, chapter: quiz.chapter, type: quiz.type, prompt: quiz.prompt,
       explanation: quiz.explanation, attempts: (wrongBook[quiz.id]?.attempts ?? 0) + 1,
       updatedAt: new Date().toISOString(),
     };
-    localStorage.setItem(key, JSON.stringify(wrongBook));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
-  } catch { /* 存储不可用时不阻塞答题 */ }
+  });
+  if (result.ok) dispatchLocalUpdate();
 }
 
 export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
@@ -113,7 +108,7 @@ export default function StructuredPractice({ quizzes }: { quizzes: Quiz[] }) {
     setResults((current) => { const next = { ...current }; delete next[quiz.id]; return next; });
     setSelfDecisions((current) => { const next = { ...current }; delete next[quiz.id]; return next; });
     setSelfChecks((current) => ({ ...current, [quiz.id]: [] }));
-    try { const key = "wxlab-progress"; const archive = JSON.parse(localStorage.getItem(key) || "{}"); delete archive[`ch${String(quiz.chapter).padStart(2, "0")}-structured-practice`]; localStorage.setItem(key, JSON.stringify(archive)); window.dispatchEvent(new CustomEvent("wxlab-progress-updated")); } catch { /* ignore */ }
+    removeProgressEntry(`ch${String(quiz.chapter).padStart(2, "0")}-structured-practice`);
   }
 
   return (

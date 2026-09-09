@@ -1,5 +1,6 @@
 import { useState } from "react";
 import "./RareBookDossier.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type Role = "support" | "limit" | "context";
 type Evidence = { id: string; label: string; detail: string; role: Role };
@@ -40,7 +41,7 @@ const verdicts = [
 ];
 
 function saveProgress(score: number, total: number) {
-  try { const key = "wxlab-progress"; const data = JSON.parse(localStorage.getItem(key) || "{}"); data["rare-book-dossier"] = { completed: true, score, total, title: "古籍鉴定综合案卷", updatedAt: new Date().toISOString() }; localStorage.setItem(key, JSON.stringify(data)); window.dispatchEvent(new CustomEvent("wxlab-progress-updated")); } catch { /* ignore */ }
+  saveProgressEntry("rare-book-dossier", { completed: true, score, total, title: "古籍鉴定综合案卷" });
 }
 
 export default function RareBookDossier({ baseUrl }: { baseUrl: string }) {

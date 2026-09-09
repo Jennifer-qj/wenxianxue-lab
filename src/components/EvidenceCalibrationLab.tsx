@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./EvidenceCalibrationLab.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type Evidence = { id: string; label: string; detail: string; anchor: number; why: string };
 type Dossier = { id: string; chapter: string; title: string; brief: string; question: string; evidence: Evidence[]; model: string };
@@ -48,12 +49,7 @@ const dossiers: Dossier[] = [
 ];
 
 function save(score: number, total: number) {
-  try {
-    const progress = JSON.parse(localStorage.getItem("wxlab-progress") || "{}");
-    progress["evidence-calibration"] = { completed: true, score, total, updatedAt: new Date().toISOString() };
-    localStorage.setItem("wxlab-progress", JSON.stringify(progress));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
-  } catch { /* 存储受限时不影响本次操作 */ }
+  saveProgressEntry("evidence-calibration", { completed: true, score, total });
 }
 
 export default function EvidenceCalibrationLab() {

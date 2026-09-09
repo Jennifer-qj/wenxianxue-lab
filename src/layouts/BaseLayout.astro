@@ -161,9 +161,9 @@ const structuredData = {
         <span>© 2026 Jennifer-qj · 不提供原书全文</span>
       </div>
     </footer>
-    <WelcomeGuide baseUrl={base} client:load />
-    {active !== "notebook" && <LearningDock baseUrl={base} title={title} pageType={pageType} client:load />}
-    <FeedbackPanel baseUrl={base} title={title} client:load />
+    <WelcomeGuide baseUrl={base} client:idle={{ timeout: 1200 }} />
+    {active !== "notebook" && <LearningDock baseUrl={base} title={title} pageType={pageType} client:idle={{ timeout: 1600 }} />}
+    <FeedbackPanel baseUrl={base} title={title} client:idle={{ timeout: 2000 }} />
     <script is:inline>
       const progressBar = document.querySelector('.reading-progress span');
       let readingFrame = 0;

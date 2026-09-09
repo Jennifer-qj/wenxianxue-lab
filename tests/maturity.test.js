@@ -44,7 +44,7 @@ describe("公开项目成熟度门禁", () => {
     expect(existsSync(resolve(root, "src/pages/notebook/index.astro"))).toBe(true);
     expect(read("src/lib/learningArchive.ts")).toContain("recent: LibraryEntry[]");
     expect(progress).toContain("library: readLibrary()");
-    expect(progress).toContain("version: 3");
+    expect(progress).toContain("ARCHIVE_VERSION");
   });
 
   it("搜索支持相关检索词、近似匹配与状态筛选", () => {
@@ -196,7 +196,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.11.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.12.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
@@ -212,7 +212,7 @@ describe("公开项目成熟度门禁", () => {
     expect(journey).toContain("我带走的一条认识");
     expect(journey).toContain("导出本章学习复盘 .md");
     expect(progress).toContain("chapterJourneys");
-    expect(progress).toContain("version: 3");
+    expect(progress).toContain("ARCHIVE_VERSION");
     expect(progress).toContain("{gameCount}/9");
     expect(progress).toContain("const totalActivities = 55");
   });
@@ -352,7 +352,7 @@ describe("公开项目成熟度门禁", () => {
     expect(casebook).toContain("不能越过的证据边界");
     expect(casebook).toContain('type="range"');
     expect(casebook).toContain("残卷归档调查报告");
-    expect(casebook).toContain('progress["fragment-casebook"]');
+    expect(casebook).toContain('saveProgressEntry("fragment-casebook"');
   });
 
   it("学习罗盘用本地证据解释三项下一步行动", () => {
@@ -386,6 +386,34 @@ describe("公开项目成熟度门禁", () => {
     expect(layout).toContain('twitter:description');
     expect(layout).toContain("isCurrentPath");
     expect(read("public/site.webmanifest")).toContain('"categories"');
+  });
+
+  it("首屏非关键工具延迟加载，并用性能预算阻止公开包持续膨胀", () => {
+    const layout = read("src/layouts/BaseLayout.astro");
+    const lab = read("src/pages/lab/index.astro");
+    const performance = read("scripts/audit-performance.mjs");
+    expect(layout).toContain("client:idle");
+    expect(lab.match(/client:visible/g)?.length).toBeGreaterThanOrEqual(8);
+    expect(performance).toContain("maxJavaScript");
+    expect(performance).toContain("maxHtmlGzip");
+    expect(read("package.json")).toContain("audit-performance.mjs");
+  });
+
+  it("发布前验证首页、十四章、实验、图谱与档案的关键学习旅程", () => {
+    const audit = read("scripts/audit-learning-journeys.mjs");
+    expect(audit).toContain("for (let chapter = 1; chapter <= 14");
+    expect(audit).toContain("关键学习旅程门禁通过");
+    expect(audit).toContain('"fragment-casebook"');
+    expect(audit).toContain('"study-compass", "portfolio", "archive"');
+    expect(read("package.json")).toContain("audit-learning-journeys.mjs");
+  });
+
+  it("公开仓库用短路径介绍项目，并说明本地数据安全边界", () => {
+    const readme = read("README.md");
+    expect(readme).toContain("## 三分钟体验");
+    expect(readme).toContain("## 项目由什么组成");
+    expect(readme).toContain("## 质量与隐私");
+    expect(read("SECURITY.md")).toContain("不会由本站自动上传");
   });
 
   it("首次引导、反馈和札记提供可恢复的键盘焦点闭环", () => {

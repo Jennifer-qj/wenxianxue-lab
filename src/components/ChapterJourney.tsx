@@ -1,5 +1,7 @@
 import { useEffect, useMemo, useState } from "react";
 import "./ChapterJourney.css";
+import { readLocalJson, updateLocalRecord } from "../lib/localData";
+import { readProgressRecord } from "../lib/progressArchive";
 
 type ReadingMode = "quick" | "standard" | "deep";
 type JourneyRecord = {
@@ -29,19 +31,17 @@ function emptyRecord(): JourneyRecord {
 }
 
 function readRecord(chapterId: string): JourneyRecord {
-  try {
-    const archive = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
-    return { ...emptyRecord(), ...(archive[chapterId] ?? {}), reflection: { ...emptyReflection, ...(archive[chapterId]?.reflection ?? {}) } };
-  } catch { return emptyRecord(); }
+  const archive = readLocalJson<Record<string, JourneyRecord>>(STORAGE_KEY, {});
+  return { ...emptyRecord(), ...(archive[chapterId] ?? {}), reflection: { ...emptyReflection, ...(archive[chapterId]?.reflection ?? {}) } };
 }
 
 function writeRecord(chapterId: string, record: JourneyRecord) {
-  try {
-    const archive = JSON.parse(localStorage.getItem(STORAGE_KEY) || "{}");
+  const result = updateLocalRecord<JourneyRecord>(STORAGE_KEY, (archive) => {
     archive[chapterId] = { ...record, updatedAt: new Date().toISOString() };
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(archive));
+  });
+  if (result.ok) {
     window.dispatchEvent(new CustomEvent("wxlab-chapter-journey-updated", { detail: { chapterId } }));
-  } catch { /* 禁用存储时仍可在当前页面使用 */ }
+  }
 }
 
 export default function ChapterJourney(props: Props) {
@@ -53,13 +53,11 @@ export default function ChapterJourney(props: Props) {
   function refresh() {
     const next = readRecord(chapterId);
     setRecord(next);
-    try {
-      const progress = JSON.parse(localStorage.getItem("wxlab-progress") || "{}");
-      const completed: string[] = [];
-      if (progress[`${chapterId}-structured-practice`]?.completed || progress[chapterId]?.completed) completed.push("practice");
-      if (deepDiveId && progress[deepDiveId]?.completed) completed.push("evidence");
-      setAutomatic(completed);
-    } catch { setAutomatic([]); }
+    const progress = readProgressRecord();
+    const completed: string[] = [];
+    if (progress[`${chapterId}-structured-practice`]?.completed || progress[chapterId]?.completed) completed.push("practice");
+    if (deepDiveId && progress[deepDiveId]?.completed) completed.push("evidence");
+    setAutomatic(completed);
   }
 
   useEffect(() => {

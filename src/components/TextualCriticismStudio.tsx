@@ -1,16 +1,12 @@
 import { useMemo, useState } from "react";
 import "./TextualCriticismStudio.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type Role = "base" | "variant" | "limit";
 type Edge = { from: string; to: string };
 
 function save(id: string, score: number, total: number) {
-  try {
-    const progress = JSON.parse(localStorage.getItem("wxlab-progress") || "{}");
-    progress[id] = { completed: true, score, total, updatedAt: new Date().toISOString() };
-    localStorage.setItem("wxlab-progress", JSON.stringify(progress));
-    window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
-  } catch { /* 练习仍可继续 */ }
+  saveProgressEntry(id, { completed: true, score, total });
 }
 
 const witnesses = [

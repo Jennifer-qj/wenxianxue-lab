@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type BinId = "core" | "support" | "caution";
 type Stage = "intake" | "evidence" | "argument" | "report";
@@ -32,11 +33,7 @@ const verdicts = [
 ];
 
 function save(score: number, total: number) {
-  const key = "wxlab-progress";
-  const current = JSON.parse(localStorage.getItem(key) || "{}");
-  current["version-detective"] = { completed: true, score, total, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(current));
-  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  saveProgressEntry("version-detective", { completed: true, score, total });
 }
 
 export default function VersionDetective() {

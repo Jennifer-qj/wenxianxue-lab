@@ -1,12 +1,9 @@
 import { useMemo, useState } from "react";
 import "./SkillArcade.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 function save(id: string, score: number, total: number, note = "") {
-  const key = "wxlab-progress";
-  const progress = JSON.parse(localStorage.getItem(key) || "{}");
-  progress[id] = { completed: true, score, total, note, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(progress));
-  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  saveProgressEntry(id, { completed: true, score, total, note });
 }
 
 type SequenceItem = { id: string; title: string; detail: string };

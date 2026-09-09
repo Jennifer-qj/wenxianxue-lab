@@ -1,15 +1,12 @@
 import { useMemo, useState } from "react";
 import "./CaseGallery.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type LabCase = { id: string; title: string; engine: string; chapter: number; concept_ids: string[]; concepts?: Array<{ id: string; label: string }>; config: Record<string, any> };
 const engineNames: Record<string, string> = { reasoning: "证据推理", classify: "分类工作台", sequence: "流程重排", simulate: "参数模拟", annotate: "文本标注", assemble: "材料组装" };
 
 function saveCase(lab: LabCase, score: number, total: number, note = "") {
-  try {
-    const key = "wxlab-progress"; const progress = JSON.parse(localStorage.getItem(key) || "{}");
-    progress[`case-${lab.id}`] = { completed: true, score, total, note, title: `第${lab.chapter}章·${lab.title}`, updatedAt: new Date().toISOString() };
-    localStorage.setItem(key, JSON.stringify(progress)); window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
-  } catch { /* 本地存储不可用时不阻塞实验 */ }
+  saveProgressEntry(`case-${lab.id}`, { completed: true, score, total, note, title: `第${lab.chapter}章·${lab.title}` });
 }
 
 function labelOf(item: any) { return typeof item === "string" ? item : item.label ?? item.task ?? item.id; }

@@ -1,5 +1,7 @@
 import { useEffect, useRef, useState } from "react";
-import { LIBRARY_KEY, emptyLibrary, readLibrary } from "../lib/learningArchive";
+import { LIBRARY_KEY, readLibrary } from "../lib/learningArchive";
+import { ARCHIVE_VERSION, applyLearningArchive, inspectLearningStorage, parseLearningArchive } from "../lib/archiveTransfer";
+import { browserStorage, readLocalJson, removeLocalValue } from "../lib/localData";
 import LearningPortfolio from "./LearningPortfolio";
 
 type ProgressItem = { completed: boolean; score: number; total: number; updatedAt: string; title?: string };
@@ -19,10 +21,6 @@ const gameIds = new Set(["version-detective", "evidence-calibration", "four-fold
 const totalActivities = 55; // 14 章综合练习 + 14 章研读 + 9 项技能实验 + 15 个案例 + 1 个研究问题工作台 + 2 个跨章案卷
 const chapterTitles = ["文献与文献学", "文献的载体", "文献的形成与流布", "文献的收藏与散佚", "文献的版本", "文献的校勘", "文献目录", "辑佚与辨伪", "类书与丛书", "地方志与家谱", "总集与别集", "出土文献（上）", "出土文献（下）", "敦煌文献"];
 
-function safeRead<T>(key: string, fallback: T): T {
-  try { return JSON.parse(localStorage.getItem(key) || "") as T; } catch { return fallback; }
-}
-
 function hrefFor(id: string, baseUrl: string) {
   if (/^ch\d{2}-structured-practice$/.test(id)) return `${baseUrl}chapters/${id.slice(0, 4)}/#check`;
   if (/^deep-ch\d{2}/.test(id)) return `${baseUrl}chapters/${id.slice(5, 9)}/#deep-dive`;
@@ -38,11 +36,14 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   const [progress, setProgress] = useState<SavedProgress>({});
   const [wrongBook, setWrongBook] = useState<Record<string, WrongItem>>({});
   const [notice, setNotice] = useState("");
+  const [storageHealth, setStorageHealth] = useState<{ status: "healthy" | "empty" | "needs_attention" | "unavailable"; bytes: number; issues: number }>({ status: "empty", bytes: 0, issues: 0 });
   const inputRef = useRef<HTMLInputElement>(null);
 
   function read() {
-    setProgress(safeRead<SavedProgress>("wxlab-progress", {}));
-    setWrongBook(safeRead<Record<string, WrongItem>>("wxlab-wrongbook", {}));
+    setProgress(readLocalJson<SavedProgress>("wxlab-progress", {}));
+    setWrongBook(readLocalJson<Record<string, WrongItem>>("wxlab-wrongbook", {}));
+    const storage = browserStorage();
+    setStorageHealth(storage ? inspectLearningStorage(storage) : { status: "unavailable", bytes: 0, issues: 0 });
   }
 
   useEffect(() => {
@@ -104,13 +105,15 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   ].filter((item, index, items) => items.findIndex((candidate) => candidate.id === item.id) === index).slice(0, 3);
 
   function exportArchive() {
+    const storage = browserStorage();
+    if (!storage) { setNotice("当前浏览器未开放本地存储，暂时没有可导出的学习档案。"); return; }
     const deepdives: Record<string, unknown> = {};
-    for (let index = 0; index < localStorage.length; index += 1) {
-      const key = localStorage.key(index);
-      if (key?.startsWith("wenxianxue-deepdive-")) deepdives[key] = safeRead(key, {});
+    for (let index = 0; index < storage.length; index += 1) {
+      const key = storage.key(index);
+      if (key?.startsWith("wenxianxue-deepdive-")) deepdives[key] = readLocalJson(key, {});
     }
-    const chapterJourneys = safeRead<Record<string, unknown>>("wxlab-chapter-journeys-v1", {});
-    const payload = { version: 3, exportedAt: new Date().toISOString(), progress, wrongBook, deepdives, library: readLibrary(), chapterJourneys };
+    const chapterJourneys = readLocalJson<Record<string, unknown>>("wxlab-chapter-journeys-v1", {});
+    const payload = { version: ARCHIVE_VERSION, exportedAt: new Date().toISOString(), progress, wrongBook, deepdives, library: readLibrary(), chapterJourneys };
     const url = URL.createObjectURL(new Blob([JSON.stringify(payload, null, 2)], { type: "application/json" }));
     const anchor = document.createElement("a"); anchor.href = url; anchor.download = `wenxianxue-learning-${new Date().toISOString().slice(0, 10)}.json`; anchor.click(); URL.revokeObjectURL(url);
     setNotice("学习档案已经导出。文件只包含本地学习记录。 ");
@@ -169,25 +172,31 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
   async function importArchive(file?: File) {
     if (!file) return;
     try {
-      const payload = JSON.parse(await file.text());
-      if (![1, 2, 3].includes(payload.version) || typeof payload.progress !== "object" || typeof payload.wrongBook !== "object") throw new Error();
-      localStorage.setItem("wxlab-progress", JSON.stringify(payload.progress));
-      localStorage.setItem("wxlab-wrongbook", JSON.stringify(payload.wrongBook));
-      Object.entries(payload.deepdives ?? {}).forEach(([key, value]) => key.startsWith("wenxianxue-deepdive-") && localStorage.setItem(key, JSON.stringify(value)));
-      if (payload.version >= 2 && payload.library && typeof payload.library === "object") { localStorage.setItem(LIBRARY_KEY, JSON.stringify({ ...emptyLibrary(), ...payload.library, version: 1 })); window.dispatchEvent(new CustomEvent("wxlab-library-updated")); }
-      if (payload.version >= 3 && payload.chapterJourneys && typeof payload.chapterJourneys === "object") { localStorage.setItem("wxlab-chapter-journeys-v1", JSON.stringify(payload.chapterJourneys)); window.dispatchEvent(new CustomEvent("wxlab-chapter-journey-updated")); }
-      read(); setNotice("学习档案导入成功。");
-    } catch { setNotice("导入失败：请选择由本站导出的 JSON 学习档案。"); }
+      const { payload, migratedFrom } = parseLearningArchive(await file.text());
+      const storage = browserStorage();
+      if (!storage || !applyLearningArchive(payload, storage)) throw new Error("storage_failed");
+      window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
+      window.dispatchEvent(new CustomEvent("wxlab-chapter-journey-updated"));
+      window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+      read();
+      setNotice(migratedFrom ? `旧版学习档案（v${migratedFrom}）已安全迁移并导入。` : "学习档案导入成功，原有记录已完整替换。");
+    } catch (error) {
+      const reason = error instanceof Error ? error.message : "";
+      setNotice(reason === "archive_too_large" ? "导入失败：档案超过 2MB，请确认文件来自本站且未被异常扩充。" : reason === "storage_failed" ? "导入失败：浏览器拒绝写入；原有档案已尽量恢复，请先导出备份或检查可用空间。" : "导入失败：请选择由本站导出的有效 JSON 学习档案。");
+    }
     if (inputRef.current) inputRef.current.value = "";
   }
 
   function clearArchive() {
     if (!window.confirm("确定清空当前浏览器中的全部进度、错题、研读记录、章节复盘、札记与收藏吗？此操作不可撤销。")) return;
-    localStorage.removeItem("wxlab-progress"); localStorage.removeItem("wxlab-wrongbook");
-    const keys = Array.from({ length: localStorage.length }, (_, index) => localStorage.key(index)).filter((key): key is string => Boolean(key?.startsWith("wenxianxue-deepdive-")));
-    keys.forEach((key) => localStorage.removeItem(key)); read(); setNotice("本地学习档案已清空。");
-    localStorage.removeItem(LIBRARY_KEY); window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
-    localStorage.removeItem("wxlab-chapter-journeys-v1"); window.dispatchEvent(new CustomEvent("wxlab-chapter-journey-updated"));
+    const storage = browserStorage();
+    if (!storage) { setNotice("当前浏览器未开放本地存储，没有可清空的档案。"); return; }
+    removeLocalValue("wxlab-progress"); removeLocalValue("wxlab-wrongbook");
+    const keys = Array.from({ length: storage.length }, (_, index) => storage.key(index)).filter((key): key is string => Boolean(key?.startsWith("wenxianxue-deepdive-")));
+    keys.forEach((key) => removeLocalValue(key));
+    removeLocalValue(LIBRARY_KEY); window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
+    removeLocalValue("wxlab-chapter-journeys-v1"); window.dispatchEvent(new CustomEvent("wxlab-chapter-journey-updated"));
+    read(); setNotice("本地学习档案已清空。");
   }
 
   return <div className="progress-dashboard progress-dashboard--full">
@@ -217,6 +226,7 @@ export default function ProgressDashboard({ baseUrl }: { baseUrl: string }) {
     </section>
     <section className="archive-tools" id="archive">
       <div><p className="mini-label">Portable archive</p><h2>带走你的学习记录</h2><p>统一备份进度、错题、研读勾选、章节复盘、札记、收藏和最近浏览；不包含账号或设备信息。</p></div>
+      <div className={`storage-health ${storageHealth.status}`} role="status"><span aria-hidden="true">{storageHealth.status === "healthy" ? "✓" : storageHealth.status === "needs_attention" ? "!" : "·"}</span><p><strong>{storageHealth.status === "healthy" ? "本地档案状态正常" : storageHealth.status === "needs_attention" ? "发现损坏的本地记录" : storageHealth.status === "unavailable" ? "浏览器未开放本地存储" : "尚未形成本地档案"}</strong><small>{storageHealth.status === "healthy" ? `已检查核心记录，约 ${Math.max(1, Math.ceil(storageHealth.bytes / 1024))} KB；建议阶段性导出备份。` : storageHealth.status === "needs_attention" ? `${storageHealth.issues} 组记录无法解析；页面会跳过损坏部分，请先导出可用内容。` : storageHealth.status === "unavailable" ? "你仍可浏览与练习，但关闭页面后记录可能无法保留。" : "完成一次练习、收藏或札记后，这里会显示健康状态。"}</small></p></div>
       <div><button onClick={exportMarkdownReport}>生成活动报告 .md</button><button onClick={exportArchive}>备份数据 .json</button><button onClick={() => inputRef.current?.click()}>导入档案</button><button className="danger" onClick={clearArchive}>清空记录</button><input ref={inputRef} type="file" accept="application/json" hidden onChange={(event) => importArchive(event.target.files?.[0])} /></div>
       {notice && <p className="archive-notice" role="status">{notice}</p>}
     </section>

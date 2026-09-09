@@ -59,7 +59,7 @@ const pathReview = new Map(learningPaths.map((path) => {
     </div>
   </section>
 
-  <HomeResume baseUrl={base} client:load />
+  <HomeResume baseUrl={base} client:idle={{ timeout: 1200 }} />
 
   <section class="flagship-entry container">
     <div class="flagship-mark"><span>综合</span><strong>案卷</strong></div>
@@ -72,7 +72,7 @@ const pathReview = new Map(learningPaths.map((path) => {
       <p><span>当前阶段</span><strong>十四章结构化公测版</strong></p>
       <div class="strip-line"><span></span></div>
       <p><span>结构覆盖</span><strong>14 / 14 章已纳入</strong></p>
-      <RepoPulse client:load />
+      <RepoPulse client:visible />
       <a href={`${base}coverage/`}>查看覆盖矩阵 →</a>
     </div>
   </section>

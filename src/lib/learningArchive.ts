@@ -1,3 +1,5 @@
+import { isPlainRecord, readLocalJson, writeLocalJson } from "./localData";
+
 export const LIBRARY_KEY = "wxlab-library-v1";
 
 export type LibraryPageType = "chapter" | "concept" | "lab" | "path" | "guide" | "other";
@@ -22,22 +24,20 @@ export const emptyLibrary = (): LearningLibrary => ({ version: 1, bookmarks: {},
 
 export function readLibrary(): LearningLibrary {
   if (typeof window === "undefined") return emptyLibrary();
-  try {
-    const parsed = JSON.parse(localStorage.getItem(LIBRARY_KEY) || "") as Partial<LearningLibrary>;
-    return {
-      version: 1,
-      bookmarks: parsed.bookmarks && typeof parsed.bookmarks === "object" ? parsed.bookmarks : {},
-      notes: parsed.notes && typeof parsed.notes === "object" ? parsed.notes : {},
-      recent: Array.isArray(parsed.recent) ? parsed.recent.slice(0, 30) : [],
-    };
-  } catch {
-    return emptyLibrary();
-  }
+  const parsed = readLocalJson<unknown>(LIBRARY_KEY, {});
+  if (!isPlainRecord(parsed)) return emptyLibrary();
+  return {
+    version: 1,
+    bookmarks: isPlainRecord(parsed.bookmarks) ? parsed.bookmarks as LearningLibrary["bookmarks"] : {},
+    notes: isPlainRecord(parsed.notes) ? parsed.notes as LearningLibrary["notes"] : {},
+    recent: Array.isArray(parsed.recent) ? parsed.recent.filter(isPlainRecord).slice(0, 30) as LearningLibrary["recent"] : [],
+  };
 }
 
-export function writeLibrary(library: LearningLibrary) {
-  localStorage.setItem(LIBRARY_KEY, JSON.stringify({ ...library, version: 1 }));
-  window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
+export function writeLibrary(library: LearningLibrary): boolean {
+  const result = writeLocalJson(LIBRARY_KEY, { ...library, version: 1 });
+  if (result.ok) window.dispatchEvent(new CustomEvent("wxlab-library-updated"));
+  return result.ok;
 }
 
 export function recordRecent(entry: Omit<LibraryEntry, "updatedAt">) {

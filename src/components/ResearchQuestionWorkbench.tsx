@@ -1,5 +1,6 @@
 import { useMemo, useState } from "react";
 import "./ResearchQuestionWorkbench.css";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type LensId = "content" | "carrier" | "formation" | "circulation" | "organization";
 
@@ -19,17 +20,12 @@ const strength = [
 ];
 
 function saveProgress(lensCount: number, strengthIndex: number) {
-  const key = "wxlab-progress";
-  const current = JSON.parse(localStorage.getItem(key) || "{}");
-  current["ch01-research-workbench"] = {
+  saveProgressEntry("ch01-research-workbench", {
     completed: true,
     score: lensCount >= 3 && strengthIndex >= 1 ? 1 : 0,
     total: 1,
     title: "第一章·研究问题装配台",
-    updatedAt: new Date().toISOString(),
-  };
-  localStorage.setItem(key, JSON.stringify(current));
-  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  });
 }
 
 export default function ResearchQuestionWorkbench() {

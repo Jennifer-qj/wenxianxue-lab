@@ -28,12 +28,12 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
   <section id="lab-directory" class="directory-section"><div class="container"><LabDirectory baseUrl={base} client:load /></div></section>
 
-  <section id="fragment-casebook" class="fragment-casebook-section"><div class="container"><FragmentCasebook client:load /></div></section>
+  <section id="fragment-casebook" class="fragment-casebook-section"><div class="container"><FragmentCasebook client:visible /></div></section>
 
   <section id="rare-book-dossier" class="dossier-section">
     <div class="container">
       <div class="section-heading dossier-heading"><div><p class="eyebrow">Flagship case</p><h2 class="section-title">古籍鉴定综合案卷</h2></div><p>跨越载体、装帧、牌记、避讳、刻工、版式、目录和递藏证据。所有材料均为教学虚构，方法逻辑来自全书结构化知识。</p></div>
-      <RareBookDossier baseUrl={base} client:load />
+      <RareBookDossier baseUrl={base} client:visible />
     </div>
   </section>
 
@@ -50,7 +50,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
           <div><dt>进度保存</dt><dd>当前浏览器</dd></div>
         </dl>
       </div>
-      <VersionDetective client:load />
+      <VersionDetective client:visible />
     </div>
   </section>
 
@@ -62,21 +62,21 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <p>先声明采用哪一种知识秩序，再把八部典籍归入经、史、子、集。遇到《梦溪笔谈》这样的边界书，必须解释为什么现代学科标签不能直接代替传统著录框架。</p>
         <div class="learning-loop"><span>声明框架</span><i>→</i><span>批量归架</span><i>→</i><span>解释边界</span><i>→</i><span>导出判断</span></div>
       </div>
-      <FourFoldChallenge client:load />
+      <FourFoldChallenge client:visible />
     </div>
   </section>
 
   <section id="evidence-calibration" class="calibration-section">
     <div class="container">
       <div class="section-heading calibration-heading"><div><p class="eyebrow">Evidence calibration</p><h2 class="section-title">证据称量室</h2></div><p>不是选择“正确答案”，而是亲手给证据分配强度、写出有限度结论，再比较推理跨度。四份案卷横跨版本、校勘、辨伪和敦煌残卷。</p></div>
-      <EvidenceCalibrationLab client:load />
+      <EvidenceCalibrationLab client:visible />
     </div>
   </section>
 
   <section id="criticism-studio" class="criticism-studio-section">
     <div class="container">
       <div class="section-heading criticism-heading"><div><p class="eyebrow">Textual criticism studio</p><h2 class="section-title">从辨认差异，走到写出可复查的判断</h2></div><p>两项进阶实验不要求猜一个选项：你需要给材料分配证据角色、写校勘记，或亲手连接版本亲缘并说明模型的限制。</p></div>
-      <TextualCriticismStudio client:load />
+      <TextualCriticismStudio client:visible />
     </div>
   </section>
 
@@ -86,7 +86,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <div><p class="eyebrow">Skill arcade</p><h2 class="section-title">四种可调整的操作台</h2></div>
         <p>校勘流程重排、载体线索配对、装帧序列重建与工具书批量分拣，分别训练程序意识、物质识别、序列建构和分类判断。</p>
       </div>
-      <SkillArcade client:load />
+      <SkillArcade client:visible />
     </div>
   </section>
 
@@ -96,7 +96,7 @@ const base = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
         <div><p class="eyebrow">Chapter case files</p><h2 class="section-title">每一章都有一个可操作现场</h2></div>
         <p>把结构化内容转成十五个小型案例：有的要求追踪证据，有的要求重排流程、标注文本或比较传播方案。完成后会写入本地学习档案。</p>
       </div>
-      <CaseGallery labs={labCases} baseUrl={base} client:load />
+      <CaseGallery labs={labCases} baseUrl={base} client:visible />
     </div>
   </section>
 

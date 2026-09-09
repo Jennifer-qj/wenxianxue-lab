@@ -1,4 +1,5 @@
 import { useMemo, useState } from "react";
+import { saveProgressEntry } from "../lib/progressArchive";
 
 type Category = "经" | "史" | "子" | "集";
 type Stage = "frame" | "shelf" | "boundary" | "report";
@@ -27,11 +28,7 @@ const boundaryChoices = [
 ];
 
 function save(score: number) {
-  const key = "wxlab-progress";
-  const stored = JSON.parse(localStorage.getItem(key) || "{}");
-  stored["four-fold"] = { completed: true, score, total: books.length + 1, updatedAt: new Date().toISOString() };
-  localStorage.setItem(key, JSON.stringify(stored));
-  window.dispatchEvent(new CustomEvent("wxlab-progress-updated"));
+  saveProgressEntry("four-fold", { completed: true, score, total: books.length + 1 });
 }
 
 export default function FourFoldChallenge() {
