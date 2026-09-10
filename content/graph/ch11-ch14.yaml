@@ -17,7 +17,7 @@ items:
   - {id: e-1204, source: c_book_history_artifact, target: c_bamboo_silk_text, type: isPartOf, evidence: "修订本第358页：简帛提供书籍制度史实物。", confidence: confirmed}
   - {id: e-1205, source: c_stone_inscription, target: c_stone_inscription_value, type: evidenceFor, evidence: "修订本第363—365页：石刻具有史料、文学、文字等价值。", confidence: confirmed}
   - {id: e-1206, source: c_covenant_text, target: c_archaeological_context, type: affectedBy, evidence: "修订本第365页：盟书作为出土文献须结合考古语境。", confidence: pedagogical}
-  - {id: e-1207, source: c_seal_text, target: c_administrative_geography, type: evidenceFor, evidence: "修订本第366页：玺印文字可提供官制身份和地域线索。", confidence: pedagogical}
+  - {id: e-1207, source: c_seal_text, target: c_administrative_geography, type: evidenceFor, evidence: "修订本第366页：玺印对研究古代官制和地理具有价值。", confidence: confirmed}
   - {id: e-1208, source: c_excavated_paper, target: c_archaeological_context, type: affectedBy, evidence: "修订本第366页：纸质出土文献的价值与来源语境相关。", confidence: pedagogical}
   - {id: e-1301, source: c_library_cave, target: c_mogao_caves, type: isPartOf, evidence: "修订本第368—371页：藏经洞位于莫高窟。", confidence: confirmed}
   - {id: e-1302, source: ev_library_cave_discovery, target: c_library_cave, type: affectedBy, evidence: "修订本第371—372页：藏经洞近代重新发现。", confidence: confirmed}

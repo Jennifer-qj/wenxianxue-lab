@@ -1,175 +1,125 @@
 chapter: 13
 edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
 source_requirement: paper_copy
-note: 第13章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+note: 第13章已完成带页码文字稿预对读；以下记录用于公开定位、提问和留痕，任何条目都必须回到实体纸本后才能改为已核验。
 items:
   - unit_id: mku-13-01-01
     page_start: 346
     page_end: 348
     focus:
-      - 核对「战国楚简与曾侯乙简」的纸本页码边界、核心定义和原书例证
-      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
-      - 检查项目对“不同墓葬楚简为何不能混成一个文本系统？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对曾侯乙墓及湖北、湖南、河南楚简的地点、年代、数量和内容
+      - 区分遣策、占卜辞与古籍等不同材料性质
+      - 检查“楚简”总称是否遮蔽具体墓葬和整理批次
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行885—903；目录定位第346—348页。原书先界定简、牍、帛，再逐批介绍曾侯乙墓及湖北、湖南、河南楚简，内容涵盖葬仪车马器物、遣策、占卜和先秦古籍。项目已撤回‘各批均有书写特征并应建档’的无据扩写，改按地点、墓葬、数量、内容和整理本区分。纸本终审需核对页码、墓号、简数、书名和出版信息。"
   - unit_id: mku-13-01-02
     page_start: 348
     page_end: 351
     focus:
-      - 核对「秦汉墓葬简帛」的纸本页码边界、核心定义和原书例证
-      - 避免把宽泛材料类别当作同一文本系统
-      - 检查项目对“墓葬简帛怎样同时保存典籍和行政生活材料？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对云梦、江陵秦简及马王堆、阜阳、银雀山汉代简帛实例
+      - 核对法律、历谱、医书、术数、兵书和经子写本的归类
+      - 区分原书材料介绍与网站对随葬文本关系的延伸提醒
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行905—959；目录定位第348—351页。原书逐项交代云梦、江陵、马王堆、阜阳、银雀山材料的出土时间、数量、篇目和整理出版情况，显示墓葬简帛兼有古籍与实用文献。项目已把‘墓主亲自撰写或阅读’明确标为网站提醒，避免冒充原书结论。纸本终审需重点核对帛书篇名、拟题与原题、简数字数及各整理本。"
   - unit_id: mku-13-01-03
     page_start: 351
     page_end: 354
     focus:
-      - 核对「边塞、汉晋与吴简」的纸本页码边界、核心定义和原书例证
-      - 区分出土本的早出、具体文本价值与作者原本三个层次
-      - 检查项目对“日常行政简牍如何重建基层制度？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对江陵、武威、居延、敦煌、定州、尹湾、楼兰尼雅及长沙吴简
+      - 区分墓葬、边塞遗址、邮驿遗址和井窖材料的来源与用途
+      - 检查历史价值是否落到原书列举的具体内容
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行961—997；目录定位第351—354页。原书续列江陵、武威、居延、敦煌、定州、大通、尹湾、楼兰尼雅和长沙吴简，来源涵盖墓葬、城障烽燧、邮驿和井窖，内容包括经典、法律、公文档案、历谱、医方、户籍券书等。项目删去统一‘基层制度’和机构偏向的泛化表达。纸本终审需核对年代、地点、数量、馆藏与已出版成果。"
   - unit_id: mku-13-02-01
     page_start: 354
     page_end: 356
     focus:
-      - 核对「佚籍复出与传世古籍校读」的纸本页码边界、核心定义和原书例证
-      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
-      - 检查项目对“出土本为何会改变我们理解古书的方式？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对佚籍复出与考校释读传世古籍两类价值
+      - 复查孙武孙膑、郭店儒书及《老子》异文案例
+      - 区分原书的可靠新依据与网站的作者原本边界提醒
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行999—1017；目录定位第354—356页。原书先以银雀山、郭店、上博和马王堆材料说明佚籍复出，再说明古写本可考证时代真伪、校补讹脱、释读文义，并以《孙子》《孙膑兵法》《老子》等展开。项目已把‘揭示长期演变’收紧为原书实例，并标明‘早出不等于作者原本’是网站方法提醒。纸本终审需核对引文、篇名、人物观点和异文字样。"
   - unit_id: mku-13-02-02
     page_start: 356
     page_end: 359
     focus:
-      - 核对「历史、文字与书籍制度」的纸本页码边界、核心定义和原书例证
-      - 避免把宽泛材料类别当作同一文本系统
-      - 检查项目对“简帛实物能回答传世文本不能回答的哪些问题？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对历史资料、文字学资料和书籍制度实物三类价值
+      - 复查地名订误、战国秦汉字形及篇题收卷实例
+      - 核对书刀用途、简长规格及“有合有不合”的限定
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1019—1043；目录定位第356—359页。原书以吴简、居延敦煌简和尹湾木牍说明历史资料价值，以战国至秦汉字形说明文字学价值，又据篇题、书刀、收卷方向和简长说明书籍制度。项目删去原稿未写的分栏、编绳复原结论，并把竞争性编联方案标为网站训练。纸本终审需核对地名异文、数量、篇题位置、简长及引用书目。"
   - unit_id: mku-13-03-01
     page_start: 359
     page_end: 363
     focus:
-      - 核对「石刻文献要籍」的纸本页码边界、核心定义和原书例证
-      - 区分出土本的早出、具体文本价值与作者原本三个层次
-      - 检查项目对“石刻总集和著录怎样保存散布各地的铭文？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对十三种石刻要籍的作者、卷数、年代、材料规模与体例
+      - 区分墨本或拓影、目录、录文、题跋考释和索引
+      - 核对各书补续、版本及优劣评价
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1045—1107；目录定位第359—363页。原书从《集古录》《金石录》写到《石刻题跋索引》，逐书说明目录、墨本或拓本、录文、题跋、尺寸出处、递藏与索引等体例；并指出欧赵三层成果后来往往分途发展。项目已撤回‘均记录存佚递藏’的笼统说法，改为逐层辨别。纸本终审需逐书核对书名、卷数、作者、年代、收录数及版本关系。"
   - unit_id: mku-13-03-02
     page_start: 363
     page_end: 365
     focus:
-      - 核对「史料与文学价值」的纸本页码边界、核心定义和原书例证
-      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
-      - 检查项目对“墓志碑铭怎样补史又为何需要批判阅读？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对石刻补史之阙、正史之谬的论证与实例
+      - 核对碑版传记、文学家生平和诗词佚作三类文学价值
+      - 区分原书明说价值与网站的文体批判提醒
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1109—1127；目录定位第363—365页。原书据欧阳修概括补史阙、正史谬，并用袁安碑纪日、荀岳墓志官职及家世订误说明；文学价值则落在传记文、文学家事迹与诗赋佚作。项目已删去把颂德丧葬文体直接写成原书结论的表达，仅作为网站边界提示。纸本终审需核对干支推算、官名异文、引书及石刻作品名。"
   - unit_id: mku-13-03-03
     page_start: 365
     page_end: 365
     focus:
-      - 核对「文字书法、经学与宗教价值」的纸本页码边界、核心定义和原书例证
-      - 避免把宽泛材料类别当作同一文本系统
-      - 检查项目对“石刻怎样连接文字形体、经典传播与宗教实践？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对碑刻字体、别体字和书法材料
+      - 核对历代石经与房山佛经刻石、题记的例证
+      - 避免把资料价值扩写成未经原书说明的断代规则
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1129—1131；目录定位第365页。原书把石刻价值续分为文字学和书法、经学和宗教史料，举《广碑别字》、历代石经、房山石经及刻经题记。项目删去‘纪年地域刻工联合断代’这一未在本节展开的规则，收回到资料类型和研究用途。纸本终审需核对字头重文数、石经名称、佛经部数和题记汇编。"
   - unit_id: mku-13-04-01
     page_start: 365
     page_end: 366
     focus:
-      - 核对「盟书、玺印与砖瓦文字」的纸本页码边界、核心定义和原书例证
-      - 区分出土本的早出、具体文本价值与作者原本三个层次
-      - 检查项目对“短小文字材料为何仍能提供制度证据？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对侯马盟书与温县盟书的年代、载体、数量和价值
+      - 核对官私玺印、陶文、封泥及相关著录
+      - 核对砖瓦文字著录及文字、民俗、建筑和考古用途
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1133—1147；目录定位第365—366页。原书将甲骨、金文、简帛、石刻之外的材料分列盟书、玺印和砖瓦文字，分别说明典型发现、著录与研究价值。项目已把笼统的‘短铭制度证据’改成三类材料各自用途，并限制单件材料的证明范围。纸本终审需核对盟书数量颜色、玺印著作、封泥收录数及砖瓦著录书名。"
   - unit_id: mku-13-04-02
     page_start: 366
     page_end: 368
     focus:
-      - 核对「纸质出土文献」的纸本页码边界、核心定义和原书例证
-      - 核对简帛、石刻及其他材料的遗址、墓葬、年代和批次
-      - 检查项目对“出土纸文献与传世纸本文献的证据差异是什么？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对吐鲁番历史背景、文书形成保存、种类与多语文字资料
+      - 核对鲁荒王墓元版古籍及《杜工部诗史》版本订误案例
+      - 核对出土文献与熟读传世文献之间的最终限定
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1149—1155；目录定位第366—368页。原书以吐鲁番出土文书为主体，列官私文书、古籍和多种文字资料；又以鲁荒王墓同版元刻本的末行题记纠正北图藏本误定宋刻，末尾强调利用出土新证据仍有赖于熟读传世文献。项目已撤回地层、纸张和制作地等泛化说明。纸本终审需核对地名年代、文书种类、古籍书名、版本题记及结论措辞。"
