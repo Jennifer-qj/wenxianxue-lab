@@ -7,6 +7,8 @@ items:
     page_start: 11
     page_end: 12
     focus: [核对甲骨材料范围和占卜流程概括, 核对出土数量与年代等可能受研究进展影响的数字, 区分原书陈述与项目补充的出土语境边界]
+    review_priority: P0
+    priority_reasons: [含1991年统计数字, 含商代纪年, 研究进展可能改变数字口径]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -16,6 +18,8 @@ items:
     page_start: 12
     page_end: 14
     focus: [核对金与金文的范围, 检查八类青铜器是否被摘要过度压缩, 区分器物功能事实与项目提出的解释方法]
+    review_priority: P1
+    priority_reasons: [含八类器名, 涉及异体字与读音, 需防止分类压缩失真]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -25,6 +29,8 @@ items:
     page_start: 14
     page_end: 16
     focus: [核对碣摩崖碑的定义和例证范围, 检查时代与专名, 注意碑与墓志等相邻概念的边界]
+    review_priority: P1
+    priority_reasons: [含碑碣专名与年代, 相邻概念边界易混, 涉及数量]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -34,6 +40,8 @@ items:
     page_start: 16
     page_end: 20
     focus: [核对简牍尺寸制度与实物变通, 核对牍检封泥和编联术语, 检查册篇卷词源是否保持原书限定]
+    review_priority: P0
+    priority_reasons: [含尺寸与出土数量, 有“不準”等特殊字形, 编联术语和词源容易误录]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -43,6 +51,8 @@ items:
     page_start: 20
     page_end: 21
     focus: [核对帛的材料性质和使用范围, 检查与简策并用的时间表述, 避免把材料优势写成普遍使用]
+    review_priority: P2
+    priority_reasons: [概括边界已收紧, 主要剩余品名与尺寸复查]
     required_checks: [page_range, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -52,6 +62,8 @@ items:
     page_start: 21
     page_end: 22
     focus: [核对莎草纸制作步骤和译名, 核对卷本连接方式, 检查跨文化年代比较是否沿用教材旧说而未注明]
+    review_priority: P0
+    priority_reasons: [含外来译名与英寸, 跨文化年代比较, 教材旧说可能需历史化说明]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -61,6 +73,8 @@ items:
     page_start: 22
     page_end: 23
     focus: [核对羊皮纸制作及普及年代, 核对人物地名和外文译名, 区分材料普及史与册页装订史]
+    review_priority: P0
+    priority_reasons: [含人物地名与外文, 含普及年代, 两条历史线索容易混写]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -70,6 +84,8 @@ items:
     page_start: 23
     page_end: 24
     focus: [核对贝叶与贝多罗等术语, 核对穿孔和夹板装订方式, 区分真实贝叶与中国纸本仿梵夹形态]
+    review_priority: P1
+    priority_reasons: [含梵文转写, 含引书卷次, 真实载体与仿制形态需分开]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -79,6 +95,8 @@ items:
     page_start: 24
     page_end: 25
     focus: [核对各次早期纸张发现的地点年代和性质, 避免把出土年代等同技术发明年代, 检查蔡伦相关表述是否足够审慎]
+    review_priority: P0
+    priority_reasons: [集中出现地点年代与尺寸, 出土年代不等于发明年代, 蔡伦叙述需要证据分层]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -88,6 +106,8 @@ items:
     page_start: 25
     page_end: 27
     focus: [核对卷子结构部件和术语, 核对纸幅尺寸与一帙卷数等数字, 区分原始形态与后配改装风险]
+    review_priority: P0
+    priority_reasons: [含“襦／褾”等疑难用字, 含尺寸与帙数, 后配改装会影响形态判断]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -97,6 +117,8 @@ items:
     page_start: 27
     page_end: 27
     focus: [核对经折装结构及与梵夹的关系, 核对替代卷子的时间判断, 保留多种形制长期并存的边界]
+    review_priority: P1
+    priority_reasons: [含大藏经名称与年代, 形制演变不能写成单线替代]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -106,6 +128,8 @@ items:
     page_start: 27
     page_end: 28
     focus: [核对版心方向和粘连位置, 核对蝴蝶装通行年代, 强调现存古书可能后改装]
+    review_priority: P1
+    priority_reasons: [含列举书名与通行年代, 后改装可能遮蔽原始形态]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -115,6 +139,8 @@ items:
     page_start: 28
     page_end: 29
     focus: [核对包背装折叶和装订位置, 核对与蝴蝶装的关键区别, 检查永乐大典与四库全书等例证]
+    review_priority: P1
+    priority_reasons: [含大型典籍例证, 与蝴蝶装的折叶方向易混]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）
@@ -124,6 +150,8 @@ items:
     page_start: 29
     page_end: 29
     focus: [核对线装工序和常见孔数, 核对兴起与沿用年代, 区分现装线装与原始成书年代]
+    review_priority: P1
+    priority_reasons: [含孔数与兴起年代, 现装形态不能直接证明原始年代]
     required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
     status: in_review
     reviewer: Codex（文字稿预对读）

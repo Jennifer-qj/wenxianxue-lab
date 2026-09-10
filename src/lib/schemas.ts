@@ -75,6 +75,8 @@ export const reviewRecordSchema = z.object({
   unit_id: z.string().regex(/^mku-\d{2}-\d{2}-\d{2}$/),
   page_start: z.number().int().positive(), page_end: z.number().int().positive().optional(),
   focus: z.array(z.string().min(1)).min(1),
+  review_priority: z.enum(["P0", "P1", "P2"]).optional(),
+  priority_reasons: z.array(z.string().min(1)).optional(),
   required_checks: z.array(z.enum(["page_range", "names_dates", "summary_fidelity", "boundary_strength", "linked_content"])).min(3),
   status: z.enum(["queued", "in_review", "submitted", "accepted"]),
   reviewer: z.string().nullable(), reviewed_at: z.string().nullable(), evidence_note: z.string().nullable(),

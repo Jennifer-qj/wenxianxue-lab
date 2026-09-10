@@ -1,5 +1,5 @@
 import { describe, expect, it } from "vitest";
-import { deepDiveSchema, graphEdgeSchema, labSchema, mkuSchema, quizSchema } from "../src/lib/schemas";
+import { deepDiveSchema, graphEdgeSchema, labSchema, mkuSchema, quizSchema, reviewRecordSchema } from "../src/lib/schemas";
 
 describe("内容 Schema", () => {
   it("合法 MKU 通过，缺真实页码失败", () => {
@@ -28,5 +28,10 @@ describe("内容 Schema", () => {
     expect(deepDiveSchema.safeParse(valid).success).toBe(true);
     expect(deepDiveSchema.safeParse({ ...valid, evidence:evidence.slice(0, 2) }).success).toBe(false);
     expect(deepDiveSchema.safeParse({ ...valid, conclusions:conclusions.slice(0, 1) }).success).toBe(false);
+  });
+  it("纸本复核条目允许登记优先级与原因", () => {
+    const valid = { unit_id:"mku-02-01-01",page_start:11,page_end:12,focus:["核对数字"],review_priority:"P0",priority_reasons:["含年代与统计口径"],required_checks:["page_range","names_dates","summary_fidelity"],status:"in_review",reviewer:null,reviewed_at:null,evidence_note:null };
+    expect(reviewRecordSchema.safeParse(valid).success).toBe(true);
+    expect(reviewRecordSchema.safeParse({ ...valid, review_priority:"urgent" }).success).toBe(false);
   });
 });

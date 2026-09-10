@@ -92,6 +92,9 @@ describe("公开项目成熟度门禁", () => {
     expect(existsSync(resolve(root, "content/reviews/ch02.yaml"))).toBe(true);
     expect(review).toContain("本地勾选只帮助你工作");
     expect(review).toContain("导出本地复核记录");
+    expect(review).toContain("打印当前核对单");
+    expect(review).toContain("优先终审");
+    expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -204,7 +207,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.12.12"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

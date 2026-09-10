@@ -16,6 +16,12 @@ const verifiedConcepts = concepts.filter((item) => item.status === "verified").l
 const confirmedEdges = edges.filter((item) => item.confidence === "confirmed").length;
 const precheckedUnitIds = new Set(reviewFiles.flatMap((entry) => entry.data.items).filter((item) => item.status === "in_review" && item.evidence_note).map((item) => item.unit_id));
 const precheckedUnits = precheckedUnitIds.size;
+const reviewItems = reviewFiles.flatMap((entry) => entry.data.items);
+const priorityCounts = reviewItems.filter((item) => item.review_priority).reduce((counts, item) => {
+  const priority = item.review_priority!;
+  counts[priority] += 1;
+  return counts;
+}, { P0: 0, P1: 0, P2: 0 });
 const rows = chapters.map((chapter, index) => {
   const number = index + 1;
   const chapterUnits = units.filter((item) => item.chapter === number);
@@ -44,6 +50,12 @@ const rows = chapters.map((chapter, index) => {
 
     <section class="audit-explainer"><div><p class="eyebrow">Review chain</p><h2>三段工作，各自证明什么？</h2></div><dl><div><dt>自动结构审计</dt><dd>检查题目答案越界、排序答案完整性、关系自环、竞争结论引用、三类自适应追问和全站九题型覆盖；跨章复用概念记录为知识连接。</dd></div><div><dt>文字稿预对读</dt><dd>逐单元定位原意、收回越界概括并登记待查专名和数字。它为纸本复核减负，但不证明字形、页码和引文已经终审。</dd></div><div><dt>人工纸本复核</dt><dd>核对专名、书名、异体字、观点边界、真实页码与复杂案例。只有完成这一层，状态才可改为“已核验”。</dd></div></dl></section>
 
+    <section class="review-readiness">
+      <div><p class="eyebrow">Paper review readiness · Chapter 02</p><h2>第二章终审已经排队，但原页仍需人工打开</h2><p>公开网站不托管原书扫描件。当前先把含数字、年代、外文、疑难字形和复杂版本关系的条目排到前面；拿到实体书或合法自用扫描件后，可直接按页核对、记录并导出。其余章节将在后续批次逐章分级。</p></div>
+      <dl><div><dt>{priorityCounts.P0}</dt><dd>优先终审</dd></div><div><dt>{priorityCounts.P1}</dt><dd>重点复查</dd></div><div><dt>{priorityCounts.P2}</dt><dd>常规复查</dd></div></dl>
+      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch02/`}>从第二章优先项开始 →</a>
+    </section>
+
     <section class="review-table">
       <header><div><p class="eyebrow">Chapter queue</p><h2>十四章复核队列</h2></div><p>竞争结论是教学情境中的可比较假说，不表示原书直接提出这些具体结论。</p></header>
       <div class="review-head"><span>章节</span><span>学习单元</span><span>概念</span><span>关系</span><span>练习与研读</span></div>
@@ -64,4 +76,5 @@ const rows = chapters.map((chapter, index) => {
   .audit-actions{display:flex;align-items:center;gap:1rem;margin-top:1.4rem}.audit-hero .button{color:#292a27;background:#f7f0e4;border-color:#f7f0e4}.audit-actions>a:last-child{color:#e0ad98;font-size:.75rem}.review-links{display:flex!important;gap:.65rem;margin-top:.25rem}.review-links a{color:var(--cinnabar);font-family:var(--sans)!important;font-size:.62rem!important;font-weight:500!important}.claim-link{color:var(--muted)!important}
   .audit-hero{padding:5rem 0 4rem;background:#24302b}.audit-hero .display-title{font-size:clamp(2.8rem,5.2vw,4.8rem)}.audit-summary{gap:1rem;border:0}.audit-summary article{border:1px solid var(--line);border-radius:10px;background:var(--white)}.audit-summary article:last-child{border:1px solid var(--line)}.audit-explainer dl div{border:0;border-radius:9px;background:#eae3d8}.audit-explainer dl div:last-child{background:#efe1dc}.review-head{border-radius:8px;background:#e7e1d6}.review-table>article{margin-top:.45rem;border:1px solid var(--line);border-radius:9px;background:rgba(252,251,247,.55)}.audit-boundary{border-radius:10px;background:var(--white)}@media(max-width:560px){.audit-actions{align-items:flex-start;flex-direction:column}.review-links{flex-direction:column;gap:.15rem}}
   .audit-hero>div>p:not(.eyebrow){max-width:52rem;color:#c4beb5;font-family:var(--serif);font-size:1.05rem}
+  .review-readiness{display:grid;grid-template-columns:1fr auto;gap:1.5rem 3rem;align-items:center;margin-top:2rem;padding:1.5rem;border:1px solid var(--line);border-radius:10px;background:#f4eee4}.review-readiness h2{margin:.2rem 0;font-family:var(--serif);font-size:1.65rem}.review-readiness p:not(.eyebrow){max-width:48rem;margin:.4rem 0 0;color:var(--muted);font-size:.78rem}.review-readiness dl{display:flex;gap:1.8rem;margin:0}.review-readiness dl div{display:grid}.review-readiness dt{font-family:var(--serif);font-size:1.8rem}.review-readiness dd{margin:0;color:var(--muted);font-size:.65rem}.review-readiness>a{grid-column:1/-1;justify-self:end;color:var(--cinnabar)}@media(max-width:700px){.review-readiness{grid-template-columns:1fr}.review-readiness dl{flex-wrap:wrap}.review-readiness>a{grid-column:auto;justify-self:start}}
 </style>
