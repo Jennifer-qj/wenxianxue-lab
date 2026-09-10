@@ -8,134 +8,134 @@ items:
     page_end: 312
     focus:
       - 核对「甲骨文的发现」的纸本页码边界、核心定义和原书例证
-      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
-      - 检查项目对“甲骨怎样从旧物药材转变为学术文献？”的回答是否保持原书限定
+      - 对读刘鹗、罗振常、王国维、王襄和明义士记载中的时间、地点与人物
+      - 检查项目对多种早期记载的综合是否说明依据和分歧
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行459—483；目录定位第309—312页。原书汇列五组早期记载后判断：甲骨在1899年前已于安阳小屯出土并作龙骨，王懿荣于1899年首先识别、购藏和研究，王襄等亦参与早期购藏；项目已撤回‘传说与可核发掘记录’的泛化对立，改为比较记载差异。纸本终审需核对各引文、地名异说、人物字号、年代及‘第一人’表述。"
   - unit_id: mku-12-01-02
     page_start: 312
     page_end: 313
     focus:
       - 核对「乱掘时期」的纸本页码边界、核心定义和原书例证
-      - 核对著录书、编号体系、材料数量和重要人物专名
-      - 检查项目对“失去出土记录会损失哪些信息？”的回答是否保持原书限定
+      - 核对乱掘年代、两种数量统计和逐利挖掘的原始记录
+      - 区分无出土记录次序、散藏、破碎与伪刻四类缺陷
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行485—517；目录定位第312—313页。原书把1899至1928年定为乱掘期，列村民挖掘、交易和冲突记录，末以散藏、无出土记录及次序、破碎严重和伪刻概括后果；项目删去了本节未逐项说明的地层、坑位与组合关系。纸本终审需核对殷墟定位、六万与十万余片统计口径、引文出处和三十年起讫。"
   - unit_id: mku-12-01-03
     page_start: 313
     page_end: 315
     focus:
       - 核对「科学发掘时期」的纸本页码边界、核心定义和原书例证
-      - 区分科学出土语境、传世来源和早期收藏叙事
-      - 检查项目对“科学发掘怎样提升甲骨文证据价值？”的回答是否保持原书限定
+      - 核对十五次发掘的主持者、时间、出土数量和战后恢复情况
+      - 检查“系统可靠”是否落实为可追踪批次、遗迹单位与数量，而非抽象赞语
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行519—531；目录定位第313—315页。原书逐次记录1928年以后中研院发掘的主持、日期与有字甲骨数量，并写河南省发掘、战争中断、1950年恢复及后续成果；结集部分又肯定科学发掘资料更系统可靠。项目据此改为可追踪的时间、地点、批次和数量。纸本终审需逐项复算二万四千九百一十八片、六千二百四十三片等合计及机构名称。"
   - unit_id: mku-12-01-04
     page_start: 315
     page_end: 325
     focus:
       - 核对「资料结集与考释」的纸本页码边界、核心定义和原书例证
-      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
-      - 检查项目对“甲骨整理为什么包括缀合与著录而不只释字？”的回答是否保持原书限定
+      - 核对二十三种结集、分类重纂、字典和论著目录的体例差异
+      - 检查拓影、来源、分期、分类、缀合、辨伪、释文与索引是否有实例支撑
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行533—647；目录定位第315—325页。原书从《铁云藏龟》至《小屯南地甲骨》介绍二十三种要籍，并续论分类重纂、字典与论著目录；各书分别涉及拓照、来源、分期分类、缀合、辨伪、释文和索引，并非统一流程。项目已把‘材料库’改为体例比较。纸本终审需核对书名、编者、年代、片数、重出伪刻及跨国馆藏。"
   - unit_id: mku-12-01-05
     page_start: 325
     page_end: 328
     focus:
       - 核对「语言文字与殷商史价值」的纸本页码边界、核心定义和原书例证
-      - 核对著录书、编号体系、材料数量和重要人物专名
-      - 检查项目对“占卜记录怎样成为语言与历史材料？”的回答是否保持原书限定
+      - 核对语言文字价值、殷商史价值与二重证据法的三层论证
+      - 复查王亥、先公先王世系和中宗等古籍校读案例
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行649—673；目录定位第325—328页。原书先说明甲骨字形对《说文》的补正，再以王国维考证王亥、商王世系和中宗说明卜辞可证史、补史、纠史，最后归结地下材料与纸上遗文互相释证的二重证据法。项目已撤回泛化的社会活动清单，突出这条论证链。纸本终审需核对字数比例、卜辞释文、异文关系及引文版本。"
   - unit_id: mku-12-02-01
     page_start: 328
     page_end: 331
     focus:
       - 核对「金文的出土」的纸本页码边界、核心定义和原书例证
-      - 区分科学出土语境、传世来源和早期收藏叙事
-      - 检查项目对“研究金文为何必须同时看器物与铭文？”的回答是否保持原书限定
+      - 核对金文定义、时代范围、青铜礼器功能和历代出土收藏线索
+      - 检查器形、纹饰、地域、地层及同出遗物互参的断代前提
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行675—699；目录定位第328—331页。原书界定金文为青铜器上的镂刻或熔铸文字，追述青铜时代、礼器功能和汉宋清以来出土收藏，明确铭文须与器形纹饰、出土地域地层及同出遗物互参，正确年代是讨论价值的先决条件。纸本终审需核对年代上下限、毛公鼎字数、一万二千件和一万一千九百八十三件统计。"
   - unit_id: mku-12-02-02
     page_start: 331
     page_end: 340
     focus:
       - 核对「汇集及考释」的纸本页码边界、核心定义和原书例证
-      - 核对甲骨、青铜器的发现、发掘、收藏与整理年代
-      - 检查项目对“金文著录怎样应对器物流散与释文分歧？”的回答是否保持原书限定
+      - 核对三十种汇集考释要籍及字典、目录、索引的体例和版本
+      - 区分器形图、拓本、摹本、释文、考释、来源说明与索引的证据层次
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行701—849；目录定位第331—340页。原书列三十种金文汇集考释要籍，并说明《金文编》等字典与《金文著录简目》《青铜器论文索引》的互补使用；图像、拓摹、尺寸、出土藏家、释文、考释、分类与索引在各书中并不齐备。项目已改为判断要籍实际提供的证据层次。纸本终审需逐书核对卷册、器数、版本、编者和优劣评语。"
   - unit_id: mku-12-02-03
     page_start: 340
     page_end: 346
     focus:
       - 核对「语言、传世文献与古史价值」的纸本页码边界、核心定义和原书例证
-      - 核对著录书、编号体系、材料数量和重要人物专名
-      - 检查项目对“金文怎样校验传世文献和补充古史？”的回答是否保持原书限定
+      - 核对语言文字、传世文献考订和古史资料三类价值边界
+      - 复查“作册”、古韵、《毕命序》、王年和战争等互证案例
     required_checks:
       - page_range
       - names_dates
       - summary_fidelity
       - boundary_strength
       - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行851—883；目录定位第340—346页。原书将金文价值明分为语言文字、释读考订传世文献、古史资料三类，分别举字形古韵语法、‘作册’与《毕命序》、王年封建战争等例；同时指出器铭真伪和系年仍是利用前提。项目已依此重组摘要。纸本终审需核对文字数、韵文篇数、铭文释读、篇章年代推论和郭沫若长引文。"
