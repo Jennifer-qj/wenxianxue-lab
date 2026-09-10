@@ -297,7 +297,7 @@ items:
   - id: deep-ch14-001
     chapter: 14
     title: 分藏三国的敦煌残卷如何虚拟重聚？
-    scenario: 三馆藏卷的旧号不同，纸张、书手和内容显示可能原属同一写卷；其中一馆只有黑白旧照片，另一馆目录题名有误。
+    scenario: 网站虚构一项方法训练：三馆藏卷的旧号不同，纸张、书手和内容显示可能原属同一写卷；其中一馆只有黑白旧照片，另一馆目录题名有误。
     question: 怎样建立跨馆统一身份，并让缀合判断可复核？
     concept_ids: [c_dunhuang_dispersal, c_dunhuang_catalog, c_fragment_reunification, me_dunhuang_id_resolution, c_digital_reunification]
     evidence:

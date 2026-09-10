@@ -1,193 +1,137 @@
 chapter: 14
 edition: 杜泽逊《文献学概要（修订本）》，中华书局2008年版
 source_requirement: paper_copy
-note: 第14章复核包按本章知识风险拆分；提示只用于定位、提问和留痕，任何条目都必须回到纸本后才能改为已核验。
+note: 第14章及修订本后记已完成带页码文字稿预对读；以下记录用于公开定位、提问和留痕，任何条目都必须回到实体纸本后才能改为已核验。
 items:
   - unit_id: mku-14-01-01
     page_start: 368
     page_end: 371
     focus:
-      - 核对「一、敦煌、敦煌石窟、莫高窟与藏经洞」的纸本页码边界、核心定义和原书例证
-      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
-      - 检查项目对“四个地理与遗址概念怎样避免混用？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对敦煌地理沿革、丝路位置与历史分期
+      - 核对敦煌石窟八处组成、莫高窟位置规模及洞窟编号
+      - 核对藏经洞作为洪晉影堂及第十六窟耳洞的形制
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1159—1199；目录定位第368—371页。原书依次解释敦煌、敦煌石窟、莫高窟和藏经洞：敦煌位于河西走廊西端，敦煌石窟为八处石窟总称，莫高窟是代表，藏经洞则是十六窟耳洞、今第十七窟。项目已把‘核心遗址之一’改成原书用语和具体层级。纸本终审需核对地名沿革、路线、石窟数量、年代、面积与洪晉姓名字形。"
   - unit_id: mku-14-02-01
     page_start: 371
     page_end: 372
     focus:
-      - 核对「藏经洞的发现」的纸本页码边界、核心定义和原书例证
-      - 核对发现、封闭、流散、收藏机构和编号系统
-      - 检查项目对“发现史怎样影响早期文献记录？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对王圆禄姓名异写、发现年月日和两件当事期材料
+      - 比较荐疏、功德碑、1931年墓志及其他早期记述
+      - 检查1900年结论是否说明史料形成先后与直接关系
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1203—1217；目录定位第371—372页。原书以《王道士荐疏》和光绪三十二年功德碑为与王圆禄直接相关的较可信材料，再以叶昌炽、斯坦因、伯希和、罗振玉近时记述旁证1900年；1931年墓志所记相差一年而可信度较低。项目删去本节未写的移动交易和实物编号。纸本终审需核对日期、碑名、引文、王圆禄异写及馆藏。"
   - unit_id: mku-14-02-02
     page_start: 372
     page_end: 375
     focus:
-      - 核对「封闭时间与原因」的纸本页码边界、核心定义和原书例证
-      - 对封闭原因、残卷缀合及材料比例保留竞争解释
-      - 检查项目对“怎样表达藏经洞封闭原因的不同假说？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对斯坦因废弃说与伯希和避难说的证据
+      - 核对荣新江对原始包裹、卷帙制度、三界寺及历史背景的论证
+      - 区分1002年纪年下限、封闭年代推测和封闭原因判断
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1219—1229；目录定位第372—375页。原书先列废弃说、避难说，再详述荣新江利用斯坦因早期记录、包裹帙号、三界寺标记及1006年于阗覆亡背景提出的解释，并判断荣说更有说服力、方法值得借鉴。项目已补回三方证据差异，同时保留“推测”层级。纸本终审需核对外文姓名、年代、包裹数量、寺名、题记编号和引文出处。"
   - unit_id: mku-14-02-03
     page_start: 375
     page_end: 379
     focus:
-      - 核对「敦煌遗书的流散」的纸本页码边界、核心定义和原书例证
-      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
-      - 检查项目对“文献流散为何同时造成损失与新的研究任务？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对1900至1925年遗书与艺术品流散时间线
+      - 核对斯坦因、伯希和、大谷队、奥登堡、华尔纳所得数量和去向
+      - 核对1910年劫余卷运京、沿途损失和国内分藏情况
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1233—1271；目录定位第375—379页。原书从地方官员分取、清点封存未果写起，逐年叙述斯坦因、伯希和、日本大谷队、奥登堡和华尔纳等取得文献文物，以及1910年劫余卷运京途中被盗分拆。项目撤回把数字重聚写成流散的正面结果，并保留原书明确的责任措辞。纸本终审需核对日期、箱卷数量、编号范围、机构更名、人物译名与陈寅恪引语。"
   - unit_id: mku-14-03-01
     page_start: 379
     page_end: 388
     focus:
-      - 核对「三、敦煌文献的目录」的纸本页码边界、核心定义和原书例证
-      - 核对发现、封闭、流散、收藏机构和编号系统
-      - 检查项目对“怎样从不同国家和机构编号定位同一写卷？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对十五种收藏检索目录的编者、年代、卷册和收录范围
+      - 比较流水、分类、专科、总目索引及叙录体例
+      - 核对编号、题名、起止、物质形态、题记、提要与索引字段
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1273—1385；目录定位第379—388页。原书介绍十五种敦煌目录及五种论著目录，逐书比较中英法俄日等馆藏范围、编号、分类和著录字段，并反复指出不全、重复、遗漏、题名错误及详略差异。项目已从抽象‘跨馆去重’改为目录体例和覆盖范围判断。纸本终审需逐书核对中外文题名、编者、年代、号码、数量和版本。"
   - unit_id: mku-14-04-01
     page_start: 388
     page_end: 396
     focus:
-      - 核对「四、敦煌文献的汇编整理与刊行」的纸本页码边界、核心定义和原书例证
-      - 对封闭原因、残卷缀合及材料比例保留竞争解释
-      - 检查项目对“影印、释录和校订各保留什么信息？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对早期刊布及二十一类汇编整理成果
+      - 区分综合影印、专题影印、录校、校注、考释与资料集
+      - 核对各书收录范围、材料来源、图文体例和续补关系
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1387—1523；目录定位第388—396页。原书由叶昌炽、王仁俊、罗振玉早期刊布写起，择要介绍综合影印、佛经、地理、社会经济、法制、医药、韵书、古籍、俗文学、题记及石窟图册等二十一类成果。项目删去原书未写的数字平台，把摘要落实到各书的图像、录文、题解、校记、考释和索引。纸本终审需核对书名卷册、编者、出版年、编号数量与完成情况。"
   - unit_id: mku-14-04-02
     page_start: 388
     page_end: 396
     focus:
-      - 核对「残卷缀合」的纸本页码边界、核心定义和原书例证
-      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
-      - 检查项目对“分藏两地的残片怎样证明原属一卷？”的回答是否保持原书限定
-      - 本单元含教学建模内容，须明确区分教材框架与项目新增推演
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对原书在具体整理本中提及的经卷缀合与多写本校录
+      - 明示纸张断口书手等证据清单为网站教学建模
+      - 检查实验是否保留图像缺口、竞争方案和可撤销结论
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1405—1407及1447—1501；目录定位第388—396页。原书在《敦煌大藏经》等整理成果中简要提及缀合、校记和多写本校录，但没有设置“残卷缀合”独立小节，也没有给出纸张、断口、书手等固定清单。项目已在单元标题、摘要和题目中明确标为网站教学建模。纸本终审需核对原书所有缀合实例；真实案例仍须另查原件图像与专门研究。"
   - unit_id: mku-14-05-01
     page_start: 396
     page_end: 400
     focus:
-      - 核对「宗教文献与儒家经籍」的纸本页码边界、核心定义和原书例证
-      - 核对发现、封闭、流散、收藏机构和编号系统
-      - 检查项目对“敦煌写本怎样呈现宗教实践与经典传播？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对佛教文献比例、逸经、三阶教与禅宗北宗资料
+      - 核对道教、摩尼教、景教文献及其宗教史价值
+      - 核对儒家经籍异文、佚注和《尚书》《论语》校例
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1525—1577；目录定位第396—400页。原书先说明佛教文献约占九成并举逸经、三阶教、禅宗北宗，再列道教、摩尼教、景教材料；儒家经籍部分用《尚书》《诗经》《论语》等异文及郑玄佚注说明校勘辑佚价值。项目删除了未经展开的讲诵实践，并把材料比例外推限制标为网站提醒。纸本终审需核对百分比、写本编号、篇名、异文和辑复比例。"
   - unit_id: mku-14-05-02
     page_start: 400
     page_end: 410
     focus:
-      - 核对「语言、史地、子书与文学」的纸本页码边界、核心定义和原书例证
-      - 对封闭原因、残卷缀合及材料比例保留竞争解释
-      - 检查项目对“非正统和日常文本为何格外珍贵？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对音韵字书俗字俗语词等语言材料分层
+      - 核对史籍、寺院官私文书、地志与子部写本实例
+      - 核对文人作品校勘辑佚和九类俗文学的界定
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1579—1655、1667—1699；目录定位第400—410页。原书将语言材料分为韵书音注、俗文学韵脚、字书字形和俗语词；史地部分列传世亡佚史籍、寺院及官私文书与地志；子部列传世与佚书写本；文学再分文人创作与九类俗文学。项目已撤回‘非正统日常文本’的笼统标签。纸本终审需核对书卷编号、异文、字数篇数、体裁定义和校辑成果。"
   - unit_id: mku-14-05-03
     page_start: 405
     page_end: 414
     focus:
-      - 核对「考古艺术与科技史料」的纸本页码边界、核心定义和原书例证
-      - 核对敦煌、敦煌石窟、莫高窟与藏经洞的层级
-      - 检查项目对“怎样联合文字、图像和物质信息研究敦煌？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对石窟建筑、壁画彩塑、书法、曲谱舞谱等考古艺术材料
+      - 核对医学、天文、历法、算书、造纸印刷与装订史实例
+      - 区分洞窟图像、写卷、印本和装订实物的证据类型
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1657—1665及1701—1729；目录定位第405—414页。原书以石窟建筑、壁画彩塑、绢纸画、书法、曲谱舞谱说明考古艺术价值，又分医学、天文、历法、算书、造纸印刷和装订说明科技史料，并列卷子、册子、经折、蝴蝶、梵夹装实物。项目已将空泛跨学科语改成可核材料清单。纸本终审需核对数量、编号、年代、科技史评价及装订术语。"
   - unit_id: mku-14-06-01
     page_start: 414
     page_end: 414
     focus:
-      - 核对「附录、修订本后记」的纸本页码边界、核心定义和原书例证
-      - 核对发现、封闭、流散、收藏机构和编号系统
-      - 检查项目对“修订说明为什么也是理解教材版本的重要材料？”的回答是否保持原书限定
-    required_checks:
-      - page_range
-      - names_dates
-      - summary_fidelity
-      - boundary_strength
-      - linked_content
-    status: queued
-    reviewer: null
-    reviewed_at: null
-    evidence_note: null
+      - 核对2001至2006年印刷及2007年修订经过
+      - 核对十一项逐章修订内容
+      - 核对作者关于准确性、前沿性和个人局限的自述
+    required_checks: [page_range, names_dates, summary_fidelity, boundary_strength, linked_content]
+    status: in_review
+    reviewer: Codex（文字稿预对读）
+    reviewed_at: "2026-09-10"
+    evidence_note: "文字稿第三册行1731—1735；目录定位后记第414页起。后记交代2001年出版至2006年六次印刷、入选规划教材和2007年修订，逐项列出第一、四、五、七至十四章的修改，并坦言准确性与前沿性受时间和学养限制。项目已把它明确为全书版本史料和网站编辑单元，而非第十四章正文。纸本终审需核对后记实际起止页、十一项内容、日期及署名地点。"
