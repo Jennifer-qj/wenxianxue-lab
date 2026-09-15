@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { z } from "astro/zod";
 
 export const reviewStatusSchema = z.enum(["not_started", "drafting", "pending_review", "reviewed", "verified"]);
 export const moduleIdSchema = z.enum(["M1", "M2", "M3", "M4", "M5", "M6", "M7", "M8"]);

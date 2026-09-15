@@ -207,7 +207,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.1"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

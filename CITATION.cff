@@ -4,8 +4,8 @@ title: 文献学实验室（Wenxianxue Lab）
 type: software
 authors:
   - family-names: Jennifer-qj
-version: 0.13.0
-date-released: 2026-09-10
+version: 0.13.1
+date-released: 2026-09-15
 url: https://jennifer-qj.github.io/wenxianxue-lab/
 repository-code: https://github.com/Jennifer-qj/wenxianxue-lab
 abstract: 面向大学生与文献学初学者的互动学习网站和个人数字人文实践。
