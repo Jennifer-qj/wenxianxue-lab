@@ -31,7 +31,7 @@
 | 知识探索 | 检索概念、拖动图谱、筛选关系，并沿问题导览或最短路径理解跨章联系 | 176 个概念、98 条关系 |
 | 互动实验 | 做版本鉴定、四部分类、校勘、谱系推理与跨章案卷；写下理由、边界和信心，而非只选答案 | 9 项技能实验、15 个章节案例、2 项跨章案卷 |
 | 个人学习档案 | 保存错题、札记、收藏、复盘与最近阅读，生成下一步建议和成果报告 | 仅存当前浏览器，可导入导出 |
-| 公开校对 | 查看纸本复核队列，按风险分级核对第二、三章，打印或导出记录，并追踪公开议题的处理状态 | 14 章复核工作台 |
+| 公开校对 | 查看纸本复核队列，按风险分级核对第二至四章，打印或导出记录，并追踪公开议题的处理状态 | 14 章复核工作台 |
 
 每个公开学习单元都有稳定标识、来源身份和复核状态。当前功能完整度不等于学术核验完成度；[内容审计页](https://jennifer-qj.github.io/wenxianxue-lab/audit/)会公开二者的差别。
 
@@ -55,6 +55,7 @@
 - 参与共校：https://jennifer-qj.github.io/wenxianxue-lab/contribute/
 - 第二章纸本复核工作台：https://jennifer-qj.github.io/wenxianxue-lab/review/ch02/
 - 第三章纸本复核工作台：https://jennifer-qj.github.io/wenxianxue-lab/review/ch03/
+- 第四章纸本复核工作台：https://jennifer-qj.github.io/wenxianxue-lab/review/ch04/
 - 参与用户测试：https://jennifer-qj.github.io/wenxianxue-lab/usability/
 - 汇总用户测试：https://jennifer-qj.github.io/wenxianxue-lab/usability/results/
 - 完整制作方法：https://jennifer-qj.github.io/wenxianxue-lab/making-of/
