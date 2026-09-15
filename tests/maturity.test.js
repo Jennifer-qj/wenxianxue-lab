@@ -95,6 +95,8 @@ describe("公开项目成熟度门禁", () => {
     expect(review).toContain("打印当前核对单");
     expect(review).toContain("优先终审");
     expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
+    expect(read("content/reviews/ch03.yaml")).toContain("review_priority: P0");
+    expect(read("src/pages/audit/index.astro")).toContain("第二、三章终审已经排队");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -207,7 +209,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.1"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.2"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

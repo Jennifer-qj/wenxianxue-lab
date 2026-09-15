@@ -10,6 +10,8 @@ items:
       - 核对「（一）著」的纸本页码边界、核心定义和原书例证
       - 核对著、述、编、译等形成方式的责任主体及相互边界
       - 检查项目对““著”为什么不等于文本从未借鉴前人？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含焦循、张舜徽等人名与书名, 引文和篇名需逐字核对, 原创性定义边界容易被概括过度]
     required_checks:
       - page_range
       - names_dates
@@ -27,6 +29,8 @@ items:
       - 核对「（二）述」的纸本页码边界、核心定义和原书例证
       - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
       - 检查项目对““述”怎样处理既有知识？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含焦循引文与经注例证, 述与透明复制的边界容易误读, 引文措辞需回到原页]
     required_checks:
       - page_range
       - names_dates
@@ -44,6 +48,8 @@ items:
       - 核对「（三）编」的纸本页码边界、核心定义和原书例证
       - 检查译经角色、传播环节和差错类型等术语是否准确
       - 检查项目对“编纂如何改变材料意义？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含多类总集类书丛书及辑佚书名, 曾纠正影响原意的概括, 编与改窜的边界须复查]
     required_checks:
       - page_range
       - names_dates
@@ -61,6 +67,8 @@ items:
       - 核对「（四）译：佛典翻译」的纸本页码边界、核心定义和原书例证
       - 核对著、述、编、译等形成方式的责任主体及相互边界
       - 检查项目对“佛典汉译为什么常是协作形成过程？”的回答是否保持原书限定
+    review_priority: P0
+    priority_reasons: [跨七页且信息密度高, 含大量译师经名年代与部卷数, 涉及异说和协作角色链]
     required_checks:
       - page_range
       - names_dates
@@ -78,6 +86,8 @@ items:
       - 核对「（四）译：学术翻译」的纸本页码边界、核心定义和原书例证
       - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
       - 检查项目对“学术翻译如何引入新的知识结构？”的回答是否保持原书限定
+    review_priority: P0
+    priority_reasons: [含人物外文名和机构沿革, 含译书数量与出版年份, 中外合作和口译笔述链条复杂]
     required_checks:
       - page_range
       - names_dates
@@ -95,6 +105,8 @@ items:
       - 核对「（四）译：文学翻译」的纸本页码边界、核心定义和原书例证
       - 检查译经角色、传播环节和差错类型等术语是否准确
       - 检查项目对“文学翻译为什么不能只逐字对应？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含林译数量与多种书名, 需核对评论出处, 合作翻译责任链容易被简化]
     required_checks:
       - page_range
       - names_dates
@@ -112,6 +124,8 @@ items:
       - 核对「（一）讲唱」的纸本页码边界、核心定义和原书例证
       - 核对著、述、编、译等形成方式的责任主体及相互边界
       - 检查项目对“口头流传怎样生成文本差异？”的回答是否保持原书限定
+    review_priority: P0
+    priority_reasons: [跨五页且材料类型多, 含民族史诗专名行数和年代, 佛教结集说法需辨材料层级]
     required_checks:
       - page_range
       - names_dates
@@ -129,6 +143,8 @@ items:
       - 核对「（二）镌刻」的纸本页码边界、核心定义和原书例证
       - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
       - 检查项目对“镌刻如何同时追求耐久与公开？”的回答是否保持原书限定
+    review_priority: P2
+    priority_reasons: [本节仅一页且定义简短, 越界概括已经收回, 主要确认页码边界和载体列举]
     required_checks:
       - page_range
       - names_dates
@@ -146,6 +162,8 @@ items:
       - 核对「（三）抄写」的纸本页码边界、核心定义和原书例证
       - 检查译经角色、传播环节和差错类型等术语是否准确
       - 检查项目对“抄写为什么会产生系统性差异？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含四库七阁现存情况, 时代性陈述需核对口径, 抄写与讹误机制的章节边界曾被误置]
     required_checks:
       - page_range
       - names_dates
@@ -163,6 +181,8 @@ items:
       - 核对「（四）印刷」的纸本页码边界、核心定义和原书例证
       - 核对著、述、编、译等形成方式的责任主体及相互边界
       - 检查项目对“印刷扩大传播后为何仍有版本问题？”的回答是否保持原书限定
+    review_priority: P0
+    priority_reasons: [含印刷起源竞争说法, 含经名年代武周制字及出土收藏信息, 必须区分传世记载与早期实物证据]
     required_checks:
       - page_range
       - names_dates
@@ -180,6 +200,8 @@ items:
       - 核对「（五）摄影」的纸本页码边界、核心定义和原书例证
       - 核对传播技术的历史条件，避免把媒介优势写成绝对结论
       - 检查项目对“摄影复制保留和丢失了什么？”的回答是否保持原书限定
+    review_priority: P1
+    priority_reasons: [含缩微胶卷与色盲卷等历史术语, 浅色印记和批点的表述需核原貌, 技术能力边界易被现代经验替代]
     required_checks:
       - page_range
       - names_dates

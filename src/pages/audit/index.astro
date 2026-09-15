@@ -22,17 +22,19 @@ const priorityCounts = reviewItems.filter((item) => item.review_priority).reduce
   counts[priority] += 1;
   return counts;
 }, { P0: 0, P1: 0, P2: 0 });
+const classifiedUnits = priorityCounts.P0 + priorityCounts.P1 + priorityCounts.P2;
 const rows = chapters.map((chapter, index) => {
   const number = index + 1;
   const chapterUnits = units.filter((item) => item.chapter === number);
   const chapterConcepts = concepts.filter((item) => item.chapter_ids.includes(chapter.id));
   const chapterQuizzes = quizzes.filter((item) => item.chapter === number);
+  const chapterReviewItems = reviewItems.filter((item) => item.unit_id.startsWith(`mku-${String(number).padStart(2, "0")}-`));
   const chapterEdges = edges.filter((edge) => {
     const source = concepts.find((item) => item.id === edge.source); const target = concepts.find((item) => item.id === edge.target);
     return source?.chapter_ids.includes(chapter.id) || target?.chapter_ids.includes(chapter.id);
   });
   const study = deepdives.find((item) => item.chapter === number);
-  return { chapter, units: chapterUnits.length, verifiedUnits: chapterUnits.filter((item) => item.status === "verified").length, precheckedUnits: chapterUnits.filter((item) => precheckedUnitIds.has(item.id)).length, concepts: chapterConcepts.length, verifiedConcepts: chapterConcepts.filter((item) => item.status === "verified").length, quizzes: chapterQuizzes.length, types: new Set(chapterQuizzes.map((item) => item.type)).size, edges: chapterEdges.length, confirmedEdges: chapterEdges.filter((item) => item.confidence === "confirmed").length, conclusions: study?.conclusions.length ?? 0 };
+  return { chapter, units: chapterUnits.length, verifiedUnits: chapterUnits.filter((item) => item.status === "verified").length, precheckedUnits: chapterUnits.filter((item) => precheckedUnitIds.has(item.id)).length, classifiedUnits: chapterReviewItems.filter((item) => item.review_priority).length, urgentUnits: chapterReviewItems.filter((item) => item.review_priority === "P0").length, concepts: chapterConcepts.length, verifiedConcepts: chapterConcepts.filter((item) => item.status === "verified").length, quizzes: chapterQuizzes.length, types: new Set(chapterQuizzes.map((item) => item.type)).size, edges: chapterEdges.length, confirmedEdges: chapterEdges.filter((item) => item.confidence === "confirmed").length, conclusions: study?.conclusions.length ?? 0 };
 });
 ---
 
@@ -51,9 +53,9 @@ const rows = chapters.map((chapter, index) => {
     <section class="audit-explainer"><div><p class="eyebrow">Review chain</p><h2>三段工作，各自证明什么？</h2></div><dl><div><dt>自动结构审计</dt><dd>检查题目答案越界、排序答案完整性、关系自环、竞争结论引用、三类自适应追问和全站九题型覆盖；跨章复用概念记录为知识连接。</dd></div><div><dt>文字稿预对读</dt><dd>逐单元定位原意、收回越界概括并登记待查专名和数字。它为纸本复核减负，但不证明字形、页码和引文已经终审。</dd></div><div><dt>人工纸本复核</dt><dd>核对专名、书名、异体字、观点边界、真实页码与复杂案例。只有完成这一层，状态才可改为“已核验”。</dd></div></dl></section>
 
     <section class="review-readiness">
-      <div><p class="eyebrow">Paper review readiness · Chapter 02</p><h2>第二章终审已经排队，但原页仍需人工打开</h2><p>公开网站不托管原书扫描件。当前先把含数字、年代、外文、疑难字形和复杂版本关系的条目排到前面；拿到实体书或合法自用扫描件后，可直接按页核对、记录并导出。其余章节将在后续批次逐章分级。</p></div>
+      <div><p class="eyebrow">Paper review readiness · Chapters 02–03</p><h2>第二、三章终审已经排队，但原页仍需人工打开</h2><p>公开网站不托管原书扫描件。当前已有 {classifiedUnits}/{reviewItems.length} 个待核验单元完成风险分级：先核对数字、年代、外文、疑难字形、异说和复杂材料关系；拿到实体书或合法自用扫描件后，可直接按页记录并导出。其余章节将在后续批次逐章分级。</p></div>
       <dl><div><dt>{priorityCounts.P0}</dt><dd>优先终审</dd></div><div><dt>{priorityCounts.P1}</dt><dd>重点复查</dd></div><div><dt>{priorityCounts.P2}</dt><dd>常规复查</dd></div></dl>
-      <a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch02/`}>从第二章优先项开始 →</a>
+      <div class="readiness-links"><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch02/`}>第二章队列 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch03/`}>第三章队列 →</a></div>
     </section>
 
     <section class="review-table">
@@ -61,7 +63,7 @@ const rows = chapters.map((chapter, index) => {
       <div class="review-head"><span>章节</span><span>学习单元</span><span>概念</span><span>关系</span><span>练习与研读</span></div>
       {rows.map((row) => <article>
         <div><small>{row.chapter.number}</small><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/chapters/${row.chapter.id}/`}>{row.chapter.title}</a><div class="review-links"><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/${row.chapter.id}/`}>打开复核工作台 →</a><a class="claim-link" href={`https://github.com/Jennifer-qj/wenxianxue-lab/issues/new?template=review-claim.yml&title=${encodeURIComponent(`[共校认领] ${row.chapter.number} ${row.chapter.title}`)}`}>认领核对 ↗</a></div></div>
-        <div><strong>{row.units}</strong><span>已核验 {row.verifiedUnits} · 预对读 {row.precheckedUnits}</span><i style={`--done:${row.units ? row.verifiedUnits / row.units * 100 : 0}%`}><b /></i></div>
+        <div><strong>{row.units}</strong><span>已核验 {row.verifiedUnits} · 预对读 {row.precheckedUnits}</span><span>{row.verifiedUnits === row.units ? "纸本终审已完成" : row.classifiedUnits ? `终审分级 ${row.classifiedUnits}/${row.units}${row.urgentUnits ? ` · P0 ${row.urgentUnits}` : ""}` : "终审风险待分级"}</span><i style={`--done:${row.units ? row.verifiedUnits / row.units * 100 : 0}%`}><b /></i></div>
         <div><strong>{row.concepts}</strong><span>已核验 {row.verifiedConcepts}</span><i style={`--done:${row.concepts ? row.verifiedConcepts / row.concepts * 100 : 0}%`}><b /></i></div>
         <div><strong>{row.edges}</strong><span>确认关系 {row.confirmedEdges}</span></div>
         <div><strong>{row.quizzes} 题 · {row.types} 题型</strong><span>{row.conclusions} 条竞争结论</span></div>
@@ -76,5 +78,5 @@ const rows = chapters.map((chapter, index) => {
   .audit-actions{display:flex;align-items:center;gap:1rem;margin-top:1.4rem}.audit-hero .button{color:#292a27;background:#f7f0e4;border-color:#f7f0e4}.audit-actions>a:last-child{color:#e0ad98;font-size:.75rem}.review-links{display:flex!important;gap:.65rem;margin-top:.25rem}.review-links a{color:var(--cinnabar);font-family:var(--sans)!important;font-size:.62rem!important;font-weight:500!important}.claim-link{color:var(--muted)!important}
   .audit-hero{padding:5rem 0 4rem;background:#24302b}.audit-hero .display-title{font-size:clamp(2.8rem,5.2vw,4.8rem)}.audit-summary{gap:1rem;border:0}.audit-summary article{border:1px solid var(--line);border-radius:10px;background:var(--white)}.audit-summary article:last-child{border:1px solid var(--line)}.audit-explainer dl div{border:0;border-radius:9px;background:#eae3d8}.audit-explainer dl div:last-child{background:#efe1dc}.review-head{border-radius:8px;background:#e7e1d6}.review-table>article{margin-top:.45rem;border:1px solid var(--line);border-radius:9px;background:rgba(252,251,247,.55)}.audit-boundary{border-radius:10px;background:var(--white)}@media(max-width:560px){.audit-actions{align-items:flex-start;flex-direction:column}.review-links{flex-direction:column;gap:.15rem}}
   .audit-hero>div>p:not(.eyebrow){max-width:52rem;color:#c4beb5;font-family:var(--serif);font-size:1.05rem}
-  .review-readiness{display:grid;grid-template-columns:1fr auto;gap:1.5rem 3rem;align-items:center;margin-top:2rem;padding:1.5rem;border:1px solid var(--line);border-radius:10px;background:#f4eee4}.review-readiness h2{margin:.2rem 0;font-family:var(--serif);font-size:1.65rem}.review-readiness p:not(.eyebrow){max-width:48rem;margin:.4rem 0 0;color:var(--muted);font-size:.78rem}.review-readiness dl{display:flex;gap:1.8rem;margin:0}.review-readiness dl div{display:grid}.review-readiness dt{font-family:var(--serif);font-size:1.8rem}.review-readiness dd{margin:0;color:var(--muted);font-size:.65rem}.review-readiness>a{grid-column:1/-1;justify-self:end;color:var(--cinnabar)}@media(max-width:700px){.review-readiness{grid-template-columns:1fr}.review-readiness dl{flex-wrap:wrap}.review-readiness>a{grid-column:auto;justify-self:start}}
+  .review-readiness{display:grid;grid-template-columns:1fr auto;gap:1.5rem 3rem;align-items:center;margin-top:2rem;padding:1.5rem;border:1px solid var(--line);border-radius:10px;background:#f4eee4}.review-readiness h2{margin:.2rem 0;font-family:var(--serif);font-size:1.65rem}.review-readiness p:not(.eyebrow){max-width:48rem;margin:.4rem 0 0;color:var(--muted);font-size:.78rem}.review-readiness dl{display:flex;gap:1.8rem;margin:0}.review-readiness dl div{display:grid}.review-readiness dt{font-family:var(--serif);font-size:1.8rem}.review-readiness dd{margin:0;color:var(--muted);font-size:.65rem}.readiness-links{display:flex;grid-column:1/-1;gap:1rem;justify-self:end}.readiness-links a{color:var(--cinnabar)}@media(max-width:700px){.review-readiness{grid-template-columns:1fr}.review-readiness dl{flex-wrap:wrap}.readiness-links{grid-column:auto;justify-self:start}}
 </style>
