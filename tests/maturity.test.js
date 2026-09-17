@@ -7,6 +7,15 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 describe("公开项目成熟度门禁", () => {
+  it("第五章逐项风险分级并保留套印工艺的完整范围", () => {
+    const packet = read("content/reviews/ch05.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(10);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(8);
+    expect(packet.match(/review_priority: P2/g)).toHaveLength(1);
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(19);
+    expect(read("content/concepts/ch05.yaml")).toContain("同版分次刷色及活字套印");
+    expect(read("content/outline/ch05.yaml")).toContain("不能把套印限为多块雕版");
+  });
   it("提供 404 恢复路径与可安装应用清单", () => {
     const page = read("src/pages/404.astro");
     const manifest = JSON.parse(read("public/site.webmanifest"));
@@ -97,7 +106,7 @@ describe("公开项目成熟度门禁", () => {
     expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch03.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch04.yaml")).toContain("review_priority: P0");
-    expect(read("src/pages/audit/index.astro")).toContain("第二至四章终审已经排队");
+    expect(read("src/pages/audit/index.astro")).toContain("第二至五章终审已经排队");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -210,7 +219,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.4"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.5"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

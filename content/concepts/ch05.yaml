@@ -2,7 +2,7 @@ items:
   - {id: c_version, label: 版本, type: concept, definition: 由早期主要指雕版印本逐步扩展而来、用以区分同一文献不同本子的广义概念。, chapter_ids: [ch05], status: pending_review}
   - {id: c_manuscript, label: 写本, type: concept, definition: 以手工书写方式形成的文献版本。, chapter_ids: [ch05], status: pending_review}
   - {id: c_blockprint, label: 刻本, type: concept, definition: 以雕刻文字或图像的版片刷印而成的书籍版本；同一版片在修版、补版与不同刷印阶段仍可能形成差异。, chapter_ids: [ch05], status: pending_review}
-  - {id: c_color_print, label: 套印本, type: concept, definition: 使用多块版分色套印形成的版本。, chapter_ids: [ch05], status: pending_review}
+  - {id: c_color_print, label: 套印本, type: concept, definition: 以两种或更多颜色分次刷印形成的版本；可用多版套印，也有同版分次刷色及活字套印。, chapter_ids: [ch05], status: pending_review}
   - {id: c_embossed_print, label: 饾版拱花, type: concept, definition: 通过分版水印与无墨压印表现色彩层次和凹凸纹理的印刷技术。, chapter_ids: [ch05], status: pending_review}
   - {id: c_movable_type, label: 活字本, type: concept, definition: 以可重复排列的单字字模印成的版本。, chapter_ids: [ch05], status: pending_review}
   - {id: c_lithograph, label: 石印本, type: concept, definition: 利用石版平版印刷技术形成的版本。, chapter_ids: [ch05], status: pending_review}
