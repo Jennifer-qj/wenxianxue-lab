@@ -7,6 +7,46 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 describe("公开项目成熟度门禁", () => {
+  it("第十四章按发现流散、目录编号和教学建模完成逐项分级", () => {
+    const packet = read("content/reviews/ch14.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(10);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(1);
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(11);
+    expect(packet).toContain("1002年只能提供纪年下限不能等同封闭年");
+    expect(packet).toContain("真实同卷判断必须另查原件图像与专门研究");
+    expect(packet.match(/status: in_review/g)).toHaveLength(11);
+  });
+  it("第十三章按出土批次、要籍体例和版本证据完成逐项分级", () => {
+    const packet = read("content/reviews/ch13.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(9);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(1);
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(10);
+    expect(packet).toContain("楚简总称不可遮蔽具体墓葬和整理批次");
+    expect(packet).toContain("鲁荒王墓同版题记直接改变版本判断");
+    expect(packet.match(/status: in_review/g)).toHaveLength(10);
+  });
+  it("第十二章把甲骨金文的发现、数量与要籍全部列为高风险", () => {
+    const packet = read("content/reviews/ch12.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(8);
+    expect(packet).not.toContain("review_priority: P1");
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(8);
+    expect(packet).toContain("十五次发掘的主持日期与数量须逐次核对");
+    expect(packet).toContain("器形图拓本摹本释文考释来源与索引不可互相替代");
+    expect(packet.match(/status: in_review/g)).toHaveLength(8);
+  });
+  it("第十一章按总集别集的编纂与责任层次完成逐项分级", () => {
+    const packet = read("content/reviews/ch11.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(5);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(2);
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(7);
+    expect(packet).toContain("附载他人作品极易误归题名作者");
+    expect(packet).toContain("跨全章二十一页且为网站教学建模");
+    expect(packet.match(/status: in_review/g)).toHaveLength(7);
+  });
   it("第十章按方志家谱的数量与结构风险完成逐项分级", () => {
     const packet = read("content/reviews/ch10.yaml");
     expect(packet.match(/review_priority: P0/g)).toHaveLength(7);
@@ -157,7 +197,7 @@ describe("公开项目成熟度门禁", () => {
     expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch03.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch04.yaml")).toContain("review_priority: P0");
-    expect(read("src/pages/audit/index.astro")).toContain("第二至十章终审已经排队");
+    expect(read("src/pages/audit/index.astro")).toContain("第二至十四章终审均已排队");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -270,7 +310,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.11"');
+    expect(read("src/consts.ts")).toContain('version: "0.14.0"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
