@@ -46,6 +46,17 @@ export default function ReviewWorkspace({ chapter, chapterTitle, edition, source
     if (!Object.keys(entries).length) return;
     try { localStorage.setItem(storageKey, JSON.stringify(entries)); } catch { /* 无痕模式或存储受限时仍可继续本次复核 */ }
   }, [entries, storageKey]);
+  useEffect(() => {
+    const id = decodeURIComponent(window.location.hash.slice(1));
+    if (!id) return;
+    window.setTimeout(() => {
+      const target = document.getElementById(id);
+      if (!target) return;
+      target.setAttribute("tabindex", "-1");
+      target.scrollIntoView({ behavior: "smooth", block: "start" });
+      target.focus({ preventScroll: true });
+    }, 80);
+  }, []);
 
   const rows = useMemo(() => units.map((unit) => {
     const record = packet.find((item) => item.unit_id === unit.id);
@@ -106,7 +117,7 @@ export default function ReviewWorkspace({ chapter, chapterTitle, edition, source
     <div className="review-boundary" role="note"><strong>当前材料边界</strong><span>网站不托管原书扫描件；这里已经备好页码和风险线索，但仍需把实体书或合法自用扫描件放在手边逐项核对。本地勾选只帮助你工作，不会自动更改网站状态，提供纸本依据并经过公开合并后才能标为“已核验”。</span></div>
     <div className="review-filter-groups"><nav className="review-filters" aria-label="按进度筛选复核条目">{([['all','全部进度'],['unfinished','未完成'],['attention','需修改／补查'],['ready','可提交']] as const).map(([id,label]) => <button key={id} className={filter === id ? "active" : ""} onClick={() => setFilter(id)}>{label}</button>)}</nav><nav className="review-filters priority" aria-label="按优先级筛选复核条目">{([['all','全部优先级'],['P0',`优先终审 ${priorityCounts.P0}`],['P1',`重点复查 ${priorityCounts.P1}`],['P2',`常规复查 ${priorityCounts.P2}`],['UNSET',`待分级 ${priorityCounts.UNSET}`]] as const).map(([id,label]) => <button key={id} className={priorityFilter === id ? "active" : ""} onClick={() => setPriorityFilter(id)}>{label}</button>)}</nav></div>
     <p className="review-sort-note">当前显示 {visible.length} 项；无论原章节顺序如何，优先终审条目会排在最前。</p>
-    <div className="review-list">{visible.map(({ unit, record, priority, required, entry, checked, complete }) => <article className={`${complete ? "complete" : entry.verdict !== "pending" ? "attention" : ""} priority-${priority.toLowerCase()}`} key={unit.id}>
+    <div className="review-list">{visible.map(({ unit, record, priority, required, entry, checked, complete }) => <article id={unit.id} className={`${complete ? "complete" : entry.verdict !== "pending" ? "attention" : ""} priority-${priority.toLowerCase()}`} key={unit.id}>
       <header><div><div className="review-kicker"><small>{unit.id}</small><b data-priority={priority}>{priority} · {priorityLabels[priority]}</b></div><h3>{unit.section}{unit.subsection ? ` · ${unit.subsection}` : ""}</h3></div><div className="review-location"><span>纸本第 {record?.page_start ?? unit.page_start}{(record?.page_end ?? unit.page_end) ? `—${record?.page_end ?? unit.page_end}` : ""} 页</span>{record?.status === "in_review" ? <small>文字稿预对读</small> : null}</div></header>
       <div className="review-source"><div><small>当前关键问题</small><p>{unit.key_question}</p></div><div><small>项目原创概括</small><p>{unit.summary}</p></div><div><small>当前判断边界</small><p>{unit.boundary}</p></div></div>
       {record?.evidence_note ? <aside className="review-precheck"><strong>文字稿预对读 · 待纸本终审</strong><div><p>{record.evidence_note}</p><small>{record.reviewer ?? "未署名"}{record.reviewed_at ? ` · ${record.reviewed_at}` : ""}</small></div></aside> : null}

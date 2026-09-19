@@ -7,6 +7,20 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 describe("公开项目成熟度门禁", () => {
+  it("全书终审指挥台汇总本地记录并深链到具体复核单元", () => {
+    const center = read("src/components/ReviewCommandCenter.tsx");
+    const workspace = read("src/components/ReviewWorkspace.tsx");
+    const audit = read("src/pages/audit/index.astro");
+    expect(center).toContain("把134项队列变成下一条可执行任务");
+    expect(center).toContain("wxlab-paper-review-ch");
+    expect(center).toContain("wenxianxue-full-paper-review.json");
+    expect(center).toContain("不自动改变网站学术状态");
+    expect(center).toContain("#${nextTask.unitId}");
+    expect(workspace).toContain("decodeURIComponent(window.location.hash.slice(1))");
+    expect(workspace).toContain("id={unit.id}");
+    expect(audit).toContain("<ReviewCommandCenter");
+    expect(audit).toContain("client:visible");
+  });
   it("第十四章按发现流散、目录编号和教学建模完成逐项分级", () => {
     const packet = read("content/reviews/ch14.yaml");
     expect(packet.match(/review_priority: P0/g)).toHaveLength(10);
@@ -310,7 +324,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.14.0"');
+    expect(read("src/consts.ts")).toContain('version: "0.14.1"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

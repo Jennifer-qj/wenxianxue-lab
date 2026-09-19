@@ -2,6 +2,9 @@
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import { getCollection } from "astro:content";
 import { chapters } from "../../data/site";
+import ReviewCommandCenter from "../../components/ReviewCommandCenter";
+
+const baseUrl = `${import.meta.env.BASE_URL.replace(/\/$/, "")}/`;
 
 const [outlineFiles, conceptFiles, graphFiles, quizFiles, deepFiles, reviewFiles] = await Promise.all([
   getCollection("outline"), getCollection("concepts"), getCollection("graph"), getCollection("quiz"), getCollection("deepdives"), getCollection("reviews"),
@@ -23,6 +26,12 @@ const priorityCounts = reviewItems.filter((item) => item.review_priority).reduce
   return counts;
 }, { P0: 0, P1: 0, P2: 0 });
 const classifiedUnits = priorityCounts.P0 + priorityCounts.P1 + priorityCounts.P2;
+const reviewQueue = reviewItems.flatMap((record) => {
+  const unit = units.find((item) => item.id === record.unit_id);
+  if (!unit || !record.review_priority) return [];
+  const chapter = chapters[unit.chapter - 1];
+  return [{ unitId: unit.id, chapter: unit.chapter, chapterId: chapter.id, chapterTitle: chapter.title, section: unit.section, subsection: unit.subsection, pageStart: record.page_start ?? unit.page_start, pageEnd: record.page_end ?? unit.page_end, priority: record.review_priority, priorityReasons: record.priority_reasons ?? [], requiredChecks: record.required_checks }];
+});
 const rows = chapters.map((chapter, index) => {
   const number = index + 1;
   const chapterUnits = units.filter((item) => item.chapter === number);
@@ -57,6 +66,8 @@ const rows = chapters.map((chapter, index) => {
       <dl><div><dt>{priorityCounts.P0}</dt><dd>优先终审</dd></div><div><dt>{priorityCounts.P1}</dt><dd>重点复查</dd></div><div><dt>{priorityCounts.P2}</dt><dd>常规复查</dd></div></dl>
       <div class="readiness-links"><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch02/`}>第二章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch03/`}>第三章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch04/`}>第四章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch05/`}>第五章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch06/`}>第六章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch07/`}>第七章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch08/`}>第八章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch09/`}>第九章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch10/`}>第十章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch11/`}>第十一章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch12/`}>第十二章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch13/`}>第十三章 →</a><a href={`${import.meta.env.BASE_URL.replace(/\/$/, "")}/review/ch14/`}>第十四章 →</a></div>
     </section>
+
+    <ReviewCommandCenter items={reviewQueue} baseUrl={baseUrl} client:visible />
 
     <section class="review-table">
       <header><div><p class="eyebrow">Chapter queue</p><h2>十四章复核队列</h2></div><p>竞争结论是教学情境中的可比较假说，不表示原书直接提出这些具体结论。</p></header>

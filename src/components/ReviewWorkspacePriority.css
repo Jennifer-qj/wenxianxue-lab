@@ -67,6 +67,10 @@
   box-shadow: inset 4px 0 #a94c38;
 }
 
+.review-list > article {
+  scroll-margin-top: 110px;
+}
+
 @media (max-width: 900px) {
   .review-filter-groups {
     align-items: flex-start;
