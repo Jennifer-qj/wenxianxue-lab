@@ -7,6 +7,16 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 describe("公开项目成熟度门禁", () => {
+  it("第十章按方志家谱的数量与结构风险完成逐项分级", () => {
+    const packet = read("content/reviews/ch10.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(7);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(2);
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(9);
+    expect(packet).toContain("可考现存残存修纂出版等口径不能相加");
+    expect(packet).toContain("第十项题名与两首领谱字号诗须逐字终审");
+    expect(packet.match(/status: in_review/g)).toHaveLength(9);
+  });
   it("第九章清除跨章套话并按类书丛书材料风险分级", () => {
     const packet = read("content/reviews/ch09.yaml");
     expect(packet.match(/review_priority: P0/g)).toHaveLength(4);
@@ -147,7 +157,7 @@ describe("公开项目成熟度门禁", () => {
     expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch03.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch04.yaml")).toContain("review_priority: P0");
-    expect(read("src/pages/audit/index.astro")).toContain("第二至九章终审已经排队");
+    expect(read("src/pages/audit/index.astro")).toContain("第二至十章终审已经排队");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -260,7 +270,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.10"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.11"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
