@@ -1,7 +1,7 @@
 {
   "name": "wenxianxue-lab",
   "type": "module",
-  "version": "0.13.7",
+  "version": "0.13.8",
   "private": true,
   "scripts": {
     "dev": "astro dev",
