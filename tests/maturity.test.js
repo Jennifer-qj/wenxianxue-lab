@@ -7,6 +7,17 @@ const root = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const read = (path) => readFileSync(resolve(root, path), "utf8");
 
 describe("公开项目成熟度门禁", () => {
+  it("第九章清除跨章套话并按类书丛书材料风险分级", () => {
+    const packet = read("content/reviews/ch09.yaml");
+    expect(packet.match(/review_priority: P0/g)).toHaveLength(4);
+    expect(packet.match(/review_priority: P1/g)).toHaveLength(4);
+    expect(packet).not.toContain("review_priority: P2");
+    expect(packet.match(/priority_reasons:/g)).toHaveLength(8);
+    expect(packet).toContain("跨二十四页并列举一百四十五种丛书");
+    expect(packet).toContain("核对六部唐宋类书的编者、卷数、门类、成书时间和现存版本");
+    expect(packet).not.toContain("区分作伪动机、作伪手段和后世流传结果");
+    expect(packet.match(/status: in_review/g)).toHaveLength(8);
+  });
   it("第八章按辑佚与辨伪证据风险完成逐项分级", () => {
     const packet = read("content/reviews/ch08.yaml");
     expect(packet.match(/review_priority: P0/g)).toHaveLength(8);
@@ -136,7 +147,7 @@ describe("公开项目成熟度门禁", () => {
     expect(read("content/reviews/ch02.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch03.yaml")).toContain("review_priority: P0");
     expect(read("content/reviews/ch04.yaml")).toContain("review_priority: P0");
-    expect(read("src/pages/audit/index.astro")).toContain("第二至八章终审已经排队");
+    expect(read("src/pages/audit/index.astro")).toContain("第二至九章终审已经排队");
     expect(review).toContain("文字稿预对读 · 待纸本终审");
     expect(review).toContain("record.evidence_note");
     expect(read("src/data/community.ts")).toContain("只记录已经公开讨论并完成处理");
@@ -249,7 +260,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.13.9"');
+    expect(read("src/consts.ts")).toContain('version: "0.13.10"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
