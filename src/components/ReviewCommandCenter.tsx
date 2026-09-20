@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from "react";
 import "./ReviewCommandCenter.css";
+import "./ReviewCommandCenterImport.css";
 
 type Priority = "P0" | "P1" | "P2";
 type Verdict = "pending" | "confirmed" | "needs_edit" | "needs_source";
@@ -20,6 +21,8 @@ export default function ReviewCommandCenter({ items, baseUrl }: { items: QueueIt
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(18);
   const [notice, setNotice] = useState("");
+  const [importing, setImporting] = useState(false);
+  const fileInputId = "review-command-import";
 
   function reload() {
     const next: Record<string, SavedEntry> = {};
@@ -58,8 +61,51 @@ export default function ReviewCommandCenter({ items, baseUrl }: { items: QueueIt
     window.setTimeout(() => setNotice(""), 2600);
   }
 
+  async function importRecords(event: React.ChangeEvent<HTMLInputElement>) {
+    const file = event.target.files?.[0];
+    event.target.value = "";
+    if (!file) return;
+    setImporting(true);
+    try {
+      const payload = JSON.parse(await file.text());
+      if (payload?.schema_version !== "1.0" || !Array.isArray(payload.items)) throw new Error("格式不是文献学实验室复核记录");
+      const known = new Map(items.map((item) => [item.unitId, item]));
+      const grouped: Record<number, Record<string, SavedEntry>> = {};
+      let accepted = 0;
+      for (const raw of payload.items) {
+        const unitId = typeof raw?.unitId === "string" ? raw.unitId : raw?.unit_id;
+        const item = known.get(unitId);
+        if (!item) continue;
+        const source = raw.local_record ?? raw;
+        const checks: Record<string, boolean> = source?.checks && typeof source.checks === "object" ? Object.fromEntries(Object.entries(source.checks).filter(([, value]) => typeof value === "boolean")) as Record<string, boolean> : {};
+        const verdict = ["pending", "confirmed", "needs_edit", "needs_source"].includes(source?.verdict) ? source.verdict : "pending";
+        const imported: SavedEntry = { checks, note: typeof source?.note === "string" ? source.note.slice(0, 4000) : "", verdict, updatedAt: typeof source?.updatedAt === "string" ? source.updatedAt : undefined };
+        if (!grouped[item.chapter]) grouped[item.chapter] = {};
+        grouped[item.chapter][unitId] = imported;
+        accepted += 1;
+      }
+      if (!accepted) throw new Error("文件中没有当前网站可识别的复核单元");
+      for (const [chapterNumber, incoming] of Object.entries(grouped)) {
+        let existing: Record<string, SavedEntry> = {};
+        try { existing = JSON.parse(localStorage.getItem(storageKey(Number(chapterNumber))) || "{}"); } catch { /* 损坏记录按空记录处理 */ }
+        for (const [unitId, entry] of Object.entries(incoming)) {
+          const old = existing[unitId];
+          if (!old?.updatedAt || !entry.updatedAt || entry.updatedAt >= old.updatedAt) existing[unitId] = entry;
+        }
+        localStorage.setItem(storageKey(Number(chapterNumber)), JSON.stringify(existing));
+      }
+      reload();
+      setNotice(`已导入并合并 ${accepted} 个单元；较新的本地记录已保留。`);
+    } catch (error) {
+      setNotice(error instanceof Error ? `导入失败：${error.message}` : "导入失败：请确认文件来自本网站");
+    } finally {
+      setImporting(false);
+      window.setTimeout(() => setNotice(""), 3600);
+    }
+  }
+
   return <section className="review-command" id="review-command-center">
-    <header><div><p className="eyebrow">FULL REVIEW COMMAND CENTER</p><h2>把134项队列变成下一条可执行任务</h2><p>这里读取各章工作台保存在当前浏览器里的记录，统一计算进度。它不上传原书、不建立账号，也不把本地勾选当作公开核验。</p></div><div className="review-command-actions">{nextTask ? <a className="button" href={`${baseUrl}review/${nextTask.chapterId}/#${nextTask.unitId}`}>继续下一条 · {nextTask.unitId} →</a> : <span>当前设备上的队列均已可提交</span>}<button onClick={exportAll}>导出全书记录 ↓</button></div></header>
+    <header><div><p className="eyebrow">FULL REVIEW COMMAND CENTER</p><h2>把134项队列变成下一条可执行任务</h2><p>这里读取各章工作台保存在当前浏览器里的记录，统一计算进度。它不上传原书、不建立账号，也不把本地勾选当作公开核验。</p></div><div className="review-command-actions">{nextTask ? <a className="button" href={`${baseUrl}review/${nextTask.chapterId}/#${nextTask.unitId}`}>继续下一条 · {nextTask.unitId} →</a> : <span>当前设备上的队列均已可提交</span>}<button onClick={exportAll}>导出全书记录 ↓</button><label className="review-command-import"><input id={fileInputId} type="file" accept="application/json,.json" onChange={importRecords} disabled={importing} /><span>{importing ? "正在导入…" : "导入并合并 ↑"}</span></label></div></header>
     <div className="review-command-stats"><article><strong>{counts.ready}<i>/{rows.length}</i></strong><span>可提交单元</span></article><article><strong>{counts.attention}</strong><span>需修改／补查</span></article><article><strong>{counts.started}</strong><span>正在核对</span></article><article><strong>{counts.untouched}</strong><span>尚未开始</span></article></div>
     <div className="review-command-progress" aria-label={`当前设备完成 ${counts.ready} / ${rows.length}`}><i style={{ width: `${rows.length ? counts.ready / rows.length * 100 : 0}%` }} /></div>
     <div className="review-command-filters">

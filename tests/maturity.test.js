@@ -14,6 +14,9 @@ describe("公开项目成熟度门禁", () => {
     expect(center).toContain("把134项队列变成下一条可执行任务");
     expect(center).toContain("wxlab-paper-review-ch");
     expect(center).toContain("wenxianxue-full-paper-review.json");
+    expect(center).toContain("importRecords");
+    expect(center).toContain("较新的本地记录已保留");
+    expect(center).toContain("application/json,.json");
     expect(center).toContain("不自动改变网站学术状态");
     expect(center).toContain("#${nextTask.unitId}");
     expect(workspace).toContain("decodeURIComponent(window.location.hash.slice(1))");
@@ -324,7 +327,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.14.1"');
+    expect(read("src/consts.ts")).toContain('version: "0.14.2"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {
