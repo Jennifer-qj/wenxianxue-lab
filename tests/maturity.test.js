@@ -283,6 +283,8 @@ describe("公开项目成熟度门禁", () => {
     const page = read("src/pages/contribute/index.astro");
     expect(panel).toContain("window.getSelection");
     expect(panel).toContain("复制证据包并提交");
+    expect(panel).toContain("downloadPacket");
+    expect(panel).toContain("wenxianxue-${current.id}-feedback.md");
     expect(page).toContain("status: needs-evidence");
     expect(page).toContain("status: in-review");
     expect(read(".github/ISSUE_TEMPLATE/content-correction.yml")).toContain("这项依据能够证明到哪一步");
@@ -327,7 +329,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.14.2"');
+    expect(read("src/consts.ts")).toContain('version: "0.14.3"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

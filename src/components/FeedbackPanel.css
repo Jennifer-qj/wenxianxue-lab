@@ -1,0 +1,2 @@
+.feedback-actions{display:flex;align-items:center;gap:.45rem}.feedback-actions .secondary{color:var(--ink);background:transparent;border:1px solid var(--line)}
+@media(max-width:560px){.feedback-actions{align-items:stretch;flex-direction:column;width:100%}.feedback-actions .button{text-align:center}}

@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useRef, useState } from "react";
+import "./FeedbackPanel.css";
 
 type Kind = "content" | "source" | "quiz" | "feature" | "bug" | "review";
 type UnitContext = { id: string; reviewStatus: string; contentKind: string };
@@ -93,6 +94,33 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
     window.open(`${repo}?${params}`, "_blank", "noopener,noreferrer");
   }
 
+  function downloadPacket() {
+    const markdown = [
+      `# ${current.prefix} · ${title}`,
+      "",
+      "> 这是文献学实验室生成的本地共校证据包。请不要加入原书扫描件、自动识别全文或大段逐字转录。",
+      "",
+      "## 页面上下文",
+      "",
+      context,
+      "",
+      "## 提交前自查",
+      "",
+      ...evidencePrompts[kind].map((item) => `- [ ] ${item}`),
+      "",
+      "## 处理约定",
+      "",
+      "- 公开提交前请删除不必要的个人信息。",
+      "- 这份记录不等于学术结论，最终状态以公开复核结果为准。",
+    ].join("\n");
+    const url = URL.createObjectURL(new Blob([markdown], { type: "text/markdown;charset=utf-8" }));
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `wenxianxue-${current.id}-feedback.md`;
+    link.click();
+    URL.revokeObjectURL(url);
+  }
+
   return <>
     <button ref={triggerRef} className="feedback-trigger" onClick={openPanel} aria-haspopup="dialog" aria-expanded={open} aria-controls="feedback-dialog">
       <span aria-hidden="true">校</span><b>反馈共校</b>
@@ -116,7 +144,7 @@ export default function FeedbackPanel({ baseUrl, title }: { baseUrl: string; tit
         <label className="feedback-note"><span>先记一句问题说明 <small>可选，会和页面信息一起复制</small></span><textarea value={note} onChange={(event) => { setNote(event.target.value); setCopied(false); }} placeholder="例如：这里把一条局部证据写成了整部书的结论……" /></label>
         <footer>
           <a href={`${baseUrl}contribute/`}>先阅读共校规则</a>
-          <button className="button" onClick={continueToGitHub}>{copied ? "信息已复制，GitHub 已打开" : "复制证据包并提交"} <span>↗</span></button>
+          <div className="feedback-actions"><button className="button secondary" onClick={downloadPacket}>下载证据包 ↓</button><button className="button" onClick={continueToGitHub}>{copied ? "信息已复制，GitHub 已打开" : "复制证据包并提交"} <span>↗</span></button></div>
         </footer>
         {copied && <p className="feedback-status" role="status">请把剪贴板内容粘贴到 GitHub 表单对应位置；提交后会留下公开处理记录。</p>}
       </section>
