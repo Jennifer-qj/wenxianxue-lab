@@ -48,17 +48,20 @@ function dateLabel(value: string) {
 
 export default function CommunityLedger() {
   const [issues, setIssues] = useState<GithubIssue[]>([]);
-  const [state, setState] = useState<"loading" | "ready" | "error">("loading");
+  const [state, setState] = useState<"loading" | "ready" | "stale" | "error">("loading");
   const [filter, setFilter] = useState<string>("all");
   const [chapter, setChapter] = useState("all");
+  const [query, setQuery] = useState("");
 
   useEffect(() => {
     const cacheKey = "wxlab-community-issues-v1";
     const cached = sessionStorage.getItem(cacheKey);
+    let staleIssues: GithubIssue[] = [];
     if (cached) {
       try {
         const payload = JSON.parse(cached);
-        if (Date.now() - payload.savedAt < 10 * 60 * 1000) {
+        if (Array.isArray(payload.issues)) staleIssues = payload.issues;
+        if (Date.now() - payload.savedAt < 10 * 60 * 1000 && staleIssues.length) {
           setIssues(payload.issues);
           setState("ready");
           return;
@@ -76,11 +79,22 @@ export default function CommunityLedger() {
         setState("ready");
         sessionStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), issues: publicIssues }));
       })
-      .catch(() => setState("error"));
+      .catch(() => {
+        if (staleIssues.length) {
+          setIssues(staleIssues);
+          setState("stale");
+        } else setState("error");
+      });
   }, []);
 
   const counts = useMemo(() => Object.fromEntries(statusOrder.map((status) => [status, issues.filter((issue) => statusOf(issue) === status).length])), [issues]);
-  const visible = useMemo(() => issues.filter((issue) => filter === "all" || statusOf(issue) === filter).slice(0, 12), [issues, filter]);
+  const visible = useMemo(() => {
+    const normalized = query.trim().toLowerCase();
+    return issues.filter((issue) => filter === "all" || statusOf(issue) === filter)
+      .filter((issue) => chapter === "all" || chapterOf(issue) === Number(chapter))
+      .filter((issue) => !normalized || `${issue.title} ${issue.number} ${issue.user?.login ?? ""}`.toLowerCase().includes(normalized))
+      .slice(0, 12);
+  }, [issues, filter, chapter, query]);
   const revisions = useMemo(() => issues.filter((issue) => {
     const issueChapter = chapterOf(issue);
     return chapter === "all" ? issueChapter !== null : issueChapter === Number(chapter);
@@ -91,7 +105,7 @@ export default function CommunityLedger() {
   return <section className="community-ledger" aria-labelledby="community-ledger-title">
     <header>
       <div><p className="eyebrow">LIVE PUBLIC LEDGER · 实时公开台账</p><h2 id="community-ledger-title">让反馈、证据与处理结果出现在同一处</h2></div>
-      <div className={`ledger-sync ${state}`} aria-live="polite"><span />{state === "loading" ? "正在读取 GitHub" : state === "ready" ? `已读取 ${issues.length} 条公开议题` : "暂时无法读取公开队列"}</div>
+      <div className={`ledger-sync ${state}`} aria-live="polite"><span />{state === "loading" ? "正在读取 GitHub" : state === "ready" ? `已读取 ${issues.length} 条公开议题` : state === "stale" ? `网络暂不可用 · 显示上次读取的 ${issues.length} 条` : "暂时无法读取公开队列"}</div>
     </header>
 
     <div className="ledger-metrics" aria-label="共校状态统计">
@@ -100,12 +114,18 @@ export default function CommunityLedger() {
       <div><strong>{contributors}</strong><span>GitHub 贡献者</span></div>
     </div>
 
+    <div className="ledger-controls" aria-label="筛选公开共校议题">
+      <label><span>搜索标题、编号或贡献者</span><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="例如：第五章、页码、版本……" /></label>
+      <label><span>章节</span><select value={chapter} onChange={(event) => setChapter(event.target.value)}><option value="all">全部章节</option>{Array.from({ length: 14 }, (_, index) => <option key={index + 1} value={index + 1}>第 {index + 1} 章</option>)}</select></label>
+      <button type="button" disabled={filter === "all" && chapter === "all" && !query} onClick={() => { setFilter("all"); setChapter("all"); setQuery(""); }}>清除筛选</button>
+    </div>
+
     <div className="ledger-grid">
       <section className="issue-stream">
         <header><div><small>最近公开议题</small><strong>{filter === "all" ? "全部处理状态" : statusLabels[filter]}</strong></div><a href={`https://github.com/${repository}/issues`} target="_blank" rel="noreferrer">在 GitHub 查看 ↗</a></header>
         {state === "loading" && <div className="ledger-placeholder">正在读取公开 Issue，不会读取私人账号信息。</div>}
         {state === "error" && <div className="ledger-placeholder">GitHub 暂时没有返回数据。你仍可打开公开队列提交或查看记录。</div>}
-        {state === "ready" && visible.length === 0 && <div className="ledger-placeholder">这个状态下目前没有公开记录。这里不会用示例数据制造参与度。</div>}
+        {(state === "ready" || state === "stale") && visible.length === 0 && <div className="ledger-placeholder">当前筛选下没有公开记录。这里不会用示例数据制造参与度。</div>}
         {visible.map((issue) => <article key={issue.number}>
           <div><span className={`issue-status ${statusOf(issue).replace(/[: ]/g, "-")}`}>{statusLabels[statusOf(issue)]}</span><small>#{issue.number} · {dateLabel(issue.updated_at)}</small></div>
           <a href={issue.html_url} target="_blank" rel="noreferrer"><strong>{issue.title}</strong><span>{chapterOf(issue) ? `第 ${chapterOf(issue)} 章 · ` : "全站 · "}{issue.user?.login ?? "匿名贡献者"}</span></a>
@@ -113,8 +133,8 @@ export default function CommunityLedger() {
       </section>
 
       <aside className="chapter-history">
-        <header><div><small>章节修订索引</small><strong>反馈发生在哪里？</strong></div><label><span className="sr-only">选择章节</span><select value={chapter} onChange={(event) => setChapter(event.target.value)}><option value="all">全部章节</option>{Array.from({ length: 14 }, (_, index) => <option key={index + 1} value={index + 1}>第 {index + 1} 章</option>)}</select></label></header>
-        {state === "ready" && revisions.length === 0 ? <p>当前没有能从标题定位到这一章的公开 Issue。提交时写明“第几章”或“ch编号”，记录就会进入这里。</p> : <ol>{revisions.slice(0, 8).map((issue) => <li key={issue.number}><span>{dateLabel(issue.created_at)}</span><a href={issue.html_url} target="_blank" rel="noreferrer">{issue.title}</a><small>{statusLabels[statusOf(issue)]}</small></li>)}</ol>}
+        <header><div><small>章节修订索引</small><strong>{chapter === "all" ? "反馈发生在哪里？" : `第 ${chapter} 章修订记录`}</strong></div></header>
+        {(state === "ready" || state === "stale") && revisions.length === 0 ? <p>当前没有能从标题定位到这一章的公开 Issue。提交时写明“第几章”或“ch编号”，记录就会进入这里。</p> : <ol>{revisions.slice(0, 8).map((issue) => <li key={issue.number}><span>{dateLabel(issue.created_at)}</span><a href={issue.html_url} target="_blank" rel="noreferrer">{issue.title}</a><small>{statusLabels[statusOf(issue)]}</small></li>)}</ol>}
         <footer>台账直接读取公开 GitHub Issue；只显示公开账号名、标题、时间和处理标签，不建立用户画像。</footer>
       </aside>
     </div>
