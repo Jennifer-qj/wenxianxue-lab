@@ -299,6 +299,8 @@ describe("公开项目成熟度门禁", () => {
     expect(ledger).toContain('setState("stale")');
     expect(ledger).toContain("搜索标题、编号或贡献者");
     expect(ledger).toContain("清除筛选");
+    expect(ledger).toContain("隐私模式或禁用存储时直接请求公开队列");
+    expect(ledger).toContain("缓存不可用不影响实时台账");
   });
 
   it("进阶校勘实验要求产出校勘记与版本谱系假说", () => {
@@ -332,7 +334,7 @@ describe("公开项目成熟度门禁", () => {
     expect(progress).toContain("exportMarkdownReport");
     expect(progress).toContain("文献学实验室 · 我的学习报告");
     expect(progress).toContain("{gameCount}/9");
-    expect(read("src/consts.ts")).toContain('version: "0.14.4"');
+    expect(read("src/consts.ts")).toContain('version: "0.14.5"');
   });
 
   it("十四章提供预计用时、任务地图、章末复盘与成果导出", () => {

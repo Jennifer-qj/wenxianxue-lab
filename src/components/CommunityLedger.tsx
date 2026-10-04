@@ -55,7 +55,8 @@ export default function CommunityLedger() {
 
   useEffect(() => {
     const cacheKey = "wxlab-community-issues-v1";
-    const cached = sessionStorage.getItem(cacheKey);
+    let cached: string | null = null;
+    try { cached = window.sessionStorage.getItem(cacheKey); } catch { /* 隐私模式或禁用存储时直接请求公开队列 */ }
     let staleIssues: GithubIssue[] = [];
     if (cached) {
       try {
@@ -77,7 +78,7 @@ export default function CommunityLedger() {
         const publicIssues = items.filter((item) => !item.pull_request);
         setIssues(publicIssues);
         setState("ready");
-        sessionStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), issues: publicIssues }));
+        try { window.sessionStorage.setItem(cacheKey, JSON.stringify({ savedAt: Date.now(), issues: publicIssues })); } catch { /* 缓存不可用不影响实时台账 */ }
       })
       .catch(() => {
         if (staleIssues.length) {
@@ -109,7 +110,7 @@ export default function CommunityLedger() {
     </header>
 
     <div className="ledger-metrics" aria-label="共校状态统计">
-      {statusOrder.map((status) => <button key={status} className={filter === status ? "active" : ""} onClick={() => setFilter(filter === status ? "all" : status)}><strong>{state === "ready" ? counts[status] : "—"}</strong><span>{statusLabels[status]}</span></button>)}
+      {statusOrder.map((status) => <button key={status} className={filter === status ? "active" : ""} onClick={() => setFilter(filter === status ? "all" : status)}><strong>{state === "loading" || state === "error" ? "—" : counts[status]}</strong><span>{statusLabels[status]}</span></button>)}
       <div><strong>{contributionRecords.length + accepted.length}</strong><span>公开采用记录</span></div>
       <div><strong>{contributors}</strong><span>GitHub 贡献者</span></div>
     </div>
